@@ -78,6 +78,8 @@ class Stage extends FlxTypedGroup<FlxBasic>
 					curStage = 'school';
 				case 'thorns':
 					curStage = 'schoolEvil';
+				case 'bopeebo':
+					curStage = 'yoda';
 				default:
 					curStage = 'stage';
 			}
@@ -91,6 +93,31 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		//
 		switch (curStage)
 		{
+			case 'yoda':
+				PlayState.defaultCamZoom = 0.92;
+				var bg:FNFSprite = new FNFSprite(-320, -320).loadGraphic(Paths.image('backgrounds/' + curStage + '/sky'));
+				bg.antialiasing = true;
+				add(bg);
+
+				var offSpring:FNFSprite = new FNFSprite(-320, -280).loadGraphic(Paths.image('backgrounds/' + curStage + '/offspring'));
+				offSpring.scrollFactor.set(0.2, 0.2);
+				offSpring.antialiasing = true;
+				add(offSpring);
+
+				var montana:FNFSprite = new FNFSprite(-320, -280).loadGraphic(Paths.image('backgrounds/' + curStage + '/las montanas'));
+				montana.scrollFactor.set(0.9, 1);
+				montana.antialiasing = true;
+				add(montana);
+
+				var desert:FNFSprite = new FNFSprite(-320, -280).loadGraphic(Paths.image('backgrounds/' + curStage + '/desert'));
+				desert.scrollFactor.set(0.95, 1);
+				desert.antialiasing = true;
+				add(desert);
+
+				var food:FNFSprite = new FNFSprite(-320, -280).loadGraphic(Paths.image('backgrounds/' + curStage + '/borgarKeng'));
+				food.scrollFactor.set(0.95, 1);
+				food.antialiasing = true;
+				add(food);
 			case 'spooky':
 				curStage = 'spooky';
 				// halloweenLevel = true;

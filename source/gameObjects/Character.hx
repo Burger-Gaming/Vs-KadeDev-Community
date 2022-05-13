@@ -59,6 +59,20 @@ class Character extends FNFSprite
 
 		switch (curCharacter)
 		{
+			case 'yoder':
+				tex = Paths.getSparrowAtlas('characters/Yoder');
+				frames = tex;
+
+				animation.addByPrefix('idle', 'Idle', 24, false);
+				animation.addByPrefix('singDOWN', 'Down', 24, false);
+				animation.addByPrefix('singLEFT', 'Left', 24, false);
+				animation.addByPrefix('singRIGHT', 'Right', 24, false);
+				animation.addByPrefix('singUP', 'Up', 24, false);
+
+				characterData.offsetY = 210;
+				characterData.offsetX = -150;
+
+				playAnim('idle');
 			case 'gf':
 				// GIRLFRIEND CODE
 				tex = Paths.getSparrowAtlas('characters/GF_assets');
