@@ -60,6 +60,9 @@ class PlayState extends MusicBeatState
 	public static var songMusic:FlxSound;
 	public static var vocals:FlxSound;
 
+	public var screen1:FlxSprite;
+	public var screen2:FlxSprite;
+
 	public static var campaignScore:Int = 0;
 
 	public static var dadOpponent:Character;
@@ -350,6 +353,29 @@ class PlayState extends MusicBeatState
 		add(uiHUD);
 		uiHUD.cameras = [camHUD];
 		//
+
+		screen1 = new FlxSprite().loadGraphic(Paths.image('clownstace/normal'));
+		screen1.scrollFactor.set();
+		screen1.cameras = [camHUD];
+		if(SONG.song == 'Clownstace'){
+			if (storyDifficulty != 3){
+				screen1.visible = true;
+			}
+		} else{
+			screen1.visible = false;
+		}
+		add(screen1);
+
+		screen2 = new FlxSprite();
+		screen2.frames = Paths.getSparrowAtlas('clownstace/noiseTexture');
+		screen2.animation.addByPrefix('idle', 'tv static', 24, true);
+		screen2.scrollFactor.set();
+		screen2.cameras = [camHUD];
+		screen2.visible = false;
+		add(screen2);
+		screen2.animation.play('idle');
+
+
 
 		// create a hud over the hud camera for dialogue
 		dialogueHUD = new FlxCamera();
@@ -1443,6 +1469,20 @@ class PlayState extends MusicBeatState
 		if (songMusic.time >= Conductor.songPosition + 20 || songMusic.time <= Conductor.songPosition - 20)
 			resyncVocals();
 		//*/
+
+		if (SONG.song == 'Clownstace' && storyDifficulty != 3){
+			switch(curStep){
+				case 132:
+					screen1.loadGraphic(Paths.image('clownstace/GRAAAHHHHHH'));
+				case 145:
+					screen1.destroy();
+					screen2.visible = true;
+					FlxTween.tween(screen2, { alpha: 0 }, 2);
+					new FlxTimer().start(2, function(tmr:FlxTimer){
+						screen2.destroy();
+					});
+			}
+		}
 
 		if(SONG.song == 'Yoder' && storyDifficulty == 3){ //yoder erect event
 			switch(curStep){

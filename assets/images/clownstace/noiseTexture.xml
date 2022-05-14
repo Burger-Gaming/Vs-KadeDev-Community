@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="noiseTexture.png">
+	<!-- Created with Adobe Animate version 21.0.7.42652 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="tv static0000" x="10" y="10" width="1280" height="720"/>
+	<SubTexture name="tv static0001" x="10" y="746" width="1280" height="720"/>
+	<SubTexture name="tv static0002" x="10" y="1482" width="1280" height="720"/>
+	<SubTexture name="tv static0003" x="10" y="2218" width="1280" height="720"/>
+	<SubTexture name="tv static0004" x="10" y="2954" width="1280" height="720"/>
+</TextureAtlas>
