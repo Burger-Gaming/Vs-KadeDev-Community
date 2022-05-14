@@ -155,6 +155,11 @@ class PlayState extends MusicBeatState
 	override public function create()
 	{
 		super.create();
+		//FE suffers a huge lag spike if the sound isnt cached on low end PCs
+		Assets.getSound('assets/sounds/missnote1.ogg', true);
+		Assets.getSound('assets/sounds/missnote2.ogg', true);
+		Assets.getSound('assets/sounds/missnote3.ogg', true);
+
 
 		// reset any values and variables that are static
 		songScore = 0;
