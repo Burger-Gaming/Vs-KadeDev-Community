@@ -110,6 +110,7 @@ class Character extends FNFSprite
 
 				playAnim('idle');
 			case 'TankACFH': // ugh
+				charColor = "#000000";
 				frames = Paths.getSparrowAtlas('characters/TankACFH');
 				animation.addByPrefix('idle', 'Idle', 24, false);
 				animation.addByPrefix('singUP', 'Up', 24, false);

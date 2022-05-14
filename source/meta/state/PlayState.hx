@@ -1484,6 +1484,8 @@ class PlayState extends MusicBeatState
 	{
 		super.beatHit();
 
+		trace(curBeat); //for events
+
 		if ((FlxG.camera.zoom < 1.35 && curBeat % 4 == 0) && (!Init.trueSettings.get('Reduced Movements')))
 		{
 			FlxG.camera.zoom += 0.015;
