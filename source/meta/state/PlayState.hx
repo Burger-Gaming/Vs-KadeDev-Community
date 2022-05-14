@@ -239,6 +239,12 @@ class PlayState extends MusicBeatState
 		gf.setCharacter(300, 100, stageBuild.returnGFtype(curStage));
 		gf.scrollFactor.set(0.95, 0.95);
 
+		if (PlayState.SONG.song == 'Onions' || PlayState.SONG.song == 'Garlico' || PlayState.SONG.song == 'Food Fight'){
+			gf.x += 600;
+			gf.y += 300;
+			gf.scrollFactor.set(1, 1);
+		}
+
 		dadOpponent = new Character().setCharacter(50, 850, SONG.player2);
 		boyfriend = new Boyfriend();
 		boyfriend.setCharacter(750, 850, SONG.player1);
@@ -1423,6 +1429,9 @@ class PlayState extends MusicBeatState
 		trace('new vocal time ${Conductor.songPosition}');
 	}
 
+	// variables to keep track of the original Y value so yoda and bf can return
+	public var bfYBeforeTween:Float = 0;
+	public var yoderYBeforeTween:Float = 0;
 	override function stepHit()
 	{
 		super.stepHit();
@@ -1430,6 +1439,22 @@ class PlayState extends MusicBeatState
 		if (songMusic.time >= Conductor.songPosition + 20 || songMusic.time <= Conductor.songPosition - 20)
 			resyncVocals();
 		//*/
+
+		if(SONG.song == 'Yoder' && storyDifficulty == 3){ //yoder erect event
+			switch(curStep){
+				case 271: //setting up the return before they ascend
+					bfYBeforeTween = boyfriend.y;
+					yoderYBeforeTween = dadOpponent.y;
+				case 272:
+					FlxTween.tween(boyfriend, {y: -50}, 5);
+				case 399:
+					FlxTween.tween(dadOpponent, {y: -200}, 5);
+				case 592:
+					FlxTween.tween(boyfriend, {y: bfYBeforeTween}, 5);
+					FlxTween.tween(dadOpponent, {y: yoderYBeforeTween}, 5);
+			}
+		}
+
 	}
 
 	private function charactersDance(curBeat:Int)

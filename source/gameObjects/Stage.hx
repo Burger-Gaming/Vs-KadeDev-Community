@@ -80,6 +80,8 @@ class Stage extends FlxTypedGroup<FlxBasic>
 					curStage = 'schoolEvil';
 				case 'yoder' | 'baby-yoda-real' | 'swagswag':
 					curStage = 'yoda';
+				case 'onions' | 'garlico' | 'food-fight':
+					curStage = 'onion';
 				default:
 					curStage = 'stage';
 			}
@@ -93,6 +95,11 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		//
 		switch (curStage)
 		{
+			case 'onion':
+				var bg:FNFSprite = new FNFSprite(-320, -125).loadGraphic(Paths.image('backgrounds/' + curStage + '/fard 2 electric boogaloo'));
+				bg.antialiasing = true;
+				bg.scale.set(0.8, 0.8);
+				add(bg);
 			case 'yoda':
 				PlayState.defaultCamZoom = 0.92;
 

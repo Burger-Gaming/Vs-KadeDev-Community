@@ -131,17 +131,17 @@ class Main extends Sprite
 			'SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG'
 		],
 		[
+			['Onions', 'Garlico', 'Food-Fight'],
+			['onion', 'onion', 'onion'],
+			[FlxColor.fromRGB(255, 166, 109)],
+			'Teary Eyes'
+		],
+		[
 			['Ancient-Clown', 'From-Hell', 'Clownstance'],
 			['acfh', 'acfh', 'acfh'],
 			[FlxColor.fromRGB(255, 45, 50)],
 			'ANCIENT AHH CLOWN'
 		],
-		[
-			['Onions', 'Garlico', 'Food-Fight'],
-			['onion', 'onion', 'onion'],
-			[FlxColor.fromRGB(255, 166, 109)],
-			'Teary Eyes'
-		]
 	];
 
 	// most of these variables are just from the base game!

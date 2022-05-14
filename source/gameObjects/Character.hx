@@ -73,7 +73,7 @@ class Character extends FNFSprite
 				characterData.offsetX = -150;
 
 				playAnim('idle');
-			case 'onion-skin':
+			case 'onion': // im not gonna change 50 charts just to add -skin to the end of onion :Dave:
 
 				frames = Paths.getSparrowAtlas('characters/onion-skin');
 
@@ -82,6 +82,9 @@ class Character extends FNFSprite
 				animation.addByPrefix('singDOWN', 'down', 24, false);
 				animation.addByPrefix('singLEFT', 'left', 24, false);
 				animation.addByPrefix('singRIGHT', 'right', 24, false);
+
+				characterData.offsetX = 250;
+				characterData.offsetY = 100;
 
 				playAnim('idle');
 			case 'ACFH':
@@ -300,7 +303,15 @@ class Character extends FNFSprite
 
 				flipX = true;
 
+
 				characterData.offsetY = 70;
+
+				if (PlayState.SONG.song == 'Onions' || PlayState.SONG.song == 'Garlico' || PlayState.SONG.song == 'Food Fight'){
+					characterData.offsetX += 600;
+					characterData.offsetY += 300;
+					characterData.camOffsetX += 200;
+					characterData.camOffsetY -= 150;
+				}
 			/*
 				case 'bf-og':
 					frames = Paths.getSparrowAtlas('characters/og/BOYFRIEND');
