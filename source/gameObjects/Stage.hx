@@ -82,6 +82,8 @@ class Stage extends FlxTypedGroup<FlxBasic>
 					curStage = 'yoda';
 				case 'onions' | 'garlico' | 'food-fight':
 					curStage = 'onion';
+				case 'ancient-clown' | 'from-hell' | 'clownstace':
+					curStage = 'ACFH';
 				default:
 					curStage = 'stage';
 			}
@@ -95,6 +97,16 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		//
 		switch (curStage)
 		{
+			case 'ACFH':
+				PlayState.defaultCamZoom = 0.9;
+				var imgName:String = 'shid-noballs';
+				if(meta.subState.GameOverSubstate.deathCount > 0){
+					imgName = 'shid';
+				}
+
+				var bg:FNFSprite = new FNFSprite(-320, -125).loadGraphic(Paths.image('backgrounds/' + curStage + '/$imgName'));
+				bg.antialiasing = true;
+				add(bg);
 			case 'onion':
 				var bg:FNFSprite = new FNFSprite(-320, -125).loadGraphic(Paths.image('backgrounds/' + curStage + '/fard 2 electric boogaloo'));
 				bg.antialiasing = true;

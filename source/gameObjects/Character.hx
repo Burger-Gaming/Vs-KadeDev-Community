@@ -95,6 +95,13 @@ class Character extends FNFSprite
 				animation.addByPrefix('singLEFT', 'Left', 24, false);
 				animation.addByPrefix('singRIGHT', 'Right', 24, false);
 
+				scale.set(0.7, 0.7);
+
+				characterData.offsetX = -650;
+				characterData.offsetY = -100;
+				characterData.camOffsetY = 100;
+				characterData.camOffsetX = 150;
+
 				playAnim('idle');
 			case 'TankACFH':
 				frames = Paths.getSparrowAtlas('characters/TankACFH');
@@ -311,6 +318,10 @@ class Character extends FNFSprite
 					characterData.offsetY += 300;
 					characterData.camOffsetX += 200;
 					characterData.camOffsetY -= 150;
+				}
+				if (PlayState.SONG.song == 'Ancient Clown' || PlayState.SONG.song == 'From Hell' || PlayState.SONG.song == 'Clownstace'){
+					characterData.camOffsetY = -100;
+					characterData.camOffsetX = 20;
 				}
 			/*
 				case 'bf-og':

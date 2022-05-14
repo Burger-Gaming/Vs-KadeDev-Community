@@ -18,6 +18,7 @@ class GameOverSubstate extends MusicBeatSubState
 	var bf:Boyfriend;
 	var camFollow:FlxObject;
 	var stageSuffix:String = "";
+	public static var deathCount:Int = 0;
 
 	public function new(x:Float, y:Float)
 	{
@@ -35,6 +36,8 @@ class GameOverSubstate extends MusicBeatSubState
 		}
 
 		super();
+
+		deathCount ++;
 
 		Conductor.songPosition = 0;
 
