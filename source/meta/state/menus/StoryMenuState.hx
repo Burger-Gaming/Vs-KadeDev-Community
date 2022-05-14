@@ -34,8 +34,8 @@ class StoryMenuState extends MusicBeatState
 		['parents-christmas', 'bf', 'gf'],
 		['senpai', 'bf', 'gf'],
 		['yoder', 'bf', 'gf'],
-		['acfh', 'bf', 'gf'],
-		['onion', 'bf', 'gf']
+		['onion', 'bf', 'gf'],
+		['acfh', 'bf', 'gf']
 	];
 
 	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, true, true, true, true, true, true];

@@ -126,22 +126,23 @@ class Main extends Sprite
 		],
 		[
 			['Yoder', 'Baby-Yoda-Real', 'Swagswag'],
-			['yoder', 'yoder', 'yoder'],
+			['yoder'],
 			[FlxColor.fromRGB(0, 200, 0)],
 			'SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG'
 		],
 		[
 			['Onions', 'Garlico', 'Food-Fight'],
-			['onion', 'onion', 'onion'],
+			['onion'],
 			[FlxColor.fromRGB(255, 166, 109)],
 			'Teary Eyes'
 		],
 		[
-			['Ancient-Clown', 'From-Hell', 'Clownstance'],
-			['acfh', 'acfh', 'acfh'],
+			['Ancient-Clown', 'From-Hell', 'Clownstace'],
+			['clown'],
 			[FlxColor.fromRGB(255, 45, 50)],
 			'ANCIENT AHH CLOWN'
-		],
+		]
+		
 	];
 
 	// most of these variables are just from the base game!
