@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Menu_ACFH.png">
+	<!-- Created with Adobe Animate version 21.0.4.39603 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Idle0000" x="0" y="0" width="1357" height="1357" frameX="-90" frameY="-90" frameWidth="1566" frameHeight="1567"/>
+	<SubTexture name="Idle0001" x="1357" y="0" width="1566" height="1567"/>
+	<SubTexture name="Idle0002" x="0" y="1567" width="1507" height="1507" frameX="-27" frameY="-26" frameWidth="1566" frameHeight="1567"/>
+	<SubTexture name="Idle0003" x="1507" y="1567" width="1507" height="1507" frameX="-27" frameY="-22" frameWidth="1566" frameHeight="1567"/>
+	<SubTexture name="Idle0004" x="1507" y="1567" width="1507" height="1507" frameX="-27" frameY="-22" frameWidth="1566" frameHeight="1567"/>
+</TextureAtlas>

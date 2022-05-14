@@ -19,7 +19,9 @@ class MenuCharacter extends FlxSprite
 		'mom' => ["Mom Idle BLACK LINES", 24, true, 1 * 0.5, 0, -20],
 		'parents-christmas' => ["Parent Christmas Idle", 24, true, 0.8, -100, 50],
 		'senpai' => ["SENPAI idle Black Lines", 24, true, 1.4 * 0.5, -50, 100],
-		'yoder' => ['Idle', 24, true, 1, -350, -225]
+		'yoder' => ['Idle', 24, true, 1, -350, -225],
+		'acfh' => ['Idle', 12, true, .4, -300, -200],
+		'onion' => ['idle', 24, true, .6, -100, 70]
 	];
 
 	var baseX:Float = 0;
@@ -39,10 +41,14 @@ class MenuCharacter extends FlxSprite
 
 	public function createCharacter(newCharacter:String, canChange:Bool = false)
 	{
-		var tex = Paths.getSparrowAtlas('menus/base/storymenu/campaign_menu_UI_characters');
-		if (newCharacter == 'yoder'){
-			tex = Paths.getSparrowAtlas('menus/base/storymenu/Menu_Yoder');
+		var textureString:String;
+		switch (newCharacter) {
+			case 'yoder': textureString = 'Menu_Yoder';
+			case 'acfh': textureString = 'Menu_ACFH';
+			case 'onion': textureString = 'Menu_Onion';
+			default: textureString = 'campaign_menu_UI_characters';
 		}
+		var tex = Paths.getSparrowAtlas('menus/base/storymenu/$textureString');
 		frames = tex;
 		var assortedValues = curCharacterMap.get(newCharacter);
 		if (assortedValues != null)

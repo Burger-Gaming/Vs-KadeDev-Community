@@ -73,6 +73,35 @@ class Character extends FNFSprite
 				characterData.offsetX = -150;
 
 				playAnim('idle');
+			case 'onion-skin':
+
+				frames = Paths.getSparrowAtlas('characters/onion-skin');
+
+				animation.addByPrefix('idle', 'idle', 24, false);
+				animation.addByPrefix('singUP', 'up', 24, false);
+				animation.addByPrefix('singDOWN', 'down', 24, false);
+				animation.addByPrefix('singLEFT', 'left', 24, false);
+				animation.addByPrefix('singRIGHT', 'right', 24, false);
+
+				playAnim('idle');
+			case 'ACFH':
+				frames = Paths.getSparrowAtlas('characters/ACFH');
+				animation.addByPrefix('idle', 'Idle', 24, false);
+				animation.addByPrefix('singUP', 'Up', 24, false);
+				animation.addByPrefix('singDOWN', 'Down', 24, false);
+				animation.addByPrefix('singLEFT', 'Left', 24, false);
+				animation.addByPrefix('singRIGHT', 'Right', 24, false);
+
+				playAnim('idle');
+			case 'TankACFH':
+				frames = Paths.getSparrowAtlas('characters/TankACFH');
+				animation.addByPrefix('idle', 'Idle', 24, false);
+				animation.addByPrefix('singUP', 'Up', 24, false);
+				animation.addByPrefix('singDOWN', 'Down', 24, false);
+				animation.addByPrefix('singLEFT', 'Left', 24, false);
+				animation.addByPrefix('singRIGHT', 'Right', 24, false);
+
+				playAnim('idle');
 			case 'gf':
 				// GIRLFRIEND CODE
 				tex = Paths.getSparrowAtlas('characters/GF_assets');
@@ -472,6 +501,7 @@ class Character extends FNFSprite
 				animation.addByPrefix('singRIGHT-alt', 'Parent Right Note Mom', 24, false);
 
 				playAnim('idle');
+			
 			default:
 				// set up animations if they aren't already
 

@@ -23,7 +23,7 @@ class StoryMenuState extends MusicBeatState
 	var scoreText:FlxText;
 	var curDifficulty:Int = 1;
 
-	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, true, true, true];
+	
 
 	var weekCharacters:Array<Dynamic> = [
 		['', 'bf', 'gf'],
@@ -33,8 +33,12 @@ class StoryMenuState extends MusicBeatState
 		['mom', 'bf', 'gf'],
 		['parents-christmas', 'bf', 'gf'],
 		['senpai', 'bf', 'gf'],
-		['yoder', 'bf', 'gf']
+		['yoder', 'bf', 'gf'],
+		['acfh', 'bf', 'gf'],
+		['onion', 'bf', 'gf']
 	];
+
+	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, true, true, true, true, true, true];
 
 	var txtWeekTitle:FlxText;
 

@@ -129,6 +129,18 @@ class Main extends Sprite
 			['yoder', 'yoder', 'yoder'],
 			[FlxColor.fromRGB(0, 200, 0)],
 			'SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG'
+		],
+		[
+			['Ancient-Clown', 'From-Hell', 'Clownstance'],
+			['acfh', 'acfh', 'acfh'],
+			[FlxColor.fromRGB(255, 45, 50)],
+			'ANCIENT AHH CLOWN'
+		],
+		[
+			['Onions', 'Garlico', 'Food-Fight'],
+			['onion', 'onion', 'onion'],
+			[FlxColor.fromRGB(255, 166, 109)],
+			'Teary Eyes'
 		]
 	];
 
