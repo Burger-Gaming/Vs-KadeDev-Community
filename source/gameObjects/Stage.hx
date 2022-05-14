@@ -78,7 +78,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 					curStage = 'school';
 				case 'thorns':
 					curStage = 'schoolEvil';
-				case 'bopeebo':
+				case 'yoder' | 'baby-yoda-real' | 'swagswag':
 					curStage = 'yoda';
 				default:
 					curStage = 'stage';

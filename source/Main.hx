@@ -124,6 +124,12 @@ class Main extends Sprite
 			[FlxColor.fromRGB(206, 106, 169)],
 			"hating simulator ft. moawling"
 		],
+		[
+			['Yoder', 'Baby-Yoda-Real', 'Swagswag'],
+			['yoder', 'yoder', 'yoder'],
+			[FlxColor.fromRGB(0, 200, 0)],
+			'SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG SWAG'
+		]
 	];
 
 	// most of these variables are just from the base game!
