@@ -95,29 +95,55 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		{
 			case 'yoda':
 				PlayState.defaultCamZoom = 0.92;
-				var bg:FNFSprite = new FNFSprite(-320, -320).loadGraphic(Paths.image('backgrounds/' + curStage + '/sky'));
+
+				var timeOfDay:String = '';
+				var skyTime:String = 's';
+				switch(PlayState.SONG.song){
+					case 'Yoder' | 'Swagswag':
+						skyTime = 'leanS';
+					case 'Baby Yoda Real':
+						skyTime = 's';
+					default:
+						skyTime = 's';
+				}
+				var skyName:String = skyTime + 'ky';
+				if (PlayState.storyDifficulty == 3){ //erect shit
+					timeOfDay = '-night';
+					skyName = 'sky-night';
+				}
+
+				var bg:FNFSprite = new FNFSprite(-320, -320).loadGraphic(Paths.image('backgrounds/' + curStage + '/' + skyName));
 				bg.antialiasing = true;
 				add(bg);
 
-				var offSpring:FNFSprite = new FNFSprite(-320, -280).loadGraphic(Paths.image('backgrounds/' + curStage + '/offspring'));
-				offSpring.scrollFactor.set(0.2, 0.2);
+				var offSpring:FNFSprite = new FNFSprite(-320, -280).loadGraphic(Paths.image('backgrounds/' + curStage + '/offspring' + timeOfDay));
+				offSpring.scrollFactor.set(0.2 / 1.5, 0.2);
 				offSpring.antialiasing = true;
 				add(offSpring);
 
-				var montana:FNFSprite = new FNFSprite(-320, -280).loadGraphic(Paths.image('backgrounds/' + curStage + '/las montanas'));
-				montana.scrollFactor.set(0.9, 1);
+				var montana:FNFSprite = new FNFSprite(-320, -280).loadGraphic(Paths.image('backgrounds/' + curStage + '/las montanas' + timeOfDay));
+				montana.scrollFactor.set(0.9 / 1.5, 1);
 				montana.antialiasing = true;
 				add(montana);
 
-				var desert:FNFSprite = new FNFSprite(-320, -280).loadGraphic(Paths.image('backgrounds/' + curStage + '/desert'));
-				desert.scrollFactor.set(0.95, 1);
+				var desert:FNFSprite = new FNFSprite(-320, -280).loadGraphic(Paths.image('backgrounds/' + curStage + '/desert' + timeOfDay));
+				desert.scrollFactor.set(0.95 / 1.5, 1);
 				desert.antialiasing = true;
 				add(desert);
 
-				var food:FNFSprite = new FNFSprite(-320, -280).loadGraphic(Paths.image('backgrounds/' + curStage + '/borgarKeng'));
-				food.scrollFactor.set(0.95, 1);
+				var food:FNFSprite = new FNFSprite(-320, -280).loadGraphic(Paths.image('backgrounds/' + curStage + '/borgarKeng' + timeOfDay));
+				food.scrollFactor.set(1, 1);
 				food.antialiasing = true;
 				add(food);
+
+				if(skyTime == 's'){
+					offSpring.visible = false;
+				}
+				if(skyTime == 'leanS'){
+					if (PlayState.SONG.song == 'Swagswag'){ // sunset stuff
+						offSpring.x = 1920 - 300;
+					}
+				}
 			case 'spooky':
 				curStage = 'spooky';
 				// halloweenLevel = true;

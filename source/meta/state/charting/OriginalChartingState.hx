@@ -374,9 +374,17 @@ class OriginalChartingState extends MusicBeatState
 		if (vocals != null)
 			vocals.stop();
 
-		songMusic = new FlxSound().loadEmbedded(Paths.inst(daSong), false, true);
+		var yeah:Bool = false;
+
+		if(PlayState.storyDifficulty == 3){
+			yeah = true;
+		} else{
+			yeah = false;
+		}
+
+		songMusic = new FlxSound().loadEmbedded(Paths.inst(daSong, yeah), false, true);
 		if (_song.needsVoices)
-			vocals = new FlxSound().loadEmbedded(Paths.voices(daSong), false, true);
+			vocals = new FlxSound().loadEmbedded(Paths.voices(daSong, yeah), false, true);
 		else
 			vocals = new FlxSound();
 		FlxG.sound.list.add(songMusic);
