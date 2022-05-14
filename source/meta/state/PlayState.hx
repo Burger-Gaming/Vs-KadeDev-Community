@@ -1377,10 +1377,14 @@ class PlayState extends MusicBeatState
 		updateRPC(false);
 
 		curSong = songData.song;
-		songMusic = new FlxSound().loadEmbedded(Paths.inst(SONG.song), false, true);
+		var yes:Bool = false;
+		if(storyDifficulty == 3){
+			yes = true;
+		}
+		songMusic = new FlxSound().loadEmbedded(Paths.inst(SONG.song, yes), false, true);
 
 		if (SONG.needsVoices)
-			vocals = new FlxSound().loadEmbedded(Paths.voices(SONG.song), false, true);
+			vocals = new FlxSound().loadEmbedded(Paths.voices(SONG.song, yes), false, true);
 		else
 			vocals = new FlxSound();
 

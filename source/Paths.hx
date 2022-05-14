@@ -261,14 +261,22 @@ class Paths
 		return file;
 	}
 
-	inline static public function voices(song:String):Any {
-		var songKey:String = '${CoolUtil.swapSpaceDash(song.toLowerCase())}/Voices';
+	inline static public function voices(song:String, isErect:Bool = false):Any {
+		var erectYeah:String = '';
+		if (isErect){
+			erectYeah = '-erect';
+		}
+		var songKey:String = '${CoolUtil.swapSpaceDash(song.toLowerCase())}/Voices' + erectYeah;
 		var voices = returnSound('songs', songKey);
 		return voices;
 	}
 
-	inline static public function inst(song:String):Any	{
-		var songKey:String = '${CoolUtil.swapSpaceDash(song.toLowerCase())}/Inst';
+	inline static public function inst(song:String, isErect:Bool = false):Any	{
+		var erectYeah:String = '';
+		if (isErect){
+			erectYeah = '-erect';
+		}
+		var songKey:String = '${CoolUtil.swapSpaceDash(song.toLowerCase())}/Inst' + erectYeah;
 		var inst = returnSound('songs', songKey);
 		return inst;
 	}
