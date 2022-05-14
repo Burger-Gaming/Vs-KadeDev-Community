@@ -36,6 +36,7 @@ class Character extends FNFSprite
 
 	public var characterData:CharacterData;
 	public var adjustPos:Bool = true;
+	public var charColor:String = "#31B0D1";
 
 	public function new(?isPlayer:Bool = false)
 	{
@@ -57,9 +58,11 @@ class Character extends FNFSprite
 			quickDancer: false
 		};
 
+
 		switch (curCharacter)
 		{
 			case 'yoder':
+				charColor = "#578779";
 				tex = Paths.getSparrowAtlas('characters/Yoder');
 				frames = tex;
 
@@ -74,6 +77,7 @@ class Character extends FNFSprite
 
 				playAnim('idle');
 			case 'onion': // im not gonna change 50 charts just to add -skin to the end of onion :Dave:
+				charColor = "#FAA66D";
 
 				frames = Paths.getSparrowAtlas('characters/onion-skin');
 
@@ -88,6 +92,8 @@ class Character extends FNFSprite
 
 				playAnim('idle');
 			case 'ACFH':
+				charColor = "#FF2D32";
+
 				frames = Paths.getSparrowAtlas('characters/ACFH');
 				animation.addByPrefix('idle', 'Idle', 24, false);
 				animation.addByPrefix('singUP', 'Up', 24, false);
@@ -103,7 +109,7 @@ class Character extends FNFSprite
 				characterData.camOffsetX = 150;
 
 				playAnim('idle');
-			case 'TankACFH':
+			case 'TankACFH': // ugh
 				frames = Paths.getSparrowAtlas('characters/TankACFH');
 				animation.addByPrefix('idle', 'Idle', 24, false);
 				animation.addByPrefix('singUP', 'Up', 24, false);

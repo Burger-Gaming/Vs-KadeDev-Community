@@ -346,7 +346,7 @@ class PlayState extends MusicBeatState
 		}
 		add(strumLines);
 
-		uiHUD = new ClassHUD();
+		uiHUD = new ClassHUD(dadOpponent.charColor, boyfriend.charColor);
 		add(uiHUD);
 		uiHUD.cameras = [camHUD];
 		//
@@ -571,6 +571,10 @@ class PlayState extends MusicBeatState
 			// make sure you're not cheating lol
 			if (!isStoryMode)
 			{
+				if (FlxG.keys.justPressed.EIGHT && !startingSong) {
+					resetMusic();
+					Main.switchState(this, new AnimationDebug(dadOpponent.curCharacter));
+				}
 				// charting state (more on that later)
 				if ((FlxG.keys.justPressed.SEVEN) && (!startingSong))
 				{
