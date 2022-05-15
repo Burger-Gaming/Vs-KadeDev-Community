@@ -124,6 +124,7 @@ class Character extends FNFSprite
 
 				frames = Paths.getSparrowAtlas('characters/fabiASSETS');
 				animation.addByPrefix('idle', 'doofus idle', 24, false);
+				animation.addByPrefix('idlePost', 'yeah uh', 24, true); //loops the tail
 				animation.addByPrefix('singUP', 'doofus UP', 24, false);
 				animation.addByPrefix('singDOWN', 'doofus DOWN', 24, false);
 				animation.addByPrefix('singLEFT', 'doofus LEFT', 24, false);

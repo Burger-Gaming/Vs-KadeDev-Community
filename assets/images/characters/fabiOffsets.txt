@@ -1,4 +1,5 @@
 idle -5 0
+idlePost -5 0
 singDOWN 26 -11
 singRIGHT -4 6
 singUP -10 20
