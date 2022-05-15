@@ -242,6 +242,10 @@ class PlayState extends MusicBeatState
 		gf.setCharacter(300, 100, stageBuild.returnGFtype(curStage));
 		gf.scrollFactor.set(0.95, 0.95);
 
+		if(SONG.song == 'Battle of the Century'){
+			gf.visible = false;
+		}
+
 		if (PlayState.SONG.song == 'Onions' || PlayState.SONG.song == 'Garlico' || PlayState.SONG.song == 'Food Fight'){
 			gf.x += 600;
 			gf.y += 300;

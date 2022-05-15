@@ -86,6 +86,15 @@ class Main extends Sprite
 		Enough of that, here's how it works
 		[ [songs to use], [characters in songs], [color of week], name of week ]
 	**/
+	public static var extraSongs:Array<Dynamic> = [
+		[
+			['Battle of the Century'],
+			['Whoppa'],
+			[FlxColor.fromRGB(255, 255, 255)],
+			'Extras'
+		]
+	];
+
 	public static var gameWeeks:Array<Dynamic> = [
 		[['Tutorial'], ['gf'], [FlxColor.fromRGB(129, 100, 223)], 'Funky Beginnings'],
 		[

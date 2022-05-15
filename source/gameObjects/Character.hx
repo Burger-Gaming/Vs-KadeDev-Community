@@ -119,6 +119,38 @@ class Character extends FNFSprite
 				animation.addByPrefix('singRIGHT', 'Right', 24, false);
 
 				playAnim('idle');
+			case 'whoppa':
+				charColor = '#FF9900';
+				frames = Paths.getSparrowAtlas('characters/whoppa');
+				animation.addByPrefix('idle', 'kingwilliams idle', 24, false);
+				animation.addByPrefix('singUP', 'kingwilliams up', 24, false);
+				animation.addByPrefix('singDOWN', 'kingwilliams down', 24, false);
+				animation.addByPrefix('singLEFT', 'kingwilliams left', 24, false);
+				animation.addByPrefix('singRIGHT', 'king williams right', 24, false);
+
+				//characterData.offsetY = 200;
+			case 'kadeplayer':
+				frames = Paths.getSparrowAtlas('characters/kade_brawl');
+
+				animation.addByPrefix('idle', 'kadecat idle', 24, false);
+				animation.addByPrefix('singUP', 'kadecat up0', 24, false);
+				animation.addByPrefix('singDOWN', 'kadecat down0', 24, false);
+				animation.addByPrefix('singLEFT', 'kadecat right0', 24, false);
+				animation.addByPrefix('singRIGHT', 'kadecat left0', 24, false);
+				animation.addByPrefix('singUPmiss', 'kadecat up miss', 24, false);
+				animation.addByPrefix('singDOWNmiss', 'kadecat down miss', 24, false);
+				animation.addByPrefix('singLEFTmiss', 'kadecat right miss', 24, false);
+				animation.addByPrefix('singRIGHTmiss', 'kadecat left miss', 24, false);
+				animation.addByPrefix('firstDeath', 'kadecat dies (sad)', 24, false);
+				animation.addByPrefix('deathConfirm', 'kadecat dies loop', 24, false);
+				animation.addByPrefix('deathLoop', 'kadecat dies loop', 24, false);
+
+				flipX = true;
+
+				characterData.offsetY = -20;
+				characterData.offsetX = 100;
+
+				playAnim('idle');
 			case 'gf':
 				// GIRLFRIEND CODE
 				tex = Paths.getSparrowAtlas('characters/GF_assets');

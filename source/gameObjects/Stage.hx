@@ -84,6 +84,8 @@ class Stage extends FlxTypedGroup<FlxBasic>
 					curStage = 'onion';
 				case 'ancient-clown' | 'from-hell' | 'clownstace':
 					curStage = 'ACFH';
+				case 'battle-of-the-century':
+					curStage = 'botc';
 				default:
 					curStage = 'stage';
 			}
@@ -97,6 +99,15 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		//
 		switch (curStage)
 		{
+			case 'botc':
+				PlayState.defaultCamZoom = 0.7;
+
+				var bg:FNFSprite = new FNFSprite(240, 135);
+				bg.frames = Paths.getSparrowAtlas('backgrounds/' + curStage + '/battleOfTheBackground');
+				bg.animation.addByPrefix('idle', 'bg speen', 30, true);
+				bg.animation.play('idle');
+				bg.scale.set(6, 6);
+				add(bg);
 			case 'ACFH':
 				PlayState.defaultCamZoom = 0.9;
 				var imgName:String = 'shid-noballs';

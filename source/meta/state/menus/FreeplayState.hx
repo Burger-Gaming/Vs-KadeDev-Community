@@ -82,7 +82,7 @@ class FreeplayState extends MusicBeatState
 
 		// */
 
-		for (i in folderSongs)
+		/*for (i in folderSongs) me no likey
 		{
 			if (!existingSongs.contains(i.toLowerCase()))
 			{
@@ -95,7 +95,7 @@ class FreeplayState extends MusicBeatState
 					addSong(CoolUtil.spaceToDash(castSong.song), 1, icon, FlxColor.WHITE);
 				}
 			}
-		}
+		}*/
 
 		// LOAD MUSIC
 		// ForeverTools.resetMenuMusic();
@@ -155,6 +155,15 @@ class FreeplayState extends MusicBeatState
 		selector.size = 40;
 		selector.text = ">";
 		// add(selector);
+		var extrasBlack:FlxSprite = new FlxSprite().makeGraphic(1280, 18, FlxColor.BLACK);
+
+		var extrasTxt:FlxText = new FlxText(0, 0, 0, "Press E to access the extra songs.", 16);
+		extrasTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, OUTLINE, FlxColor.BLACK);
+		extrasTxt.y = FlxG.height - extrasTxt.height;
+		extrasBlack.alpha = 0.5;
+		extrasBlack.y = extrasTxt.y;
+		add(extrasBlack);
+		add(extrasTxt);
 	}
 
 	public function addSong(songName:String, weekNum:Int, songCharacter:String, songColor:FlxColor)
@@ -212,6 +221,11 @@ class FreeplayState extends MusicBeatState
 			changeSelection(-1);
 		else if (downP)
 			changeSelection(1);
+
+		if (FlxG.keys.justPressed.E){
+			threadActive = false;
+			Main.switchState(this, new meta.state.menus.ExtrasState());
+		}
 
 		if (controls.UI_LEFT_P)
 			changeDiff(-1);

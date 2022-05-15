@@ -45,6 +45,9 @@ class HealthIcon extends FlxSprite
 		animation.add('icon', [0, 1], 0, false, isPlayer);
 		animation.play('icon');
 		scrollFactor.set();
+		if (char == 'kadeplayer'){
+			flipX = true;
+		}
 	}
 
 	override function update(elapsed:Float)

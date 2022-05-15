@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="kadecat.png">
+	<!-- Created with Adobe Animate version 20.0.3.25487 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="kadecat dies (sad)0000" x="0" y="0" width="216" height="259" frameX="-9" frameY="0" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0001" x="0" y="0" width="216" height="259" frameX="-9" frameY="0" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0002" x="216" y="0" width="216" height="259" frameX="-9" frameY="0" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0003" x="216" y="0" width="216" height="259" frameX="-9" frameY="0" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0004" x="432" y="0" width="216" height="259" frameX="-9" frameY="0" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0005" x="432" y="0" width="216" height="259" frameX="-9" frameY="0" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0006" x="648" y="0" width="226" height="255" frameX="-5" frameY="-4" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0007" x="648" y="0" width="226" height="255" frameX="-5" frameY="-4" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0008" x="874" y="0" width="239" height="238" frameX="0" frameY="-21" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0009" x="874" y="0" width="239" height="238" frameX="0" frameY="-21" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0010" x="1113" y="0" width="230" height="242" frameX="-4" frameY="-17" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0011" x="1113" y="0" width="230" height="242" frameX="-4" frameY="-17" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0012" x="1343" y="0" width="232" height="241" frameX="-3" frameY="-18" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0013" x="1343" y="0" width="232" height="241" frameX="-3" frameY="-18" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0014" x="1343" y="0" width="232" height="241" frameX="-3" frameY="-18" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0015" x="1343" y="0" width="232" height="241" frameX="-3" frameY="-18" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0016" x="1575" y="0" width="351" height="348" frameX="-3" frameY="-18" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0017" x="1575" y="0" width="351" height="348" frameX="-3" frameY="-18" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0018" x="0" y="348" width="294" height="280" frameX="-3" frameY="-18" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0019" x="0" y="348" width="294" height="280" frameX="-3" frameY="-18" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0020" x="294" y="348" width="296" height="280" frameX="-3" frameY="-20" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0021" x="294" y="348" width="296" height="280" frameX="-3" frameY="-20" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0022" x="590" y="348" width="296" height="284" frameX="-3" frameY="-16" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0023" x="590" y="348" width="296" height="284" frameX="-3" frameY="-16" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0024" x="886" y="348" width="296" height="281" frameX="-3" frameY="-19" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0025" x="886" y="348" width="296" height="281" frameX="-3" frameY="-19" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0026" x="1182" y="348" width="288" height="274" frameX="-3" frameY="-19" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0027" x="1182" y="348" width="288" height="274" frameX="-3" frameY="-19" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0028" x="1470" y="348" width="295" height="280" frameX="-3" frameY="-19" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0029" x="1470" y="348" width="295" height="280" frameX="-3" frameY="-19" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0030" x="1470" y="348" width="295" height="280" frameX="-3" frameY="-19" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0031" x="1470" y="348" width="295" height="280" frameX="-3" frameY="-19" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0032" x="1470" y="348" width="295" height="280" frameX="-3" frameY="-19" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0033" x="1470" y="348" width="295" height="280" frameX="-3" frameY="-19" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0034" x="1765" y="348" width="164" height="151" frameX="-94" frameY="-107" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0035" x="1765" y="348" width="164" height="151" frameX="-94" frameY="-107" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0036" x="0" y="632" width="140" height="93" frameX="-124" frameY="-53" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0037" x="0" y="632" width="140" height="93" frameX="-124" frameY="-53" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0038" x="140" y="632" width="311" height="114" frameX="-43" frameY="-20" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0039" x="140" y="632" width="311" height="114" frameX="-43" frameY="-20" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0040" x="451" y="632" width="275" height="101" frameX="-61" frameY="-27" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0041" x="451" y="632" width="275" height="101" frameX="-61" frameY="-27" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0042" x="726" y="632" width="283" height="104" frameX="-57" frameY="-25" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies (sad)0043" x="726" y="632" width="283" height="104" frameX="-57" frameY="-25" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies loop0000" x="1009" y="632" width="266" height="98" frameX="-20" frameY="-6" frameWidth="307" frameHeight="112"/>
+	<SubTexture name="kadecat dies loop0001" x="1009" y="632" width="266" height="98" frameX="-20" frameY="-6" frameWidth="307" frameHeight="112"/>
+	<SubTexture name="kadecat dies loop0002" x="1275" y="632" width="307" height="112"/>
+	<SubTexture name="kadecat dies loop0003" x="1275" y="632" width="307" height="112"/>
+	<SubTexture name="kadecat dies loop0004" x="1582" y="632" width="299" height="110" frameX="-4" frameY="-1" frameWidth="307" frameHeight="112"/>
+	<SubTexture name="kadecat dies loop0005" x="1582" y="632" width="299" height="110" frameX="-4" frameY="-1" frameWidth="307" frameHeight="112"/>
+	<SubTexture name="kadecat dies loop0006" x="0" y="746" width="287" height="105" frameX="-10" frameY="-4" frameWidth="307" frameHeight="112"/>
+	<SubTexture name="kadecat dies loop0007" x="0" y="746" width="287" height="105" frameX="-10" frameY="-4" frameWidth="307" frameHeight="112"/>
+	<SubTexture name="kadecat dies loop0008" x="287" y="746" width="283" height="104" frameX="-12" frameY="-4" frameWidth="307" frameHeight="112"/>
+	<SubTexture name="kadecat dies loop0009" x="287" y="746" width="283" height="104" frameX="-12" frameY="-4" frameWidth="307" frameHeight="112"/>
+	<SubTexture name="kadecat dies loop0010" x="726" y="632" width="283" height="104" frameX="-12" frameY="-4" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies loop0011" x="726" y="632" width="283" height="104" frameX="-12" frameY="-4" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies loop0012" x="726" y="632" width="283" height="104" frameX="-12" frameY="-4" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat dies loop0013" x="726" y="632" width="283" height="104" frameX="-12" frameY="-4" frameWidth="354" frameHeight="366"/>
+	<SubTexture name="kadecat down0000" x="570" y="746" width="212" height="259"/>
+	<SubTexture name="kadecat down0001" x="570" y="746" width="212" height="259"/>
+	<SubTexture name="kadecat down0002" x="782" y="746" width="205" height="259" frameX="-3" frameY="0" frameWidth="212" frameHeight="259"/>
+	<SubTexture name="kadecat down0003" x="782" y="746" width="205" height="259" frameX="-3" frameY="0" frameWidth="212" frameHeight="259"/>
+	<SubTexture name="kadecat down0004" x="782" y="746" width="205" height="259" frameX="-3" frameY="0" frameWidth="212" frameHeight="259"/>
+	<SubTexture name="kadecat down0005" x="782" y="746" width="205" height="259" frameX="-3" frameY="0" frameWidth="212" frameHeight="259"/>
+	<SubTexture name="kadecat down0006" x="782" y="746" width="205" height="259" frameX="-3" frameY="0" frameWidth="212" frameHeight="259"/>
+	<SubTexture name="kadecat down0007" x="782" y="746" width="205" height="259" frameX="-3" frameY="0" frameWidth="212" frameHeight="259"/>
+	<SubTexture name="kadecat down0008" x="782" y="746" width="205" height="259" frameX="-3" frameY="0" frameWidth="212" frameHeight="259"/>
+	<SubTexture name="kadecat down0009" x="782" y="746" width="205" height="259" frameX="-3" frameY="0" frameWidth="212" frameHeight="259"/>
+	<SubTexture name="kadecat down0010" x="782" y="746" width="205" height="259" frameX="-3" frameY="0" frameWidth="212" frameHeight="259"/>
+	<SubTexture name="kadecat down0011" x="782" y="746" width="205" height="259" frameX="-3" frameY="0" frameWidth="212" frameHeight="259"/>
+	<SubTexture name="kadecat down0012" x="782" y="746" width="205" height="259" frameX="-3" frameY="0" frameWidth="212" frameHeight="259"/>
+	<SubTexture name="kadecat down0013" x="782" y="746" width="205" height="259" frameX="-3" frameY="0" frameWidth="212" frameHeight="259"/>
+	<SubTexture name="kadecat down miss0000" x="570" y="746" width="212" height="259" frameX="0" frameY="-3" frameWidth="212" frameHeight="259"/>
+	<SubTexture name="kadecat down miss0001" x="570" y="746" width="212" height="259" frameX="0" frameY="-3" frameWidth="212" frameHeight="259"/>
+	<SubTexture name="kadecat down miss0002" x="987" y="746" width="199" height="262" frameX="-5" frameY="0" frameWidth="212" frameHeight="262"/>
+	<SubTexture name="kadecat down miss0003" x="987" y="746" width="199" height="262" frameX="-5" frameY="0" frameWidth="212" frameHeight="262"/>
+	<SubTexture name="kadecat down miss0004" x="1186" y="746" width="206" height="260" frameX="-2" frameY="-2" frameWidth="212" frameHeight="262"/>
+	<SubTexture name="kadecat down miss0005" x="1186" y="746" width="206" height="260" frameX="-2" frameY="-2" frameWidth="212" frameHeight="262"/>
+	<SubTexture name="kadecat down miss0006" x="1186" y="746" width="206" height="260" frameX="-2" frameY="-2" frameWidth="212" frameHeight="262"/>
+	<SubTexture name="kadecat down miss0007" x="1186" y="746" width="206" height="260" frameX="-2" frameY="-2" frameWidth="212" frameHeight="262"/>
+	<SubTexture name="kadecat down miss0008" x="1186" y="746" width="206" height="260" frameX="-2" frameY="-2" frameWidth="212" frameHeight="262"/>
+	<SubTexture name="kadecat down miss0009" x="1186" y="746" width="206" height="260" frameX="-2" frameY="-2" frameWidth="212" frameHeight="262"/>
+	<SubTexture name="kadecat down miss0010" x="1186" y="746" width="206" height="260" frameX="-2" frameY="-2" frameWidth="212" frameHeight="262"/>
+	<SubTexture name="kadecat down miss0011" x="1186" y="746" width="206" height="260" frameX="-2" frameY="-2" frameWidth="212" frameHeight="262"/>
+	<SubTexture name="kadecat down miss0012" x="1186" y="746" width="206" height="260" frameX="-2" frameY="-2" frameWidth="212" frameHeight="262"/>
+	<SubTexture name="kadecat down miss0013" x="1186" y="746" width="206" height="260" frameX="-2" frameY="-2" frameWidth="212" frameHeight="262"/>
+	<SubTexture name="kadecat idle0000" x="1392" y="746" width="216" height="259" frameX="0" frameY="-9" frameWidth="216" frameHeight="268"/>
+	<SubTexture name="kadecat idle0001" x="1392" y="746" width="216" height="259" frameX="0" frameY="-9" frameWidth="216" frameHeight="268"/>
+	<SubTexture name="kadecat idle0002" x="1608" y="746" width="213" height="260" frameX="-1" frameY="-8" frameWidth="216" frameHeight="268"/>
+	<SubTexture name="kadecat idle0003" x="1608" y="746" width="213" height="260" frameX="-1" frameY="-8" frameWidth="216" frameHeight="268"/>
+	<SubTexture name="kadecat idle0004" x="1821" y="746" width="208" height="267" frameX="-4" frameY="-1" frameWidth="216" frameHeight="268"/>
+	<SubTexture name="kadecat idle0005" x="1821" y="746" width="208" height="267" frameX="-4" frameY="-1" frameWidth="216" frameHeight="268"/>
+	<SubTexture name="kadecat idle0006" x="0" y="1013" width="206" height="267" frameX="-4" frameY="-1" frameWidth="216" frameHeight="268"/>
+	<SubTexture name="kadecat idle0007" x="0" y="1013" width="206" height="267" frameX="-4" frameY="-1" frameWidth="216" frameHeight="268"/>
+	<SubTexture name="kadecat idle0008" x="206" y="1013" width="204" height="268" frameX="-5" frameY="0" frameWidth="216" frameHeight="268"/>
+	<SubTexture name="kadecat idle0009" x="206" y="1013" width="204" height="268" frameX="-5" frameY="0" frameWidth="216" frameHeight="268"/>
+	<SubTexture name="kadecat idle0010" x="206" y="1013" width="204" height="268" frameX="-5" frameY="0" frameWidth="216" frameHeight="268"/>
+	<SubTexture name="kadecat idle0011" x="206" y="1013" width="204" height="268" frameX="-5" frameY="0" frameWidth="216" frameHeight="268"/>
+	<SubTexture name="kadecat idle0012" x="206" y="1013" width="204" height="268" frameX="-5" frameY="0" frameWidth="216" frameHeight="268"/>
+	<SubTexture name="kadecat idle0013" x="206" y="1013" width="204" height="268" frameX="-5" frameY="0" frameWidth="216" frameHeight="268"/>
+	<SubTexture name="kadecat left0000" x="410" y="1013" width="207" height="271" frameX="0" frameY="0" frameWidth="215" frameHeight="271"/>
+	<SubTexture name="kadecat left0001" x="410" y="1013" width="207" height="271" frameX="0" frameY="0" frameWidth="215" frameHeight="271"/>
+	<SubTexture name="kadecat left0002" x="617" y="1013" width="207" height="269" frameX="-8" frameY="-2" frameWidth="215" frameHeight="271"/>
+	<SubTexture name="kadecat left0003" x="617" y="1013" width="207" height="269" frameX="-8" frameY="-2" frameWidth="215" frameHeight="271"/>
+	<SubTexture name="kadecat left0004" x="617" y="1013" width="207" height="269" frameX="-8" frameY="-2" frameWidth="215" frameHeight="271"/>
+	<SubTexture name="kadecat left0005" x="617" y="1013" width="207" height="269" frameX="-8" frameY="-2" frameWidth="215" frameHeight="271"/>
+	<SubTexture name="kadecat left0006" x="617" y="1013" width="207" height="269" frameX="-8" frameY="-2" frameWidth="215" frameHeight="271"/>
+	<SubTexture name="kadecat left0007" x="617" y="1013" width="207" height="269" frameX="-8" frameY="-2" frameWidth="215" frameHeight="271"/>
+	<SubTexture name="kadecat left0008" x="617" y="1013" width="207" height="269" frameX="-8" frameY="-2" frameWidth="215" frameHeight="271"/>
+	<SubTexture name="kadecat left0009" x="617" y="1013" width="207" height="269" frameX="-8" frameY="-2" frameWidth="215" frameHeight="271"/>
+	<SubTexture name="kadecat left0010" x="617" y="1013" width="207" height="269" frameX="-8" frameY="-2" frameWidth="215" frameHeight="271"/>
+	<SubTexture name="kadecat left0011" x="617" y="1013" width="207" height="269" frameX="-8" frameY="-2" frameWidth="215" frameHeight="271"/>
+	<SubTexture name="kadecat left0012" x="617" y="1013" width="207" height="269" frameX="-8" frameY="-2" frameWidth="215" frameHeight="271"/>
+	<SubTexture name="kadecat left0013" x="617" y="1013" width="207" height="269" frameX="-8" frameY="-2" frameWidth="215" frameHeight="271"/>
+	<SubTexture name="kadecat left miss0000" x="410" y="1013" width="207" height="271" frameX="0" frameY="0" frameWidth="215" frameHeight="271"/>
+	<SubTexture name="kadecat left miss0001" x="410" y="1013" width="207" height="271" frameX="0" frameY="0" frameWidth="215" frameHeight="271"/>
+	<SubTexture name="kadecat left miss0002" x="824" y="1013" width="210" height="269" frameX="-9" frameY="-2" frameWidth="219" frameHeight="271"/>
+	<SubTexture name="kadecat left miss0003" x="824" y="1013" width="210" height="269" frameX="-9" frameY="-2" frameWidth="219" frameHeight="271"/>
+	<SubTexture name="kadecat left miss0004" x="1034" y="1013" width="208" height="269" frameX="-8" frameY="-2" frameWidth="219" frameHeight="271"/>
+	<SubTexture name="kadecat left miss0005" x="1034" y="1013" width="208" height="269" frameX="-8" frameY="-2" frameWidth="219" frameHeight="271"/>
+	<SubTexture name="kadecat left miss0006" x="1034" y="1013" width="208" height="269" frameX="-8" frameY="-2" frameWidth="219" frameHeight="271"/>
+	<SubTexture name="kadecat left miss0007" x="1034" y="1013" width="208" height="269" frameX="-8" frameY="-2" frameWidth="219" frameHeight="271"/>
+	<SubTexture name="kadecat left miss0008" x="1034" y="1013" width="208" height="269" frameX="-8" frameY="-2" frameWidth="219" frameHeight="271"/>
+	<SubTexture name="kadecat left miss0009" x="1034" y="1013" width="208" height="269" frameX="-8" frameY="-2" frameWidth="219" frameHeight="271"/>
+	<SubTexture name="kadecat left miss0010" x="1034" y="1013" width="208" height="269" frameX="-8" frameY="-2" frameWidth="219" frameHeight="271"/>
+	<SubTexture name="kadecat left miss0011" x="1034" y="1013" width="208" height="269" frameX="-8" frameY="-2" frameWidth="219" frameHeight="271"/>
+	<SubTexture name="kadecat left miss0012" x="1034" y="1013" width="208" height="269" frameX="-8" frameY="-2" frameWidth="219" frameHeight="271"/>
+	<SubTexture name="kadecat left miss0013" x="1034" y="1013" width="208" height="269" frameX="-8" frameY="-2" frameWidth="219" frameHeight="271"/>
+	<SubTexture name="kadecat right0000" x="1242" y="1013" width="230" height="270" frameX="-1" frameY="0" frameWidth="231" frameHeight="270"/>
+	<SubTexture name="kadecat right0001" x="1242" y="1013" width="230" height="270" frameX="-1" frameY="0" frameWidth="231" frameHeight="270"/>
+	<SubTexture name="kadecat right0002" x="1472" y="1013" width="222" height="268" frameX="0" frameY="-2" frameWidth="231" frameHeight="270"/>
+	<SubTexture name="kadecat right0003" x="1472" y="1013" width="222" height="268" frameX="0" frameY="-2" frameWidth="231" frameHeight="270"/>
+	<SubTexture name="kadecat right0004" x="1472" y="1013" width="222" height="268" frameX="0" frameY="-2" frameWidth="231" frameHeight="270"/>
+	<SubTexture name="kadecat right0005" x="1472" y="1013" width="222" height="268" frameX="0" frameY="-2" frameWidth="231" frameHeight="270"/>
+	<SubTexture name="kadecat right0006" x="1472" y="1013" width="222" height="268" frameX="0" frameY="-2" frameWidth="231" frameHeight="270"/>
+	<SubTexture name="kadecat right0007" x="1472" y="1013" width="222" height="268" frameX="0" frameY="-2" frameWidth="231" frameHeight="270"/>
+	<SubTexture name="kadecat right0008" x="1472" y="1013" width="222" height="268" frameX="0" frameY="-2" frameWidth="231" frameHeight="270"/>
+	<SubTexture name="kadecat right0009" x="1472" y="1013" width="222" height="268" frameX="0" frameY="-2" frameWidth="231" frameHeight="270"/>
+	<SubTexture name="kadecat right0010" x="1472" y="1013" width="222" height="268" frameX="0" frameY="-2" frameWidth="231" frameHeight="270"/>
+	<SubTexture name="kadecat right0011" x="1472" y="1013" width="222" height="268" frameX="0" frameY="-2" frameWidth="231" frameHeight="270"/>
+	<SubTexture name="kadecat right0012" x="1472" y="1013" width="222" height="268" frameX="0" frameY="-2" frameWidth="231" frameHeight="270"/>
+	<SubTexture name="kadecat right0013" x="1472" y="1013" width="222" height="268" frameX="0" frameY="-2" frameWidth="231" frameHeight="270"/>
+	<SubTexture name="kadecat right miss0000" x="1242" y="1013" width="230" height="270" frameX="-1" frameY="0" frameWidth="231" frameHeight="270"/>
+	<SubTexture name="kadecat right miss0001" x="1242" y="1013" width="230" height="270" frameX="-1" frameY="0" frameWidth="231" frameHeight="270"/>
+	<SubTexture name="kadecat right miss0002" x="1694" y="1013" width="218" height="268" frameX="0" frameY="-2" frameWidth="231" frameHeight="270"/>
+	<SubTexture name="kadecat right miss0003" x="1694" y="1013" width="218" height="268" frameX="0" frameY="-2" frameWidth="231" frameHeight="270"/>
+	<SubTexture name="kadecat right miss0004" x="0" y="1284" width="223" height="268" frameX="0" frameY="-2" frameWidth="231" frameHeight="270"/>
+	<SubTexture name="kadecat right miss0005" x="0" y="1284" width="223" height="268" frameX="0" frameY="-2" frameWidth="231" frameHeight="270"/>
+	<SubTexture name="kadecat right miss0006" x="0" y="1284" width="223" height="268" frameX="0" frameY="-2" frameWidth="231" frameHeight="270"/>
+	<SubTexture name="kadecat right miss0007" x="0" y="1284" width="223" height="268" frameX="0" frameY="-2" frameWidth="231" frameHeight="270"/>
+	<SubTexture name="kadecat right miss0008" x="0" y="1284" width="223" height="268" frameX="0" frameY="-2" frameWidth="231" frameHeight="270"/>
+	<SubTexture name="kadecat right miss0009" x="0" y="1284" width="223" height="268" frameX="0" frameY="-2" frameWidth="231" frameHeight="270"/>
+	<SubTexture name="kadecat right miss0010" x="0" y="1284" width="223" height="268" frameX="0" frameY="-2" frameWidth="231" frameHeight="270"/>
+	<SubTexture name="kadecat right miss0011" x="0" y="1284" width="223" height="268" frameX="0" frameY="-2" frameWidth="231" frameHeight="270"/>
+	<SubTexture name="kadecat right miss0012" x="0" y="1284" width="223" height="268" frameX="0" frameY="-2" frameWidth="231" frameHeight="270"/>
+	<SubTexture name="kadecat right miss0013" x="0" y="1284" width="223" height="268" frameX="0" frameY="-2" frameWidth="231" frameHeight="270"/>
+	<SubTexture name="kadecat up0000" x="223" y="1284" width="211" height="280" frameX="-1" frameY="0" frameWidth="213" frameHeight="280"/>
+	<SubTexture name="kadecat up0001" x="223" y="1284" width="211" height="280" frameX="-1" frameY="0" frameWidth="213" frameHeight="280"/>
+	<SubTexture name="kadecat up0002" x="434" y="1284" width="213" height="274" frameX="0" frameY="-6" frameWidth="213" frameHeight="280"/>
+	<SubTexture name="kadecat up0003" x="434" y="1284" width="213" height="274" frameX="0" frameY="-6" frameWidth="213" frameHeight="280"/>
+	<SubTexture name="kadecat up0004" x="434" y="1284" width="213" height="274" frameX="0" frameY="-6" frameWidth="213" frameHeight="280"/>
+	<SubTexture name="kadecat up0005" x="434" y="1284" width="213" height="274" frameX="0" frameY="-6" frameWidth="213" frameHeight="280"/>
+	<SubTexture name="kadecat up0006" x="434" y="1284" width="213" height="274" frameX="0" frameY="-6" frameWidth="213" frameHeight="280"/>
+	<SubTexture name="kadecat up0007" x="434" y="1284" width="213" height="274" frameX="0" frameY="-6" frameWidth="213" frameHeight="280"/>
+	<SubTexture name="kadecat up0008" x="434" y="1284" width="213" height="274" frameX="0" frameY="-6" frameWidth="213" frameHeight="280"/>
+	<SubTexture name="kadecat up0009" x="434" y="1284" width="213" height="274" frameX="0" frameY="-6" frameWidth="213" frameHeight="280"/>
+	<SubTexture name="kadecat up0010" x="434" y="1284" width="213" height="274" frameX="0" frameY="-6" frameWidth="213" frameHeight="280"/>
+	<SubTexture name="kadecat up0011" x="434" y="1284" width="213" height="274" frameX="0" frameY="-6" frameWidth="213" frameHeight="280"/>
+	<SubTexture name="kadecat up0012" x="434" y="1284" width="213" height="274" frameX="0" frameY="-6" frameWidth="213" frameHeight="280"/>
+	<SubTexture name="kadecat up0013" x="434" y="1284" width="213" height="274" frameX="0" frameY="-6" frameWidth="213" frameHeight="280"/>
+	<SubTexture name="kadecat up miss0000" x="223" y="1284" width="211" height="280" frameX="-3" frameY="0" frameWidth="213" frameHeight="280"/>
+	<SubTexture name="kadecat up miss0001" x="223" y="1284" width="211" height="280" frameX="-3" frameY="0" frameWidth="213" frameHeight="280"/>
+	<SubTexture name="kadecat up miss0002" x="647" y="1284" width="218" height="271" frameX="0" frameY="-9" frameWidth="218" frameHeight="280"/>
+	<SubTexture name="kadecat up miss0003" x="647" y="1284" width="218" height="271" frameX="0" frameY="-9" frameWidth="218" frameHeight="280"/>
+	<SubTexture name="kadecat up miss0004" x="865" y="1284" width="213" height="274" frameX="-2" frameY="-6" frameWidth="218" frameHeight="280"/>
+	<SubTexture name="kadecat up miss0005" x="865" y="1284" width="213" height="274" frameX="-2" frameY="-6" frameWidth="218" frameHeight="280"/>
+	<SubTexture name="kadecat up miss0006" x="865" y="1284" width="213" height="274" frameX="-2" frameY="-6" frameWidth="218" frameHeight="280"/>
+	<SubTexture name="kadecat up miss0007" x="865" y="1284" width="213" height="274" frameX="-2" frameY="-6" frameWidth="218" frameHeight="280"/>
+	<SubTexture name="kadecat up miss0008" x="865" y="1284" width="213" height="274" frameX="-2" frameY="-6" frameWidth="218" frameHeight="280"/>
+	<SubTexture name="kadecat up miss0009" x="865" y="1284" width="213" height="274" frameX="-2" frameY="-6" frameWidth="218" frameHeight="280"/>
+	<SubTexture name="kadecat up miss0010" x="865" y="1284" width="213" height="274" frameX="-2" frameY="-6" frameWidth="218" frameHeight="280"/>
+	<SubTexture name="kadecat up miss0011" x="865" y="1284" width="213" height="274" frameX="-2" frameY="-6" frameWidth="218" frameHeight="280"/>
+	<SubTexture name="kadecat up miss0012" x="865" y="1284" width="213" height="274" frameX="-2" frameY="-6" frameWidth="218" frameHeight="280"/>
+	<SubTexture name="kadecat up miss0013" x="865" y="1284" width="213" height="274" frameX="-2" frameY="-6" frameWidth="218" frameHeight="280"/>
+</TextureAtlas>
