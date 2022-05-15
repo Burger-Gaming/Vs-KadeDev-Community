@@ -154,6 +154,8 @@ class AnimationDebug extends FlxState
 			curAnim += 1;
 		}
 
+		if (FlxG.keys.justPressed.F) dad.flipX = !dad.flipX;
+
 		if (curAnim < 0)
 			curAnim = animList.length - 1;
 
@@ -183,14 +185,19 @@ class AnimationDebug extends FlxState
 		if (upP || rightP || downP || leftP)
 		{
 			updateTexts();
+			var currentAnimation = char.animOffsets.get(animList[curAnim]);
+			if (currentAnimation == null) {
+				char.addOffset(animList[curAnim], 0, 0);
+				currentAnimation = char.animOffsets.get(animList[curAnim]);
+			}
 			if (upP)
-				char.animOffsets.get(animList[curAnim])[1] += 1 * multiplier;
+				currentAnimation[1] += 1 * multiplier;
 			if (downP)
-				char.animOffsets.get(animList[curAnim])[1] -= 1 * multiplier;
+				currentAnimation[1] -= 1 * multiplier;
 			if (leftP)
-				char.animOffsets.get(animList[curAnim])[0] += 1 * multiplier;
+				currentAnimation[0] += 1 * multiplier;
 			if (rightP)
-				char.animOffsets.get(animList[curAnim])[0] -= 1 * multiplier;
+				currentAnimation[0] -= 1 * multiplier;
 
 			updateTexts();
 			genBoyOffsets(false);
