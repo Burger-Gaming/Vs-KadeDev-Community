@@ -134,6 +134,9 @@ class Character extends FNFSprite
 			
 				flipLeftRight();
 
+				characterData.offsetY = -40;
+				characterData.camOffsetY = -100;
+
 				playAnim('idle');
 			case 'whoppa':
 				charColor = '#FF9900';
@@ -368,15 +371,17 @@ class Character extends FNFSprite
 
 				characterData.offsetY = 70;
 
-				if (PlayState.SONG.song == 'Onions' || PlayState.SONG.song == 'Garlico' || PlayState.SONG.song == 'Food Fight'){
-					characterData.offsetX += 600;
-					characterData.offsetY += 300;
-					characterData.camOffsetX += 200;
-					characterData.camOffsetY -= 150;
-				}
-				if (PlayState.SONG.song == 'Ancient Clown' || PlayState.SONG.song == 'From Hell' || PlayState.SONG.song == 'Clownstace'){
-					characterData.camOffsetY = -100;
-					characterData.camOffsetX = 20;
+				switch(PlayState.SONG.song){ //sorry bro i didnt wanna be yandev
+					case 'Onions' | 'Garlico' | 'Food Fight':
+						characterData.offsetX += 600;
+						characterData.offsetY += 300;
+						characterData.camOffsetX += 200;
+						characterData.camOffsetY -= 150;
+					case 'Ancient Clown' | 'From Hell' | 'Clownstace':
+						characterData.camOffsetY = -100;
+						characterData.camOffsetX = 20;
+					case 'Dasher' | 'Fabicoolest' | 'Fabilicious':
+						characterData.camOffsetY = -50;
 				}
 			/*
 				case 'bf-og':

@@ -84,6 +84,10 @@ class Stage extends FlxTypedGroup<FlxBasic>
 					curStage = 'onion';
 				case 'ancient-clown' | 'from-hell' | 'clownstace':
 					curStage = 'ACFH';
+				case 'dasher' | 'fabicoolest' | 'fabilicious':
+					curStage = 'fabiworld';
+				case 'bopeebo':
+					curStage = 'fabiworld';
 				case 'battle-of-the-century':
 					curStage = 'botc';
 				default:
@@ -99,6 +103,12 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		//
 		switch (curStage)
 		{
+			case 'fabiworld':
+				PlayState.defaultCamZoom = 0.8;
+
+				var bg:FNFSprite = new FNFSprite(-320, -120).loadGraphic(Paths.image('backgrounds/$curStage/fabiworld')); // $ means money therefore i will use $ instead :Dave:
+				bg.scale.set(1.2, 1.2);
+				add(bg);
 			case 'botc':
 				PlayState.defaultCamZoom = 0.7;
 

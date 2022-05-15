@@ -150,6 +150,12 @@ class Main extends Sprite
 			['clown'],
 			[FlxColor.fromRGB(255, 45, 50)],
 			'ANCIENT AHH CLOWN'
+		],
+		[
+			['Dasher', 'Fabicoolest', 'Fabilicious'],
+			['fabi'],
+			[FlxColor.fromRGB(88, 44, 0)],
+			'literally nothing but drum breaks ong'
 		]
 		
 	];

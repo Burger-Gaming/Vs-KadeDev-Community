@@ -35,10 +35,11 @@ class StoryMenuState extends MusicBeatState
 		['senpai', 'bf', 'gf'],
 		['yoder', 'bf', 'gf'],
 		['onion', 'bf', 'gf'],
-		['acfh', 'bf', 'gf']
+		['acfh', 'bf', 'gf'],
+		['fabi', 'bf', 'gf']
 	];
 
-	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, true, true, true, true, true, true];
+	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, true, true, true, true, true, true, true];
 
 	var txtWeekTitle:FlxText;
 

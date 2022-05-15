@@ -21,7 +21,8 @@ class MenuCharacter extends FlxSprite
 		'senpai' => ["SENPAI idle Black Lines", 24, true, 1.4 * 0.5, -50, 100],
 		'yoder' => ['Idle', 24, true, 1, -350, -225],
 		'acfh' => ['Idle', 12, true, .4, -300, -200],
-		'onion' => ['idle', 24, true, .6, -100, 70]
+		'onion' => ['idle', 24, true, .6, -100, 70],
+		'fabi' => ['doofus idle', 24, true, 1, -150, 0]
 	];
 
 	var baseX:Float = 0;
@@ -46,6 +47,7 @@ class MenuCharacter extends FlxSprite
 			case 'yoder': textureString = 'Menu_Yoder';
 			case 'acfh': textureString = 'Menu_ACFH';
 			case 'onion': textureString = 'Menu_Onion';
+			case 'fabi': textureString = 'Menu_Fabi';
 			default: textureString = 'campaign_menu_UI_characters';
 		}
 		var tex = Paths.getSparrowAtlas('menus/base/storymenu/$textureString');
@@ -68,7 +70,7 @@ class MenuCharacter extends FlxSprite
 				updateHitbox();
 				setPosition(baseX + assortedValues[4], baseY + assortedValues[5]);
 
-				if (newCharacter == 'pico')
+				if (newCharacter == 'pico' || newCharacter == 'fabi')
 					flipX = true;
 				else
 					flipX = false;
