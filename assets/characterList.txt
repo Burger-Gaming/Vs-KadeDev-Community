@@ -23,3 +23,5 @@ yoder
 onion
 ACFH
 TankACFH
+whoppa
+kadeplayer
