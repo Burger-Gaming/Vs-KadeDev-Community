@@ -119,6 +119,21 @@ class Character extends FNFSprite
 				animation.addByPrefix('singRIGHT', 'Right', 24, false);
 
 				playAnim('idle');
+			case 'fabi':
+				charColor = "#663535";
+
+				frames = Paths.getSparrowAtlas('characters/fabiASSETS');
+				animation.addByPrefix('idle', 'doofus idle', 24, false);
+				animation.addByPrefix('singUP', 'doofus UP', 24, false);
+				animation.addByPrefix('singDOWN', 'doofus DOWN', 24, false);
+				animation.addByPrefix('singLEFT', 'doofus LEFT', 24, false);
+				animation.addByPrefix('singRIGHT', 'doofus RIGHT', 24, false);
+
+				flipX = true;
+			
+				flipLeftRight();
+
+				playAnim('idle');
 			case 'whoppa':
 				charColor = '#FF9900';
 				frames = Paths.getSparrowAtlas('characters/whoppa');

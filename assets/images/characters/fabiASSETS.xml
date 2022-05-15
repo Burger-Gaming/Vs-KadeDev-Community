@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="fabiASSETS.png">
+	<!-- Created with Adobe Animate version 21.0.7.42652 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="doofus idle0000" x="2619" y="698" width="354" height="325" frameX="0" frameY="-1" frameWidth="367" frameHeight="326"/>
+	<SubTexture name="doofus idle0001" x="2619" y="698" width="354" height="325" frameX="0" frameY="-1" frameWidth="367" frameHeight="326"/>
+	<SubTexture name="doofus idle0002" x="387" y="359" width="356" height="326" frameX="-4" frameY="0" frameWidth="367" frameHeight="326"/>
+	<SubTexture name="doofus idle0003" x="387" y="359" width="356" height="326" frameX="-4" frameY="0" frameWidth="367" frameHeight="326"/>
+	<SubTexture name="doofus idle0004" x="10" y="357" width="361" height="323" frameX="-6" frameY="-3" frameWidth="367" frameHeight="326"/>
+	<SubTexture name="doofus idle0005" x="10" y="357" width="361" height="323" frameX="-6" frameY="-3" frameWidth="367" frameHeight="326"/>
+	<SubTexture name="doofus idle0006" x="2246" y="698" width="357" height="323" frameX="-10" frameY="-3" frameWidth="367" frameHeight="326"/>
+	<SubTexture name="doofus idle0007" x="2246" y="698" width="357" height="323" frameX="-10" frameY="-3" frameWidth="367" frameHeight="326"/>
+	<SubTexture name="doofus idle0008" x="759" y="359" width="356" height="326" frameX="-11" frameY="0" frameWidth="367" frameHeight="326"/>
+	<SubTexture name="doofus idle0009" x="759" y="359" width="356" height="326" frameX="-11" frameY="0" frameWidth="367" frameHeight="326"/>
+	<SubTexture name="doofus idle0010" x="1875" y="698" width="355" height="326" frameX="-11" frameY="0" frameWidth="367" frameHeight="326"/>
+	<SubTexture name="doofus idle0011" x="1875" y="698" width="355" height="326" frameX="-11" frameY="0" frameWidth="367" frameHeight="326"/>
+	<SubTexture name="doofus idle0012" x="1131" y="359" width="356" height="326" frameX="-11" frameY="0" frameWidth="367" frameHeight="326"/>
+	<SubTexture name="doofus idle0013" x="1131" y="359" width="356" height="326" frameX="-11" frameY="0" frameWidth="367" frameHeight="326"/>
+	<SubTexture name="doofus DOWN0000" x="3626" y="10" width="392" height="310" frameX="0" frameY="-6" frameWidth="392" frameHeight="316"/>
+	<SubTexture name="doofus DOWN0001" x="3626" y="10" width="392" height="310" frameX="0" frameY="-6" frameWidth="392" frameHeight="316"/>
+	<SubTexture name="doofus DOWN0002" x="2020" y="10" width="386" height="316" frameX="0" frameY="0" frameWidth="392" frameHeight="316"/>
+	<SubTexture name="doofus DOWN0003" x="2020" y="10" width="386" height="316" frameX="0" frameY="0" frameWidth="392" frameHeight="316"/>
+	<SubTexture name="doofus DOWN0004" x="2824" y="10" width="385" height="316" frameX="0" frameY="0" frameWidth="392" frameHeight="316"/>
+	<SubTexture name="doofus DOWN0005" x="2824" y="10" width="385" height="316" frameX="0" frameY="0" frameWidth="392" frameHeight="316"/>
+	<SubTexture name="doofus DOWN0006" x="3225" y="10" width="385" height="316" frameX="0" frameY="0" frameWidth="392" frameHeight="316"/>
+	<SubTexture name="doofus DOWN0007" x="3225" y="10" width="385" height="316" frameX="0" frameY="0" frameWidth="392" frameHeight="316"/>
+	<SubTexture name="doofus DOWN0008" x="2422" y="10" width="386" height="316" frameX="0" frameY="0" frameWidth="392" frameHeight="316"/>
+	<SubTexture name="doofus DOWN0009" x="2422" y="10" width="386" height="316" frameX="0" frameY="0" frameWidth="392" frameHeight="316"/>
+	<SubTexture name="doofus DOWN0010" x="2020" y="10" width="386" height="316" frameX="0" frameY="0" frameWidth="392" frameHeight="316"/>
+	<SubTexture name="doofus DOWN0011" x="2020" y="10" width="386" height="316" frameX="0" frameY="0" frameWidth="392" frameHeight="316"/>
+	<SubTexture name="doofus DOWN0012" x="2824" y="10" width="385" height="316" frameX="0" frameY="0" frameWidth="392" frameHeight="316"/>
+	<SubTexture name="doofus DOWN0013" x="2824" y="10" width="385" height="316" frameX="0" frameY="0" frameWidth="392" frameHeight="316"/>
+	<SubTexture name="doofus LEFT0000" x="10" y="10" width="393" height="331" frameX="0" frameY="-2" frameWidth="402" frameHeight="333"/>
+	<SubTexture name="doofus LEFT0001" x="10" y="10" width="393" height="331" frameX="0" frameY="-2" frameWidth="402" frameHeight="333"/>
+	<SubTexture name="doofus LEFT0002" x="820" y="10" width="384" height="333" frameX="-17" frameY="0" frameWidth="402" frameHeight="333"/>
+	<SubTexture name="doofus LEFT0003" x="820" y="10" width="384" height="333" frameX="-17" frameY="0" frameWidth="402" frameHeight="333"/>
+	<SubTexture name="doofus LEFT0004" x="1220" y="10" width="384" height="333" frameX="-17" frameY="0" frameWidth="402" frameHeight="333"/>
+	<SubTexture name="doofus LEFT0005" x="1220" y="10" width="384" height="333" frameX="-17" frameY="0" frameWidth="402" frameHeight="333"/>
+	<SubTexture name="doofus LEFT0006" x="1620" y="10" width="384" height="333" frameX="-17" frameY="0" frameWidth="402" frameHeight="333"/>
+	<SubTexture name="doofus LEFT0007" x="1620" y="10" width="384" height="333" frameX="-17" frameY="0" frameWidth="402" frameHeight="333"/>
+	<SubTexture name="doofus LEFT0008" x="419" y="10" width="385" height="333" frameX="-17" frameY="0" frameWidth="402" frameHeight="333"/>
+	<SubTexture name="doofus LEFT0009" x="419" y="10" width="385" height="333" frameX="-17" frameY="0" frameWidth="402" frameHeight="333"/>
+	<SubTexture name="doofus LEFT0010" x="820" y="10" width="384" height="333" frameX="-17" frameY="0" frameWidth="402" frameHeight="333"/>
+	<SubTexture name="doofus LEFT0011" x="820" y="10" width="384" height="333" frameX="-17" frameY="0" frameWidth="402" frameHeight="333"/>
+	<SubTexture name="doofus LEFT0012" x="1220" y="10" width="384" height="333" frameX="-17" frameY="0" frameWidth="402" frameHeight="333"/>
+	<SubTexture name="doofus LEFT0013" x="1220" y="10" width="384" height="333" frameX="-17" frameY="0" frameWidth="402" frameHeight="333"/>
+	<SubTexture name="doofus RIGHT0000" x="726" y="701" width="334" height="324" frameX="-17" frameY="-12" frameWidth="351" frameHeight="336"/>
+	<SubTexture name="doofus RIGHT0001" x="726" y="701" width="334" height="324" frameX="-17" frameY="-12" frameWidth="351" frameHeight="336"/>
+	<SubTexture name="doofus RIGHT0002" x="3334" y="699" width="328" height="336" frameX="0" frameY="0" frameWidth="351" frameHeight="336"/>
+	<SubTexture name="doofus RIGHT0003" x="3334" y="699" width="328" height="336" frameX="0" frameY="0" frameWidth="351" frameHeight="336"/>
+	<SubTexture name="doofus RIGHT0004" x="3678" y="699" width="328" height="336" frameX="0" frameY="0" frameWidth="351" frameHeight="336"/>
+	<SubTexture name="doofus RIGHT0005" x="3678" y="699" width="328" height="336" frameX="0" frameY="0" frameWidth="351" frameHeight="336"/>
+	<SubTexture name="doofus RIGHT0006" x="382" y="701" width="328" height="336" frameX="0" frameY="0" frameWidth="351" frameHeight="336"/>
+	<SubTexture name="doofus RIGHT0007" x="382" y="701" width="328" height="336" frameX="0" frameY="0" frameWidth="351" frameHeight="336"/>
+	<SubTexture name="doofus RIGHT0008" x="2989" y="698" width="329" height="336" frameX="0" frameY="0" frameWidth="351" frameHeight="336"/>
+	<SubTexture name="doofus RIGHT0009" x="2989" y="698" width="329" height="336" frameX="0" frameY="0" frameWidth="351" frameHeight="336"/>
+	<SubTexture name="doofus RIGHT0010" x="3334" y="699" width="328" height="336" frameX="0" frameY="0" frameWidth="351" frameHeight="336"/>
+	<SubTexture name="doofus RIGHT0011" x="3334" y="699" width="328" height="336" frameX="0" frameY="0" frameWidth="351" frameHeight="336"/>
+	<SubTexture name="doofus RIGHT0012" x="3678" y="699" width="328" height="336" frameX="0" frameY="0" frameWidth="351" frameHeight="336"/>
+	<SubTexture name="doofus RIGHT0013" x="3678" y="699" width="328" height="336" frameX="0" frameY="0" frameWidth="351" frameHeight="336"/>
+	<SubTexture name="doofus UP0000" x="3626" y="336" width="343" height="347" frameX="-13" frameY="0" frameWidth="356" frameHeight="347"/>
+	<SubTexture name="doofus UP0001" x="3626" y="336" width="343" height="347" frameX="-13" frameY="0" frameWidth="356" frameHeight="347"/>
+	<SubTexture name="doofus UP0002" x="2385" y="342" width="348" height="340" frameX="0" frameY="-7" frameWidth="356" frameHeight="347"/>
+	<SubTexture name="doofus UP0003" x="2385" y="342" width="348" height="340" frameX="0" frameY="-7" frameWidth="356" frameHeight="347"/>
+	<SubTexture name="doofus UP0004" x="2749" y="342" width="348" height="340" frameX="0" frameY="-7" frameWidth="356" frameHeight="347"/>
+	<SubTexture name="doofus UP0005" x="2749" y="342" width="348" height="340" frameX="0" frameY="-7" frameWidth="356" frameHeight="347"/>
+	<SubTexture name="doofus UP0006" x="3113" y="342" width="348" height="340" frameX="0" frameY="-7" frameWidth="356" frameHeight="347"/>
+	<SubTexture name="doofus UP0007" x="3113" y="342" width="348" height="340" frameX="0" frameY="-7" frameWidth="356" frameHeight="347"/>
+	<SubTexture name="doofus UP0008" x="2020" y="342" width="349" height="340" frameX="0" frameY="-7" frameWidth="356" frameHeight="347"/>
+	<SubTexture name="doofus UP0009" x="2020" y="342" width="349" height="340" frameX="0" frameY="-7" frameWidth="356" frameHeight="347"/>
+	<SubTexture name="doofus UP0010" x="2385" y="342" width="348" height="340" frameX="0" frameY="-7" frameWidth="356" frameHeight="347"/>
+	<SubTexture name="doofus UP0011" x="2385" y="342" width="348" height="340" frameX="0" frameY="-7" frameWidth="356" frameHeight="347"/>
+	<SubTexture name="doofus UP0012" x="2749" y="342" width="348" height="340" frameX="0" frameY="-7" frameWidth="356" frameHeight="347"/>
+	<SubTexture name="doofus UP0013" x="2749" y="342" width="348" height="340" frameX="0" frameY="-7" frameWidth="356" frameHeight="347"/>
+	<SubTexture name="yeah uh0000" x="1503" y="359" width="356" height="326"/>
+	<SubTexture name="yeah uh0001" x="1503" y="359" width="356" height="326"/>
+	<SubTexture name="yeah uh0002" x="10" y="696" width="356" height="326"/>
+	<SubTexture name="yeah uh0003" x="10" y="696" width="356" height="326"/>
+	<SubTexture name="yeah uh0004" x="1503" y="359" width="356" height="326"/>
+	<SubTexture name="yeah uh0005" x="1503" y="359" width="356" height="326"/>
+</TextureAtlas>
