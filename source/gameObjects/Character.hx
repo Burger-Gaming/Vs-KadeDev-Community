@@ -95,7 +95,7 @@ class Character extends FNFSprite
 				charColor = "#FF2D32";
 
 				frames = Paths.getSparrowAtlas('characters/ACFH');
-				animation.addByPrefix('idle', 'Idle', 24, false);
+				animation.addByPrefix('idle', 'Idle', 12, false);
 				animation.addByPrefix('singUP', 'Up', 24, false);
 				animation.addByPrefix('singDOWN', 'Down', 24, false);
 				animation.addByPrefix('singLEFT', 'Left', 24, false);

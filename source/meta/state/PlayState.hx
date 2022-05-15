@@ -139,6 +139,7 @@ class PlayState extends MusicBeatState
 
 	public static var daPixelZoom:Float = 6;
 	public static var determinedChartType:String = "";
+	public var shouldZoom:Bool;
 
 	// strumlines
 	private var dadStrums:Strumline;
@@ -180,6 +181,7 @@ class PlayState extends MusicBeatState
 
 		assetModifier = 'base';
 		changeableSkin = 'default';
+		shouldZoom = !Init.trueSettings.get('Reduced Movements');
 
 		// stop any existing music tracks playing
 		resetMusic();
@@ -363,6 +365,9 @@ class PlayState extends MusicBeatState
 		screen1.cameras = [camHUD];
 		if(SONG.song == 'Clownstace'){
 			if (storyDifficulty != 3){
+				shouldZoom = false;
+				boyfriendStrums.forEach(s -> s.visible = false);
+				dadStrums.forEach(s -> s.visible = false);
 				screen1.visible = true;
 			}
 		} else{
@@ -1481,6 +1486,9 @@ class PlayState extends MusicBeatState
 				case 145:
 					screen1.destroy();
 					screen2.visible = true;
+					shouldZoom = !Init.trueSettings.get('Reduced Movements');
+					boyfriendStrums.forEach(s -> s.visible = true);
+					dadStrums.forEach(s -> s.visible = true);
 					FlxTween.tween(screen2, { alpha: 0 }, 2);
 					new FlxTimer().start(2, function(tmr:FlxTimer){
 						screen2.destroy();
@@ -1530,7 +1538,7 @@ class PlayState extends MusicBeatState
 
 		trace(curBeat); //for events
 
-		if ((FlxG.camera.zoom < 1.35 && curBeat % 4 == 0) && (!Init.trueSettings.get('Reduced Movements')))
+		if ((FlxG.camera.zoom < 1.35 && curBeat % 4 == 0) && (shouldZoom))
 		{
 			FlxG.camera.zoom += 0.015;
 			camHUD.zoom += 0.05;
