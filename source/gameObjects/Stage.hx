@@ -133,6 +133,11 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				bg.antialiasing = true;
 				bg.scale.set(0.8, 0.8);
 				add(bg);
+
+				var table:FNFSprite = new FNFSprite(-320, -125).loadGraphic(Paths.image('backgrounds/' + curStage + '/table'));
+				table.antialiasing = true;
+				table.scale.set(0.8, 0.8);
+				add(table);
 			case 'yoda':
 				PlayState.defaultCamZoom = 0.92;
 
