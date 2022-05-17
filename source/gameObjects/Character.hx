@@ -149,6 +149,7 @@ class Character extends FNFSprite
 
 				//characterData.offsetY = 200;
 			case 'kadeplayer':
+				charColor = "#663300";
 				frames = Paths.getSparrowAtlas('characters/kade_brawl');
 
 				animation.addByPrefix('idle', 'kadecat idle', 24, false);

@@ -90,7 +90,7 @@ class Main extends Sprite
 		[
 			['Battle of the Century'],
 			['Whoppa'],
-			[FlxColor.fromRGB(255, 255, 255)],
+			[FlxColor.fromRGB(255, 153, 0)],
 			'Extras'
 		]
 	];
