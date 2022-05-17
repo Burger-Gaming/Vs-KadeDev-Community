@@ -39,15 +39,22 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 	private var SONG = PlayState.SONG;
 	public var iconP1:HealthIcon;
 	public var iconP2:HealthIcon;
+
 	private var stupidHealth:Float = 0;
 
 	private var timingsMap:Map<String, FlxText> = [];
+
+	var p1Color:String;
+	var p2Color:String;
 
 	// eep
 	public function new(dadColor:String, bfColor:String)
 	{
 		// call the initializations and stuffs
 		super();
+
+		p1Color = bfColor;
+		p2Color = dadColor;
 
 		// fnf mods
 		var scoreDisplay:String = 'beep bop bo skdkdkdbebedeoop brrapadop';
@@ -65,7 +72,7 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8));
 		healthBar.scrollFactor.set();
-		healthBar.createFilledBar(FlxColor.fromString(dadColor), FlxColor.fromString(bfColor));
+		healthBar.createFilledBar(FlxColor.fromString(p2Color), FlxColor.fromString(p1Color));
 		// healthBar
 		add(healthBar);
 
@@ -201,5 +208,19 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 			iconP2.updateHitbox();
 		}
 		//
+	}
+
+	function switchOutIcons(target: String, newIcon: String, color: String) {
+		switch (target) {
+			case "dad": { 
+				iconP2 = new HealthIcon(newIcon); 
+				p2Color = color;
+			}
+			case "bf": {
+				iconP1 = new HealthIcon(newIcon);
+				p1Color = color;
+			}
+		}
+		healthBar.createFilledBar(FlxColor.fromString(p2Color), FlxColor.fromString(p1Color));
 	}
 }

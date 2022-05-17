@@ -69,6 +69,7 @@ class PlayState extends MusicBeatState
 	public static var dadOpponent:Character;
 	public static var gf:Character;
 	public static var boyfriend:Boyfriend;
+	var preCachedCharacters:Map<String, Character> = [];
 
 	public static var assetModifier:String = 'base';
 	public static var changeableSkin:String = 'default';
@@ -364,14 +365,14 @@ class PlayState extends MusicBeatState
 		screen1 = new FlxSprite().loadGraphic(Paths.image('clownstace/normal'));
 		screen1.scrollFactor.set();
 		screen1.cameras = [camHUD];
-		if(SONG.song == 'Clownstace'){
-			if (storyDifficulty != 3){
-				shouldZoom = false;
-				boyfriendStrums.forEach(s -> s.visible = false);
-				dadStrums.forEach(s -> s.visible = false);
-				screen1.visible = true;
-			}
-		} else{
+		if (SONG.song == 'Clownstace' && storyDifficulty != 3) {
+			shouldZoom = false;
+			boyfriendStrums.forEach(s -> s.visible = false);
+			dadStrums.forEach(s -> s.visible = false);
+			screen1.visible = true;
+		} 
+		else {
+			
 			screen1.visible = false;
 		}
 		add(screen1);
@@ -1943,6 +1944,12 @@ class PlayState extends MusicBeatState
 			// generateSong('fresh');
 		}, 5);
 	}
+	// this super cool function allows you to switch characters without a lag a spike in the song
+	function preCacheCharacters(targets: Array<String>) {
+		for (x in targets) preCachedCharacters[x] = new Character();
+
+	}
+	function switchCharacter(target: Character, newChar: String) {}
 
 	override function add(Object:FlxBasic):FlxBasic
 	{
