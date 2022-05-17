@@ -259,6 +259,10 @@ class PlayState extends MusicBeatState
 		dadOpponent = new Character().setCharacter(50, 850, SONG.player2);
 		boyfriend = new Boyfriend();
 		boyfriend.setCharacter(750, 850, SONG.player1);
+		/*if (SONG.song == 'Ancient Clown' && storyDifficulty == 3) { 
+			switchCharacter("dad", "TankACFH"); 
+			switchCharacter("dad", SONG.player2);
+		}*/
 		// if you want to change characters later use setCharacter() instead of new or it will break
 
 		var camPos:FlxPoint = new FlxPoint(gf.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
@@ -385,6 +389,7 @@ class PlayState extends MusicBeatState
 		screen2.visible = false;
 		add(screen2);
 		screen2.animation.play('idle');
+		
 
 
 
@@ -438,7 +443,7 @@ class PlayState extends MusicBeatState
 
 		// Uncomment the code below to apply the effect
 
-		/*
+        /*
 		var shader:GraphicsShader = new GraphicsShader("", File.getContent("./assets/shaders/vhs.frag"));
 		FlxG.camera.setFilters([new ShaderFilter(shader)]);
 		*/
@@ -1480,37 +1485,56 @@ class PlayState extends MusicBeatState
 		if (songMusic.time >= Conductor.songPosition + 20 || songMusic.time <= Conductor.songPosition - 20)
 			resyncVocals();
 		//*/
+        
+		switch (SONG.song) {
+			
+			case 'Yoder': 
+				if (storyDifficulty == 3) {
+					switch (curStep) {
+						case 271: // setting up the return before they ascend
+							bfYBeforeTween = boyfriend.y;
+							yoderYBeforeTween = dadOpponent.y;
+						case 272:
+							FlxTween.tween(boyfriend, {y: -50}, 5);
+						case 399:
+							FlxTween.tween(dadOpponent, {y: -200}, 5);
+						case 592:
+							FlxTween.tween(boyfriend, {y: bfYBeforeTween}, 5);
+							FlxTween.tween(dadOpponent, {y: yoderYBeforeTween}, 5);
+					}
+				}
+			case 'Ancient Clown':
+				if (storyDifficulty == 3) {
+					switch (curStep) {
+						case 399: 
+							switchCharacter("dad", "TankACFH");
+							FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom * 1.5 }, 1.5, { ease: FlxEase.quadIn, type: PERSIST });
+							shouldZoom = false;
+						case 431:
+							switchCharacter("dad", "ACFH");
+							shouldZoom = !Init.trueSettings.get('Reduced Movements');
+					}
+				}
+			case 'Clownstace': 
+				if (storyDifficulty != 3) {
+					switch (curStep) {
+						case 132:
+							screen1.loadGraphic(Paths.image('clownstace/GRAAAHHHHHH'));
+						case 145:
+							screen1.destroy();
+							screen2.visible = true;
+							shouldZoom = !Init.trueSettings.get('Reduced Movements');
+							boyfriendStrums.forEach(s -> s.visible = true);
+							dadStrums.forEach(s -> s.visible = true);
+							FlxTween.tween(screen2, {alpha: 0}, 2);
+							new FlxTimer().start(2, function(tmr:FlxTimer)
+							{
+								screen2.destroy();
+							});
 
-		if (SONG.song == 'Clownstace' && storyDifficulty != 3){
-			switch(curStep){
-				case 132:
-					screen1.loadGraphic(Paths.image('clownstace/GRAAAHHHHHH'));
-				case 145:
-					screen1.destroy();
-					screen2.visible = true;
-					shouldZoom = !Init.trueSettings.get('Reduced Movements');
-					boyfriendStrums.forEach(s -> s.visible = true);
-					dadStrums.forEach(s -> s.visible = true);
-					FlxTween.tween(screen2, { alpha: 0 }, 2);
-					new FlxTimer().start(2, function(tmr:FlxTimer){
-						screen2.destroy();
-					});
-			}
-		}
-
-		if(SONG.song == 'Yoder' && storyDifficulty == 3){ //yoder erect event
-			switch(curStep){
-				case 271: //setting up the return before they ascend
-					bfYBeforeTween = boyfriend.y;
-					yoderYBeforeTween = dadOpponent.y;
-				case 272:
-					FlxTween.tween(boyfriend, {y: -50}, 5);
-				case 399:
-					FlxTween.tween(dadOpponent, {y: -200}, 5);
-				case 592:
-					FlxTween.tween(boyfriend, {y: bfYBeforeTween}, 5);
-					FlxTween.tween(dadOpponent, {y: yoderYBeforeTween}, 5);
-			}
+					}
+			    }
+			default: trace(SONG.song);
 		}
 
 	}
@@ -1944,12 +1968,34 @@ class PlayState extends MusicBeatState
 			// generateSong('fresh');
 		}, 5);
 	}
-	// this super cool function allows you to switch characters without a lag a spike in the song
-	function preCacheCharacters(targets: Array<String>) {
-		for (x in targets) preCachedCharacters[x] = new Character();
+	function switchCharacter(target: String, newChar: String) {
+		switch (target) {
+			case "dad":
+				remove(dadOpponent);
+				dadOpponent.setCharacter(50, 850, newChar);
+				/*var replacement = preCachedCharacters[newChar];
+				replacement.reset(replacement.x, replacement.y);
+				dadOpponent = replacement;
+				dadOpponent.color = FlxColor.GREEN;*/
+				add(dadOpponent);
+			/*case "gf": WILL RETURN TO
+				remove(gf);
+				var replacement = preCachedCharacters[newChar];
+				replacement.reset(replacement.x, replacement.y);
+				gf = replacement;
+				add(gf);
+
+			case "bf":
+				remove(boyfriend);
+				var replacement:Dynamic = preCachedCharacters[newChar]; // AUUUUGH
+				replacement.reset(replacement.x, replacement.y);
+				boyfriend = replacement;
+				add(boyfriend);*/
+
+		}
+		
 
 	}
-	function switchCharacter(target: Character, newChar: String) {}
 
 	override function add(Object:FlxBasic):FlxBasic
 	{

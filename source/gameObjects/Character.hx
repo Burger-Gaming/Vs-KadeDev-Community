@@ -112,11 +112,16 @@ class Character extends FNFSprite
 			case 'TankACFH': // ugh
 				charColor = "#000000";
 				frames = Paths.getSparrowAtlas('characters/TankACFH');
-				animation.addByPrefix('idle', 'Idle', 24, false);
+				animation.addByPrefix('idle', 'Idle', 12, false);
 				animation.addByPrefix('singUP', 'Up', 24, false);
 				animation.addByPrefix('singDOWN', 'Down', 24, false);
 				animation.addByPrefix('singLEFT', 'Left', 24, false);
 				animation.addByPrefix('singRIGHT', 'Right', 24, false);
+
+				characterData.offsetX = -650;
+				characterData.offsetY = -100;
+				characterData.camOffsetY = 100;
+				characterData.camOffsetX = 150;
 
 				playAnim('idle');
 			case 'fabi':
