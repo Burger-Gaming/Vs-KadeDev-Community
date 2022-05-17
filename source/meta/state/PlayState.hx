@@ -56,6 +56,7 @@ class PlayState extends MusicBeatState
 	public static var storyWeek:Int = 0;
 	public static var storyPlaylist:Array<String> = [];
 	public static var storyDifficulty:Int = 2;
+	public static var isExtraSong:Bool = false;
 
 	public static var songMusic:FlxSound;
 	public static var vocals:FlxSound;
@@ -1637,6 +1638,7 @@ class PlayState extends MusicBeatState
 
 		if (!isStoryMode)
 		{
+			FreeplayState.isExtra = isExtraSong;
 			Main.switchState(this, new FreeplayState());
 		}
 		else

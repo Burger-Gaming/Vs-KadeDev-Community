@@ -1,6 +1,7 @@
 package meta.state.menus;
 
 import flash.text.TextField;
+import flixel.FlxBasic;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.display.FlxGridOverlay;
@@ -30,6 +31,8 @@ class FreeplayState extends MusicBeatState
 {
 	//
 	var songs:Array<SongMetadata> = [];
+	var extraSongs:Array<SongMetadata> = [];
+	public static var isExtra:Bool = false;
 
 	var selector:FlxText;
 	var curSelected:Int = 0;
@@ -38,6 +41,7 @@ class FreeplayState extends MusicBeatState
 
 	var scoreText:FlxText;
 	var diffText:FlxText;
+	var extrasTxt:FlxText;
 	var lerpScore:Int = 0;
 	var intendedScore:Int = 0;
 
@@ -79,6 +83,12 @@ class FreeplayState extends MusicBeatState
 			for (j in cast(Main.gameWeeks[i][0], Array<Dynamic>))
 				existingSongs.push(j.toLowerCase());
 		}
+		for (i in 0...Main.extraSongs.length)
+		{
+			addWeek(Main.extraSongs[i][0], i, Main.extraSongs[i][1], Main.extraSongs[i][2], true);
+		}
+		
+		
 
 		// */
 
@@ -111,24 +121,7 @@ class FreeplayState extends MusicBeatState
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
 
-		for (i in 0...songs.length)
-		{
-			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, songs[i].songName, true, false);
-			songText.isMenuItem = true;
-			songText.targetY = i;
-			grpSongs.add(songText);
-
-			var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);
-			icon.sprTracker = songText;
-
-			// using a FlxGroup is too much fuss!
-			iconArray.push(icon);
-			add(icon);
-
-			// songText.x += 40;
-			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
-			// songText.screenCenter(X);
-		}
+		renderSongs();
 
 		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
 		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
@@ -157,7 +150,7 @@ class FreeplayState extends MusicBeatState
 		// add(selector);
 		var extrasBlack:FlxSprite = new FlxSprite().makeGraphic(1280, 18, FlxColor.BLACK);
 
-		var extrasTxt:FlxText = new FlxText(0, 0, 0, "Press E to access the extra songs.", 16);
+		extrasTxt = new FlxText(0, 0, 0, isExtra ? "Press E to go back to freeplay songs." : "Press E to access the extra songs.", 16);
 		extrasTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, OUTLINE, FlxColor.BLACK);
 		extrasTxt.y = FlxG.height - extrasTxt.height;
 		extrasBlack.alpha = 0.5;
@@ -166,7 +159,7 @@ class FreeplayState extends MusicBeatState
 		add(extrasTxt);
 	}
 
-	public function addSong(songName:String, weekNum:Int, songCharacter:String, songColor:FlxColor)
+	public function addSong(songName:String, weekNum:Int, songCharacter:String, songColor:FlxColor, isExtraSong:Bool)
 	{
 		///*
 		var coolDifficultyArray = [];
@@ -177,12 +170,12 @@ class FreeplayState extends MusicBeatState
 
 		if (coolDifficultyArray.length > 0)
 		{ //*/
-			songs.push(new SongMetadata(songName, weekNum, songCharacter, songColor));
+			(isExtraSong ? extraSongs : songs).push(new SongMetadata(songName, weekNum, songCharacter, songColor));
 			existingDifficulties.push(coolDifficultyArray);
 		}
 	}
 
-	public function addWeek(songs:Array<String>, weekNum:Int, ?songCharacters:Array<String>, ?songColor:Array<FlxColor>)
+	public function addWeek(songs:Array<String>, weekNum:Int, ?songCharacters:Array<String>, ?songColor:Array<FlxColor>, isExtraWeek=false)
 	{
 		if (songCharacters == null)
 			songCharacters = ['bf'];
@@ -192,12 +185,37 @@ class FreeplayState extends MusicBeatState
 		var num:Array<Int> = [0, 0];
 		for (song in songs)
 		{
-			addSong(song, weekNum, songCharacters[num[0]], songColor[num[1]]);
+			addSong(song, weekNum, songCharacters[num[0]], songColor[num[1]], isExtraWeek);
 
 			if (songCharacters.length != 1)
 				num[0]++;
 			if (songColor.length != 1)
 				num[1]++;
+		}
+	}
+	function renderSongs() {
+		grpSongs.forEach(d -> grpSongs.remove(d));
+		grpSongs.clear();
+		iconArray.map(d -> remove(d));
+		iconArray = [];
+		var toUse = isExtra ? extraSongs : songs;
+		for (i in 0...toUse.length)
+		{
+			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, toUse[i].songName, true, false);
+			songText.isMenuItem = true;
+			songText.targetY = i;
+			grpSongs.add(songText);
+
+			var icon:HealthIcon = new HealthIcon(toUse[i].songCharacter);
+			icon.sprTracker = songText;
+
+			// using a FlxGroup is too much fuss!
+			iconArray.push(icon);
+			add(icon);
+
+			// songText.x += 40;
+			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
+			// songText.screenCenter(X);
 		}
 	}
 
@@ -215,6 +233,7 @@ class FreeplayState extends MusicBeatState
 
 		var upP = controls.UI_UP_P;
 		var downP = controls.UI_DOWN_P;
+		var eP = FlxG.keys.justPressed.E;
 		var accepted = controls.ACCEPT;
 
 		if (upP)
@@ -222,9 +241,18 @@ class FreeplayState extends MusicBeatState
 		else if (downP)
 			changeSelection(1);
 
-		if (FlxG.keys.justPressed.E){
-			threadActive = false;
-			Main.switchState(this, new meta.state.menus.ExtrasState());
+		if (eP) {
+			isExtra = !isExtra;
+			extrasTxt.text = isExtra ? "Press E to go back to freeplay songs." : "Press E to access the extra songs.";
+			curSelected = 0;
+			if (isExtra) curDifficulty = 1;
+			diffText.text = "< NORMAL >";
+			renderSongs();
+			changeSelection();
+			
+			mutex.acquire(); // because for some reason the first song won't play on menu switch fsr
+			FlxG.sound.playMusic(Paths.inst((isExtra ? extraSongs : songs)[0].songName));
+			mutex.release();
 		}
 
 		if (controls.UI_LEFT_P)
@@ -240,14 +268,16 @@ class FreeplayState extends MusicBeatState
 
 		if (accepted)
 		{
-			var poop:String = Highscore.formatSong(songs[curSelected].songName.toLowerCase(),
+			var toUse = isExtra ? extraSongs : songs;
+			var poop:String = Highscore.formatSong(toUse[curSelected].songName.toLowerCase(),
 				CoolUtil.difficultyArray.indexOf(existingDifficulties[curSelected][curDifficulty]));
 
-			PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase());
+			PlayState.SONG = Song.loadFromJson(poop, toUse[curSelected].songName.toLowerCase());
 			PlayState.isStoryMode = false;
 			PlayState.storyDifficulty = curDifficulty;
+			PlayState.isExtraSong = isExtra;
 
-			PlayState.storyWeek = songs[curSelected].week;
+			PlayState.storyWeek = toUse[curSelected].week;
 			trace('CUR WEEK' + PlayState.storyWeek);
 
 			if (FlxG.sound.music != null)
@@ -261,9 +291,12 @@ class FreeplayState extends MusicBeatState
 		// Adhere the position of all the things (I'm sorry it was just so ugly before I had to fix it Shubs)
 		scoreText.text = "PERSONAL BEST:" + lerpScore;
 		scoreText.x = FlxG.width - scoreText.width - 5;
-		scoreBG.width = scoreText.width + 8;
+		scoreBG.makeGraphic(Std.int(scoreText.width + 8), isExtra ? 45 : 66, 0xFF000000);
+		
 		scoreBG.x = FlxG.width - scoreBG.width;
 		diffText.x = scoreBG.x + (scoreBG.width / 2) - (diffText.width / 2);
+		diffText.visible = !isExtra;
+		
 
 		mutex.acquire();
 		if (songToPlay != null)
@@ -285,6 +318,10 @@ class FreeplayState extends MusicBeatState
 
 	function changeDiff(change:Int = 0)
 	{
+		if (isExtra) { 
+			curDifficulty = 1;
+			return;
+		}
 		curDifficulty += change;
 		if (lastDifficulty != null && change != 0)
 			while (existingDifficulties[curSelected][curDifficulty] == lastDifficulty)
@@ -304,20 +341,22 @@ class FreeplayState extends MusicBeatState
 	function changeSelection(change:Int = 0)
 	{
 		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		var toUse = isExtra ? extraSongs : songs;
 
 		curSelected += change;
+		
 
 		if (curSelected < 0)
-			curSelected = songs.length - 1;
-		if (curSelected >= songs.length)
+			curSelected = toUse.length - 1;
+		if (curSelected >= toUse.length)
 			curSelected = 0;
 
 		// selector.y = (70 * curSelected) + 30;
 
-		intendedScore = Highscore.getScore(songs[curSelected].songName, curDifficulty);
+		intendedScore = Highscore.getScore(toUse[curSelected].songName, curDifficulty);
 
 		// set up color stuffs
-		mainColor = songs[curSelected].songColor;
+		mainColor = toUse[curSelected].songColor;
 
 		// song switching stuffs
 
@@ -329,7 +368,6 @@ class FreeplayState extends MusicBeatState
 		}
 
 		iconArray[curSelected].alpha = 1;
-
 		for (item in grpSongs.members)
 		{
 			item.targetY = bullShit - curSelected;
@@ -372,11 +410,14 @@ class FreeplayState extends MusicBeatState
 						if (index == curSelected && index != curSongPlaying)
 						{
 							trace("Loading index " + index);
-
-							var inst:Sound = Paths.inst(songs[curSelected].songName);
+							var toUse = isExtra ? extraSongs : songs;
+							
+                            
+							var inst:Sound = Paths.inst(toUse[curSelected].songName);
 
 							if (index == curSelected && threadActive)
 							{
+								
 								mutex.acquire();
 								songToPlay = inst;
 								mutex.release();
