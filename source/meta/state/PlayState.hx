@@ -1534,7 +1534,6 @@ class PlayState extends MusicBeatState
 
 					}
 			    }
-			default: trace(SONG.song);
 		}
 
 	}
