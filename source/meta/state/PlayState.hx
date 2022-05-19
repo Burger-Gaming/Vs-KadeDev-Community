@@ -67,7 +67,7 @@ class PlayState extends MusicBeatState
 	public static var campaignScore:Int = 0;
 
 	public static var dadOpponent:Character;
-	public static var otherDad:Character; // 🏳️‍🌈 we support gay marraige in this house
+	public static var otherDad:Null<Character> = null; // 🏳️‍🌈 we support gay marraige in this house
 	public static var gf:Character;
 	public static var boyfriend:Boyfriend;
 	var preCachedCharacters:Map<String, Character> = [];
@@ -1550,48 +1550,12 @@ class PlayState extends MusicBeatState
 			    }
 			case 'Roasted':
 				switch (curStep) {
-					case 288:
+					case 288 | 672 | 928 | 1312 | 1696 | 1952 | 2209:
 						dadOpponent.shouldSing = false;
 						otherDad.shouldSing = true;
-					case 540:
+					case 540 | 801 | 1051 | 1568 | 1824 | 2080 | 2336:
 						dadOpponent.shouldSing = true;
 						otherDad.shouldSing = false;
-					case 672:
-						dadOpponent.shouldSing = false;
-						otherDad.shouldSing = true;
-					case 801:
-						dadOpponent.shouldSing = true;
-						otherDad.shouldSing = false;
-					case 928:
-						dadOpponent.shouldSing = false;
-						otherDad.shouldSing = true;
-					case 1051:
-						dadOpponent.shouldSing = true;
-						otherDad.shouldSing = false;
-					case 1312:
-						dadOpponent.shouldSing = false;
-						otherDad.shouldSing = true;
-					case 1568:
-						dadOpponent.shouldSing = true;
-						otherDad.shouldSing = false;
-					case 1696:
-						dadOpponent.shouldSing = false;
-						otherDad.shouldSing = true;
-					case 1824:
-						dadOpponent.shouldSing = true;
-					case 1952:
-						otherDad.shouldSing = false;
-					case 2080:
-						dadOpponent.shouldSing = false;
-						otherDad.shouldSing = true;
-					case 2209:
-						dadOpponent.shouldSing = true;
-						otherDad.shouldSing = false;
-					case 2336:
-						dadOpponent.shouldSing = false;
-						otherDad.shouldSing = true;
-						
-
 				}
 		}
 
