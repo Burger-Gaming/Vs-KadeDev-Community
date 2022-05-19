@@ -37,6 +37,7 @@ class Character extends FNFSprite
 	public var characterData:CharacterData;
 	public var adjustPos:Bool = true;
 	public var charColor:String = "#31B0D1";
+	public var shouldSing:Bool = true;
 
 	public function new(?isPlayer:Bool = false)
 	{
@@ -748,8 +749,12 @@ class Character extends FNFSprite
 
 	override public function playAnim(AnimName:String, Force:Bool = false, Reversed:Bool = false, Frame:Int = 0):Void
 	{
-		if (animation.getByName(AnimName) != null)
-			super.playAnim(AnimName, Force, Reversed, Frame);
+		if (animation.getByName(AnimName) != null) {
+			if (AnimName.contains('sing')) {
+				if (shouldSing) super.playAnim(AnimName, Force, Reversed, Frame);
+			} 
+			else super.playAnim(AnimName, Force, Reversed, Frame);
+		}
 
 		if (curCharacter == 'gf')
 		{

@@ -67,6 +67,7 @@ class PlayState extends MusicBeatState
 	public static var campaignScore:Int = 0;
 
 	public static var dadOpponent:Character;
+	public static var otherDad:Character; // 🏳️‍🌈 we support gay marraige in this house
 	public static var gf:Character;
 	public static var boyfriend:Boyfriend;
 	var preCachedCharacters:Map<String, Character> = [];
@@ -259,10 +260,18 @@ class PlayState extends MusicBeatState
 		dadOpponent = new Character().setCharacter(50, 850, SONG.player2);
 		boyfriend = new Boyfriend();
 		boyfriend.setCharacter(750, 850, SONG.player1);
+
+		if (SONG.song == 'Roasted') {
+			dadOpponent.x -= 80;
+			dadOpponent.y -= 60;
+			otherDad = new Character().setCharacter(50 - 80, 850 - 10, 'ACFH');
+			otherDad.shouldSing = false;
+		}
 		/*if (SONG.song == 'Ancient Clown' && storyDifficulty == 3) { 
 			switchCharacter("dad", "TankACFH"); 
 			switchCharacter("dad", SONG.player2);
 		}*/
+
 		// if you want to change characters later use setCharacter() instead of new or it will break
 
 		var camPos:FlxPoint = new FlxPoint(gf.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
@@ -280,13 +289,16 @@ class PlayState extends MusicBeatState
 		// add limo cus dumb layering
 		if (curStage == 'highway')
 			add(stageBuild.limo);
-
+        
+		if (otherDad != null) add(otherDad);
 		add(dadOpponent);
+		
 		add(boyfriend);
 
 		add(stageBuild.foreground);
 
 		// force them to dance
+		if (otherDad != null) otherDad.dance();
 		dadOpponent.dance();
 		gf.dance();
 		boyfriend.dance();
@@ -337,9 +349,10 @@ class PlayState extends MusicBeatState
 
 		//
 		var placement = (FlxG.width / 2);
-		dadStrums = new Strumline(placement - (FlxG.width / 4), this, dadOpponent, false, true, false, 4, Init.trueSettings.get('Downscroll'));
+		var characters = otherDad != null ? [dadOpponent, otherDad] : [dadOpponent];
+		dadStrums = new Strumline(placement - (FlxG.width / 4), this, characters, false, true, false, 4, Init.trueSettings.get('Downscroll'));
 		dadStrums.visible = !Init.trueSettings.get('Centered Notefield');
-		boyfriendStrums = new Strumline(placement + (!Init.trueSettings.get('Centered Notefield') ? (FlxG.width / 4) : 0), this, boyfriend, true, false, true,
+		boyfriendStrums = new Strumline(placement + (!Init.trueSettings.get('Centered Notefield') ? (FlxG.width / 4) : 0), this, [boyfriend], true, false, true,
 			4, Init.trueSettings.get('Downscroll'));
 
 		strumLines.add(dadStrums);
@@ -511,7 +524,7 @@ class PlayState extends MusicBeatState
 						}
 
 						if (eligable) {
-							goodNoteHit(coolNote, boyfriend, boyfriendStrums, firstNote); // then hit the note
+							goodNoteHit(coolNote, [boyfriend], boyfriendStrums, firstNote); // then hit the note
 							pressedNotes.push(coolNote);
 						}
 						// end of this little check
@@ -856,7 +869,7 @@ class PlayState extends MusicBeatState
 						}
 					}
 					// hell breaks loose here, we're using nested scripts!
-					mainControls(daNote, strumline.character, strumline, strumline.autoplay);
+					mainControls(daNote, strumline.characters, strumline, strumline.autoplay);
 
 					// check where the note is and make sure it is either active or inactive
 					if (daNote.y > FlxG.height) {
@@ -951,13 +964,13 @@ class PlayState extends MusicBeatState
 	}
 
 
-	function goodNoteHit(coolNote:Note, character:Character, characterStrums:Strumline, ?canDisplayJudgement:Bool = true)
+	function goodNoteHit(coolNote:Note, characters:Array<Character>, characterStrums:Strumline, ?canDisplayJudgement:Bool = true)
 	{
 		if (!coolNote.wasGoodHit) {
 			coolNote.wasGoodHit = true;
 			vocals.volume = 1;
 
-			characterPlayAnimation(coolNote, character);
+			for (character in characters) characterPlayAnimation(coolNote, character);
 			if (characterStrums.receptors.members[coolNote.noteData] != null)
 				characterStrums.receptors.members[coolNote.noteData].playAnim('confirm', true);
 
@@ -985,7 +998,7 @@ class PlayState extends MusicBeatState
 				}
 
 				if (!coolNote.isSustainNote) {
-					increaseCombo(foundRating, coolNote.noteData, character);
+					for (character in characters) increaseCombo(foundRating, coolNote.noteData, character);
 					popUpScore(foundRating, ratingTiming, characterStrums, coolNote);
 					if (coolNote.childrenNotes.length > 0)
 						Timings.notesHit++;
@@ -1072,7 +1085,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	private function mainControls(daNote:Note, char:Character, strumline:Strumline, autoplay:Bool):Void
+	private function mainControls(daNote:Note, chars:Array<Character>, strumline:Strumline, autoplay:Bool):Void
 	{
 		var notesPressedAutoplay = [];
 
@@ -1109,7 +1122,7 @@ class PlayState extends MusicBeatState
 					}
 					notesPressedAutoplay.push(daNote);
 				}
-				goodNoteHit(daNote, char, strumline, canDisplayJudgement);
+				goodNoteHit(daNote, chars, strumline, canDisplayJudgement);
 			}
 			//
 		} 
@@ -1125,8 +1138,9 @@ class PlayState extends MusicBeatState
 					if ((coolNote.parentNote != null && coolNote.parentNote.wasGoodHit)
 					&& coolNote.canBeHit && coolNote.mustPress
 					&& !coolNote.tooLate && coolNote.isSustainNote
-					&& holdControls[coolNote.noteData])
-						goodNoteHit(coolNote, char, strumline);
+					&& holdControls[coolNote.noteData]) { 
+						for (char in chars) goodNoteHit(coolNote, [char], strumline); 
+					}
 				});
 			}
 		}
@@ -1534,6 +1548,51 @@ class PlayState extends MusicBeatState
 
 					}
 			    }
+			case 'Roasted':
+				switch (curStep) {
+					case 288:
+						dadOpponent.shouldSing = false;
+						otherDad.shouldSing = true;
+					case 540:
+						dadOpponent.shouldSing = true;
+						otherDad.shouldSing = false;
+					case 672:
+						dadOpponent.shouldSing = false;
+						otherDad.shouldSing = true;
+					case 801:
+						dadOpponent.shouldSing = true;
+						otherDad.shouldSing = false;
+					case 928:
+						dadOpponent.shouldSing = false;
+						otherDad.shouldSing = true;
+					case 1051:
+						dadOpponent.shouldSing = true;
+						otherDad.shouldSing = false;
+					case 1312:
+						dadOpponent.shouldSing = false;
+						otherDad.shouldSing = true;
+					case 1568:
+						dadOpponent.shouldSing = true;
+						otherDad.shouldSing = false;
+					case 1696:
+						dadOpponent.shouldSing = false;
+						otherDad.shouldSing = true;
+					case 1824:
+						dadOpponent.shouldSing = true;
+					case 1952:
+						otherDad.shouldSing = false;
+					case 2080:
+						dadOpponent.shouldSing = false;
+						otherDad.shouldSing = true;
+					case 2209:
+						dadOpponent.shouldSing = true;
+						otherDad.shouldSing = false;
+					case 2336:
+						dadOpponent.shouldSing = false;
+						otherDad.shouldSing = true;
+						
+
+				}
 		}
 
 	}
@@ -1554,7 +1613,12 @@ class PlayState extends MusicBeatState
 		if ((dadOpponent.animation.curAnim.name.startsWith("idle") 
 		|| dadOpponent.animation.curAnim.name.startsWith("dance"))  
 			&& (curBeat % 2 == 0 || dadOpponent.characterData.quickDancer))
-			dadOpponent.dance();
+			dadOpponent.dance(true);
+
+		if (otherDad != null && ((otherDad.animation.curAnim.name.startsWith("idle") 
+			|| otherDad.animation.curAnim.name.startsWith("dance"))  
+				&& (curBeat % 2 == 0 || otherDad.characterData.quickDancer)))
+			otherDad.dance(true);
 	}
 
 	override function beatHit()
