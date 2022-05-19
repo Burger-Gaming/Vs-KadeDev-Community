@@ -131,11 +131,12 @@ class Strumline extends FlxTypedGroup<FlxBasic>
 	public var allNotes:FlxTypedGroup<Note>;
 
 	public var autoplay:Bool = true;
-	public var character:Character;
+	public var characters:Array<Character>;
+	public var otherChar:Character;
 	public var playState:PlayState;
 	public var displayJudgements:Bool = false;
 
-	public function new(x:Float = 0, playState:PlayState, ?character:Character, ?displayJudgements:Bool = true, ?autoplay:Bool = true,
+	public function new(x:Float = 0, playState:PlayState, ?characters:Array<Character>, ?displayJudgements:Bool = true, ?autoplay:Bool = true,
 			?noteSplashes:Bool = false, ?keyAmount:Int = 4, ?downscroll:Bool = false, ?parent:Strumline)
 	{
 		super();
@@ -148,7 +149,7 @@ class Strumline extends FlxTypedGroup<FlxBasic>
 		allNotes = new FlxTypedGroup<Note>();
 
 		this.autoplay = autoplay;
-		this.character = character;
+		this.characters = characters;
 		this.playState = playState;
 		this.displayJudgements = displayJudgements;
 
