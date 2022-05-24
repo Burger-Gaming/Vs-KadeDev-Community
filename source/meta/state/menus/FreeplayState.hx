@@ -38,6 +38,7 @@ class FreeplayState extends MusicBeatState
 	var curSelected:Int = 0;
 	var curSongPlaying:Int = -1;
 	var curDifficulty:Int = 1;
+	var lastDiff:Int = 1;
 
 	var scoreText:FlxText;
 	var diffText:FlxText;
@@ -318,6 +319,7 @@ class FreeplayState extends MusicBeatState
 
 	function changeDiff(change:Int = 0)
 	{
+		lastDiff = curDifficulty;
 		if (isExtra) { 
 			curDifficulty = 1;
 			return;
@@ -326,13 +328,17 @@ class FreeplayState extends MusicBeatState
 		if (lastDifficulty != null && change != 0)
 			while (existingDifficulties[curSelected][curDifficulty] == lastDifficulty)
 				curDifficulty += change;
+		
 
 		if (curDifficulty < 0)
 			curDifficulty = existingDifficulties[curSelected].length - 1;
 		if (curDifficulty > existingDifficulties[curSelected].length - 1)
 			curDifficulty = 0;
 
+
 		intendedScore = Highscore.getScore(songs[curSelected].songName, curDifficulty);
+		if (curDifficulty == 3 || (lastDiff + change) == 4 || curDifficulty == 2 && lastDiff == 3) changeSongPlaying();
+		
 
 		diffText.text = '< ' + existingDifficulties[curSelected][curDifficulty] + ' >';
 		lastDifficulty = existingDifficulties[curSelected][curDifficulty];
@@ -407,13 +413,12 @@ class FreeplayState extends MusicBeatState
 					var index:Null<Int> = Thread.readMessage(false);
 					if (index != null)
 					{
-						if (index == curSelected && index != curSongPlaying)
+						if (index == curSelected && (index != curSongPlaying || curDifficulty != lastDiff))
 						{
 							trace("Loading index " + index);
 							var toUse = isExtra ? extraSongs : songs;
 							
-                            
-							var inst:Sound = Paths.inst(toUse[curSelected].songName);
+							var inst:Sound = Paths.inst(toUse[curSelected].songName, curDifficulty == 3);
 
 							if (index == curSelected && threadActive)
 							{
