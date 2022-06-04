@@ -72,7 +72,8 @@ class Character extends FNFSprite
 				animation.addByPrefix('singLEFT', 'BABY YODA LEFT', 24, false);
 				animation.addByPrefix('singRIGHT', 'BABY YODA RIGHT', 24, false);
 				animation.addByPrefix('singUP', 'BABY YODA UP', 24, false);
-				animation.addByPrefix('force', 'BABY YODA FORCE', 24, false);
+				animation.addByPrefix('idle-force', 'BABY YODA FORCE IDLE', 24, false);
+				animation.addByPrefix('force', 'BABY YODA FORCE0', 24, false);
 
 				characterData.offsetY = 40;
 				characterData.camOffsetX = 150;
@@ -716,11 +717,12 @@ class Character extends FNFSprite
 	/**
 	 * FOR GF DANCING SHIT
 	 */
-	public function dance(?forced:Bool = false)
+	public function dance(?forced:Bool = false, ?jediLol = false)
 	{
 		if (!debugMode)
 		{
 			var curCharSimplified:String = simplifyCharacter();
+			var forceSuffix:String = jediLol ? "-force" : "";
 			switch (curCharSimplified)
 			{
 				case 'gf':
@@ -743,7 +745,7 @@ class Character extends FNFSprite
 							playAnim('danceLeft', forced);
 					}
 					else
-						playAnim('idle', forced);
+						playAnim('idle$forceSuffix', forced);
 			}
 		}
 	}

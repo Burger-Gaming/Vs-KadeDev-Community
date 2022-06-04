@@ -137,8 +137,10 @@ class PauseSubState extends MusicBeatSubState
 				case "Resume":
 					close();
 				case "Restart Song":
+					PlayState.forceAnim = false;
 					Main.switchState(this, new PlayState());
 				case "Exit to menu":
+					PlayState.forceAnim = false;
 					PlayState.resetMusic();
 
 					if (PlayState.isStoryMode)

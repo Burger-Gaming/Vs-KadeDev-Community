@@ -88,6 +88,8 @@ class PlayState extends MusicBeatState
 	private var camFollow:FlxObject;
 	private var camFollowPos:FlxObject;
 
+	public static var forceAnim:Bool = false;
+
 	// Discord RPC variables
 	public static var songDetails:String = "";
 	public static var detailsSub:String = "";
@@ -1510,9 +1512,14 @@ class PlayState extends MusicBeatState
 							bfYBeforeTween = boyfriend.y;
 							yoderYBeforeTween = dadOpponent.y;
 						case 272:
+							dadOpponent.playAnim('force', true);
+							new FlxTimer().start(1.16666666667, function(tmr:FlxTimer){ // "According to my calculations, the animation takes 1.16666666667 seconds." :nerd:
+								forceAnim = true;
+							});
 							FlxTween.tween(boyfriend, {y: -50}, 5);
 						case 399:
-							FlxTween.tween(dadOpponent, {y: -200}, 5);
+							forceAnim = false;
+							FlxTween.tween(dadOpponent, {y: -100}, 5);
 						case 592:
 							FlxTween.tween(boyfriend, {y: bfYBeforeTween}, 5);
 							FlxTween.tween(dadOpponent, {y: yoderYBeforeTween}, 5);
@@ -1581,12 +1588,12 @@ class PlayState extends MusicBeatState
 		if ((dadOpponent.animation.curAnim.name.startsWith("idle") 
 		|| dadOpponent.animation.curAnim.name.startsWith("dance") || !dadOpponent.shouldSing)  
 			&& (curBeat % 2 == 0 || dadOpponent.characterData.quickDancer))
-			dadOpponent.dance(true);
+			dadOpponent.dance(true, forceAnim);
 
 		if (otherDad != null && ((otherDad.animation.curAnim.name.startsWith("idle") 
 			|| otherDad.animation.curAnim.name.startsWith("dance") || !otherDad.shouldSing)  
 				&& (curBeat % 2 == 0 || otherDad.characterData.quickDancer)))
-			otherDad.dance(true);
+			otherDad.dance(true, forceAnim);
 	}
 
 	override function beatHit()
