@@ -64,14 +64,15 @@ class Character extends FNFSprite
 		{
 			case 'yoder':
 				charColor = "#578779";
-				tex = Paths.getSparrowAtlas('characters/Yoder');
+				tex = Paths.getSparrowAtlas('characters/baby yoder');
 				frames = tex;
 
-				animation.addByPrefix('idle', 'Idle', 24, false);
-				animation.addByPrefix('singDOWN', 'Down', 24, false);
-				animation.addByPrefix('singLEFT', 'Left', 24, false);
-				animation.addByPrefix('singRIGHT', 'Right', 24, false);
-				animation.addByPrefix('singUP', 'Up', 24, false);
+				animation.addByPrefix('idle', 'BABY YODA IDLE', 24, false);
+				animation.addByPrefix('singDOWN', 'BABY YODA DOWN', 24, false);
+				animation.addByPrefix('singLEFT', 'BABY YODA LEFT', 24, false);
+				animation.addByPrefix('singRIGHT', 'BABY YODA RIGHT', 24, false);
+				animation.addByPrefix('singUP', 'BABY YODA UP', 24, false);
+				animation.addByPrefix('force', 'BABY YODA FORCE', 24, false);
 
 				characterData.offsetY = 210;
 				characterData.offsetX = -150;
