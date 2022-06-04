@@ -63,7 +63,7 @@ class Character extends FNFSprite
 		switch (curCharacter)
 		{
 			case 'yoder':
-				charColor = "#578779";
+				charColor = "#73e155";
 				tex = Paths.getSparrowAtlas('characters/baby yoder');
 				frames = tex;
 
