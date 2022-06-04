@@ -74,8 +74,8 @@ class Character extends FNFSprite
 				animation.addByPrefix('singUP', 'BABY YODA UP', 24, false);
 				animation.addByPrefix('force', 'BABY YODA FORCE', 24, false);
 
-				characterData.offsetY = 210;
-				characterData.offsetX = -150;
+				characterData.offsetY = 40;
+				characterData.camOffsetX = 150;
 
 				playAnim('idle');
 			case 'onion': // im not gonna change 50 charts just to add -skin to the end of onion :Dave:
