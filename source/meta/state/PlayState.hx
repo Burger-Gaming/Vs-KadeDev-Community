@@ -1519,7 +1519,7 @@ class PlayState extends MusicBeatState
 							FlxTween.tween(boyfriend, {y: -50}, 5);
 						case 399:
 							forceAnim = false;
-							FlxTween.tween(dadOpponent, {y: -100}, 5);
+							FlxTween.tween(dadOpponent, {y: -10}, 5);
 						case 592:
 							FlxTween.tween(boyfriend, {y: bfYBeforeTween}, 5);
 							FlxTween.tween(dadOpponent, {y: yoderYBeforeTween}, 5);
