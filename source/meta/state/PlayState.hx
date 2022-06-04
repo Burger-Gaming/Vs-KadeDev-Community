@@ -696,10 +696,12 @@ class PlayState extends MusicBeatState
 
 				if (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
 				{
-					var char = dadOpponent;
+					// otherDad != null && !dadOpponent.shouldSing
+					var isDuet = otherDad != null && (dadOpponent.shouldSing && otherDad.shouldSing);
+					var char = otherDad != null && (!dadOpponent.shouldSing || isDuet) ? otherDad : dadOpponent;
 
 					var getCenterX = char.getMidpoint().x + 100;
-					var getCenterY = char.getMidpoint().y - 100;
+					var getCenterY = char.getMidpoint().y - (isDuet ? -50 : 100);
 
 					camFollow.setPosition(getCenterX + camDisplaceX + char.characterData.camOffsetX,
 						getCenterY + camDisplaceY + char.characterData.camOffsetY);
@@ -737,7 +739,7 @@ class PlayState extends MusicBeatState
 
 			var easeLerp = 0.95;
 			// camera stuffs
-			FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom + forceZoom[0], FlxG.camera.zoom, easeLerp);
+			if (shouldZoom) FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom + forceZoom[0], FlxG.camera.zoom, easeLerp);
 			for (hud in allUIs)
 				hud.zoom = FlxMath.lerp(1 + forceZoom[1], hud.zoom, easeLerp);
 
@@ -1501,7 +1503,6 @@ class PlayState extends MusicBeatState
 		//*/
         
 		switch (SONG.song) {
-			
 			case 'Yoder': 
 				if (storyDifficulty == 3) {
 					switch (curStep) {
@@ -1550,12 +1551,15 @@ class PlayState extends MusicBeatState
 			    }
 			case 'Roasted':
 				switch (curStep) {
-					case 288 | 672 | 928 | 1312 | 1696 | 1952 | 2209:
+					case 288 | 672 | 928 | 1312 | 1696 | 2080 | 2336:
 						dadOpponent.shouldSing = false;
 						otherDad.shouldSing = true;
-					case 540 | 801 | 1051 | 1568 | 1824 | 2080 | 2336:
+					case 540 | 801 | 1051 | 1562 | 1952 | 2209:
 						dadOpponent.shouldSing = true;
 						otherDad.shouldSing = false;
+					case 1824:
+						dadOpponent.shouldSing = true;
+						otherDad.shouldSing = true;
 				}
 		}
 
@@ -1575,12 +1579,12 @@ class PlayState extends MusicBeatState
 
 		// added this for opponent cus it wasn't here before and skater would just freeze
 		if ((dadOpponent.animation.curAnim.name.startsWith("idle") 
-		|| dadOpponent.animation.curAnim.name.startsWith("dance"))  
+		|| dadOpponent.animation.curAnim.name.startsWith("dance") || !dadOpponent.shouldSing)  
 			&& (curBeat % 2 == 0 || dadOpponent.characterData.quickDancer))
 			dadOpponent.dance(true);
 
 		if (otherDad != null && ((otherDad.animation.curAnim.name.startsWith("idle") 
-			|| otherDad.animation.curAnim.name.startsWith("dance"))  
+			|| otherDad.animation.curAnim.name.startsWith("dance") || !otherDad.shouldSing)  
 				&& (curBeat % 2 == 0 || otherDad.characterData.quickDancer)))
 			otherDad.dance(true);
 	}
@@ -1590,6 +1594,24 @@ class PlayState extends MusicBeatState
 		super.beatHit();
 
 		trace(curBeat); //for events
+		/*switch (SONG.song) { // TODO
+			case 'Roasted':
+				switch (curBeat) {
+					case 392 | 408 | 424 | 440: 
+						FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom * 0.9 }, .7, { ease: FlxEase.quadInOut, type: PERSIST });
+						shouldZoom = false;
+					case 396 | 412 | 428 | 444:
+						FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom }, .7, { ease: FlxEase.quadInOut, type: PERSIST });
+					case 400 | 416 | 432 | 448:
+						FlxTween.tween(FlxG.camera, { zoom: FlxG.camera.zoom * 1.2 }, .7, { ease: FlxEase.quadInOut, type: PERSIST });
+					case 404 | 420 | 436 | 452 | 456:
+						FlxTween.tween(FlxG.camera, { zoom: FlxG.camera.zoom * 1.5  }, .7, { ease: FlxEase.quadInOut, type: PERSIST });
+					case 488:
+						FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom }, .7, { ease: FlxEase.quadInOut, type: PERSIST });
+						shouldZoom = true;
+
+				}
+		}*/
 
 		if ((FlxG.camera.zoom < 1.35 && curBeat % 4 == 0) && (shouldZoom))
 		{

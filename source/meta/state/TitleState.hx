@@ -284,58 +284,48 @@ class TitleState extends MusicBeatState
 			gfDance.animation.play('danceLeft');
 
 		FlxG.log.add(curBeat);
+		trace(curBeat);
+
 
 		switch (curBeat)
 		{
-			case 1:
-				createCoolText(['ninjamuffin', 'phantomArcade', 'kawaisprite', 'evilsker']);
-
-			// credTextShit.visible = true;
+			case 1: createCoolText(['music by']);
+			case 2:
+				var coolMusicPeople = ['waddle', 'lemlom', 'fabi'];
+				for (x in coolMusicPeople) addMoreText(x);
 			case 3:
-				addMoreText('present');
-			// credTextShit.text += '\npresent...';
-			// credTextShit.addText();
-			case 4:
 				deleteCoolText();
-			// credTextShit.visible = false;
-			// credTextShit.text = 'In association \nwith';
-			// credTextShit.screenCenter();
-			case 5:
-				createCoolText(['In association', 'with']);
+				createCoolText(['music by', 'tomi', 'xg', 'indefin8']);
+			case 4: deleteCoolText();
+			case 5: createCoolText(['art by']);
+			case 6:
+				var coolArtPeople = ['beekies', 'multi-hand', 'lemlom', 'tostper'];
+				for (x in coolArtPeople) addMoreText(x);
 			case 7:
-				addMoreText('newgrounds');
-				ngSpr.visible = true;
-			// credTextShit.text += '\nNewgrounds';
-
-			case 8:
 				deleteCoolText();
-				ngSpr.visible = false;
-			// credTextShit.visible = false;
-
-			// credTextShit.text = 'Shoutouts Tom Fulp';
-			// credTextShit.screenCenter();
-			case 9:
-				createCoolText([curWacky[0]]);
-			// credTextShit.visible = true;
-			case 11:
-				addMoreText(curWacky[1]);
-			// credTextShit.text += '\nlmao';
-			case 12:
-				deleteCoolText();
-			// credTextShit.visible = false;
-			// credTextShit.text = "Friday";
-			// credTextShit.screenCenter();
-			case 13:
-				addMoreText('Friday');
-			// credTextShit.visible = true;
-			case 14:
-				addMoreText('Night');
-			// credTextShit.text += '\nNight';
-			case 15:
-				addMoreText('Funkin'); // credTextShit.text += '\nFunkin';
-
-			case 16:
-				skipIntro();
+				createCoolText(['art by', 'red', 'soulslimm', 'k4zimir', 'dareiphobia']);
+			case 8: deleteCoolText();
+			case 9: createCoolText(['three dimensional stuff by']);
+			case 10: addMoreText('vander');
+			case 11: addMoreText('nater marson');
+			case 12: deleteCoolText();
+			case 13: createCoolText(['charting by']);
+			case 15: addMoreText('techsec');
+			case 16: deleteCoolText();
+			case 17: createCoolText(['coding by']);
+			case 18: addMoreText('burger');
+			case 19: addMoreText('skullbite');
+			case 20: deleteCoolText();
+			case 21: createCoolText([curWacky[0]]);
+			case 23: addMoreText(curWacky[1]);
+			case 24: deleteCoolText();
+			case 25: createCoolText(['too much work', 'went into this']);
+			case 27: addMoreText('enjoy the mod');
+			case 28: deleteCoolText();
+			case 29: createCoolText(['vs']);
+			case 30: addMoreText('kadedev');
+			case 31: addMoreText('community');
+			case 32: skipIntro();
 		}
 	}
 
