@@ -102,6 +102,8 @@ class PlayState extends MusicBeatState
 
 	public static var health:Float = 1; // mario
 	public static var combo:Int = 0;
+	public static var sectCombo = 0;
+	public static var comboShown:Bool = false;
 
 	public static var misses:Int = 0;
 
@@ -110,6 +112,7 @@ class PlayState extends MusicBeatState
 	private var startingSong:Bool = false;
 	private var paused:Bool = false;
 	var startedCountdown:Bool = false;
+	var countdownComplete:Bool = false;
 	var inCutscene:Bool = false;
 
 	var canPause:Bool = true;
@@ -698,6 +701,18 @@ class PlayState extends MusicBeatState
 
 				if (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
 				{
+					/*if (PlayState.SONG.notes[Std.int(curStep / 16)].sectionNotes.filter(d -> d[1] > 3).length == 0) {
+						var songJustStarted = false;
+						for (x in 0...Std.int(curStep / 16)) {
+							if (PlayState.SONG.notes[x].sectionNotes.filter(d -> d[1] > 3).length != 0) {
+								songJustStarted = true;
+								break;
+							}
+						}
+						// if (songJustStarted) trace('no notes detected between sections 0-${Std.int(curStep / 16)}, intro detected');
+						if (!comboShown && !songJustStarted && countdownComplete) uiHUD.showNoteCombo();
+					}
+					else comboShown = false;*/
 					// otherDad != null && !dadOpponent.shouldSing
 					var isDuet = otherDad != null && (dadOpponent.shouldSing && otherDad.shouldSing);
 					var char = otherDad != null && (!dadOpponent.shouldSing || isDuet) ? otherDad : dadOpponent;
@@ -1337,6 +1352,7 @@ class PlayState extends MusicBeatState
 				if (combo < 0)
 					combo = 0;
 				combo += 1;
+				sectCombo += 1;
 			}
 			else
 				missNoteCheck(true, direction, character, false, true);
@@ -2018,6 +2034,7 @@ class PlayState extends MusicBeatState
 					FlxG.sound.play(Paths.sound('introGo-' + assetModifier), 0.6);
 
 					Conductor.songPosition = -(Conductor.crochet * 1);
+					countdownComplete = true;
 			}
 
 			swagCounter += 1;

@@ -19,7 +19,7 @@ class MenuCharacter extends FlxSprite
 		'mom' => ["Mom Idle BLACK LINES", 24, true, 1 * 0.5, 0, -20],
 		'parents-christmas' => ["Parent Christmas Idle", 24, true, 0.8, -100, 50],
 		'senpai' => ["SENPAI idle Black Lines", 24, true, 1.4 * 0.5, -50, 100],
-		'yoder' => ['Idle', 24, true, 1, -350, -225],
+		'yoder' => ['BABY YODA IDLE', 24, true, 1, -150, 0],
 		'acfh' => ['Idle', 12, true, .4, -300, -200],
 		'onion' => ['idle', 24, true, .6, -100, 70],
 		'fabi' => ['doofus idle', 24, true, 1, -150, 0]

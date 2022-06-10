@@ -32,6 +32,8 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 
 	var scoreLast:Float = -1;
 	var scoreDisplay:String;
+	var comboTxt:FlxText;
+	var comboActive:Bool = false;
 
 	private var healthBarBG:FlxSprite;
 	private var healthBar:FlxBar;
@@ -83,6 +85,14 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 		iconP2 = new HealthIcon(SONG.player2, false);
 		iconP2.y = healthBar.y - (iconP2.height / 2);
 		add(iconP2);
+
+		comboTxt = new FlxText();
+		comboTxt.text = "000 Note Combo!";
+		comboTxt.setFormat(Paths.font("vcr.ttf"), 64, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		comboTxt.screenCenter(XY);
+		comboTxt.alpha = 0;
+		add(comboTxt);
+
 
 		scoreBar = new FlxText(FlxG.width / 2, healthBarBG.y + 40, 0, scoreDisplay, 20);
 		scoreBar.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -210,7 +220,17 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 		//
 	}
 
-	function switchOutIcons(target: String, newIcon: String, color: String) {
+	public function showNoteCombo() {
+		if (comboActive || PlayState.sectCombo == 0) return;
+		comboActive = true;
+
+		comboTxt.text = '${PlayState.sectCombo} Note Combo!';
+		FlxTween.tween(comboTxt, { alpha: 1 }, 1, { onComplete: tw -> new FlxTimer().start(1.4, t -> FlxTween.tween(comboTxt, { alpha: 0 }, 1, { onComplete: t -> comboActive = false })) });
+		PlayState.sectCombo = 0;
+		PlayState.comboShown = true;
+	}
+
+	public function switchOutIcons(target: String, newIcon: String, color: String) {
 		switch (target) {
 			case "dad": { 
 				iconP2 = new HealthIcon(newIcon); 

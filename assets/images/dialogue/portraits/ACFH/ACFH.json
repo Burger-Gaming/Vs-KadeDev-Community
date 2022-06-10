@@ -1,0 +1,12 @@
+{
+    "name": "ACFH",
+    "expressions": {
+        "normal": "Speak"
+    },
+    "position": "left",
+    "sounds": ["pixelText"],
+    "soundChance": 100,
+    
+    "soundPath": "sounds/"
+
+}
