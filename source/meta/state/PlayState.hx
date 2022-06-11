@@ -1,5 +1,6 @@
 package meta.state;
 
+import meta.data.dependency.FNFSprite;
 import flixel.FlxBasic;
 import flixel.FlxCamera;
 import flixel.FlxG;
@@ -720,7 +721,7 @@ class PlayState extends MusicBeatState
 					var getCenterX = char.getMidpoint().x + 100;
 					var getCenterY = char.getMidpoint().y - (isDuet ? -50 : 100);
 
-					camFollow.setPosition(getCenterX + camDisplaceX + char.characterData.camOffsetX,
+					if (curStage != 'nater') camFollow.setPosition(getCenterX + camDisplaceX + char.characterData.camOffsetX,
 						getCenterY + camDisplaceY + char.characterData.camOffsetY);
 
 					if (char.curCharacter == 'mom')
@@ -746,7 +747,7 @@ class PlayState extends MusicBeatState
 							getCenterY = char.getMidpoint().y - 200;
 					}
 
-					camFollow.setPosition(getCenterX + camDisplaceX - char.characterData.camOffsetX,
+					if (curStage != 'nater') camFollow.setPosition(getCenterX + camDisplaceX - char.characterData.camOffsetX,
 						getCenterY + camDisplaceY + char.characterData.camOffsetY);
 				}
 			}
@@ -1616,7 +1617,7 @@ class PlayState extends MusicBeatState
 	{
 		super.beatHit();
 
-		trace(curBeat); //for events
+		// trace(curBeat); //for events
 		/*switch (SONG.song) { // TODO
 			case 'Roasted':
 				switch (curBeat) {
@@ -1656,6 +1657,7 @@ class PlayState extends MusicBeatState
 
 		//
 		charactersDance(curBeat);
+		for (x in stageBuild.bump) x.playAnim('bump');
 
 		// stage stuffs
 		stageBuild.stageUpdate(curBeat, boyfriend, gf, dadOpponent);
@@ -1818,6 +1820,26 @@ class PlayState extends MusicBeatState
 	{
 		switch (curSong.toLowerCase())
 		{
+			case "fresh": // mental note: for nater
+			    inCutscene = true;
+				for (hud in allUIs) hud.alpha = 0;
+			    var raise = new FNFSprite();
+			    raise.frames = Paths.getSparrowAtlas("backgrounds/naterplat/Platform-Raise");
+			    raise.animation.addByPrefix('up', 'ANIM', false);
+			    raise.playAnim('up');
+				raise.scrollFactor.set(0, 0);
+				raise.screenCenter();
+				raise.setGraphicSize(Std.int(raise.width * 2));
+				
+				add(raise);
+			    raise.animation.finishCallback = d -> {
+					remove(raise);
+					FlxG.camera.flash(FlxColor.WHITE, 1, () -> {
+						for (hud in allUIs) FlxTween.tween(hud, { alpha: 1 }, .75);
+						startCountdown();
+					});
+				}
+			    
 			case "winter-horrorland":
 				inCutscene = true;
 				var blackScreen:FlxSprite = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);

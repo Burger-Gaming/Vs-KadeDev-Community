@@ -51,6 +51,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 	var daPixelZoom = PlayState.daPixelZoom;
 
 	public var foreground:FlxTypedGroup<FlxBasic>;
+	public var bump:Array<FNFSprite> = [];
 
 	public function new(curStage)
 	{
@@ -86,8 +87,8 @@ class Stage extends FlxTypedGroup<FlxBasic>
 					curStage = 'ACFH';
 				case 'dasher' | 'fabicoolest' | 'fabilicious':
 					curStage = 'fabiworld';
-				case 'bopeebo':
-					curStage = 'fabiworld';
+				case 'fresh':
+					curStage = 'nater';
 				case 'battle-of-the-century':
 					curStage = 'botc';
 				default:
@@ -189,6 +190,20 @@ class Stage extends FlxTypedGroup<FlxBasic>
 						offSpring.x = 1920 - 300;
 					}
 				}
+			case 'nater':
+				curStage = 'nater';
+				PlayState.defaultCamZoom = 0.72;
+
+				var BG:FNFSprite = new FNFSprite();
+				BG.frames = Paths.getSparrowAtlas('backgrounds/naterplat/Platform-Stage');
+				BG.animation.addByPrefix('bump', 'ANIM', 24, false);
+				BG.scrollFactor.set(0, 0);
+				BG.screenCenter();
+				// BG.playAnim('bump');
+				BG.setGraphicSize(Std.int(BG.width * 2));
+				bump.push(BG);
+				add(BG);
+
 			case 'spooky':
 				curStage = 'spooky';
 				// halloweenLevel = true;
@@ -518,6 +533,16 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		// REPOSITIONING PER STAGE
 		switch (curStage)
 		{
+			case 'nater':
+				boyfriend.scale.set(0.65, 0.65);
+				/*gf.scale.set(0.55, 0.55);
+				gf.adjustPos = false;*/
+				gf.visible = false;
+				dad.x -= 100;
+				dad.y += 0;
+				boyfriend.y += 100;
+				boyfriend.x -= 100;
+
 			case 'highway':
 				boyfriend.y -= 220;
 				boyfriend.x += 260;

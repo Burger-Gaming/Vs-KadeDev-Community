@@ -62,6 +62,20 @@ class Character extends FNFSprite
 
 		switch (curCharacter)
 		{
+			case 'nater':
+				charColor = "#878787";
+				frames = Paths.getSparrowAtlas('characters/nater');
+
+				animation.addByPrefix('idle', 'IDLE', 24, false);
+				animation.addByPrefix('singDOWN', 'DOWN', 24, false);
+				animation.addByPrefix('singLEFT', 'LEFT', 24, false);
+				animation.addByPrefix('singRIGHT', 'RIGHT', 24, false);
+				animation.addByPrefix('singUP', 'UP', 24, false);
+
+				// setGraphicSize(Std.int(width * 1.5));
+				antialiasing = true;
+
+				playAnim('idle');
 			case 'yoder':
 				charColor = "#73e155";
 				tex = Paths.getSparrowAtlas('characters/baby yoder');
