@@ -253,10 +253,7 @@ class PlayState extends MusicBeatState
 		gf.setCharacter(300, 100, stageBuild.returnGFtype(curStage));
 		gf.scrollFactor.set(0.95, 0.95);
 
-		if(SONG.song == 'Battle of the Century'){
-			gf.visible = false;
-		}
-
+	
 		if (PlayState.SONG.song == 'Onions' || PlayState.SONG.song == 'Garlico' || PlayState.SONG.song == 'Food Fight'){
 			gf.x += 600;
 			gf.y += 300;
@@ -390,8 +387,7 @@ class PlayState extends MusicBeatState
 		screen1.cameras = [camHUD];
 		if (SONG.song == 'Clownstace' && storyDifficulty != 3) {
 			shouldZoom = false;
-			boyfriendStrums.forEach(s -> s.visible = false);
-			dadStrums.forEach(s -> s.visible = false);
+			for (hud in allUIs) hud.visible = false;
 			screen1.visible = true;
 		} 
 		else {
@@ -529,7 +525,7 @@ class PlayState extends MusicBeatState
 								eligable = false;
 						}
 
-						if (eligable) {
+						if (eligable || boyfriendStrums.autoplay) {
 							goodNoteHit(coolNote, [boyfriend], boyfriendStrums, firstNote); // then hit the note
 							pressedNotes.push(coolNote);
 						}
@@ -646,8 +642,17 @@ class PlayState extends MusicBeatState
 						Main.switchState(this, new OriginalChartingState());
 				}
 
-				if ((FlxG.keys.justPressed.SIX))
+				if ((FlxG.keys.justPressed.SIX)) {
 					boyfriendStrums.autoplay = !boyfriendStrums.autoplay;
+					if (boyfriendStrums.autoplay) uiHUD.autoplayUsed = true;
+					uiHUD.autoplayCurUsed = boyfriendStrums.autoplay;
+				}
+
+				if (FlxG.keys.justPressed.E && storyDifficulty == 3) {
+					FlxG.mouse.useSystemCursor = false;
+					FlxG.mouse.visible = true;
+				}
+					
 			}
 
 			///*
@@ -721,7 +726,7 @@ class PlayState extends MusicBeatState
 					var getCenterX = char.getMidpoint().x + 100;
 					var getCenterY = char.getMidpoint().y - (isDuet ? -50 : 100);
 
-					if (curStage != 'nater') camFollow.setPosition(getCenterX + camDisplaceX + char.characterData.camOffsetX,
+					camFollow.setPosition(getCenterX + camDisplaceX + char.characterData.camOffsetX,
 						getCenterY + camDisplaceY + char.characterData.camOffsetY);
 
 					if (char.curCharacter == 'mom')
@@ -747,7 +752,7 @@ class PlayState extends MusicBeatState
 							getCenterY = char.getMidpoint().y - 200;
 					}
 
-					if (curStage != 'nater') camFollow.setPosition(getCenterX + camDisplaceX - char.characterData.camOffsetX,
+					camFollow.setPosition(getCenterX + camDisplaceX - char.characterData.camOffsetX,
 						getCenterY + camDisplaceY + char.characterData.camOffsetY);
 				}
 			}
@@ -1348,7 +1353,7 @@ class PlayState extends MusicBeatState
 		// trolled this can actually decrease your combo if you get a bad/shit/miss
 		if (baseRating != null)
 		{
-			if (Timings.judgementsMap.get(baseRating)[3] > 0)
+			if (Timings.judgementsMap.get(baseRating)[3] > 0 || boyfriendStrums.autoplay)
 			{
 				if (combo < 0)
 					combo = 0;
@@ -1528,11 +1533,12 @@ class PlayState extends MusicBeatState
 						case 271: // setting up the return before they ascend
 							bfYBeforeTween = boyfriend.y;
 							yoderYBeforeTween = dadOpponent.y;
-						case 272:
+						case 264:
 							dadOpponent.playAnim('force', true);
 							new FlxTimer().start(1.16666666667, function(tmr:FlxTimer){ // "According to my calculations, the animation takes 1.16666666667 seconds." :nerd:
 								forceAnim = true;
 							});
+						case 272:
 							FlxTween.tween(boyfriend, {y: -50}, 5);
 						case 399:
 							forceAnim = false;
@@ -1563,8 +1569,7 @@ class PlayState extends MusicBeatState
 							screen1.destroy();
 							screen2.visible = true;
 							shouldZoom = !Init.trueSettings.get('Reduced Movements');
-							boyfriendStrums.forEach(s -> s.visible = true);
-							dadStrums.forEach(s -> s.visible = true);
+							for (hud in allUIs) hud.visible = true;
 							FlxTween.tween(screen2, {alpha: 0}, 2);
 							new FlxTimer().start(2, function(tmr:FlxTimer)
 							{
@@ -1732,7 +1737,8 @@ class PlayState extends MusicBeatState
 		canPause = false;
 		songMusic.volume = 0;
 		vocals.volume = 0;
-		if (SONG.validScore)
+		FlxG.mouse.visible = false;
+		if (SONG.validScore && !uiHUD.autoplayUsed)
 			Highscore.saveScore(SONG.song, songScore, storyDifficulty);
 
 		if (!isStoryMode)
@@ -1762,7 +1768,7 @@ class PlayState extends MusicBeatState
 				Main.switchState(this, new StoryMenuState());
 
 				// save the week's score if the score is valid
-				if (SONG.validScore)
+				if (SONG.validScore && !uiHUD.autoplayUsed)
 					Highscore.saveWeekScore(storyWeek, campaignScore, storyDifficulty);
 
 				// flush the save

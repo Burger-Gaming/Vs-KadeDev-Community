@@ -142,6 +142,7 @@ class PauseSubState extends MusicBeatSubState
 				case "Exit to menu":
 					PlayState.forceAnim = false;
 					PlayState.resetMusic();
+					FlxG.mouse.enabled = false;
 
 					if (PlayState.isStoryMode)
 						Main.switchState(this, new StoryMenuState());

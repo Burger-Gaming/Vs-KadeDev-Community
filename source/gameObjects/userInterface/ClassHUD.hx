@@ -1,5 +1,9 @@
 package gameObjects.userInterface;
 
+import flixel.input.mouse.FlxMouseEventManager;
+import meta.data.Song;
+import meta.data.Highscore;
+import flixel.addons.display.FlxExtendedSprite;
 import flixel.FlxBasic;
 import flixel.FlxCamera;
 import flixel.FlxG;
@@ -43,6 +47,10 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 	public var iconP2:HealthIcon;
 
 	private var stupidHealth:Float = 0;
+	public var autoplayUsed:Bool = false;
+	public var autoplayCurUsed:Bool = false;
+	var autoplayText:FlxText;
+	var antisaveWarning:FlxText;
 
 	private var timingsMap:Map<String, FlxText> = [];
 
@@ -99,6 +107,19 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 		updateScoreText();
 		scoreBar.scrollFactor.set();
 		add(scoreBar);
+		
+		autoplayText = new FlxText(FlxG.width - 405, Init.trueSettings.get('Downscroll') ? FlxG.height - 40 : 15, 0, "[BOTPLAY]", 30);
+		autoplayText.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		autoplayText.scrollFactor.set();
+		if (Init.trueSettings.get('Centered Notefield')) autoplayText.screenCenter(X);
+		autoplayText.visible = autoplayUsed;
+		add(autoplayText);
+		
+		antisaveWarning = new FlxText(0, scoreBar.y + 20, 0, "This score will not be saved.", 15);
+		antisaveWarning.setFormat(Paths.font("vcr.ttf"), 15, FlxColor.RED, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		antisaveWarning.screenCenter(X);
+		antisaveWarning.visible = autoplayUsed;
+		add(antisaveWarning);
 
 		// small info bar, kinda like the KE watermark
 		// based on scoretxt which I will set up as well
@@ -114,6 +135,8 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 		infoBar = new FlxText(5, FlxG.height - 30, 0, infoDisplay, 20);
 		infoBar.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		infoBar.scrollFactor.set();
+		infoBar.updateHitbox();
+		
 		add(infoBar);
 
 		// counter
@@ -150,6 +173,8 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 	{
 		// pain, this is like the 7th attempt
 		healthBar.percent = (PlayState.health * 50);
+		autoplayText.visible = autoplayCurUsed;
+		antisaveWarning.visible = autoplayUsed;
 
 		var iconLerp = 0.5;
 		iconP1.setGraphicSize(Std.int(FlxMath.lerp(iconP1.initialWidth, iconP1.width, iconLerp)));
@@ -157,6 +182,14 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 
 		iconP1.updateHitbox();
 		iconP2.updateHitbox();
+		FlxMouseEventManager.add(iconP2, null, f -> {
+			if (PlayState.SONG.song == "Erect" || PlayState.storyDifficulty != 3) return;
+			trace("owo owo owo owo owo");
+			PlayState.SONG = Song.loadFromJson(Highscore.formatSong("erect", 3), "erect");
+			PlayState.isStoryMode = false;
+			PlayState.storyDifficulty = 3;
+			Main.switchState(new PlayState(), new PlayState());
+		});
 
 		var iconOffset:Int = 26;
 

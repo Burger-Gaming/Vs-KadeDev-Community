@@ -87,7 +87,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 					curStage = 'ACFH';
 				case 'dasher' | 'fabicoolest' | 'fabilicious':
 					curStage = 'fabiworld';
-				case 'fresh':
+				case 'fresh' | 'poor-emulation':
 					curStage = 'nater';
 				case 'battle-of-the-century':
 					curStage = 'botc';
@@ -192,15 +192,15 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				}
 			case 'nater':
 				curStage = 'nater';
-				PlayState.defaultCamZoom = 0.72;
+				PlayState.defaultCamZoom = 0.9;
 
-				var BG:FNFSprite = new FNFSprite();
+				var BG:FNFSprite = new FNFSprite(0, -100);
 				BG.frames = Paths.getSparrowAtlas('backgrounds/naterplat/Platform-Stage');
 				BG.animation.addByPrefix('bump', 'ANIM', 24, false);
-				BG.scrollFactor.set(0, 0);
-				BG.screenCenter();
+				BG.scrollFactor.set(1, 1);
+				BG.screenCenter(X);
 				// BG.playAnim('bump');
-				BG.setGraphicSize(Std.int(BG.width * 2));
+				BG.setGraphicSize(Std.int(BG.width * 2.5));
 				bump.push(BG);
 				add(BG);
 
@@ -534,15 +534,17 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		switch (curStage)
 		{
 			case 'nater':
-				boyfriend.scale.set(0.65, 0.65);
+				boyfriend.scale.set(0.75, 0.75);
+				dad.scale.set(1.5, 1.5);
 				/*gf.scale.set(0.55, 0.55);
 				gf.adjustPos = false;*/
 				gf.visible = false;
 				dad.x -= 100;
-				dad.y += 0;
-				boyfriend.y += 100;
+				dad.y -= 400;
+				boyfriend.y -= 200;
 				boyfriend.x -= 100;
-
+            case 'botc':
+				gf.visible = false;
 			case 'highway':
 				boyfriend.y -= 220;
 				boyfriend.x += 260;
