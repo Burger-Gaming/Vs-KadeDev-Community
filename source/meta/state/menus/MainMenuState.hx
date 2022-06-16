@@ -283,7 +283,7 @@ class MainMenuState extends MusicBeatState
 
 		if (menuItems.members[Math.floor(curSelected)].animation.curAnim.name == 'idle') {
 			menuItems.members[Math.floor(curSelected)].animation.play('selected');
-			menuItems.members[Math.floor(curSelected)].y -       /.///= 20;
+			menuItems.members[Math.floor(curSelected)].y -= 20;
 		}
 
 		menuItems.members[Math.floor(curSelected)].updateHitbox();
