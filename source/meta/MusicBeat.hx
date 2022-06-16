@@ -131,6 +131,15 @@ class MusicBeatState extends FNFUIState
 	{
 		// used for updates when beats are hit in classes that extend this one
 	}
+    // bruh this was in kade and base, why not here??
+	public static function fancyOpenURL(schmancy:String)
+	{
+		#if linux
+		Sys.command('/usr/bin/xdg-open', [schmancy, "&"]);
+		#else
+		FlxG.openURL(schmancy);
+		#end
+	}
 }
 
 class MusicBeatSubState extends FlxSubState

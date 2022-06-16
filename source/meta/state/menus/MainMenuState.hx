@@ -13,6 +13,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import meta.MusicBeat.MusicBeatState;
 import meta.data.dependency.Discord;
+import meta.state.menus.CreditsState.CreditsName;
 
 using StringTools;
 
@@ -29,8 +30,9 @@ class MainMenuState extends MusicBeatState
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
 
-	var optionShit:Array<String> = ['story mode', 'freeplay', 'options'];
+	var optionShit:Array<String> = ['story mode', 'freeplay', 'credits', 'options'];
 	var canSnap:Array<Float> = [];
+	var ogYs:Array<Float> = [];
 
 	// the create 'state'
 	override function create()
@@ -87,8 +89,8 @@ class MainMenuState extends MusicBeatState
 		// loop through the menu options
 		for (i in 0...optionShit.length)
 		{
-			var menuItem:FlxSprite = new FlxSprite(0, 80 + (i * 200));
-			menuItem.frames = tex;
+			var menuItem:FlxSprite = new FlxSprite(0, 80 + (i * 150));
+			menuItem.frames = optionShit[i] == 'credits' ? Paths.getSparrowAtlas('menus/base/title/menu_credits') : tex;
 			// add the animations in a cool way (real
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
@@ -111,6 +113,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.scrollFactor.set();
 			menuItem.antialiasing = true;
 			menuItem.updateHitbox();
+			ogYs.push(menuItem.y);
 
 			/*
 				FlxTween.tween(menuItem, {alpha: 1, x: ((FlxG.width / 2) - (menuItem.width / 2))}, 0.35, {
@@ -239,6 +242,8 @@ class MainMenuState extends MusicBeatState
 								Main.switchState(this, new StoryMenuState());
 							case 'freeplay':
 								Main.switchState(this, new FreeplayState());
+							case 'credits':
+								Main.switchState(this, new CreditsState());
 							case 'options':
 								transIn = FlxTransitionableState.defaultTransIn;
 								transOut = FlxTransitionableState.defaultTransOut;
@@ -268,6 +273,7 @@ class MainMenuState extends MusicBeatState
 		menuItems.forEach(function(spr:FlxSprite)
 		{
 			spr.animation.play('idle');
+			spr.y = ogYs[menuItems.members.indexOf(spr)];
 			spr.updateHitbox();
 		});
 
@@ -275,8 +281,10 @@ class MainMenuState extends MusicBeatState
 		camFollow.setPosition(menuItems.members[Math.floor(curSelected)].getGraphicMidpoint().x,
 			menuItems.members[Math.floor(curSelected)].getGraphicMidpoint().y);
 
-		if (menuItems.members[Math.floor(curSelected)].animation.curAnim.name == 'idle')
+		if (menuItems.members[Math.floor(curSelected)].animation.curAnim.name == 'idle') {
 			menuItems.members[Math.floor(curSelected)].animation.play('selected');
+			menuItems.members[Math.floor(curSelected)].y -       /.///= 20;
+		}
 
 		menuItems.members[Math.floor(curSelected)].updateHitbox();
 
