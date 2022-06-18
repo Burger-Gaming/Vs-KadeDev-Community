@@ -71,6 +71,7 @@ class PlayState extends MusicBeatState
 	public static var otherDad:Null<Character> = null; // 🏳️‍🌈 we support gay marraige in this house
 	public static var gf:Character;
 	public static var boyfriend:Boyfriend;
+	public var missTimer:FlxTimer;
 	var preCachedCharacters:Map<String, Character> = [];
 
 	public static var assetModifier:String = 'base';
@@ -1051,6 +1052,12 @@ class PlayState extends MusicBeatState
 
 			FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
 			character.playAnim('sing' + stringDirection.toUpperCase() + 'miss', lockMiss);
+			if (character.curCharacter == 'naterbf') {
+				character.color = FlxColor.BLUE;
+				missTimer = new FlxTimer().start(1, t -> {
+					character.color = 0xffffff;
+				});
+			}
 		}
 		decreaseCombo(popMiss);
 
@@ -1083,6 +1090,13 @@ class PlayState extends MusicBeatState
 		//	stringArrow = coolNote.noteString;
 
 		character.playAnim(stringArrow, true);
+		if (character.curCharacter == 'naterbf') {
+			character.color = 0xffffff;
+			if (missTimer != null) { 
+				missTimer.cancel(); 
+				missTimer = null;
+			}
+		}
 		character.holdTimer = 0;
 	}
 
@@ -1662,7 +1676,6 @@ class PlayState extends MusicBeatState
 
 		//
 		charactersDance(curBeat);
-		for (x in stageBuild.bump) x.playAnim('bump');
 
 		// stage stuffs
 		stageBuild.stageUpdate(curBeat, boyfriend, gf, dadOpponent);

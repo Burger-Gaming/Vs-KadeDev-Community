@@ -207,7 +207,7 @@ class CreditsState extends MusicBeatState {
         for (x in 0...aaaa.length) {
 			var coolTxt = new FlxText(quoteTxt.x, uwu + x * 30);
 			coolTxt.setFormat(Paths.font("vcr.ttf"), 35, FlxColor.WHITE, LEFT, OUTLINE, FlxColor.BLACK);
-            coolTxt.text = "-" + aaaa[x];
+			coolTxt.text = "-" + Std.string(aaaa[x]);
 			coolTxt.borderSize = 2;
             didWhatTxts.push(coolTxt);
             add(coolTxt);

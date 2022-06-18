@@ -4,6 +4,7 @@ package gameObjects;
 	The character class initialises any and all characters that exist within gameplay. For now, the character class will
 	stay the same as it was in the original source of the game. I'll most likely make some changes afterwards though!
 **/
+import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.addons.util.FlxSimplex;
 import flixel.animation.FlxBaseAnimation;
@@ -62,6 +63,29 @@ class Character extends FNFSprite
 
 		switch (curCharacter)
 		{
+			case 'naterbf':
+				charColor = "#0040B5";
+				frames = Paths.getSparrowAtlas('characters/naterBf');
+
+				animation.addByPrefix('idle', 'IDLE', 24, false);
+				animation.addByPrefix('singDOWN', 'DOWN', 24, false);
+				animation.addByPrefix('singLEFT', 'LEFT', 24, false);
+				animation.addByPrefix('singRIGHT', 'RIGHT', 24, false);
+				animation.addByPrefix('singUP', 'UP', 24, false);
+				animation.addByPrefix('singDOWNmiss', 'DOWN', 24, false);
+				animation.addByPrefix('singLEFTmiss', 'LEFT', 24, false);
+				animation.addByPrefix('singRIGHTmiss', 'RIGHT', 24, false);
+				animation.addByPrefix('singUPmiss', 'UP', 24, false);
+
+				flipX = true;
+
+				scale.set(2, 2);
+				characterData.offsetY = 240;
+				flipLeftRight();
+				color = 0xffffff; // wanna make sure it matches with the color i'm using
+
+				playAnim('idle');
+
 			case 'nater':
 				charColor = "#878787";
 				frames = Paths.getSparrowAtlas('characters/nater');
@@ -73,6 +97,7 @@ class Character extends FNFSprite
 				animation.addByPrefix('singUP', 'UP', 24, false);
 
 				// setGraphicSize(Std.int(width * 1.5));
+				scale.set(1.5, 1.5);
 				antialiasing = true;
 
 				playAnim('idle');

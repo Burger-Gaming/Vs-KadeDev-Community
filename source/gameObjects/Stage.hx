@@ -51,7 +51,8 @@ class Stage extends FlxTypedGroup<FlxBasic>
 	var daPixelZoom = PlayState.daPixelZoom;
 
 	public var foreground:FlxTypedGroup<FlxBasic>;
-	public var bump:Array<FNFSprite> = [];
+	public var bump:Array<FNFSprite> = []; // put sprites here with a "bump" animation
+	public var publicSprites:Map<String, FNFSprite> = []; // publicizes sprites so you can interact with them from the playstate
 
 	public function new(curStage)
 	{
@@ -87,8 +88,10 @@ class Stage extends FlxTypedGroup<FlxBasic>
 					curStage = 'ACFH';
 				case 'dasher' | 'fabicoolest' | 'fabilicious':
 					curStage = 'fabiworld';
-				case 'fresh' | 'poor-emulation':
+				case 'poor-emulation':
 					curStage = 'nater';
+				case 'fresh' | 'rom-hack':
+					curStage = 'naterdark';
 				case 'battle-of-the-century':
 					curStage = 'botc';
 				default:
@@ -194,6 +197,16 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				curStage = 'nater';
 				PlayState.defaultCamZoom = 0.9;
 
+				var raise = new FNFSprite();
+				raise.frames = Paths.getSparrowAtlas("backgrounds/naterplat/Platform-Raise");
+				raise.animation.addByPrefix('up', 'ANIM', false);
+				raise.playAnim('up');
+				raise.scrollFactor.set(1, 1);
+				raise.screenCenter();
+				raise.setGraphicSize(Std.int(raise.width * 2.5));
+				add(raise);
+				publicSprites["raise"] = raise;
+
 				var BG:FNFSprite = new FNFSprite(0, -100);
 				BG.frames = Paths.getSparrowAtlas('backgrounds/naterplat/Platform-Stage');
 				BG.animation.addByPrefix('bump', 'ANIM', 24, false);
@@ -203,6 +216,40 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				BG.setGraphicSize(Std.int(BG.width * 2.5));
 				bump.push(BG);
 				add(BG);
+
+			case 'naterdark':
+				curStage = 'nater';
+				var dark = new FNFSprite(0, 50);
+				dark.frames = Paths.getSparrowAtlas('backgrounds/naterdark/dark');
+				dark.animation.addByPrefix('flash', 'ANIM', 24, true);
+				dark.playAnim('flash');
+				dark.scrollFactor.set(1, 1);
+				dark.screenCenter(X);
+				dark.setGraphicSize(Std.int(dark.width * 1.7));
+				publicSprites["dark"] = dark;
+				add(dark);
+
+				var superdark = new FNFSprite(0, 50);
+				superdark.frames = Paths.getSparrowAtlas('backgrounds/naterdark/superdark');
+				superdark.animation.addByPrefix('flash', 'ANIM', 24, true);
+				superdark.playAnim('flash');
+				superdark.scrollFactor.set(1, 1);
+				superdark.screenCenter(X);
+				superdark.setGraphicSize(Std.int(dark.width * 1.7));
+				superdark.visible = false;
+				publicSprites["superdark"] = superdark;
+				add(superdark);
+
+				var spotlight = new FNFSprite(0, 50);
+				spotlight.frames = Paths.getSparrowAtlas('backgrounds/naterdark/spotlight');
+				spotlight.animation.addByPrefix('flash', 'ANIM', 24, true);
+				spotlight.playAnim('flash');
+				spotlight.scrollFactor.set(1, 1);
+				spotlight.screenCenter(X);
+				spotlight.setGraphicSize(Std.int(dark.width * 1.7));
+				spotlight.visible = false;
+				publicSprites["spotlight"] = spotlight;
+				add(spotlight);
 
 			case 'spooky':
 				curStage = 'spooky';
@@ -533,16 +580,24 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		// REPOSITIONING PER STAGE
 		switch (curStage)
 		{
+			case 'naterdark':
+				gf.visible = false;
+				// boyfriend.scale.set(0.75, 0.75);
+				boyfriend.y -= 130;
+				boyfriend.x -= 100;
+				dad.x -= 40;
+				dad.y -= 25;
+				
+
 			case 'nater':
-				boyfriend.scale.set(0.75, 0.75);
-				dad.scale.set(1.5, 1.5);
+				// boyfriend.scale.set(0.75, 0.75);
 				/*gf.scale.set(0.55, 0.55);
 				gf.adjustPos = false;*/
 				gf.visible = false;
-				dad.x -= 100;
-				dad.y -= 400;
-				boyfriend.y -= 200;
-				boyfriend.x -= 100;
+				dad.x -= 120;
+				dad.y -= 120;
+				boyfriend.y -= 225;
+				boyfriend.x -= 75;
             case 'botc':
 				gf.visible = false;
 			case 'highway':
@@ -586,6 +641,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 	public function stageUpdate(curBeat:Int, boyfriend:Boyfriend, gf:Character, dadOpponent:Character)
 	{
 		// trace('update backgrounds');
+		for (x in bump) x.playAnim('bump');
 		switch (PlayState.curStage)
 		{
 			case 'highway':
