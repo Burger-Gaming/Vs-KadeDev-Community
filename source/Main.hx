@@ -158,7 +158,7 @@ class Main extends Sprite
 			'literally nothing but drum breaks ong'
 		],
 		[
-			['Poor-Emulation', 'Rom-Hack'],
+			['Rom-Hack', 'Poor-Emulation'],
 			['nater'],
 			[FlxColor.fromRGB(65, 65, 65)],
 			'3D shi'
