@@ -14,6 +14,7 @@ import openfl.text.TextField;
 import openfl.text.TextFormat;
 
 // i didn't steal this from psych i swear
+// grrr skull youre FIRED from stealing CODE.
 class CreditsName extends FlxTypedGroup<FlxSprite> {
     public var isActive:Bool = false;
     var icon:CreditIcon;
@@ -146,6 +147,16 @@ class CreditsState extends MusicBeatState {
 		sectTitle = new Alphabet(80, firstCred.y - 100, creditSections[0], true);
         add(sectTitle);
 
+        var uiBG = new FlxSprite(0, FlxG.height - 16).makeGraphic(1280, 16, FlxColor.BLACK);
+        uiBG.alpha = 0.5;
+        add(uiBG);
+
+        // idk what to call it so i just said member descriptions lmfao
+        // also you bitch said to press left and right yet the controls are up and down.
+        var uiText = new FlxText(0, 0, 0, "Press Up and Down to switch between member descriptions.", 16);
+        uiText.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, OUTLINE, FlxColor.BLACK);
+        uiText.y = FlxG.height - uiText.height;
+        add(uiText);
     }
 
     override function update(elapsed:Float) {
