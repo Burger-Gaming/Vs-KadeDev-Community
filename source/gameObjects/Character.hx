@@ -60,6 +60,10 @@ class Character extends FNFSprite
 			quickDancer: false
 		};
 
+		if ((PlayState.SONG.song == 'Yoder' || PlayState.SONG.song == 'Baby Yoda Real' || PlayState.SONG.song == 'Swagswag') && PlayState.storyDifficulty == 3){
+			color = 0xFFD3D8FF;
+		}
+
 
 		switch (curCharacter)
 		{
