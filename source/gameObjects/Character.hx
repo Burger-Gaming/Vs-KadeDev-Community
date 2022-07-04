@@ -39,6 +39,7 @@ class Character extends FNFSprite
 	public var adjustPos:Bool = true;
 	public var charColor:String = "#31B0D1";
 	public var shouldSing:Bool = true;
+	public var deadShouldBump:Bool = false;
 
 	public function new(?isPlayer:Bool = false)
 	{
@@ -67,19 +68,30 @@ class Character extends FNFSprite
 
 		switch (curCharacter)
 		{
+			case 'naterbf-dead':
+				frames = Paths.getSparrowAtlas('characters/naterBfDead');
+
+				animation.addByPrefix('firstDeath', 'DEADSTART', 24, false);
+				animation.addByPrefix('deathLoop', 'DEADLOOP', 16, true);
+				animation.addByPrefix('deathConfirm', 'DEADEND', 24, false);
+				deadShouldBump = true;
+
+				//playAnim('firstDeath');
+
+				flipX = true;
 			case 'naterbf':
 				charColor = "#0040B5";
 				frames = Paths.getSparrowAtlas('characters/naterBf');
 
 				animation.addByPrefix('idle', 'IDLE', 24, false);
-				animation.addByPrefix('singDOWN', 'DOWN', 24, false);
-				animation.addByPrefix('singLEFT', 'LEFT', 24, false);
-				animation.addByPrefix('singRIGHT', 'RIGHT', 24, false);
-				animation.addByPrefix('singUP', 'UP', 24, false);
-				animation.addByPrefix('singDOWNmiss', 'DOWN', 24, false);
-				animation.addByPrefix('singLEFTmiss', 'LEFT', 24, false);
-				animation.addByPrefix('singRIGHTmiss', 'RIGHT', 24, false);
-				animation.addByPrefix('singUPmiss', 'UP', 24, false);
+				animation.addByPrefix('singDOWN', 'DOWN0', 24, false);
+				animation.addByPrefix('singLEFT', 'LEFT0', 24, false);
+				animation.addByPrefix('singRIGHT', 'RIGHT0', 24, false);
+				animation.addByPrefix('singUP', 'UP0', 24, false);
+				animation.addByPrefix('singDOWNmiss', 'DOWNMISS', 24, false);
+				animation.addByPrefix('singLEFTmiss', 'LEFTMISS', 24, false);
+				animation.addByPrefix('singRIGHTmiss', 'RIGHTMISS', 24, false);
+				animation.addByPrefix('singUPmiss', 'UPMISS', 24, false);
 
 				flipX = true;
 
@@ -87,6 +99,20 @@ class Character extends FNFSprite
 				characterData.offsetY = 240;
 				flipLeftRight();
 				color = 0xffffff; // wanna make sure it matches with the color i'm using
+
+				playAnim('idle');
+			
+			case 'nater-dark':
+				charColor = "#878787";
+				frames = Paths.getSparrowAtlas('characters/nater-dark');
+				animation.addByPrefix('idle', 'DARKIDLE', 24, false);
+				animation.addByPrefix('singDOWN', 'DARKDOWN', 24, false);
+				animation.addByPrefix('singLEFT', 'DARKLEFT', 24, false);
+				animation.addByPrefix('singRIGHT', 'DARKRIGHT', 24, false);
+				animation.addByPrefix('singUP', 'DARKUP', 24, false);
+
+				scale.set(1.5, 1.5);
+				antialiasing = true;
 
 				playAnim('idle');
 
@@ -697,6 +723,7 @@ class Character extends FNFSprite
 
 	function flipLeftRight():Void
 	{
+		if (animation.getByName('singRIGHT') == null) return;
 		// get the old right sprite
 		var oldRight = animation.getByName('singRIGHT').frames;
 
