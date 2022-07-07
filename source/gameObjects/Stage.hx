@@ -90,7 +90,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 					curStage = 'fabiworld';
 				case 'rom-hack':
 					curStage = 'nater';
-				case 'fresh' | 'poor-emulation' | 'save-stated':
+				case 'fresh' | 'poor-emulation' | 'savestated':
 					curStage = 'naterdark';
 				case 'battle-of-the-century':
 					curStage = 'botc';
