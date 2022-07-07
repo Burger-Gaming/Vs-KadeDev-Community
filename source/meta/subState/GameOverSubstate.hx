@@ -18,6 +18,7 @@ class GameOverSubstate extends MusicBeatSubState
 	var bf:Boyfriend;
 	var camFollow:FlxObject;
 	var stageSuffix:String = "";
+	var isEnding:Bool = false;
 	public static var deathCount:Int = 0;
 
 	public function new(x:Float, y:Float)
@@ -33,6 +34,8 @@ class GameOverSubstate extends MusicBeatSubState
 				stageSuffix = '-pixel';
 			case 'kadeplayer':
 				daBf = 'kadeplayer';
+			case 'naterbf':
+				daBf = 'naterbf-dead';
 			default:
 				daBf = 'bf-dead';
 		}
@@ -95,11 +98,10 @@ class GameOverSubstate extends MusicBeatSubState
 	override function beatHit()
 	{
 		super.beatHit();
+		if (bf.deadShouldBump && !isEnding) bf.playAnim('deathLoop');
 
 		FlxG.log.add('beat');
 	}
-
-	var isEnding:Bool = false;
 
 	function endBullshit():Void
 	{

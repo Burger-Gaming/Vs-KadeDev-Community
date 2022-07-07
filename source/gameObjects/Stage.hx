@@ -90,7 +90,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 					curStage = 'fabiworld';
 				case 'rom-hack':
 					curStage = 'nater';
-				case 'fresh' | 'poor-emulation':
+				case 'fresh' | 'poor-emulation' | 'save-stated':
 					curStage = 'naterdark';
 				case 'battle-of-the-century':
 					curStage = 'botc';
@@ -587,7 +587,11 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				boyfriend.x -= 100;
 				dad.x -= 40;
 				dad.y -= 25;
-				
+				if (CoolUtil.spaceToDash(PlayState.SONG.song.toLowerCase()) == "save-stated") { 
+					publicSprites["dark"].visible = false;
+					publicSprites["superdark"].visible = true;
+					boyfriend.setColorTransform(0.07, 0.07, 0.07);
+				}
 
 			case 'nater':
 				// boyfriend.scale.set(0.75, 0.75);

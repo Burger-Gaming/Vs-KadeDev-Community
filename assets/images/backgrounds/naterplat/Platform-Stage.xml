@@ -6,7 +6,7 @@
 	<SubTexture name="ANIM0001" x="960" y="0" width="960" height="540"/>
 	<SubTexture name="ANIM0002" x="0" y="540" width="960" height="540"/>
 	<SubTexture name="ANIM0003" x="960" y="540" width="960" height="540"/>
-	<SubTexture name="ANIM0004" x="0" y="1080" width="960" height="540"/>
-	<SubTexture name="ANIM0005" x="960" y="1080" width="960" height="540"/>
+	<SubTexture name="ANIM0004" x="0" y="540" width="960" height="540"/>
+	<SubTexture name="ANIM0005" x="960" y="0" width="960" height="540"/>
 	<SubTexture name="ANIM0006" x="0" y="0" width="960" height="540"/>
 </TextureAtlas>

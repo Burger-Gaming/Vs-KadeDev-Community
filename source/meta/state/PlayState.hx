@@ -165,6 +165,9 @@ class PlayState extends MusicBeatState
 	// stores the last combo objects in an array
 	public static var lastCombo:Array<FlxSprite>;
 
+	public var erectTimer:FlxTimer;
+	public var erectCounter:Int = 0;
+
 	// at the beginning of the playstate
 	override public function create()
 	{
@@ -631,7 +634,7 @@ class PlayState extends MusicBeatState
 			{
 				if (FlxG.keys.justPressed.EIGHT && !startingSong) {
 					resetMusic();
-					Main.switchState(this, new AnimationDebug(dadOpponent.curCharacter));
+					Main.switchState(this, new AnimationDebug(FlxG.keys.pressed.SHIFT ? boyfriend.curCharacter : dadOpponent.curCharacter));
 				}
 				// charting state (more on that later)
 				if ((FlxG.keys.justPressed.SEVEN) && (!startingSong))
@@ -650,8 +653,23 @@ class PlayState extends MusicBeatState
 				}
 
 				if (FlxG.keys.justPressed.E && storyDifficulty == 3) {
-					FlxG.mouse.useSystemCursor = false;
-					FlxG.mouse.visible = true;
+					switch (erectCounter) {
+						case 0:
+							erectCounter++;
+							erectTimer = new FlxTimer().start(5, t -> { 
+								erectCounter = 0;
+								erectTimer = null;
+							});
+						case 10:
+							if (SONG.song == "Erect") return;
+			                SONG = Song.loadFromJson(Highscore.formatSong("erect", 3), "erect");
+			                isStoryMode = false;
+							erectCounter = 0;
+							erectTimer.cancel();
+			                Main.switchState(this, new PlayState());
+						default: erectCounter++;
+
+					}
 				}
 					
 			}
@@ -1051,13 +1069,13 @@ class PlayState extends MusicBeatState
 			var stringDirection:String = UIStaticArrow.getArrowFromNumber(direction);
 
 			FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
-			character.playAnim('sing' + stringDirection.toUpperCase() + 'miss', lockMiss);
-			if (character.curCharacter == 'naterbf') {
+			if (character.animation.getByName('sing' + stringDirection.toUpperCase() + 'miss') == null) {
 				character.color = FlxColor.BLUE;
 				missTimer = new FlxTimer().start(1, t -> {
 					character.color = 0xffffff;
 				});
 			}
+			else character.playAnim('sing' + stringDirection.toUpperCase() + 'miss', lockMiss);
 		}
 		decreaseCombo(popMiss);
 

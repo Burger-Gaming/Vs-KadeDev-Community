@@ -89,7 +89,11 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 		iconP1 = new HealthIcon(SONG.player1, true);
 		iconP1.y = healthBar.y - (iconP1.height / 2);
 		add(iconP1);
-
+        
+		var sex = SONG.player2;
+		switch (sex) {
+			case "nater-dark": sex = "nater";
+		}
 		iconP2 = new HealthIcon(SONG.player2, false);
 		iconP2.y = healthBar.y - (iconP2.height / 2);
 		add(iconP2);
@@ -124,6 +128,7 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 		// small info bar, kinda like the KE watermark
 		// based on scoretxt which I will set up as well
 		var infoDisplay:String = CoolUtil.dashToSpace(PlayState.SONG.song) + (!PlayState.isExtraSong ? ' - ' + CoolUtil.difficultyFromNumber(PlayState.storyDifficulty) : '');
+		if (PlayState.SONG.song == "Erect") infoDisplay += "\nHAHAHAHAhAHAHAHAHA";
 		var engineDisplay:String = "Forever Engine v" + Main.gameVersion;
 		var engineBar:FlxText = new FlxText(0, FlxG.height - 30, 0, engineDisplay, 16);
 		engineBar.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -182,14 +187,14 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 
 		iconP1.updateHitbox();
 		iconP2.updateHitbox();
-		FlxMouseEventManager.add(iconP2, null, f -> {
+		/*FlxMouseEventManager.add(iconP2, null, f -> {
 			if (PlayState.SONG.song == "Erect" || PlayState.storyDifficulty != 3) return;
 			trace("owo owo owo owo owo");
 			PlayState.SONG = Song.loadFromJson(Highscore.formatSong("erect", 3), "erect");
 			PlayState.isStoryMode = false;
 			PlayState.storyDifficulty = 3;
 			Main.switchState(new PlayState(), new PlayState());
-		});
+		});*/
 
 		var iconOffset:Int = 26;
 
