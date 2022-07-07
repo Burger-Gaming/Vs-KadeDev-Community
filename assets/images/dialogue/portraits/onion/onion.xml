@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="onion.png">
+	<!-- Created with Adobe Animate version 21.0.7.42652 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="onion portrait idle0000" x="0" y="0" width="286" height="308"/>
+	<SubTexture name="onion portrait talking0000" x="0" y="0" width="286" height="308"/>
+	<SubTexture name="onion portrait talking0001" x="296" y="0" width="282" height="279" frameX="0" frameY="-52" frameWidth="286" frameHeight="331"/>
+	<SubTexture name="onion portrait talking0002" x="296" y="0" width="282" height="279" frameX="0" frameY="-52" frameWidth="286" frameHeight="331"/>
+	<SubTexture name="onion portrait talking0003" x="296" y="0" width="282" height="279" frameX="0" frameY="-52" frameWidth="286" frameHeight="331"/>
+	<SubTexture name="onion portrait talking0004" x="0" y="0" width="286" height="308"/>
+</TextureAtlas>

@@ -1,12 +1,11 @@
 {
-    "name": "ACFH",
+    "name": "Onion",
     "expressions": {
-        "normal": "Speak"
+        "normal": "onion portrait talking"
     },
     "position": "left",
     "sounds": ["pixelText"],
     "soundChance": 100,
-    "flipX": false,
-    
+
     "soundPath": "sounds/"
 }

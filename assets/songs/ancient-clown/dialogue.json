@@ -1,0 +1,49 @@
+{
+    "box": "speech_bubble_talking",
+    "boxState": "normal",
+    "dialogue": [
+        {
+            "portrait": "bf",
+            "expression": "normal",
+            "text": "beep bop boppity"
+        },
+        {
+            "portrait": "ACFH",
+            "expression": "normal",
+            "text": "Shut the hell up i'm playing Gmod."
+        },
+        {
+            "portrait": "bf",
+            "expression": "normal",
+            "text": "that game is GAY"
+        },
+        {
+            "portrait": "ACFH",
+            "expression": "normal",
+            "text": "The hell did you say?? I will literally kill you!"
+        },
+        {
+            "portrait": "bf",
+            "expression": "smug",
+            "text": "Valve sucks ass"
+        },
+        {
+            "portrait": "ACFH",
+            "expression": "normal",
+            "boxState": "yell",
+            "text": "...",
+            "speed": 0.5
+        },
+        {
+            "portrait": "ACFH",
+            "expression": "normal",
+            "boxState": "yell",
+            "text": "That's it. You and me. Rap battle. NOW!"
+        },
+        {
+            "portrait": "bf",
+            "boxState": "normal",
+            "text": "beep beep hell yeah!"
+        }
+    ]
+}
