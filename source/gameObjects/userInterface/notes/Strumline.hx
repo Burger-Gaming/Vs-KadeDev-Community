@@ -157,7 +157,7 @@ class Strumline extends FlxTypedGroup<FlxBasic>
 		{
 			var staticArrow:UIStaticArrow = ForeverAssets.generateUIArrows(-25 + x, 25 + (downscroll ? FlxG.height - 200 : 0), i, PlayState.assetModifier);
 			staticArrow.ID = i;
-			if (PlayState.SONG.song == 'Save Stated') staticArrow.color = 0x535353;
+			if (PlayState.SONG.song == 'SaveStated') staticArrow.color = 0x747171;
 
 			staticArrow.x -= ((keyAmount / 2) * Note.swagWidth);
 			staticArrow.x += (Note.swagWidth * i);
@@ -198,6 +198,7 @@ class Strumline extends FlxTypedGroup<FlxBasic>
 	public function push(newNote:Note)
 	{
 		//
+		if (PlayState.SONG.song == 'SaveStated') newNote.color = 0x747171;
 		var chosenGroup = (newNote.isSustainNote ? holdsGroup : notesGroup);
 		chosenGroup.add(newNote);
 		allNotes.add(newNote);

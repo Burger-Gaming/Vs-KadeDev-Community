@@ -80,6 +80,7 @@ class PlayState extends MusicBeatState
 	private var unspawnNotes:Array<Note> = [];
 	private var ratingArray:Array<String> = [];
 	private var allSicks:Bool = true;
+	public static var ratingColor:Int = 0xffffff;
 
 	// if you ever wanna add more keys
 	private var numberOfKeys:Int = 4;
@@ -257,22 +258,17 @@ class PlayState extends MusicBeatState
 		gf.setCharacter(300, 100, stageBuild.returnGFtype(curStage));
 		gf.scrollFactor.set(0.95, 0.95);
 
-	
-		if (PlayState.SONG.song == 'Onions' || PlayState.SONG.song == 'Garlico' || PlayState.SONG.song == 'Food Fight'){
-			gf.x += 600;
-			gf.y += 300;
-			gf.scrollFactor.set(1, 1);
-		}
-
 		dadOpponent = new Character().setCharacter(50, 850, SONG.player2);
 		boyfriend = new Boyfriend();
 		boyfriend.setCharacter(750, 850, SONG.player1);
 
-		if (SONG.song == 'Roasted') {
-			dadOpponent.x -= 80;
-			dadOpponent.y -= 60;
-			otherDad = new Character().setCharacter(50 - 80, 850 - 10, 'ACFH');
-			otherDad.shouldSing = false;
+		switch (SONG.song) {
+			case "SaveStated": 
+			case "Roasted":
+				dadOpponent.x -= 80;
+			    dadOpponent.y -= 60;
+			    otherDad = new Character().setCharacter(50 - 80, 850 - 10, 'ACFH');
+			    otherDad.shouldSing = false;
 		}
 		/*if (SONG.song == 'Ancient Clown' && storyDifficulty == 3) { 
 			switchCharacter("dad", "TankACFH"); 
@@ -292,10 +288,6 @@ class PlayState extends MusicBeatState
 
 		// add characters
 		add(gf);
-
-		// add limo cus dumb layering
-		if (curStage == 'highway')
-			add(stageBuild.limo);
         
 		if (otherDad != null) add(otherDad);
 		add(dadOpponent);
@@ -759,7 +751,7 @@ class PlayState extends MusicBeatState
 					var getCenterY = char.getMidpoint().y - 100;
 					switch (curStage)
 					{
-						case 'limo':
+						/*case 'limo':
 							getCenterX = char.getMidpoint().x - 300;
 						case 'mall':
 							getCenterY = char.getMidpoint().y - 200;
@@ -768,7 +760,7 @@ class PlayState extends MusicBeatState
 							getCenterY = char.getMidpoint().y - 200;
 						case 'schoolEvil':
 							getCenterX = char.getMidpoint().x - 200;
-							getCenterY = char.getMidpoint().y - 200;
+							getCenterY = char.getMidpoint().y - 200;*/
 					}
 
 					camFollow.setPosition(getCenterX + camDisplaceX - char.characterData.camOffsetX,
@@ -1070,9 +1062,10 @@ class PlayState extends MusicBeatState
 
 			FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
 			if (character.animation.getByName('sing' + stringDirection.toUpperCase() + 'miss') == null) {
+				var ogColor = character.color;
 				character.color = FlxColor.BLUE;
 				missTimer = new FlxTimer().start(1, t -> {
-					character.color = 0xffffff;
+					character.color = ogColor;
 				});
 			}
 			else character.playAnim('sing' + stringDirection.toUpperCase() + 'miss', lockMiss);
@@ -1109,7 +1102,8 @@ class PlayState extends MusicBeatState
 
 		character.playAnim(stringArrow, true);
 		if (character.curCharacter == 'naterbf') {
-			character.color = 0xffffff;
+			var ogColor = character.color;
+			character.color = ogColor;
 			if (missTimer != null) { 
 				missTimer.cancel(); 
 				missTimer = null;
@@ -1319,10 +1313,12 @@ class PlayState extends MusicBeatState
 			var numScore = ForeverAssets.generateCombo('combo', stringArray[scoreInt], (!negative ? allSicks : false), assetModifier, changeableSkin, 'UI',
 				negative, createdColor, scoreInt);
 			add(numScore);
+			numScore.color = ratingColor;
 			// hardcoded lmao
 			if (!Init.trueSettings.get('Simply Judgements'))
 			{
 				add(numScore);
+				numScore.color = ratingColor;
 				FlxTween.tween(numScore, {alpha: 0}, 0.2, {
 					onComplete: function(tween:FlxTween)
 					{
@@ -1405,6 +1401,7 @@ class PlayState extends MusicBeatState
 		 */
 		var rating = ForeverAssets.generateRating('$daRating', (daRating == 'sick' ? allSicks : false), timing, assetModifier, changeableSkin, 'UI');
 		add(rating);
+		rating.color = ratingColor;
 
 		if (!Init.trueSettings.get('Simply Judgements'))
 		{
