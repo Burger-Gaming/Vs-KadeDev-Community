@@ -72,7 +72,7 @@ class CreditsState extends MusicBeatState {
         ['Red', 'red', 'pending quote', 'Artist of yoda sprites', 'https://example.com/', 0xEB002D],
         ['Soulslimm', 'soulslimm', 'pending quote', 'pending actions...', 'https://example.com', 0xC0762A],
         ['Techsec', 'techsec', 'pending quote', 'Charted fabicoolest', 'https://example.com', 0x4254A0],
-        ['Burger', 'burger', 'pending quote', 'Primary programmed this, Charted a bunch of songs', 'https://example.com/', 0xFFFF00],
+        ['Burger', 'burger', 'pending quote', 'Primarily programmed this, Charted a bunch of songs', 'https://example.com/', 0xFFFF00],
         ['Lemlom', 'lemlem', 'pending quote', 'Made fabi and own sprites', 'https://example.com/', 0xFFCC66],
         ['Multi-hand', 'multihand', 'pending quote', 'Made ACFH sprites', 'https://example.com/', 0x4391E6]
     ];
