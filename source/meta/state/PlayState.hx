@@ -68,11 +68,20 @@ class PlayState extends MusicBeatState
 	public static var campaignScore:Int = 0;
 
 	public static var dadOpponent:Character;
-	public static var otherDad:Null<Character> = null; // 🏳️‍🌈 we support gay marraige in this house
+	public var otherDad:Null<Character> = null; // 🏳️‍🌈 we support gay marraige in this house
 	public static var gf:Character;
 	public static var boyfriend:Boyfriend;
 	public var missTimer:FlxTimer;
-	var preCachedCharacters:Map<String, Character> = [];
+	var preCachedCharacters:Map<String, Map<String, Character>> = [
+		"bf" => [],
+		"gf" => [],
+		"dad" => []
+	];
+	public static var forPreCacheState:Map<String, Array<String>> = [
+		"bf" => [],
+		"gf" => [],
+		"dad" => []
+	];
 
 	public static var assetModifier:String = 'base';
 	public static var changeableSkin:String = 'default';
@@ -81,6 +90,7 @@ class PlayState extends MusicBeatState
 	private var ratingArray:Array<String> = [];
 	private var allSicks:Bool = true;
 	public static var ratingColor:Int = 0xffffff;
+	public static var uiTint:Int = 0xffffff;
 
 	// if you ever wanna add more keys
 	private var numberOfKeys:Int = 4;
@@ -262,18 +272,14 @@ class PlayState extends MusicBeatState
 		boyfriend = new Boyfriend();
 		boyfriend.setCharacter(750, 850, SONG.player1);
 
-		switch (SONG.song) {
-			case "SaveStated": 
+		switch (SONG.song)
+		{ // song set up that isn't stage or characters
 			case "Roasted":
 				dadOpponent.x -= 80;
-			    dadOpponent.y -= 60;
-			    otherDad = new Character().setCharacter(50 - 80, 850 - 10, 'ACFH');
-			    otherDad.shouldSing = false;
+				dadOpponent.y -= 60;
+				otherDad = new Character().setCharacter(50 - 80, 850 - 10, 'ACFH');
+				otherDad.shouldSing = false;
 		}
-		/*if (SONG.song == 'Ancient Clown' && storyDifficulty == 3) { 
-			switchCharacter("dad", "TankACFH"); 
-			switchCharacter("dad", SONG.player2);
-		}*/
 
 		// if you want to change characters later use setCharacter() instead of new or it will break
 
@@ -356,6 +362,20 @@ class PlayState extends MusicBeatState
 
 		strumLines.add(dadStrums);
 		strumLines.add(boyfriendStrums);
+
+		switch (SONG.song) { // more song set up that isn't stage or characters
+			case "Ancient Clown":
+				if (storyDifficulty == 3) { 
+					preCacheCharacter('dad', 'TankACFH', [dadOpponent.x, dadOpponent.y]); 
+					preCacheCharacter('dad', 'ACFH', [dadOpponent.x, dadOpponent.y]);
+				}
+			case "Poor Emulation":
+				preCacheCharacter('dad', 'nater', [dadOpponent.x, dadOpponent.y]);
+				preCacheCharacter('dad', 'nater-dark', [dadOpponent.x, dadOpponent.y]);
+				preCacheCharacter('bf', 'naterbf-flash', [boyfriend.x, boyfriend.y]);
+				preCacheCharacter('bf', 'naterbf', [boyfriend.x, boyfriend.y]);
+
+		}
 
 		// strumline camera setup
 		strumHUD = [];
@@ -1313,12 +1333,12 @@ class PlayState extends MusicBeatState
 			var numScore = ForeverAssets.generateCombo('combo', stringArray[scoreInt], (!negative ? allSicks : false), assetModifier, changeableSkin, 'UI',
 				negative, createdColor, scoreInt);
 			add(numScore);
-			numScore.color = ratingColor;
+			numScore.color = uiTint;
 			// hardcoded lmao
 			if (!Init.trueSettings.get('Simply Judgements'))
 			{
 				add(numScore);
-				numScore.color = ratingColor;
+				numScore.color = uiTint;
 				FlxTween.tween(numScore, {alpha: 0}, 0.2, {
 					onComplete: function(tween:FlxTween)
 					{
@@ -1401,7 +1421,7 @@ class PlayState extends MusicBeatState
 		 */
 		var rating = ForeverAssets.generateRating('$daRating', (daRating == 'sick' ? allSicks : false), timing, assetModifier, changeableSkin, 'UI');
 		add(rating);
-		rating.color = ratingColor;
+		rating.color = uiTint;
 
 		if (!Init.trueSettings.get('Simply Judgements'))
 		{
@@ -1619,6 +1639,62 @@ class PlayState extends MusicBeatState
 						dadOpponent.shouldSing = true;
 						otherDad.shouldSing = true;
 				}
+			case 'Poor Emulation':
+				switch (curStep) {
+					case 128:
+						switchCharacter('dad', 'nater', false);
+						boyfriend.setColorTransform(1, 1, 1);
+						stageBuild.publicSprites["dark"].visible = true;
+						stageBuild.publicSprites["superdark"].visible = false;
+						uiTint = 0xffffff;
+						boyfriendStrums.changeTint();
+						dadStrums.changeTint();
+
+					/*case 200 | 240 | 270 | 300:
+						stageBuild.publicSprites["superdark"].visible = true;
+						stageBuild.publicSprites["dark"].visible = false;
+                    */
+					case 639:
+						switchCharacter('dad', 'nater-dark', false);
+						boyfriend.setColorTransform(0.07, 0.07, 0.07);
+						stageBuild.publicSprites["superdark"].visible = true;
+						stageBuild.publicSprites["dark"].visible = false;
+						uiTint = 0x747171;
+						boyfriendStrums.changeTint();
+						dadStrums.changeTint();
+						
+					
+					case 710:
+						switchCharacter('bf', 'naterbf-flash', false);
+						boyfriend.setColorTransform(0.07, 0.07, 0.07);
+						boyfriend.playAnim('look');
+						boyfriend.animation.finishCallback = t ->  { 
+							boyfriend.dance();
+							boyfriend.animation.finishCallback = null;
+						};
+
+					case 745:
+						boyfriend.playAnim('on');
+						boyfriend.setColorTransform(1, 1, 1);
+						stageBuild.publicSprites["superdark"].visible = false;
+						stageBuild.publicSprites["spotlight"].visible = true;
+						boyfriendStrums.tint = 0xffffff;
+						boyfriendStrums.changeTint();
+
+					case 760:
+						boyfriend.dance();
+
+					case 1279:
+						switchCharacter('dad', 'nater', false);
+						switchCharacter('bf', 'naterbf', false);
+						boyfriend.setColorTransform(1, 1, 1);
+						stageBuild.publicSprites["dark"].visible = true;
+						stageBuild.publicSprites["spotlight"].visible = false;
+						uiTint = 0xffffff;
+						boyfriendStrums.changeTint();
+
+						dadStrums.changeTint();
+				}
 		}
 
 	}
@@ -1626,17 +1702,17 @@ class PlayState extends MusicBeatState
 	private function charactersDance(curBeat:Int)
 	{
 		if ((curBeat % gfSpeed == 0) 
-		&& ((gf.animation.curAnim.name.startsWith("idle")
+		&& (gf != null && (gf.animation.curAnim.name.startsWith("idle")
 		|| gf.animation.curAnim.name.startsWith("dance"))))
 			gf.dance();
 
-		if ((boyfriend.animation.curAnim.name.startsWith("idle") 
+		if (boyfriend != null && (boyfriend.animation.curAnim.name.startsWith("idle") 
 		|| boyfriend.animation.curAnim.name.startsWith("dance")) 
 			&& (curBeat % 2 == 0 || boyfriend.characterData.quickDancer))
 			boyfriend.dance();
 
 		// added this for opponent cus it wasn't here before and skater would just freeze
-		if ((dadOpponent.animation.curAnim.name.startsWith("idle") 
+		if (dadOpponent != null && (dadOpponent.animation.curAnim.name.startsWith("idle") 
 		|| dadOpponent.animation.curAnim.name.startsWith("dance") || !dadOpponent.shouldSing)  
 			&& (curBeat % 2 == 0 || dadOpponent.characterData.quickDancer))
 			dadOpponent.dance(true, forceAnim);
@@ -1645,6 +1721,7 @@ class PlayState extends MusicBeatState
 			|| otherDad.animation.curAnim.name.startsWith("dance") || !otherDad.shouldSing)  
 				&& (curBeat % 2 == 0 || otherDad.characterData.quickDancer)))
 			otherDad.dance(true, forceAnim);
+		
 	}
 
 	override function beatHit()
@@ -2097,34 +2174,84 @@ class PlayState extends MusicBeatState
 			// generateSong('fresh');
 		}, 5);
 	}
-	function switchCharacter(target: String, newChar: String) {
+	function switchCharacter(target: String, newChar: String, repos=true) {
+		// if (repos) stageBuild.repositionPlayers(curStage, boyfriend, dadOpponent, gf);
 		switch (target) {
 			case "dad":
 				remove(dadOpponent);
-				dadOpponent.setCharacter(50, 850, newChar);
-				/*var replacement = preCachedCharacters[newChar];
-				replacement.reset(replacement.x, replacement.y);
+				var replacement = preCachedCharacters['dad'].get(newChar);
 				dadOpponent = replacement;
-				dadOpponent.color = FlxColor.GREEN;*/
 				add(dadOpponent);
-			/*case "gf": WILL RETURN TO
+			case "gf": 
 				remove(gf);
-				var replacement = preCachedCharacters[newChar];
-				replacement.reset(replacement.x, replacement.y);
+				var replacement = preCachedCharacters['gf'].get(newChar);
 				gf = replacement;
 				add(gf);
-
 			case "bf":
 				remove(boyfriend);
-				var replacement:Dynamic = preCachedCharacters[newChar]; // AUUUUGH
-				replacement.reset(replacement.x, replacement.y);
+				var replacement:Dynamic = preCachedCharacters['bf'].get(newChar); // AUUUUGH
 				boyfriend = replacement;
-				add(boyfriend);*/
-
+				add(boyfriend);
 		}
+	}
+	function preCacheCharacter(target: String, char: String, ?positions: Array<Float>) {
+		var xy = [];
+		var character:Dynamic = null;
+		var toUse = positions != null ? positions : xy;
+		switch (target) {
+			case 'dad': xy = [dadOpponent.x, dadOpponent.y];
+			case 'gf':
+				xy = [gf.x, gf.y];
+			case 'bf':
+				xy = [boyfriend.x, boyfriend.y];
+		}
+		if (target == 'bf') character = new Boyfriend().setCharacter(toUse[0], toUse[1], char);
+		else character = new Character().setCharacter(toUse[0], toUse[1], char);
+		switch (target) {
+			case 'dad': dadStrums.characters.push(character);
+			case 'bf': boyfriendStrums.characters.push(character);
+		}
+		character.x = toUse[0];
+		character.y = toUse[1];
+		character.visible = false;
+		add(character);
+		remove(character);
+		character.visible = true;
 		
 
+		// character.visible = false;
+		preCachedCharacters[target][char] = character;
 	}
+
+	public static function getPrecachedCharacters() {
+		switch (SONG.song) {
+			case "Ancient Clown":
+				if (storyDifficulty == 3) { 
+					// preCacheCharacter('dad', 'TankACFH', [dadOpponent.x, dadOpponent.y]); 
+					// preCacheCharacter('dad', 'ACFH', [dadOpponent.x, dadOpponent.y]);
+					forPreCacheState['dad'].push('TankACFH');
+				}
+			case "Poor Emulation":
+				//preCacheCharacter('dad', 'nater', [dadOpponent.x, dadOpponent.y]);
+				// preCacheCharacter('dad', 'nater-dark', [dadOpponent.x, dadOpponent.y]);
+				// preCacheCharacter('bf', 'naterbf-flash', [boyfriend.x, boyfriend.y]);
+				// preCacheCharacter('bf', 'naterbf', [boyfriend.x, boyfriend.y]);
+				forPreCacheState['dad'].push('nater');
+				forPreCacheState['bf'].push('naterBf');
+				forPreCacheState['dad'].push('naterBfFlash');
+
+		}
+		return forPreCacheState;
+	}
+	
+	public static function cleanUpPreCache() {
+		forPreCacheState = [
+			'dad' => [],
+			'bf' => [],
+			'gf' => []
+		];
+	}
+	
 
 	override function add(Object:FlxBasic):FlxBasic
 	{

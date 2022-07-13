@@ -1,0 +1,6 @@
+on 0 0
+singUP 0 0
+singDOWN 13 0
+singLEFT 0 0
+singRIGHT -1 0
+singDOWNmiss 0 0

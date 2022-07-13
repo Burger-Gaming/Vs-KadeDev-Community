@@ -3,35 +3,35 @@
 	<!-- Created with Adobe Animate version 21.0.6.41649 -->
 	<!-- http://www.adobe.com/products/animate.html -->
 	<SubTexture name="ANIM0000" x="0" y="0" width="960" height="540"/>
-	<SubTexture name="ANIM0001" x="0" y="0" width="960" height="540"/>
-	<SubTexture name="ANIM0002" x="0" y="0" width="960" height="540"/>
-	<SubTexture name="ANIM0003" x="960" y="0" width="960" height="540"/>
-	<SubTexture name="ANIM0004" x="1920" y="0" width="960" height="540"/>
-	<SubTexture name="ANIM0005" x="2880" y="0" width="960" height="540"/>
-	<SubTexture name="ANIM0006" x="0" y="540" width="960" height="540"/>
-	<SubTexture name="ANIM0007" x="960" y="540" width="960" height="540"/>
-	<SubTexture name="ANIM0008" x="1920" y="540" width="960" height="540"/>
-	<SubTexture name="ANIM0009" x="2880" y="540" width="960" height="540"/>
-	<SubTexture name="ANIM0010" x="0" y="1080" width="960" height="540"/>
-	<SubTexture name="ANIM0011" x="960" y="1080" width="960" height="540"/>
-	<SubTexture name="ANIM0012" x="1920" y="1080" width="960" height="540"/>
-	<SubTexture name="ANIM0013" x="2880" y="1080" width="960" height="540"/>
-	<SubTexture name="ANIM0014" x="2880" y="1080" width="960" height="540"/>
-	<SubTexture name="ANIM0015" x="0" y="1620" width="960" height="540"/>
-	<SubTexture name="ANIM0016" x="0" y="1620" width="960" height="540"/>
-	<SubTexture name="ANIM0017" x="2880" y="1080" width="960" height="540"/>
+	<SubTexture name="ANIM0001" x="960" y="0" width="960" height="540"/>
+	<SubTexture name="ANIM0002" x="1920" y="0" width="960" height="540"/>
+	<SubTexture name="ANIM0003" x="2880" y="0" width="960" height="540"/>
+	<SubTexture name="ANIM0004" x="3840" y="0" width="960" height="540"/>
+	<SubTexture name="ANIM0005" x="4800" y="0" width="960" height="540"/>
+	<SubTexture name="ANIM0006" x="5760" y="0" width="960" height="540"/>
+	<SubTexture name="ANIM0007" x="6720" y="0" width="960" height="540"/>
+	<SubTexture name="ANIM0008" x="0" y="540" width="960" height="540"/>
+	<SubTexture name="ANIM0009" x="960" y="540" width="960" height="540"/>
+	<SubTexture name="ANIM0010" x="1920" y="540" width="960" height="540"/>
+	<SubTexture name="ANIM0011" x="2880" y="540" width="960" height="540"/>
+	<SubTexture name="ANIM0012" x="3840" y="540" width="960" height="540"/>
+	<SubTexture name="ANIM0013" x="4800" y="540" width="960" height="540"/>
+	<SubTexture name="ANIM0014" x="5760" y="540" width="960" height="540"/>
+	<SubTexture name="ANIM0015" x="6720" y="540" width="960" height="540"/>
+	<SubTexture name="ANIM0016" x="0" y="1080" width="960" height="540"/>
+	<SubTexture name="ANIM0017" x="960" y="1080" width="960" height="540"/>
 	<SubTexture name="ANIM0018" x="1920" y="1080" width="960" height="540"/>
-	<SubTexture name="ANIM0019" x="960" y="1080" width="960" height="540"/>
-	<SubTexture name="ANIM0020" x="0" y="1080" width="960" height="540"/>
-	<SubTexture name="ANIM0021" x="2880" y="540" width="960" height="540"/>
-	<SubTexture name="ANIM0022" x="1920" y="540" width="960" height="540"/>
-	<SubTexture name="ANIM0023" x="960" y="540" width="960" height="540"/>
-	<SubTexture name="ANIM0024" x="0" y="540" width="960" height="540"/>
-	<SubTexture name="ANIM0025" x="0" y="540" width="960" height="540"/>
-	<SubTexture name="ANIM0026" x="1920" y="0" width="960" height="540"/>
-	<SubTexture name="ANIM0027" x="1920" y="0" width="960" height="540"/>
-	<SubTexture name="ANIM0028" x="960" y="0" width="960" height="540"/>
-	<SubTexture name="ANIM0029" x="0" y="0" width="960" height="540"/>
-	<SubTexture name="ANIM0030" x="0" y="0" width="960" height="540"/>
-	<SubTexture name="ANIM0031" x="0" y="0" width="960" height="540"/>
+	<SubTexture name="ANIM0019" x="2880" y="1080" width="960" height="540"/>
+	<SubTexture name="ANIM0020" x="3840" y="1080" width="960" height="540"/>
+	<SubTexture name="ANIM0021" x="4800" y="1080" width="960" height="540"/>
+	<SubTexture name="ANIM0022" x="5760" y="1080" width="960" height="540"/>
+	<SubTexture name="ANIM0023" x="6720" y="1080" width="960" height="540"/>
+	<SubTexture name="ANIM0024" x="0" y="1620" width="960" height="540"/>
+	<SubTexture name="ANIM0025" x="960" y="1620" width="960" height="540"/>
+	<SubTexture name="ANIM0026" x="1920" y="1620" width="960" height="540"/>
+	<SubTexture name="ANIM0027" x="2880" y="1620" width="960" height="540"/>
+	<SubTexture name="ANIM0028" x="3840" y="1620" width="960" height="540"/>
+	<SubTexture name="ANIM0029" x="4800" y="1620" width="960" height="540"/>
+	<SubTexture name="ANIM0030" x="5760" y="1620" width="960" height="540"/>
+	<SubTexture name="ANIM0031" x="6720" y="1620" width="960" height="540"/>
 </TextureAtlas>

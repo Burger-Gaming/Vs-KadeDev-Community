@@ -132,6 +132,7 @@ class Strumline extends FlxTypedGroup<FlxBasic>
 
 	public var autoplay:Bool = true;
 	public var characters:Array<Character>;
+	public var tint:Null<Int> = null;
 	public var otherChar:Character;
 	public var playState:PlayState;
 	public var displayJudgements:Bool = false;
@@ -157,7 +158,7 @@ class Strumline extends FlxTypedGroup<FlxBasic>
 		{
 			var staticArrow:UIStaticArrow = ForeverAssets.generateUIArrows(-25 + x, 25 + (downscroll ? FlxG.height - 200 : 0), i, PlayState.assetModifier);
 			staticArrow.ID = i;
-			if (PlayState.SONG.song == 'SaveStated') staticArrow.color = 0x747171;
+			staticArrow.color = PlayState.uiTint;
 
 			staticArrow.x -= ((keyAmount / 2) * Note.swagWidth);
 			staticArrow.x += (Note.swagWidth * i);
@@ -187,7 +188,9 @@ class Strumline extends FlxTypedGroup<FlxBasic>
 		if (splashNotes != null)
 			add(splashNotes);
 	}
-
+    public function changeTint() {
+		receptors.forEach(d -> d.color = tint != null ? tint : PlayState.uiTint);
+	}
 	public function createSplash(coolNote:Note)
 	{
 		// play animation in existing notesplashes
@@ -198,10 +201,12 @@ class Strumline extends FlxTypedGroup<FlxBasic>
 	public function push(newNote:Note)
 	{
 		//
-		if (PlayState.SONG.song == 'SaveStated') newNote.color = 0x747171;
+		newNote.color = tint != null ? tint : PlayState.uiTint;
 		var chosenGroup = (newNote.isSustainNote ? holdsGroup : notesGroup);
 		chosenGroup.add(newNote);
+		chosenGroup.forEach(d -> d.color = tint != null ? tint : PlayState.uiTint);
 		allNotes.add(newNote);
+		allNotes.forEach(d -> d.color = tint != null ? tint : PlayState.uiTint);
 		chosenGroup.sort(FlxSort.byY, (!Init.trueSettings.get('Downscroll')) ? FlxSort.DESCENDING : FlxSort.ASCENDING);
 	}
 }

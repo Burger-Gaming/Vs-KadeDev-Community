@@ -74,6 +74,30 @@ class Character extends FNFSprite
 				//playAnim('firstDeath');
 
 				flipX = true;
+			case 'naterbf-flash':
+				charColor = "#0040B5";
+				frames = Paths.getSparrowAtlas('characters/naterBfFlash');
+
+				animation.addByPrefix('look', 'LOOKINGAROUND0', 24, false);
+				animation.addByPrefix('on', 'FLASHON', 24, false);
+				animation.addByPrefix('idle', 'FLASHIDLE', 24, false);
+				animation.addByPrefix('singDOWN', 'FLASHDOWN0', 24, false);
+				animation.addByPrefix('singLEFT', 'FLASHLEFT0', 24, false);
+				animation.addByPrefix('singRIGHT', 'FLASHRIGHT0', 24, false);
+				animation.addByPrefix('singUP', 'FLASHUP0', 24, false);
+				animation.addByPrefix('singDOWNmiss', 'FLASHDOWNMISS', 24, false);
+				animation.addByPrefix('singLEFTmiss', 'FLASHLEFTMISS', 24, false);
+				animation.addByPrefix('singRIGHTmiss', 'FLASHRIGHTMISS', 24, false);
+				animation.addByPrefix('singUPmiss', 'FLASHUPMISS', 24, false);
+
+				flipX = true;
+
+				scale.set(2, 2);
+				characterData.offsetY = 240;
+				flipLeftRight();
+
+				playAnim('idle');
+
 			case 'naterbf':
 				charColor = "#0040B5";
 				frames = Paths.getSparrowAtlas('characters/naterBf');
@@ -184,6 +208,8 @@ class Character extends FNFSprite
 				animation.addByPrefix('singDOWN', 'Down', 24, false);
 				animation.addByPrefix('singLEFT', 'Left', 24, false);
 				animation.addByPrefix('singRIGHT', 'Right', 24, false);
+
+				scale.set(0.7, 0.7);
 
 				characterData.offsetX = -650;
 				characterData.offsetY = -100;
@@ -487,6 +513,7 @@ class Character extends FNFSprite
 					}
 				default:
 					// Left/right dancing, think Skid & Pump
+					if (animation == null || animation.getByName == null) return; // idk why but this causes crashes sometimes???
 					if (animation.getByName('danceLeft') != null && animation.getByName('danceRight') != null) {
 						danced = !danced;
 						if (danced)

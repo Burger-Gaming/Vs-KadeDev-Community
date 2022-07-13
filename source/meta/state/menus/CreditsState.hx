@@ -60,7 +60,7 @@ class CreditsName extends FlxTypedGroup<FlxSprite> {
         }
 
         if (nextY != 0) {
-            nameSpr.y = nextY;
+            nameSpr.y += nextY;
         }
     }
     
@@ -69,15 +69,14 @@ class CreditsName extends FlxTypedGroup<FlxSprite> {
 class CreditsState extends MusicBeatState {
     var credits:Array<Array<Dynamic>> = [
         // name, icon name, cool quote, what they did ("1, 2, 3"), link, color (int)
-        ['uwu', 'bf-pixel', 'this mod sucks', 'thing one, thing 2, thing 3', 'https://github.com/skellypupper', FlxColor.RED],
-        ['owo', 'bf-pixel', 'uwu', 'thing one, thing two, thing three', 'https://github.com', FlxColor.BLUE],
-		['xwx', 'bf-pixel', 'OwO', 'thing a, thing b, thing c', 'https://github.com', FlxColor.GREEN],
-        ['pwp', 'bf-pixel', 'this mod sucks', 'insulted team, failed to contribute, inserted name in credits, made waddle cry, hissed at children, slapped my mother', 'https://twitter.com', FlxColor.LIME],
-        ['amogus', 'bf-pixel', 'i\'m not sus', 'did tasks, voted out red', 'https://amongus.com', FlxColor.ORANGE]
-
+        ['Red', 'red', 'pending quote', 'Artist of yoda sprites', 'https://example.com/', 0xEB002D],
+        ['Soulslimm', 'soulslimm', 'pending quote', 'pending actions...', 'https://example.com', 0xC0762A],
+        ['Techsec', 'techsec', 'pending quote', 'Charted fabicoolest', 'https://example.com', 0x4254A0],
+        ['Burger', 'burger', 'pending quote', 'Primary programmed this, Charted a bunch of songs', 'https://example.com/', 0xFFFF00],
+        ['Lemlom', 'lemlem', 'pending quote', 'Made fabi and own sprites', 'https://example.com/', 0xFFCC66],
+        ['Multi-hand', 'multihand', 'pending quote', 'Made ACFH sprites', 'https://example.com/', 0x4391E6]
     ];
     var bg:FlxSprite; 
-    var creditSections = ["KDC TEAM", "KDC TEAM"]; // the idea is that this gets paginated every 5 credit members
     var coolCredits:FlxTypedGroup<CreditsName>;
     var quoteBox:FlxSprite;
     var quoteTxt:FlxText;
@@ -87,6 +86,9 @@ class CreditsState extends MusicBeatState {
     var iconDanced:Bool = false;
     var didWhatTxts:Array<FlxText> = [];
     var sectTitle:Alphabet;
+    var arrowStuffs:FlxTypedGroup<FlxSprite> = new FlxTypedGroup();
+    var leftArrow:FlxSprite;
+    var rightArrow:FlxSprite;
     //
     var lastColor:Int = 0;
     var colorTween:Null<FlxTween> = null;
@@ -106,13 +108,33 @@ class CreditsState extends MusicBeatState {
 		coolCredits = new FlxTypedGroup();
 		add(coolCredits);
 
+
 		quoteBox = new FlxSprite(FlxG.width / 1.9, FlxG.height / 3.2).makeGraphic(575, 450, FlxColor.BLACK);
+        quoteBox.screenCenter(X);
         quoteBox.alpha = .65;
         add(quoteBox);
         
         curCredName = new Alphabet(quoteBox.x + 90, quoteBox.y - 150, "owo", true);
         add(curCredName);
 
+		add(arrowStuffs);
+		var tex = Paths.getSparrowAtlas("menus/base/storymenu/campaign_menu_UI_assets");
+
+		leftArrow = new FlxSprite(quoteBox.x - 60);
+        leftArrow.screenCenter(Y);
+        leftArrow.frames = tex;
+		leftArrow.animation.addByPrefix("idle", 'arrow left');
+        leftArrow.animation.addByPrefix("press", 'arrow push left');
+        leftArrow.animation.play("idle");
+        add(leftArrow);
+
+		rightArrow = new FlxSprite(quoteBox.x + 590);
+		rightArrow.screenCenter(Y);
+        rightArrow.frames = tex;
+		rightArrow.animation.addByPrefix("idle", 'arrow right');
+		rightArrow.animation.addByPrefix("press", 'arrow push right');
+		rightArrow.animation.play("idle");
+		add(rightArrow);
 
         /*creditsBox = new TextField();
 		creditsBox.x = FlxG.width / 1.9;
@@ -139,24 +161,27 @@ class CreditsState extends MusicBeatState {
         for (x in 0...credits.length) {
 			var credTarget = credits[x];
 			var coolNewCreditItem = new CreditsName(140, Std.int(160 + x * 105), credTarget[0], credTarget[1], credTarget[4]);
-            coolCredits.add(coolNewCreditItem); 
+            coolNewCreditItem.visible = false;
+            coolCredits.add(coolNewCreditItem);
         }
         changeCred();
 
-        var firstCred = coolCredits.members[0];
+        /*var firstCred = coolCredits.members[0];
 		sectTitle = new Alphabet(80, firstCred.y - 100, creditSections[0], true);
-        add(sectTitle);
+        sectTitle.visible = false;
+        add(sectTitle);*/
 
-        var uiBG = new FlxSprite(0, FlxG.height - 16).makeGraphic(1280, 16, FlxColor.BLACK);
+        /*var uiBG = new FlxSprite(0, FlxG.height - 16).makeGraphic(1280, 16, FlxColor.BLACK);
         uiBG.alpha = 0.5;
-        add(uiBG);
+        add(uiBG);*/
 
         // idk what to call it so i just said member descriptions lmfao
         // also you bitch said to press left and right yet the controls are up and down.
-        var uiText = new FlxText(0, 0, 0, "Press Up and Down to switch between member descriptions.", 16);
+        // shut up nvm
+        /*var uiText = new FlxText(0, 0, 0, "Press Up and Down to switch between member descriptions.", 16);
         uiText.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, OUTLINE, FlxColor.BLACK);
         uiText.y = FlxG.height - uiText.height;
-        add(uiText);
+        add(uiText);*/
     }
 
     override function update(elapsed:Float) {
@@ -165,8 +190,14 @@ class CreditsState extends MusicBeatState {
             if (colorTween != null) colorTween.cancel();
             Main.switchState(this, new MainMenuState()); 
         }
-        if (FlxG.keys.justPressed.UP) changeCred(-1);
-        if (FlxG.keys.justPressed.DOWN) changeCred(1);
+		if (controls.UI_LEFT_P) changeCred(-1);
+		if (controls.UI_RIGHT_P) changeCred(1);
+
+        if (controls.UI_LEFT) leftArrow.animation.play("press");
+        else leftArrow.animation.play("idle");
+
+        if (controls.UI_RIGHT) rightArrow.animation.play("press");
+        else rightArrow.animation.play("idle");
     }
 
     /*override function beatHit() {
@@ -213,8 +244,32 @@ class CreditsState extends MusicBeatState {
 		quoteTxt.text = '"${credits[activeCred][2]}"';
 		curCredName.text = credits[activeCred][0];
 
+        var coolNumeral = 0;
+        for (x in 0...coolCredits.members.length) {
+            
+            if (change == 1) {
+                var nextIndex = 0;
+                if (x+1 == coolCredits.members.length) nextIndex = 0;
+                else nextIndex = x+1;
+				coolCredits.members[x].nextY = -105;
+            }
+            else {
+                var nextIndex = 0;
+                if (x-1 == -1) nextIndex = coolCredits.members.length - 1;
+                else nextIndex = x-1;
+				coolCredits.members[x].nextY = 105;
+            }
+			// coolCredits.members[x].nextY = coolNumeral - activeCred;
+            // else x.nextY -= coolNumeral * 105;
+            // coolNumeral++;
+        }
+
+		curCredIcon.loadGraphic(Paths.image('credits/${credits[activeCred][1]}'));
+
 		var aaaa:Array<String> = credits[activeCred][3].split(", ");
 		var uwu = quoteBox.y + 70;
+		
+
         for (x in 0...aaaa.length) {
 			var coolTxt = new FlxText(quoteTxt.x, uwu + x * 30);
 			coolTxt.setFormat(Paths.font("vcr.ttf"), 35, FlxColor.WHITE, LEFT, OUTLINE, FlxColor.BLACK);
@@ -227,9 +282,12 @@ class CreditsState extends MusicBeatState {
         if (lastColor != credits[activeCred][5]) {
             if (colorTween != null) colorTween.cancel();
 			lastColor = credits[activeCred][5];
-			colorTween = FlxTween.color(bg, .5, bg.color, credits[activeCred][5], {
+			bg.color = credits[activeCred][5];
+            // FlxTween.color()
+
+			/* colorTween = FlxTween.color(bg, .5, bg.color, color, { // turns the bg black for some reason?? TODO
 				onComplete: t -> colorTween = null
-			});
+			}); */
         }
 
 		// quoteTxt.x = quoteBox.getGraphicMidpoint().x - quoteTxt.width + quoteTxt.text.length + 40;

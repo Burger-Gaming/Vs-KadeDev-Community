@@ -343,11 +343,11 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				boyfriend.x -= 100;
 				dad.x -= 40;
 				dad.y -= 25;
-				if (PlayState.SONG.song == "SaveStated") { 
+				if (["SaveStated", "Poor Emulation"].contains(PlayState.SONG.song)) { 
 					publicSprites["dark"].visible = false;
 					publicSprites["superdark"].visible = true;
 					boyfriend.setColorTransform(0.07, 0.07, 0.07);
-					PlayState.ratingColor = 0x747171;
+					PlayState.uiTint = 0x747171;
 				}
 			case 'nater':
 				// boyfriend.scale.set(0.75, 0.75);
@@ -367,8 +367,11 @@ class Stage extends FlxTypedGroup<FlxBasic>
 			case 'yoda':
 				if (PlayState.storyDifficulty == 3) { 
 					for (x in [dad, boyfriend, gf]) x.color = 0xFFD3D8FF; 
-					PlayState.ratingColor = 0xFFD3D8FF;
+					PlayState.uiTint = 0xFFD3D8FF;
 				}
+			default:
+				PlayState.uiTint = 0xffffff;
+
 		}
 	}
 
