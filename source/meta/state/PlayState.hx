@@ -291,7 +291,8 @@ class PlayState extends MusicBeatState
 		songBoxTopText = new FlxText(0, 0, 0, SONG.song + (storyDifficulty == 3 ? " (ERECT)" : ""));
 		songBoxTopText.setFormat(Paths.font("vcr.ttf"), 25, 0xffffff, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		songBoxTopText.borderSize = 2;
-		songBox = new FlxSprite().makeGraphic(Std.int(songBoxTopText.width * 1.32), 80, FlxColor.BLACK);
+		var target = songBoxTopText.text.length >= 15 ? 1.12 : 1.32;
+		songBox = new FlxSprite().makeGraphic(Std.int(songBoxTopText.width * target), 80, FlxColor.BLACK);
 		songBox.screenCenter(Y);
 		songBox.alpha = .75;
 		songBoxTopText.x = 10;
@@ -1720,7 +1721,8 @@ class PlayState extends MusicBeatState
 						dadStrums.changeTint();
 
 					case 703:
-						FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom * 1.5}, 1.5, {ease: FlxEase.quadIn, type: PERSIST});
+						FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom * 1.5 }, 1.5, { ease: FlxEase.quadInOut });
+						shouldZoom = false;
 						for (x in allUIs) FlxTween.tween(x, { alpha: 0 }, 0.8);
 
 					case 710:
@@ -1741,8 +1743,10 @@ class PlayState extends MusicBeatState
 						boyfriendStrums.changeTint();
 
 					case 760:
+						FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom }, 1.5, {ease: FlxEase.quadInOut});
 						for (x in allUIs) FlxTween.tween(x, { alpha: 1 }, 0.8);
 						boyfriend.dance();
+						shouldZoom = true;
 
 					case 1279:
 						switchCharacter('dad', 'nater', false);
@@ -1790,24 +1794,27 @@ class PlayState extends MusicBeatState
 		if (curBeat == 16) tweenSongIntroOut();
 
 		// trace(curBeat); //for events
-		/*switch (SONG.song) { // TODO
+		switch (SONG.song) { // TODO
 			case 'Roasted':
 				switch (curBeat) {
 					case 392 | 408 | 424 | 440: 
-						FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom * 0.9 }, .7, { ease: FlxEase.quadInOut, type: PERSIST });
+						FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom * 0.9 }, .7, { ease: FlxEase.quadInOut });
 						shouldZoom = false;
 					case 396 | 412 | 428 | 444:
-						FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom }, .7, { ease: FlxEase.quadInOut, type: PERSIST });
+						FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom }, .7, { ease: FlxEase.quadInOut });
 					case 400 | 416 | 432 | 448:
-						FlxTween.tween(FlxG.camera, { zoom: FlxG.camera.zoom * 1.2 }, .7, { ease: FlxEase.quadInOut, type: PERSIST });
+						FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom * 1.2 }, .7, { ease: FlxEase.quadInOut });
+						// FlxG.camera.zoom = defaultCamZoom * 1.2;
 					case 404 | 420 | 436 | 452 | 456:
-						FlxTween.tween(FlxG.camera, { zoom: FlxG.camera.zoom * 1.5  }, .7, { ease: FlxEase.quadInOut, type: PERSIST });
+						FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom * 1.5  }, .7, { ease: FlxEase.quadInOut });
+						// FlxG.camera.zoom = defaultCamZoom * 1.5;
 					case 488:
-						FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom }, .7, { ease: FlxEase.quadInOut, type: PERSIST });
+						FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom }, .7, { ease: FlxEase.quadInOut });
+						// FlxG.camera.zoom = defaultCamZoom;
 						shouldZoom = true;
 
 				}
-		}*/
+		}
 
 		if ((FlxG.camera.zoom < 1.35 && curBeat % 4 == 0) && (shouldZoom))
 		{
