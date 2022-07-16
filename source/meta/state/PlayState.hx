@@ -1,5 +1,6 @@
 package meta.state;
 
+import flixel.text.FlxText;
 import meta.data.dependency.FNFSprite;
 import flixel.FlxBasic;
 import flixel.FlxCamera;
@@ -179,6 +180,11 @@ class PlayState extends MusicBeatState
 	public var erectTimer:FlxTimer;
 	public var erectCounter:Int = 0;
 
+	var songBox:FlxSprite;
+	var songBoxTopText:FlxText;
+	var songBoxBottomText:FlxText;
+	var extColorBar:FlxSprite;
+
 	// at the beginning of the playstate
 	override public function create()
 	{
@@ -282,6 +288,51 @@ class PlayState extends MusicBeatState
 		}
 
 		// if you want to change characters later use setCharacter() instead of new or it will break
+		songBoxTopText = new FlxText(0, 0, 0, SONG.song + (storyDifficulty == 3 ? " (ERECT)" : ""));
+		songBoxTopText.setFormat(Paths.font("vcr.ttf"), 25, 0xffffff, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		songBoxTopText.borderSize = 2;
+		songBox = new FlxSprite().makeGraphic(Std.int(songBoxTopText.width * 1.32), 80, FlxColor.BLACK);
+		songBox.screenCenter(Y);
+		songBox.alpha = .75;
+		songBoxTopText.x = 10;
+		songBoxTopText.y = songBox.y + 10;
+		songBoxBottomText = new FlxText(songBoxTopText.x, songBoxTopText.y + 30, 0, "by <XYZ>");
+		songBoxBottomText.setFormat(Paths.font("vcr.ttf"), 24, 0xffffff, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		songBoxBottomText.borderSize = 2;
+		var songArtist = '';
+		var ogArtist = '';
+		var barColor = "#FF008000";
+		switch (SONG.song.toLowerCase()) {
+			case 'yoder' | 'baby yoda real' | 'swagswag' | 
+			'onions' | 'garlico' | 'food fight' 
+			| 'ancient clown' | 'from hell' | 'clownstace' | 
+			'dasher' | 'fabicoolest' | 'battle of the century' |
+			'rom hack': 
+			    songArtist = 'Waddle';
+				barColor = "#7251DD";
+			case 'fabilicious': 
+				songArtist = 'KadeDev';
+			case 'poor emulation' | 'savestated': 
+				songArtist = 'Nater_Marson';
+				barColor = "#878787";
+			case 'roasted': 
+				songArtist = 'Skullbite';
+				ogArtist = 'RaymondVito';
+				barColor = "#C38742";
+			case 'erect':
+			    songArtist = 'Skullbite';
+				barColor = "#C38742";
+
+		}
+		if (ogArtist != '') { 
+			songBoxBottomText.text = 'by $songArtist (og: $ogArtist)'; 
+		}
+		else songBoxBottomText.text = 'by $songArtist';
+
+		if (songBoxTopText.width < songBoxBottomText.width) songBox.makeGraphic(Std.int(songBoxBottomText.width * 1.12), 80, FlxColor.BLACK);
+		extColorBar = new FlxSprite(songBox.width - 5, songBox.y).makeGraphic(5, Std.int(songBox.height), FlxColor.fromString(barColor));
+
+		
 
 		var camPos:FlxPoint = new FlxPoint(gf.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
 
@@ -374,7 +425,6 @@ class PlayState extends MusicBeatState
 				preCacheCharacter('dad', 'nater-dark', [dadOpponent.x, dadOpponent.y]);
 				preCacheCharacter('bf', 'naterbf-flash', [boyfriend.x, boyfriend.y]);
 				preCacheCharacter('bf', 'naterbf', [boyfriend.x, boyfriend.y]);
-
 		}
 
 		// strumline camera setup
@@ -420,6 +470,12 @@ class PlayState extends MusicBeatState
 		screen2.visible = false;
 		add(screen2);
 		screen2.animation.play('idle');
+
+		for (x in [songBox, songBoxTopText, songBoxBottomText, extColorBar]) {
+			x.x = songBox.width * -1;
+			x.cameras = [camHUD]; 
+			add(x);
+		}
 		
 
 
@@ -1554,14 +1610,14 @@ class PlayState extends MusicBeatState
 
 	function resyncVocals():Void
 	{
-		trace('resyncing vocal time ${vocals.time}');
+		// trace('resyncing vocal time ${vocals.time}');
 		songMusic.pause();
 		vocals.pause();
 		Conductor.songPosition = songMusic.time;
 		vocals.time = Conductor.songPosition;
 		songMusic.play();
 		vocals.play();
-		trace('new vocal time ${Conductor.songPosition}');
+		// trace('new vocal time ${Conductor.songPosition}');
 	}
 
 	// variables to keep track of the original Y value so yoda and bf can return
@@ -1662,8 +1718,11 @@ class PlayState extends MusicBeatState
 						uiTint = 0x747171;
 						boyfriendStrums.changeTint();
 						dadStrums.changeTint();
-						
-					
+
+					case 703:
+						FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom * 1.5}, 1.5, {ease: FlxEase.quadIn, type: PERSIST});
+						for (x in allUIs) FlxTween.tween(x, { alpha: 0 }, 0.8);
+
 					case 710:
 						switchCharacter('bf', 'naterbf-flash', false);
 						boyfriend.setColorTransform(0.07, 0.07, 0.07);
@@ -1682,6 +1741,7 @@ class PlayState extends MusicBeatState
 						boyfriendStrums.changeTint();
 
 					case 760:
+						for (x in allUIs) FlxTween.tween(x, { alpha: 1 }, 0.8);
 						boyfriend.dance();
 
 					case 1279:
@@ -1727,6 +1787,7 @@ class PlayState extends MusicBeatState
 	override function beatHit()
 	{
 		super.beatHit();
+		if (curBeat == 16) tweenSongIntroOut();
 
 		// trace(curBeat); //for events
 		/*switch (SONG.song) { // TODO
@@ -2168,6 +2229,7 @@ class PlayState extends MusicBeatState
 
 					Conductor.songPosition = -(Conductor.crochet * 1);
 					countdownComplete = true;
+					tweenSongIntroIn();
 			}
 
 			swagCounter += 1;
@@ -2242,6 +2304,21 @@ class PlayState extends MusicBeatState
 
 		}
 		return forPreCacheState;
+	}
+
+	function tweenSongIntroIn() {
+		// for (x in [songBox, songBoxTopText, songBoxBottomText, extColorBar]) FlxTween.tween(x, { x: songBox.width }, 1.5, { ease: FlxEase.quadInOut });
+		FlxTween.tween(songBox, { x: 0 }, 1.5, { ease: FlxEase.quadInOut, onUpdate: t -> extColorBar.x = (songBox.width - 5) + songBox.x });
+		FlxTween.tween(songBoxTopText, { x: 10 }, 1.5, { ease: FlxEase.quadInOut });
+		FlxTween.tween(songBoxBottomText, { x: 10 }, 1.5, { ease: FlxEase.quadInOut });
+		// FlxTween.tween(extColorBar, { x: songBox.width - 5 }, 1.5);
+	}
+	function tweenSongIntroOut() {
+		for (x in [songBoxTopText, songBoxBottomText]) FlxTween.tween(x, { x: songBox.width * -1 }, 1.5, { ease: FlxEase.quadInOut, onComplete: t -> x.destroy() });
+		FlxTween.tween(songBox, {x: songBox.width * -1}, 1.5, { ease: FlxEase.quadInOut, onUpdate: t -> extColorBar.x = (songBox.width - 5) + songBox.x, onComplete: t -> {
+			songBox.destroy();
+			extColorBar.destroy();
+		} });
 	}
 	
 	public static function cleanUpPreCache() {

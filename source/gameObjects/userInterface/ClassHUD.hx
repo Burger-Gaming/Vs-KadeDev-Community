@@ -45,6 +45,7 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 	private var SONG = PlayState.SONG;
 	public var iconP1:HealthIcon;
 	public var iconP2:HealthIcon;
+	var iconsDanced = false;
 
 	private var stupidHealth:Float = 0;
 	public var autoplayUsed:Bool = false;
@@ -128,7 +129,7 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 		// small info bar, kinda like the KE watermark
 		// based on scoretxt which I will set up as well
 		var infoDisplay:String = CoolUtil.dashToSpace(PlayState.SONG.song) + (!PlayState.isExtraSong ? ' - ' + CoolUtil.difficultyFromNumber(PlayState.storyDifficulty) : '');
-		if (PlayState.SONG.song == "Erect") infoDisplay += "\nHAHAHAHAhAHAHAHAHA";
+		if (PlayState.SONG.song == "Erect") infoDisplay = "HAHAHAHAhAHAHAHAHA";
 		var engineDisplay:String = "Forever Engine v" + Main.gameVersion;
 		var engineBar:FlxText = new FlxText(0, FlxG.height - 30, 0, engineDisplay, 16);
 		engineBar.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -254,6 +255,18 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 
 			iconP1.updateHitbox();
 			iconP2.updateHitbox();
+
+			if (iconsDanced)
+			{
+				iconP1.angle = 25;
+				iconP2.angle = 25;
+			}
+			else
+			{
+				iconP1.angle = -25;
+				iconP2.angle = -25;
+			}
+			iconsDanced = !iconsDanced;
 		}
 		//
 	}
