@@ -414,6 +414,11 @@ class PlayState extends MusicBeatState
 
 		strumLines.add(dadStrums);
 		strumLines.add(boyfriendStrums);
+		for (x in [songBox, songBoxTopText, songBoxBottomText, extColorBar]) {
+			x.x = songBox.width * -1;
+			x.cameras = [camHUD]; 
+			add(x);
+		}
 
 		switch (SONG.song) { // more song set up that isn't stage or characters
 			case "Ancient Clown":
@@ -472,11 +477,6 @@ class PlayState extends MusicBeatState
 		add(screen2);
 		screen2.animation.play('idle');
 
-		for (x in [songBox, songBoxTopText, songBoxBottomText, extColorBar]) {
-			x.x = songBox.width * -1;
-			x.cameras = [camHUD]; 
-			add(x);
-		}
 		
 
 
@@ -1791,10 +1791,14 @@ class PlayState extends MusicBeatState
 	override function beatHit()
 	{
 		super.beatHit();
-		if (curBeat == 16) tweenSongIntroOut();
 
 		// trace(curBeat); //for events
-		switch (SONG.song) { // TODO
+		switch (SONG.song) {
+			case 'Clownstace':
+				if (storyDifficulty != 3) switch (curBeat) {
+					case 44: tweenSongIntroIn();
+					case 66: tweenSongIntroOut();
+				}
 			case 'Roasted':
 				switch (curBeat) {
 					case 392 | 408 | 424 | 440: 
@@ -1812,8 +1816,9 @@ class PlayState extends MusicBeatState
 						FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom }, .7, { ease: FlxEase.quadInOut });
 						// FlxG.camera.zoom = defaultCamZoom;
 						shouldZoom = true;
-
 				}
+			default:
+				if (curBeat == 16) tweenSongIntroOut();
 		}
 
 		if ((FlxG.camera.zoom < 1.35 && curBeat % 4 == 0) && (shouldZoom))
@@ -2149,6 +2154,12 @@ class PlayState extends MusicBeatState
 		swagCounter = 0;
 
 		camHUD.visible = true;
+		if (SONG.song == "Clownstace" && storyDifficulty != 3) {
+			Conductor.songPosition = -(Conductor.crochet * 1);
+			countdownComplete = true;
+			charactersDance(curBeat);
+			return;
+		}
 
 		startTimer = new FlxTimer().start(Conductor.crochet / 1000, function(tmr:FlxTimer)
 		{
