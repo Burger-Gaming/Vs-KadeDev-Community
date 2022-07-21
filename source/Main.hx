@@ -125,6 +125,12 @@ class Main extends Sprite
 			['nater'],
 			[FlxColor.fromRGB(65, 65, 65)],
 			'3Deez nuts in your mouth'
+		],
+		[
+			['Lemfunker', 'Minging'],
+			['lemlom'],
+			[FlxColor.fromRGB(255, 204, 102)],
+			'I like to move it move it'
 		]
 		
 	];

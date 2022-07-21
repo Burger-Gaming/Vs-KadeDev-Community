@@ -63,6 +63,12 @@ class Character extends FNFSprite
 
 		switch (curCharacter)
 		{
+			case 'lemlom':
+				charColor = "#FFCC66";
+				frames = Paths.getSparrowAtlas('characters/lemlom');
+				
+				for (x in ['idle', 'singUP', 'singDOWN', 'singLEFT', 'singRIGHT']) animation.addByPrefix(x, x, 24, false); // actual ascension
+
 			case 'naterbf-dead':
 				frames = Paths.getSparrowAtlas('characters/naterBfDead');
 

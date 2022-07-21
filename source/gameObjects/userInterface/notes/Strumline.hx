@@ -190,6 +190,7 @@ class Strumline extends FlxTypedGroup<FlxBasic>
 	}
     public function changeTint() {
 		receptors.forEach(d -> d.color = tint != null ? tint : PlayState.uiTint);
+		allNotes.forEachAlive(d -> d.color = tint != null ? tint : PlayState.uiTint);
 	}
 	public function createSplash(coolNote:Note)
 	{
@@ -204,9 +205,7 @@ class Strumline extends FlxTypedGroup<FlxBasic>
 		newNote.color = tint != null ? tint : PlayState.uiTint;
 		var chosenGroup = (newNote.isSustainNote ? holdsGroup : notesGroup);
 		chosenGroup.add(newNote);
-		chosenGroup.forEach(d -> d.color = tint != null ? tint : PlayState.uiTint);
 		allNotes.add(newNote);
-		allNotes.forEach(d -> d.color = tint != null ? tint : PlayState.uiTint);
 		chosenGroup.sort(FlxSort.byY, (!Init.trueSettings.get('Downscroll')) ? FlxSort.DESCENDING : FlxSort.ASCENDING);
 	}
 }

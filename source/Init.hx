@@ -59,6 +59,14 @@ class Init extends FlxState
 			NOT_FORCED
 		],
 		'Debug Info' => [false, Checkmark, 'Whether to display information like your game state.', NOT_FORCED],
+		'Song Info' => [true, Checkmark, 'Whether to show the song info at the beginning of each song.', NOT_FORCED],
+		'Song Prog' => [
+			'left', 
+			Selector, 
+			'Choose how to show the song progression timestamp.', 
+			NOT_FORCED,
+			['left', 'elapsed', 'none']
+		],
 		'Reduced Movements' => [
 			false,
 			Checkmark,

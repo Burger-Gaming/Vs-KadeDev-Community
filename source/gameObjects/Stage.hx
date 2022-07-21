@@ -334,6 +334,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 	public function repositionPlayers(curStage, boyfriend:Character, dad:Character, gf:Character):Void
 	{
 		// REPOSITIONING PER STAGE
+		PlayState.uiTint = 0xffffff;
 		switch (curStage)
 		{
 			case 'naterdark':
@@ -369,9 +370,6 @@ class Stage extends FlxTypedGroup<FlxBasic>
 					for (x in [dad, boyfriend, gf]) x.color = 0xFFD3D8FF; 
 					PlayState.uiTint = 0xFFD3D8FF;
 				}
-			default:
-				PlayState.uiTint = 0xffffff;
-
 		}
 	}
 

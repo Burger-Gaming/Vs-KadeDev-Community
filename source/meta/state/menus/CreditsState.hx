@@ -69,12 +69,13 @@ class CreditsName extends FlxTypedGroup<FlxSprite> {
 class CreditsState extends MusicBeatState {
     var credits:Array<Array<Dynamic>> = [
         // name, icon name, cool quote, what they did ("1, 2, 3"), link, color (int)
-        ['Red', 'red', 'pending quote', 'Artist of yoda sprites', 'https://example.com/', 0xEB002D],
+        ['Red', 'red', 'THE OWO', 'Artist of yoda sprites', 'https://example.com/', 0xEB002D],
         ['Soulslimm', 'soulslimm', 'pending quote', 'pending actions...', 'https://example.com', 0xC0762A],
         ['Techsec', 'techsec', 'pending quote', 'Charted fabicoolest', 'https://example.com', 0x4254A0],
         ['Burger', 'burger', 'pending quote', 'Primarily programmed this, Charted a bunch of songs', 'https://example.com/', 0xFFFF00],
         ['Lemlom', 'lemlem', 'pending quote', 'Made fabi and own sprites', 'https://example.com/', 0xFFCC66],
-        ['Multi-hand', 'multihand', 'pending quote', 'Made ACFH sprites', 'https://example.com/', 0x4391E6]
+        ['Multi-hand', 'multihand', 'pending quote', 'Made ACFH sprites', 'https://example.com/', 0x4391E6],
+        ['KadeDev', 'kadedev', 'no quote :(', 'Composed fabilicious, Made the community', 'https://github.com/kadedev', 0x4b6448]
     ];
     var bg:FlxSprite; 
     var coolCredits:FlxTypedGroup<CreditsName>;

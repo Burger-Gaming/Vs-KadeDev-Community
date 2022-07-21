@@ -184,6 +184,8 @@ class PlayState extends MusicBeatState
 	var songBoxTopText:FlxText;
 	var songBoxBottomText:FlxText;
 	var extColorBar:FlxSprite;
+	var songPos:Float;
+	var timeTxt:FlxText;
 
 	// at the beginning of the playstate
 	override public function create()
@@ -323,11 +325,10 @@ class PlayState extends MusicBeatState
 			case 'erect':
 			    songArtist = 'Skullbite';
 				barColor = "#C38742";
-
+			default:
+				songArtist = '???';
 		}
-		if (ogArtist != '') { 
-			songBoxBottomText.text = 'by $songArtist (og: $ogArtist)'; 
-		}
+		if (ogArtist != '') songBoxBottomText.text = 'by $songArtist (og: $ogArtist)'; 
 		else songBoxBottomText.text = 'by $songArtist';
 
 		if (songBoxTopText.width < songBoxBottomText.width) songBox.makeGraphic(Std.int(songBoxBottomText.width * 1.12), 80, FlxColor.BLACK);
@@ -414,11 +415,14 @@ class PlayState extends MusicBeatState
 
 		strumLines.add(dadStrums);
 		strumLines.add(boyfriendStrums);
-		for (x in [songBox, songBoxTopText, songBoxBottomText, extColorBar]) {
-			x.x = songBox.width * -1;
-			x.cameras = [camHUD]; 
-			add(x);
-		}
+
+		timeTxt = new FlxText(250, 85 + (Init.trueSettings.get('Downscroll') ? FlxG.height - 200 : 0), 0);
+		timeTxt.setFormat(Paths.font("vcr.ttf"), 29, 0xffffff, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		timeTxt.borderSize = 2;
+		timeTxt.antialiasing = false;
+		timeTxt.alpha = 0;
+		timeTxt.cameras = [camHUD];
+		add(timeTxt);
 
 		switch (SONG.song) { // more song set up that isn't stage or characters
 			case "Ancient Clown":
@@ -448,6 +452,11 @@ class PlayState extends MusicBeatState
 			strumLines.members[i].cameras = [strumHUD[i]];
 		}
 		add(strumLines);
+		for (x in [songBox, songBoxTopText, songBoxBottomText, extColorBar]) {
+			x.x = songBox.width * -1;
+			x.cameras = [camHUD]; 
+			add(x);
+		}
 
 		uiHUD = new ClassHUD(dadOpponent.charColor, boyfriend.charColor);
 		add(uiHUD);
@@ -1538,6 +1547,8 @@ class PlayState extends MusicBeatState
 	function startSong():Void
 	{
 		startingSong = false;
+        // 😮‍💨
+		if (Init.trueSettings.get('Song Prog') != 'none') FlxTween.tween(timeTxt, { alpha: 1 }, .5, { ease: FlxEase.circOut });
 
 		previousFrameTime = FlxG.game.ticks;
 		lastReportedPlayheadPosition = 0;
@@ -1631,6 +1642,13 @@ class PlayState extends MusicBeatState
 		if (songMusic.time >= Conductor.songPosition + 20 || songMusic.time <= Conductor.songPosition - 20)
 			resyncVocals();
 		//*/
+		switch (Init.trueSettings.get('Song Prog')) {
+			// case 'elapsed w length': timeTxt.text = '[${CoolUtil.msToTimestamp(songMusic.time)}/${CoolUtil.msToTimestamp(songMusic.length)}]';
+			case 'elapsed': timeTxt.text = '[${CoolUtil.msToTimestamp(songMusic.time)}]';
+            case 'left': timeTxt.text = '[${CoolUtil.msToTimestamp(songMusic.length-songMusic.time)}]';
+		}
+		timeTxt.color = uiTint;
+		if (!Init.trueSettings.get('Centered Notefield')) timeTxt.screenCenter(X); 
         
 		switch (SONG.song) {
 			case 'Yoder': 
@@ -1689,7 +1707,7 @@ class PlayState extends MusicBeatState
 					case 288 | 672 | 928 | 1312 | 1696 | 2080 | 2336:
 						dadOpponent.shouldSing = false;
 						otherDad.shouldSing = true;
-					case 540 | 801 | 1051 | 1562 | 1952 | 2209:
+					case 540 | 801 | 1051 | 1562 | 1951 | 2209:
 						dadOpponent.shouldSing = true;
 						otherDad.shouldSing = false;
 					case 1824:
@@ -1776,7 +1794,7 @@ class PlayState extends MusicBeatState
 			boyfriend.dance();
 
 		// added this for opponent cus it wasn't here before and skater would just freeze
-		if (dadOpponent != null && (dadOpponent.animation.curAnim.name.startsWith("idle") 
+		if (dadOpponent != null && (dadOpponent.animation.curAnim.name.startsWith("idle")
 		|| dadOpponent.animation.curAnim.name.startsWith("dance") || !dadOpponent.shouldSing)  
 			&& (curBeat % 2 == 0 || dadOpponent.characterData.quickDancer))
 			dadOpponent.dance(true, forceAnim);
@@ -1801,6 +1819,8 @@ class PlayState extends MusicBeatState
 				}
 			case 'Roasted':
 				switch (curBeat) {
+					case 16: 
+						tweenSongIntroOut();
 					case 392 | 408 | 424 | 440: 
 						FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom * 0.9 }, .7, { ease: FlxEase.quadInOut });
 						shouldZoom = false;
@@ -1808,14 +1828,11 @@ class PlayState extends MusicBeatState
 						FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom }, .7, { ease: FlxEase.quadInOut });
 					case 400 | 416 | 432 | 448:
 						FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom * 1.2 }, .7, { ease: FlxEase.quadInOut });
-						// FlxG.camera.zoom = defaultCamZoom * 1.2;
 					case 404 | 420 | 436 | 452 | 456:
 						FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom * 1.5  }, .7, { ease: FlxEase.quadInOut });
-						// FlxG.camera.zoom = defaultCamZoom * 1.5;
 					case 488:
 						FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom }, .7, { ease: FlxEase.quadInOut });
-						// FlxG.camera.zoom = defaultCamZoom;
-						shouldZoom = true;
+						shouldZoom = !Init.trueSettings.get('Reduced Movements');
 				}
 			default:
 				if (curBeat == 16) tweenSongIntroOut();
@@ -2254,6 +2271,7 @@ class PlayState extends MusicBeatState
 			// generateSong('fresh');
 		}, 5);
 	}
+	// imma be real, this does not work 💀
 	function switchCharacter(target: String, newChar: String, repos=true) {
 		// if (repos) stageBuild.repositionPlayers(curStage, boyfriend, dadOpponent, gf);
 		switch (target) {
@@ -2325,6 +2343,7 @@ class PlayState extends MusicBeatState
 	}
 
 	function tweenSongIntroIn() {
+		if (!Init.trueSettings.get('Song Info')) return;
 		// for (x in [songBox, songBoxTopText, songBoxBottomText, extColorBar]) FlxTween.tween(x, { x: songBox.width }, 1.5, { ease: FlxEase.quadInOut });
 		FlxTween.tween(songBox, { x: 0 }, 1.5, { ease: FlxEase.quadInOut, onUpdate: t -> extColorBar.x = (songBox.width - 5) + songBox.x });
 		FlxTween.tween(songBoxTopText, { x: 10 }, 1.5, { ease: FlxEase.quadInOut });
@@ -2332,6 +2351,10 @@ class PlayState extends MusicBeatState
 		// FlxTween.tween(extColorBar, { x: songBox.width - 5 }, 1.5);
 	}
 	function tweenSongIntroOut() {
+		if (!Init.trueSettings.get('Song Info')) {
+			for (x in [songBox, songBoxTopText, songBoxBottomText, extColorBar]) x.destroy();
+			return;
+		}
 		for (x in [songBoxTopText, songBoxBottomText]) FlxTween.tween(x, { x: songBox.width * -1 }, 1.5, { ease: FlxEase.quadInOut, onComplete: t -> x.destroy() });
 		FlxTween.tween(songBox, {x: songBox.width * -1}, 1.5, { ease: FlxEase.quadInOut, onUpdate: t -> extColorBar.x = (songBox.width - 5) + songBox.x, onComplete: t -> {
 			songBox.destroy();

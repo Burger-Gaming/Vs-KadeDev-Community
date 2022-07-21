@@ -115,6 +115,7 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 		
 		autoplayText = new FlxText(FlxG.width - 405, Init.trueSettings.get('Downscroll') ? FlxG.height - 40 : 15, 0, "[BOTPLAY]", 30);
 		autoplayText.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		autoplayText.borderSize = 2;
 		autoplayText.scrollFactor.set();
 		if (Init.trueSettings.get('Centered Notefield')) autoplayText.screenCenter(X);
 		autoplayText.visible = autoplayUsed;
@@ -181,6 +182,7 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 		healthBar.percent = (PlayState.health * 50);
 		autoplayText.visible = autoplayCurUsed;
 		antisaveWarning.visible = autoplayUsed;
+		autoplayText.color = PlayState.uiTint;
 
 		var iconLerp = 0.5;
 		iconP1.setGraphicSize(Std.int(FlxMath.lerp(iconP1.initialWidth, iconP1.width, iconLerp)));
