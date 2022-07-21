@@ -310,7 +310,7 @@ class PlayState extends MusicBeatState
 			'onions' | 'garlico' | 'food fight' 
 			| 'ancient clown' | 'from hell' | 'clownstace' | 
 			'dasher' | 'fabicoolest' | 'battle of the century' |
-			'rom hack': 
+			'rom hack' | 'lemfunker' | 'minging': 
 			    songArtist = 'Waddle';
 				barColor = "#7251DD";
 			case 'fabilicious': 
