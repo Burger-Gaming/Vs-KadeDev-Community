@@ -331,7 +331,7 @@ class PlayState extends MusicBeatState
 		if (ogArtist != '') songBoxBottomText.text = 'by $songArtist (og: $ogArtist)'; 
 		else songBoxBottomText.text = 'by $songArtist';
 
-		if (songBoxTopText.width < songBoxBottomText.width) songBox.makeGraphic(Std.int(songBoxBottomText.width * 1.12), 80, FlxColor.BLACK);
+		if (songBoxTopText.width < songBoxBottomText.width) songBox.makeGraphic(Std.int(songBoxBottomText.width * 1.22), 80, FlxColor.BLACK);
 		extColorBar = new FlxSprite(songBox.width - 5, songBox.y).makeGraphic(5, Std.int(songBox.height), FlxColor.fromString(barColor));
 
 		
