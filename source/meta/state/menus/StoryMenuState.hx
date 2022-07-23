@@ -30,7 +30,7 @@ class StoryMenuState extends MusicBeatState
 		['onion', 'bf', 'gf'],
 		['acfh', 'bf', 'gf'],
 		['fabi', 'bf', 'gf'],
-		['fabi', 'bf', 'gf'], // nater
+		['nater', 'bf', 'gf'],
 		['fabi', 'bf', 'gf'] // lem
 	];
 

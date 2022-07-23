@@ -22,7 +22,8 @@ class MenuCharacter extends FlxSprite
 		'yoder' => ['BABY YODA IDLE', 24, true, 1, -150, 0],
 		'acfh' => ['Idle', 12, true, .4, -300, -200],
 		'onion' => ['idle', 24, true, .6, -100, 70],
-		'fabi' => ['doofus idle', 24, true, 1, -150, 0]
+		'fabi' => ['doofus idle', 24, true, 1, -150, 0],
+		'nater' => ['STORY', 24, true, .75, -325, -50]
 	];
 
 	var baseX:Float = 0;
@@ -48,6 +49,7 @@ class MenuCharacter extends FlxSprite
 			case 'acfh': textureString = 'Menu_ACFH';
 			case 'onion': textureString = 'Menu_Onion';
 			case 'fabi': textureString = 'Menu_Fabi';
+			case 'nater': textureString = 'Menu_Nater';
 			default: textureString = 'campaign_menu_UI_characters';
 		}
 		var tex = Paths.getSparrowAtlas('menus/base/storymenu/$textureString');
