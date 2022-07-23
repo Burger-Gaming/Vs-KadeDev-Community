@@ -331,7 +331,11 @@ class PlayState extends MusicBeatState
 		if (ogArtist != '') songBoxBottomText.text = 'by $songArtist (og: $ogArtist)'; 
 		else songBoxBottomText.text = 'by $songArtist';
 
-		if (songBoxTopText.width < songBoxBottomText.width) songBox.makeGraphic(Std.int(songBoxBottomText.width * 1.22), 80, FlxColor.BLACK);
+		if (songBoxTopText.width < songBoxBottomText.width) { 
+			var target = songBoxBottomText.text.length >= 15 ? 1.09 : 1.22;
+			trace('${songBoxBottomText.text.length} $target');
+			songBox.makeGraphic(Std.int(songBoxBottomText.width * target), 80, FlxColor.BLACK); 
+		}
 		extColorBar = new FlxSprite(songBox.width - 5, songBox.y).makeGraphic(5, Std.int(songBox.height), FlxColor.fromString(barColor));
 
 		
@@ -454,7 +458,7 @@ class PlayState extends MusicBeatState
 		add(strumLines);
 		for (x in [songBox, songBoxTopText, songBoxBottomText, extColorBar]) {
 			x.x = songBox.width * -1;
-			x.cameras = [camHUD]; 
+			x.cameras = [strumHUD[0]]; 
 			add(x);
 		}
 
@@ -1815,7 +1819,10 @@ class PlayState extends MusicBeatState
 			case 'Clownstace':
 				if (storyDifficulty != 3) switch (curBeat) {
 					case 44: tweenSongIntroIn();
-					case 66: tweenSongIntroOut();
+					case 60: tweenSongIntroOut();
+				}
+				else {
+					if (curBeat == 16) tweenSongIntroOut();
 				}
 			case 'Roasted':
 				switch (curBeat) {
