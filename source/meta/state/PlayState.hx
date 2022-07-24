@@ -280,11 +280,8 @@ class PlayState extends MusicBeatState
 		boyfriend = new Boyfriend();
 		boyfriend.setCharacter(750, 850, SONG.player1);
 
-		switch (SONG.song)
-		{ // song set up that isn't stage or characters
+		switch (SONG.song) { // song set up that isn't stage or characters
 			case "Roasted":
-				dadOpponent.x -= 80;
-				dadOpponent.y -= 60;
 				otherDad = new Character().setCharacter(50 - 80, 850 - 10, 'ACFH');
 				otherDad.shouldSing = false;
 		}
@@ -1708,10 +1705,10 @@ class PlayState extends MusicBeatState
 			    }
 			case 'Roasted':
 				switch (curStep) {
-					case 288 | 672 | 928 | 1312 | 1696 | 2080 | 2336:
+					case 287 | 672 | 928 | 1312 | 1696 | 2079 | 2336:
 						dadOpponent.shouldSing = false;
 						otherDad.shouldSing = true;
-					case 540 | 801 | 1051 | 1562 | 1951 | 2209:
+					case 540 | 799 | 1051 | 1562 | 1951 | 2209:
 						dadOpponent.shouldSing = true;
 						otherDad.shouldSing = false;
 					case 1824:
@@ -1836,7 +1833,7 @@ class PlayState extends MusicBeatState
 					case 400 | 416 | 432 | 448:
 						FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom * 1.2 }, .7, { ease: FlxEase.quadInOut });
 					case 404 | 420 | 436 | 452 | 456:
-						FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom * 1.5  }, .7, { ease: FlxEase.quadInOut });
+						FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom * 1.5 }, .7, { ease: FlxEase.quadInOut });
 					case 488:
 						FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom }, .7, { ease: FlxEase.quadInOut });
 						shouldZoom = !Init.trueSettings.get('Reduced Movements');

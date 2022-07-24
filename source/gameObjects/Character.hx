@@ -63,6 +63,14 @@ class Character extends FNFSprite
 
 		switch (curCharacter)
 		{
+			case 'burger':
+				charColor = "#FFFF33";
+				frames = Paths.getSparrowAtlas('characters/burger');
+
+				for (x in ['idle', 'singUP', 'singDOWN', 'singLEFT', 'singRIGHT']) animation.addByPrefix(x, x, 24, false); // LEM IS LOVE LEM IS LIFE
+				scale.set(1.2, 1.2);
+				characterData.offsetY = -20;
+
 			case 'lemlom':
 				charColor = "#FFCC66";
 				frames = Paths.getSparrowAtlas('characters/lemlom');

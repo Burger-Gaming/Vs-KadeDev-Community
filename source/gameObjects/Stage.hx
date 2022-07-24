@@ -66,20 +66,6 @@ class Stage extends FlxTypedGroup<FlxBasic>
 			// custom stage stuffs will come with forever charts
 			switch (CoolUtil.spaceToDash(PlayState.SONG.song.toLowerCase()))
 			{
-				case 'spookeez' | 'south' | 'monster':
-					curStage = 'spooky';
-				case 'pico' | 'blammed' | 'philly-nice':
-					curStage = 'philly';
-				case 'milf' | 'satin-panties' | 'high':
-					curStage = 'highway';
-				case 'cocoa' | 'eggnog':
-					curStage = 'mall';
-				case 'winter-horrorland':
-					curStage = 'mallEvil';
-				case 'senpai' | 'roses':
-					curStage = 'school';
-				case 'thorns':
-					curStage = 'schoolEvil';
 				case 'yoder' | 'baby-yoda-real' | 'swagswag':
 					curStage = 'yoda';
 				case 'onions' | 'garlico' | 'food-fight':
@@ -90,7 +76,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 					curStage = 'fabiworld';
 				case 'rom-hack':
 					curStage = 'nater';
-				case 'fresh' | 'poor-emulation' | 'savestated':
+				case 'poor-emulation' | 'savestated':
 					curStage = 'naterdark';
 				case 'battle-of-the-century':
 					curStage = 'botc';
@@ -369,6 +355,11 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				if (PlayState.storyDifficulty == 3) { 
 					for (x in [dad, boyfriend, gf]) x.color = 0xFFD3D8FF; 
 					PlayState.uiTint = 0xFFD3D8FF;
+				}
+			case 'stage':
+				if (PlayState.SONG.song == "Roasted") {
+					dad.x += 200;
+					dad.y += 20;
 				}
 		}
 	}
