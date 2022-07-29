@@ -31,7 +31,7 @@ class StoryMenuState extends MusicBeatState
 		['acfh', 'bf', 'gf'],
 		['fabi', 'bf', 'gf'],
 		['nater', 'bf', 'gf'],
-		['fabi', 'bf', 'gf'] // lem
+		['lem', 'bf', 'gf']
 	];
 
 	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, true];

@@ -23,6 +23,7 @@ class MenuCharacter extends FlxSprite
 		'acfh' => ['Idle', 12, true, .4, -300, -200],
 		'onion' => ['idle', 24, true, .6, -100, 70],
 		'fabi' => ['doofus idle', 24, true, 1, -150, 0],
+		'lem' => ['idle', 24, true, .85, -150, -15],
 		'nater' => ['STORY', 24, true, .75, -325, -50]
 	];
 
@@ -50,6 +51,7 @@ class MenuCharacter extends FlxSprite
 			case 'onion': textureString = 'Menu_Onion';
 			case 'fabi': textureString = 'Menu_Fabi';
 			case 'nater': textureString = 'Menu_Nater';
+			case 'lem': textureString = 'menulom';
 			default: textureString = 'campaign_menu_UI_characters';
 		}
 		var tex = Paths.getSparrowAtlas('menus/base/storymenu/$textureString');
