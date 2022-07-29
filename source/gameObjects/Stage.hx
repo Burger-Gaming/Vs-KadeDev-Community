@@ -52,7 +52,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 
 	public var foreground:FlxTypedGroup<FlxBasic>;
 	public var bump:Array<FNFSprite> = []; // put sprites here with a "bump" animation
-	public var publicSprites:Map<String, FNFSprite> = []; // publicizes sprites so you can interact with them from the playstate
+	public var publicSprites:Map<String, FlxSprite> = []; // publicizes sprites so you can interact with them from the playstate
 
 	public function new(curStage)
 	{
@@ -80,6 +80,8 @@ class Stage extends FlxTypedGroup<FlxBasic>
 					curStage = 'naterdark';
 				case 'battle-of-the-century':
 					curStage = 'botc';
+				case 'test':
+					curStage = 'kadecat-hateclub';
 				default:
 					curStage = 'stage';
 			}
@@ -93,6 +95,46 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		//
 		switch (curStage)
 		{
+			case 'kadecat-hateclub':
+				PlayState.defaultCamZoom = 1.7;
+
+				var channelBG = new FlxSprite().loadGraphic(Paths.image('backgrounds/kadecat-hateclub/channelbgbecauseflxissues'));
+				channelBG.screenCenter();
+				channelBG.scale.set(5, 5);
+				channelBG.visible = false;
+				publicSprites["channelBG"] = channelBG;
+				add(channelBG);
+
+				var channelTopic = new FlxSprite().loadGraphic(Paths.image('backgrounds/kadecat-hateclub/topic'));
+				channelTopic.screenCenter();
+				channelTopic.visible = false;
+				publicSprites["channelTopic"] = channelTopic;
+				add(channelTopic);
+
+				var dicsusButton = new FNFSprite();
+				// dicsusButton.loadGraphic(Paths.image('backgrounds/kadecat-hateclub/dicsus'), true);
+				dicsusButton.frames = Paths.getSparrowAtlas('backgrounds/kadecat-hateclub/dicsus');
+				dicsusButton.visible = false;
+				dicsusButton.screenCenter();
+				// dicsusButton.x += 12;
+				dicsusButton.y += 14;
+				dicsusButton.animation.add('dicsus', [0, 1, 2], 0);
+				dicsusButton.playAnim('dicsus');
+				dicsusButton.scrollFactor.set();
+				publicSprites["dicsusButton"] = dicsusButton;
+				add(dicsusButton);
+
+				var chatBG = new FlxSprite().loadGraphic(Paths.image('backgrounds/kadecat-hateclub/chatbgbecauseflxissues')); // makeGraphic sucks
+				chatBG.scale.set(5, 5);
+				chatBG.screenCenter();
+				add(chatBG);
+				
+
+				var kadeCatHateMSG = new FlxSprite().loadGraphic(Paths.image('backgrounds/kadecat-hateclub/IHATEKADECAT'));
+				kadeCatHateMSG.screenCenter();
+				kadeCatHateMSG.antialiasing = true;
+				foreground.add(kadeCatHateMSG);
+
 			case 'fabiworld':
 				PlayState.defaultCamZoom = 0.8;
 
@@ -185,11 +227,12 @@ class Stage extends FlxTypedGroup<FlxBasic>
 
 				var raise = new FNFSprite();
 				raise.frames = Paths.getSparrowAtlas("backgrounds/naterplat/Platform-Raise");
-				raise.animation.addByPrefix('up', 'ANIM', false);
+				raise.animation.addByPrefix('up', 'ANIM', 24, true);
 				raise.playAnim('up');
 				raise.scrollFactor.set(1, 1);
 				raise.screenCenter();
-				raise.setGraphicSize(Std.int(raise.width * 2.5));
+				raise.y -= 195;
+				raise.setGraphicSize(Std.int(raise.width * 5));
 				add(raise);
 				publicSprites["raise"] = raise;
 
@@ -198,10 +241,13 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				BG.animation.addByPrefix('bump', 'ANIM', 24, false);
 				BG.scrollFactor.set(1, 1);
 				BG.screenCenter(X);
+				BG.visible = false;
+
 				// BG.playAnim('bump');
 				BG.setGraphicSize(Std.int(BG.width * 2.5));
 				bump.push(BG);
 				add(BG);
+				publicSprites["BG"] = BG;
 
 			case 'naterdark':
 				curStage = 'nater';
@@ -323,6 +369,24 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		PlayState.uiTint = 0xffffff;
 		switch (curStage)
 		{
+			case 'kadecat-hateclub':
+				gf.visible = false;
+				dad.setGraphicSize(Std.int(dad.width * 0.3));
+				boyfriend.setGraphicSize(Std.int(boyfriend.width * 0.3));
+				dad.characterData.camOffsetX += 50;
+				dad.characterData.camOffsetY += 50;
+				boyfriend.characterData.camOffsetX += 50;
+				boyfriend.characterData.camOffsetY += 50;
+				
+
+				dad.x += 120;
+				dad.y -= 510;
+
+				boyfriend.x = dad.x;
+				boyfriend.y = dad.y + 300;
+
+
+
 			case 'naterdark':
 				gf.visible = false;
 				// boyfriend.scale.set(0.75, 0.75);

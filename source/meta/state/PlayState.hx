@@ -1,5 +1,6 @@
 package meta.state;
 
+import flixel.input.mouse.FlxMouseEventManager;
 import flixel.text.FlxText;
 import meta.data.dependency.FNFSprite;
 import flixel.FlxBasic;
@@ -330,7 +331,6 @@ class PlayState extends MusicBeatState
 
 		if (songBoxTopText.width < songBoxBottomText.width) { 
 			var target = songBoxBottomText.text.length >= 15 ? 1.09 : 1.22;
-			trace('${songBoxBottomText.text.length} $target');
 			songBox.makeGraphic(Std.int(songBoxBottomText.width * target), 80, FlxColor.BLACK); 
 		}
 		extColorBar = new FlxSprite(songBox.width - 5, songBox.y).makeGraphic(5, Std.int(songBox.height), FlxColor.fromString(barColor));
@@ -1778,6 +1778,16 @@ class PlayState extends MusicBeatState
 
 						dadStrums.changeTint();
 				}
+			case 'Rom Hack':
+				switch (curStep) {
+					case 224:
+						FlxG.camera.fade(FlxColor.WHITE, 3);
+					case 256:
+						FlxG.camera.stopFX();
+						FlxG.camera.flash(FlxColor.WHITE, .5);
+					    stageBuild.publicSprites["BG"].visible = true;
+						stageBuild.publicSprites["raise"].visible = false;
+				}
 		}
 
 	}
@@ -2025,26 +2035,30 @@ class PlayState extends MusicBeatState
 	{
 		switch (curSong.toLowerCase())
 		{
-			case "fresh": // mental note: for nater
-			    inCutscene = true;
-				for (hud in allUIs) hud.alpha = 0;
-			    var raise = new FNFSprite();
-			    raise.frames = Paths.getSparrowAtlas("backgrounds/naterplat/Platform-Raise");
-			    raise.animation.addByPrefix('up', 'ANIM', false);
-			    raise.playAnim('up');
-				raise.scrollFactor.set(0, 0);
-				raise.screenCenter();
-				raise.setGraphicSize(Std.int(raise.width * 2));
-				
-				add(raise);
-			    raise.animation.finishCallback = d -> {
-					remove(raise);
-					FlxG.camera.flash(FlxColor.WHITE, 1, () -> {
-						for (hud in allUIs) FlxTween.tween(hud, { alpha: 1 }, .75);
-						startCountdown();
-					});
+			case "test":
+				inCutscene = true;
+				FlxG.mouse.visible = true;
+				FlxG.mouse.useSystemCursor = true;
+				for (hud in allUIs) {
+					if (hud != camHUD) hud.alpha = 0;
 				}
-			    
+				for (x in [stageBuild.publicSprites["channelBG"], stageBuild.publicSprites["channelTopic"], stageBuild.publicSprites["dicsusButton"]]) {
+					x.visible = true;
+					x.cameras = [camHUD];
+				}
+				FlxMouseEventManager.add(stageBuild.publicSprites["dicsusButton"], spr -> {
+					spr.animation.curAnim.curFrame = 2;
+					new FlxTimer().start(0.4, tmr -> {
+						stageBuild.publicSprites["channelBG"].visible = false;
+						stageBuild.publicSprites["channelTopic"].visible = false;
+						stageBuild.publicSprites["dicsusButton"].visible = false;
+						for (hud in allUIs) FlxTween.tween(hud, { alpha: 1 }, .75, { onComplete: t ->  { 
+								FlxG.mouse.visible = false;
+								FlxG.mouse.useSystemCursor = false;
+							startCountdown(); 
+						} });
+					});
+				}, null, spr -> spr.animation.curAnim.curFrame = 1, spr -> spr.animation.curAnim.curFrame = 0);
 			case "winter-horrorland":
 				inCutscene = true;
 				var blackScreen:FlxSprite = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
@@ -2175,7 +2189,7 @@ class PlayState extends MusicBeatState
 		swagCounter = 0;
 
 		camHUD.visible = true;
-		if (SONG.song == "Clownstace" && storyDifficulty != 3) {
+		if ((SONG.song == "Clownstace" && storyDifficulty != 3) || SONG.song == "Test") {
 			Conductor.songPosition = -(Conductor.crochet * 1);
 			countdownComplete = true;
 			charactersDance(curBeat);
