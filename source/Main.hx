@@ -130,7 +130,7 @@ class Main extends Sprite
 			['Lemfunker', 'Minging'],
 			['lemlom'],
 			[FlxColor.fromRGB(255, 204, 102)],
-			'I like to move it move it'
+			'She uses he/him pronouns' // guh
 		]
 		
 	];

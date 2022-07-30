@@ -366,7 +366,6 @@ class Stage extends FlxTypedGroup<FlxBasic>
 	public function repositionPlayers(curStage, boyfriend:Character, dad:Character, gf:Character):Void
 	{
 		// REPOSITIONING PER STAGE
-		PlayState.uiTint = 0xffffff;
 		switch (curStage)
 		{
 			case 'kadecat-hateclub':
@@ -378,14 +377,11 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				boyfriend.characterData.camOffsetX += 50;
 				boyfriend.characterData.camOffsetY += 50;
 				
-
 				dad.x += 120;
 				dad.y -= 510;
 
 				boyfriend.x = dad.x;
 				boyfriend.y = dad.y + 300;
-
-
 
 			case 'naterdark':
 				gf.visible = false;

@@ -91,7 +91,6 @@ class PlayState extends MusicBeatState
 	private var unspawnNotes:Array<Note> = [];
 	private var ratingArray:Array<String> = [];
 	private var allSicks:Bool = true;
-	public static var ratingColor:Int = 0xffffff;
 	public static var uiTint:Int = 0xffffff;
 
 	// if you ever wanna add more keys
@@ -119,6 +118,7 @@ class PlayState extends MusicBeatState
 	public static var combo:Int = 0;
 	public static var sectCombo = 0;
 	public static var comboShown:Bool = false;
+	var beatZoomSpeed = 4;
 
 	public static var misses:Int = 0;
 
@@ -178,9 +178,11 @@ class PlayState extends MusicBeatState
 	// stores the last combo objects in an array
 	public static var lastCombo:Array<FlxSprite>;
 
+	// erect easter egg stuffs
 	public var erectTimer:FlxTimer;
 	public var erectCounter:Int = 0;
 
+    // song info stuff
 	var songBox:FlxSprite;
 	var songBoxTopText:FlxText;
 	var songBoxBottomText:FlxText;
@@ -203,6 +205,7 @@ class PlayState extends MusicBeatState
 		combo = 0;
 		health = 1;
 		misses = 0;
+		uiTint = 0xffffff;
 		// sets up the combo object array
 		lastCombo = [];
 
@@ -285,6 +288,8 @@ class PlayState extends MusicBeatState
 			case "Roasted":
 				otherDad = new Character().setCharacter(50 - 80, 850 - 10, 'ACFH');
 				otherDad.shouldSing = false;
+			case "Baby Yoder Real":
+				if (storyDifficulty == 3) beatZoomSpeed = 2;
 		}
 
 		// if you want to change characters later use setCharacter() instead of new or it will break
@@ -1852,7 +1857,7 @@ class PlayState extends MusicBeatState
 				if (curBeat == 16) tweenSongIntroOut();
 		}
 
-		if ((FlxG.camera.zoom < 1.35 && curBeat % 4 == 0) && (shouldZoom))
+		if ((FlxG.camera.zoom < 1.35 && curBeat % beatZoomSpeed == 0) && (shouldZoom))
 		{
 			FlxG.camera.zoom += 0.015;
 			camHUD.zoom += 0.05;
@@ -2036,6 +2041,7 @@ class PlayState extends MusicBeatState
 		switch (curSong.toLowerCase())
 		{
 			case "test":
+				var clicked = false;
 				inCutscene = true;
 				FlxG.mouse.visible = true;
 				FlxG.mouse.useSystemCursor = true;
@@ -2047,6 +2053,7 @@ class PlayState extends MusicBeatState
 					x.cameras = [camHUD];
 				}
 				FlxMouseEventManager.add(stageBuild.publicSprites["dicsusButton"], spr -> {
+					clicked = true;
 					spr.animation.curAnim.curFrame = 2;
 					new FlxTimer().start(0.4, tmr -> {
 						stageBuild.publicSprites["channelBG"].visible = false;
@@ -2058,7 +2065,21 @@ class PlayState extends MusicBeatState
 							startCountdown(); 
 						} });
 					});
-				}, null, spr -> spr.animation.curAnim.curFrame = 1, spr -> spr.animation.curAnim.curFrame = 0);
+				}, spr -> {
+					if (clicked) return; // because tap clicking
+					spr.animation.curAnim.curFrame = 2;
+					new FlxTimer().start(0.4, tmr -> {
+						stageBuild.publicSprites["channelBG"].visible = false;
+						stageBuild.publicSprites["channelTopic"].visible = false;
+						stageBuild.publicSprites["dicsusButton"].visible = false;
+						for (hud in allUIs) FlxTween.tween(hud, { alpha: 1 }, .75, { onComplete: t ->  { 
+								FlxG.mouse.visible = false;
+								FlxG.mouse.useSystemCursor = false;
+							startCountdown(); 
+						} });
+					});
+				}, 
+				spr -> spr.animation.curAnim.curFrame = 1, spr -> spr.animation.curAnim.curFrame = 0);
 			case "winter-horrorland":
 				inCutscene = true;
 				var blackScreen:FlxSprite = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
@@ -2348,7 +2369,7 @@ class PlayState extends MusicBeatState
 					forPreCacheState['dad'].push('TankACFH');
 				}
 			case "Poor Emulation":
-				//preCacheCharacter('dad', 'nater', [dadOpponent.x, dadOpponent.y]);
+				// preCacheCharacter('dad', 'nater', [dadOpponent.x, dadOpponent.y]);
 				// preCacheCharacter('dad', 'nater-dark', [dadOpponent.x, dadOpponent.y]);
 				// preCacheCharacter('bf', 'naterbf-flash', [boyfriend.x, boyfriend.y]);
 				// preCacheCharacter('bf', 'naterbf', [boyfriend.x, boyfriend.y]);
