@@ -63,6 +63,20 @@ class Character extends FNFSprite
 
 		switch (curCharacter)
 		{
+			case 'beeg-nater':
+				charColor = "#CF0101";
+				frames = Paths.getSparrowAtlas('characters/beeg-nater');
+
+				animation.addByPrefix('idle', 'BIDLE', 24, false);
+				animation.addByPrefix('laugh', 'BLAUGH', 24, false);
+				animation.addByPrefix('singLEFT', 'BLEFT', 24, false);
+				animation.addByPrefix('singRIGHT', 'BRIGHT', 24, false);
+				animation.addByPrefix('singUP', 'BUP', 24, false);
+				animation.addByPrefix('singDOWN', 'BDOWN', 24, false);
+
+				scale.set(2.3, 2.3);
+				characterData.camOffsetY -= 50;
+				 
 			case 'burger':
 				charColor = "#FFFF33";
 				frames = Paths.getSparrowAtlas('characters/burger');
@@ -131,12 +145,11 @@ class Character extends FNFSprite
 				scale.set(2, 2);
 				characterData.offsetY = 240;
 				flipLeftRight();
-				color = 0xffffff; // wanna make sure it matches with the color i'm using
 
 				playAnim('idle');
 			
 			case 'nater-dark':
-				charColor = "#878787";
+				charColor = "#3E3E3E";
 				frames = Paths.getSparrowAtlas('characters/nater-dark');
 				animation.addByPrefix('idle', 'DARKIDLE', 24, false);
 				animation.addByPrefix('singDOWN', 'DARKDOWN', 24, false);
@@ -150,7 +163,7 @@ class Character extends FNFSprite
 				playAnim('idle');
 
 			case 'nater':
-				charColor = "#878787";
+				charColor = "#3E3E3E";
 				frames = Paths.getSparrowAtlas('characters/nater');
 
 				animation.addByPrefix('idle', 'IDLE', 24, false);

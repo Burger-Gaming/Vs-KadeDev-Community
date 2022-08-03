@@ -46,6 +46,7 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 	public var iconP1:HealthIcon;
 	public var iconP2:HealthIcon;
 	var iconsDanced = false;
+	public var doStuffWithIcons = true;
 
 	private var stupidHealth:Float = 0;
 	public var autoplayUsed:Bool = false;
@@ -183,7 +184,8 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 		autoplayText.visible = autoplayCurUsed;
 		antisaveWarning.visible = autoplayUsed;
 		autoplayText.color = PlayState.uiTint;
-
+        
+		if (!doStuffWithIcons) return;
 		var iconLerp = 0.5;
 		iconP1.setGraphicSize(Std.int(FlxMath.lerp(iconP1.initialWidth, iconP1.width, iconLerp)));
 		iconP2.setGraphicSize(Std.int(FlxMath.lerp(iconP2.initialWidth, iconP2.width, iconLerp)));
@@ -250,7 +252,7 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 
 	public function beatHit()
 	{
-		if (!Init.trueSettings.get('Reduced Movements'))
+		if (!Init.trueSettings.get('Reduced Movements') && doStuffWithIcons)
 		{
 			iconP1.setGraphicSize(Std.int(iconP1.width + 45));
 			iconP2.setGraphicSize(Std.int(iconP2.width + 45));
@@ -286,8 +288,12 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 	public function switchOutIcons(target: String, newIcon: String, color: String) {
 		switch (target) {
 			case "dad": { 
-				iconP2 = new HealthIcon(newIcon); 
+				iconP2.destroy();
+				iconP2 = new HealthIcon(newIcon, false);
+				iconP2.y = healthBar.y - (iconP2.height / 2);
+				add(iconP2);
 				p2Color = color;
+				
 			}
 			case "bf": {
 				iconP1 = new HealthIcon(newIcon);

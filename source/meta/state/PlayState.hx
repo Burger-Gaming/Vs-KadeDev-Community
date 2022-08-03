@@ -284,12 +284,18 @@ class PlayState extends MusicBeatState
 		boyfriend = new Boyfriend();
 		boyfriend.setCharacter(750, 850, SONG.player1);
 
+		stageBuild.repositionPlayers(curStage, boyfriend, dadOpponent, gf);
+
 		switch (SONG.song) { // song set up that isn't stage or characters
 			case "Roasted":
 				otherDad = new Character().setCharacter(50 - 80, 850 - 10, 'ACFH');
 				otherDad.shouldSing = false;
 			case "Baby Yoder Real":
-				if (storyDifficulty == 3) beatZoomSpeed = 2;
+				if (storyDifficulty == 3) beatZoomSpeed = 1;
+			case "SaveStated":
+				otherDad = new Character().setCharacter(dadOpponent.x, dadOpponent.y - 200, 'beeg-nater');
+				// otherDad.alpha = 0;
+				otherDad.shouldSing = false;
 		}
 
 		// if you want to change characters later use setCharacter() instead of new or it will break
@@ -344,7 +350,6 @@ class PlayState extends MusicBeatState
 
 		var camPos:FlxPoint = new FlxPoint(gf.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
 
-		stageBuild.repositionPlayers(curStage, boyfriend, dadOpponent, gf);
 		stageBuild.dadPosition(curStage, boyfriend, dadOpponent, gf, camPos);
 
 		changeableSkin = Init.trueSettings.get("UI Skin");
@@ -458,6 +463,7 @@ class PlayState extends MusicBeatState
 			strumLines.members[i].cameras = [strumHUD[i]];
 		}
 		add(strumLines);
+
 		for (x in [songBox, songBoxTopText, songBoxBottomText, extColorBar]) {
 			x.x = songBox.width * -1;
 			x.cameras = [strumHUD[0]]; 
@@ -468,6 +474,23 @@ class PlayState extends MusicBeatState
 		add(uiHUD);
 		uiHUD.cameras = [camHUD];
 		//
+
+		switch (SONG.song)
+		{ // more song set up that isn't stage or characters
+			case "Ancient Clown":
+				if (storyDifficulty == 3)
+				{
+					preCacheCharacter('dad', 'TankACFH', [dadOpponent.x, dadOpponent.y]);
+					preCacheCharacter('dad', 'ACFH', [dadOpponent.x, dadOpponent.y]);
+				}
+			case "Poor Emulation":
+				preCacheCharacter('dad', 'nater', [dadOpponent.x, dadOpponent.y]);
+				preCacheCharacter('dad', 'nater-dark', [dadOpponent.x, dadOpponent.y]);
+				preCacheCharacter('bf', 'naterbf-flash', [boyfriend.x, boyfriend.y]);
+				preCacheCharacter('bf', 'naterbf', [boyfriend.x, boyfriend.y]);
+			case "SaveStated":
+				for (x in allUIs) x.alpha = 0;
+		}
 
 		screen1 = new FlxSprite().loadGraphic(Paths.image('clownstace/normal'));
 		screen1.scrollFactor.set();
@@ -1793,6 +1816,54 @@ class PlayState extends MusicBeatState
 					    stageBuild.publicSprites["BG"].visible = true;
 						stageBuild.publicSprites["raise"].visible = false;
 				}
+			case 'SaveStated':
+				switch (curStep) {
+					// song starts completely black
+					case 1:
+						otherDad.shouldSing = false;
+						boyfriendStrums.tint = 0xffffff;
+						boyfriendStrums.changeTint();
+					case 32:
+						FlxTween.tween(dadOpponent, { alpha: 1 }, 1.4);
+					case 64:
+						FlxTween.tween(boyfriend, { alpha: 1 }, 1.4);
+					case 96:
+						FlxTween.tween(stageBuild.publicSprites["spotlight"], { alpha: 1 }, 1.4);
+					case 111:
+						FlxTween.tween(strumHUD[0], { alpha: 1 }, 1.7);
+					case 509:
+						for (x in allUIs) FlxTween.tween(x, { alpha: 0 }, .7);
+						for (x in [dadOpponent, boyfriend]) FlxTween.tween(x, { alpha: 0 }, .7);
+						FlxTween.tween(stageBuild.publicSprites["spotlight"], { alpha: 0 }, .7, { onComplete: t -> {
+							dadStrums.tint = 0xCBAAAA;
+							dadStrums.changeTint();
+							uiHUD.switchOutIcons('dad', 'beeg-nater', '#CF0101');
+							uiHUD.doStuffWithIcons = false;
+						}});
+						
+					case 510:
+						// FlxG.camera.fade(FlxColor.BLACK, .2);
+						FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom * 1.5 }, .4);
+						shouldZoom = false;
+						dadOpponent.shouldSing = false;
+						dadOpponent.visible = false;
+						otherDad.shouldSing = true;
+						otherDad.x += 120;
+						otherDad.y += 1350;
+						// FlxTween.tween(otherDad, { alpha: 1 }, .5);
+						// dadOpponent.destroy();
+						FlxG.camera.stopFX();
+						FlxG.camera.fade(FlxColor.BLACK, .5, true);
+
+					case 511:
+						otherDad.playAnim('laugh');
+					case 588:
+						FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom }, .4);
+						shouldZoom = !Init.trueSettings.get('Reduced Movements');
+						uiHUD.doStuffWithIcons = true;
+						for (x in allUIs) FlxTween.tween(x, { alpha: 1 }, .7);
+						for (x in [boyfriend, stageBuild.publicSprites["spotlight"]]) FlxTween.tween(x, { alpha: 1 }, .7);
+				}
 		}
 
 	}
@@ -1828,6 +1899,11 @@ class PlayState extends MusicBeatState
 
 		// trace(curBeat); //for events
 		switch (SONG.song) {
+			case 'SaveStated':
+				switch (curBeat) {
+					case 32: tweenSongIntroIn();
+					case 48: tweenSongIntroOut();
+				}
 			case 'Clownstace':
 				if (storyDifficulty != 3) switch (curBeat) {
 					case 44: tweenSongIntroIn();
@@ -1864,6 +1940,7 @@ class PlayState extends MusicBeatState
 			for (hud in strumHUD)
 				hud.zoom += 0.05;
 		}
+		// else trace(curBeat % beatZoomSpeed);
 
 		if (SONG.notes[Math.floor(curStep / 16)] != null)
 		{
@@ -2210,7 +2287,7 @@ class PlayState extends MusicBeatState
 		swagCounter = 0;
 
 		camHUD.visible = true;
-		if ((SONG.song == "Clownstace" && storyDifficulty != 3) || SONG.song == "Test") {
+		if ((SONG.song == "Clownstace" && storyDifficulty != 3) || SONG.song == "Test" || SONG.song == "SaveStated") {
 			Conductor.songPosition = -(Conductor.crochet * 1);
 			countdownComplete = true;
 			charactersDance(curBeat);

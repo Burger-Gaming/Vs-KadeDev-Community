@@ -390,11 +390,19 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				boyfriend.x -= 100;
 				dad.x -= 40;
 				dad.y -= 25;
-				if (["SaveStated", "Poor Emulation"].contains(PlayState.SONG.song)) { 
-					publicSprites["dark"].visible = false;
-					publicSprites["superdark"].visible = true;
-					boyfriend.setColorTransform(0.07, 0.07, 0.07);
-					PlayState.uiTint = 0x747171;
+				switch (PlayState.SONG.song) {
+					case "Poor Emulation":
+						publicSprites["dark"].visible = false;
+						publicSprites["superdark"].visible = true;
+						boyfriend.setColorTransform(0.07, 0.07, 0.07);
+						PlayState.uiTint = 0x747171;
+					case "SaveStated":
+						publicSprites["dark"].visible = false;
+						publicSprites["spotlight"].visible = true;
+						publicSprites["spotlight"].alpha = 0;
+						dad.alpha = 0;
+						boyfriend.alpha = 0;
+						PlayState.uiTint = 0x747171;
 				}
 			case 'nater':
 				// boyfriend.scale.set(0.75, 0.75);
