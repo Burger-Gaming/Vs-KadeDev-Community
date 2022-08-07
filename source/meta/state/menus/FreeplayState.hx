@@ -84,12 +84,7 @@ class FreeplayState extends MusicBeatState
 			for (j in cast(Main.gameWeeks[i][0], Array<Dynamic>))
 				existingSongs.push(j.toLowerCase());
 		}
-		for (i in 0...Main.extraSongs.length)
-		{
-			addWeek(Main.extraSongs[i][0], i, Main.extraSongs[i][1], Main.extraSongs[i][2], true);
-		}
-		
-		
+		addWeek(Main.extraSongs[0], -1, Main.extraSongs[1], Main.extraSongs[2], true);
 
 		// */
 

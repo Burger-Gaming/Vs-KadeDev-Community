@@ -14,6 +14,7 @@ import flixel.math.FlxPoint;
 import flixel.system.FlxSound;
 import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
+import flixel.util.FlxColor;
 import gameObjects.background.*;
 import meta.CoolUtil;
 import meta.data.Conductor;
@@ -52,7 +53,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 
 	public var foreground:FlxTypedGroup<FlxBasic>;
 	public var bump:Array<FNFSprite> = []; // put sprites here with a "bump" animation
-	public var publicSprites:Map<String, FlxSprite> = []; // publicizes sprites so you can interact with them from the playstate
+	public var publicSprites:Map<String, FlxBasic> = []; // publicizes sprites so you can interact with them from the playstate
 
 	public function new(curStage)
 	{
@@ -76,11 +77,13 @@ class Stage extends FlxTypedGroup<FlxBasic>
 					curStage = 'fabiworld';
 				case 'rom-hack':
 					curStage = 'nater';
-				case 'poor-emulation' | 'savestated':
+				case 'poor-emulation':
 					curStage = 'naterdark';
+				case 'savestated':
+					curStage = 'naterrain';
 				case 'battle-of-the-century':
 					curStage = 'botc';
-				case 'test':
+				case 'kadecat-hate-club':
 					curStage = 'kadecat-hateclub';
 				default:
 					curStage = 'stage';
@@ -124,16 +127,37 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				publicSprites["dicsusButton"] = dicsusButton;
 				add(dicsusButton);
 
+				var cutsceneFallbackTxt = new FlxText(0, channelTopic.y + 120, 0, "Click #dicsus already! (If it's not working, you can also press S.)");
+				cutsceneFallbackTxt.setFormat(Paths.font('vcr.ttf'), 15, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+				cutsceneFallbackTxt.screenCenter(X);
+				publicSprites["cutsceneFallbackTxt"] = cutsceneFallbackTxt;
+				cutsceneFallbackTxt.visible = false;
+				add(cutsceneFallbackTxt);
+
+
 				var chatBG = new FlxSprite().loadGraphic(Paths.image('backgrounds/kadecat-hateclub/chatbgbecauseflxissues')); // makeGraphic sucks
 				chatBG.scale.set(5, 5);
 				chatBG.screenCenter();
 				add(chatBG);
 				
-
 				var kadeCatHateMSG = new FlxSprite().loadGraphic(Paths.image('backgrounds/kadecat-hateclub/IHATEKADECAT'));
 				kadeCatHateMSG.screenCenter();
 				kadeCatHateMSG.antialiasing = true;
+				publicSprites["kadeCatHateMSG"] = kadeCatHateMSG;
 				foreground.add(kadeCatHateMSG);
+
+				var msgBlock = new FlxSprite(kadeCatHateMSG.x, kadeCatHateMSG.height).makeGraphic(Std.int(kadeCatHateMSG.width), 150, FlxColor.fromRGB(54, 57, 63));
+				publicSprites["msgBlock"] = msgBlock;
+				foreground.add(msgBlock);
+                
+				// i want to lie and say sora did this
+				var kadeCat = new FNFSprite(511, 189);
+				kadeCat.frames = Paths.getSparrowAtlas('backgrounds/kadecat-hateclub/kadecat');
+				kadeCat.animation.addByPrefix('kade', 'Kade', 12);
+				kadeCat.scale.set(1.3, 1.3);
+				kadeCat.playAnim('kade');
+				publicSprites["kadeCat"] = kadeCat;
+				foreground.add(kadeCat);
 
 			case 'fabiworld':
 				PlayState.defaultCamZoom = 0.8;
@@ -282,7 +306,21 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				spotlight.visible = false;
 				publicSprites["spotlight"] = spotlight;
 				add(spotlight);
+            
+		    case 'naterrain':
+				PlayState.defaultCamZoom = 1.3;
+				var BG = new FNFSprite().loadGraphic(Paths.image('backgrounds/naterrain/bg'));
+				BG.scrollFactor.set(1, 1);
+				BG.alpha = 0;
+				publicSprites["BG"] = BG;
+				add(BG);
 
+				var rain = new FNFSprite();
+				rain.frames = Paths.getSparrowAtlas('backgrounds/naterrain/rain');
+				rain.animation.addByPrefix('rain', 'ANIM', 24);
+				rain.playAnim('rain');
+				foreground.add(rain); // todo: reduced motion
+				
 
 			default:
 				PlayState.defaultCamZoom = 0.9;
@@ -382,6 +420,12 @@ class Stage extends FlxTypedGroup<FlxBasic>
 
 				boyfriend.x = dad.x;
 				boyfriend.y = dad.y + 300;
+			
+			case 'naterrain':
+				gf.visible = false;
+				dad.y += 110;
+				dad.alpha = 0;
+				boyfriend.alpha = 0;
 
 			case 'naterdark':
 				gf.visible = false;
@@ -390,20 +434,10 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				boyfriend.x -= 100;
 				dad.x -= 40;
 				dad.y -= 25;
-				switch (PlayState.SONG.song) {
-					case "Poor Emulation":
-						publicSprites["dark"].visible = false;
-						publicSprites["superdark"].visible = true;
-						boyfriend.setColorTransform(0.07, 0.07, 0.07);
-						PlayState.uiTint = 0x747171;
-					case "SaveStated":
-						publicSprites["dark"].visible = false;
-						publicSprites["spotlight"].visible = true;
-						publicSprites["spotlight"].alpha = 0;
-						dad.alpha = 0;
-						boyfriend.alpha = 0;
-						PlayState.uiTint = 0x747171;
-				}
+				publicSprites["dark"].visible = false;
+				publicSprites["superdark"].visible = true;
+				boyfriend.setColorTransform(0.07, 0.07, 0.07);
+				PlayState.uiTint = 0x747171;
 			case 'nater':
 				// boyfriend.scale.set(0.75, 0.75);
 				/*gf.scale.set(0.55, 0.55);

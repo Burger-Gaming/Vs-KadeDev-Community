@@ -1,8 +1,5 @@
 package meta.state;
 
-import flixel.input.mouse.FlxMouseEventManager;
-import flixel.text.FlxText;
-import meta.data.dependency.FNFSprite;
 import flixel.FlxBasic;
 import flixel.FlxCamera;
 import flixel.FlxG;
@@ -14,12 +11,14 @@ import flixel.addons.effects.FlxTrail;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.input.keyboard.FlxKey;
+import flixel.input.mouse.FlxMouseEventManager;
 import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
 import flixel.math.FlxRandom;
 import flixel.math.FlxRect;
 import flixel.system.FlxAssets.FlxSoundAsset;
 import flixel.system.FlxSound;
+import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
@@ -33,6 +32,7 @@ import meta.*;
 import meta.MusicBeat.MusicBeatState;
 import meta.data.*;
 import meta.data.Song.SwagSong;
+import meta.data.dependency.FNFSprite;
 import meta.state.charting.*;
 import meta.state.menus.*;
 import meta.subState.*;
@@ -71,6 +71,7 @@ class PlayState extends MusicBeatState
 
 	public static var dadOpponent:Character;
 	public var otherDad:Null<Character> = null; // 🏳️‍🌈 we support gay marraige in this house
+	var useOtherDadChart = false;
 	public static var gf:Character;
 	public static var boyfriend:Boyfriend;
 	public var missTimer:FlxTimer;
@@ -89,6 +90,7 @@ class PlayState extends MusicBeatState
 	public static var changeableSkin:String = 'default';
 
 	private var unspawnNotes:Array<Note> = [];
+	private var extChartUnspawnNotes:Array<Note> = [];
 	private var ratingArray:Array<String> = [];
 	private var allSicks:Bool = true;
 	public static var uiTint:Int = 0xffffff;
@@ -129,6 +131,8 @@ class PlayState extends MusicBeatState
 	var startedCountdown:Bool = false;
 	var countdownComplete:Bool = false;
 	var inCutscene:Bool = false;
+	var cutsceneRanLong = false;
+	var followMustHits = true;
 
 	var canPause:Bool = true;
 
@@ -166,6 +170,7 @@ class PlayState extends MusicBeatState
 
 	// strumlines
 	private var dadStrums:Strumline;
+	private var otherDadStrums:Null<Strumline> = null;
 	private var boyfriendStrums:Strumline;
 
 	public static var strumLines:FlxTypedGroup<Strumline>;
@@ -262,6 +267,7 @@ class PlayState extends MusicBeatState
 
 		stageBuild = new Stage(curStage);
 		add(stageBuild);
+		
 
 		/*
 			Everything related to the stages aside from things done after are set in the stage class!
@@ -296,6 +302,11 @@ class PlayState extends MusicBeatState
 				otherDad = new Character().setCharacter(dadOpponent.x, dadOpponent.y - 200, 'beeg-nater');
 				// otherDad.alpha = 0;
 				otherDad.shouldSing = false;
+			case "Kadecat Hate Club":
+				otherDad = new Character().setCharacter(dadOpponent.x, dadOpponent.y + 260, 'dad');
+				otherDad.setGraphicSize(Std.int(otherDad.width * 0.3));
+				useOtherDadChart = true;
+
 		}
 
 		// if you want to change characters later use setCharacter() instead of new or it will break
@@ -334,6 +345,8 @@ class PlayState extends MusicBeatState
 			case 'erect':
 			    songArtist = 'Skullbite';
 				barColor = "#C38742";
+			case 'kadecat hate club':
+				songArtist = 'Skullbite (SONG ISN\'T DONE, NOTHING IS FINAL)';
 			default:
 				songArtist = '???';
 		}
@@ -418,14 +431,22 @@ class PlayState extends MusicBeatState
 
 		//
 		var placement = (FlxG.width / 2);
-		var characters = otherDad != null ? [dadOpponent, otherDad] : [dadOpponent];
+		var characters = otherDad != null && !useOtherDadChart ? [dadOpponent, otherDad] : [dadOpponent];
 		dadStrums = new Strumline(placement - (FlxG.width / 4), this, characters, false, true, false, 4, Init.trueSettings.get('Downscroll'));
 		dadStrums.visible = !Init.trueSettings.get('Centered Notefield');
+
+		if (useOtherDadChart) {
+			otherDadStrums = new Strumline(0, this, [otherDad], false);
+			otherDadStrums.visible = false;
+			
+		}
 		boyfriendStrums = new Strumline(placement + (!Init.trueSettings.get('Centered Notefield') ? (FlxG.width / 4) : 0), this, [boyfriend], true, false, true,
 			4, Init.trueSettings.get('Downscroll'));
 
 		strumLines.add(dadStrums);
 		strumLines.add(boyfriendStrums);
+		if (otherDadStrums != null) strumLines.add(otherDadStrums);
+
 
 		timeTxt = new FlxText(250, 85 + (Init.trueSettings.get('Downscroll') ? FlxG.height - 200 : 0), 0);
 		timeTxt.setFormat(Paths.font("vcr.ttf"), 29, 0xffffff, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -846,13 +867,13 @@ class PlayState extends MusicBeatState
 					}
 					else comboShown = false;*/
 					// otherDad != null && !dadOpponent.shouldSing
-					var isDuet = otherDad != null && (dadOpponent.shouldSing && otherDad.shouldSing);
+					var isDuet = (otherDad != null && !useOtherDadChart) && (dadOpponent.shouldSing && otherDad.shouldSing);
 					var char = otherDad != null && (!dadOpponent.shouldSing || isDuet) ? otherDad : dadOpponent;
 
 					var getCenterX = char.getMidpoint().x + 100;
 					var getCenterY = char.getMidpoint().y - (isDuet ? -50 : 100);
 
-					camFollow.setPosition(getCenterX + camDisplaceX + char.characterData.camOffsetX,
+					if (followMustHits) camFollow.setPosition(getCenterX + camDisplaceX + char.characterData.camOffsetX,
 						getCenterY + camDisplaceY + char.characterData.camOffsetY);
 
 					if (char.curCharacter == 'mom')
@@ -878,7 +899,7 @@ class PlayState extends MusicBeatState
 							getCenterY = char.getMidpoint().y - 200;*/
 					}
 
-					camFollow.setPosition(getCenterX + camDisplaceX - char.characterData.camOffsetX,
+					if (followMustHits) camFollow.setPosition(getCenterX + camDisplaceX - char.characterData.camOffsetX,
 						getCenterY + camDisplaceY + char.characterData.camOffsetY);
 				}
 			}
@@ -919,8 +940,35 @@ class PlayState extends MusicBeatState
 				strumLines.members[Math.floor((dunceNote.noteData + (dunceNote.mustPress ? 4 : 0)) / numberOfKeys)].push(dunceNote);
 				unspawnNotes.splice(unspawnNotes.indexOf(dunceNote), 1);
 			}
+            // because extra notes!
+			if (extChartUnspawnNotes[0] != null && (unspawnNotes[0].strumTime - Conductor.songPosition) < 3500) {
+				var dunceNote = extChartUnspawnNotes[0];
+				strumLines.members[2].push(dunceNote);
+				extChartUnspawnNotes.splice(extChartUnspawnNotes.indexOf(dunceNote), 1);
+			}
 
 			noteCalls();
+		}
+		else {
+			if (SONG.song == 'Kadecat Hate Club' && FlxG.keys.justPressed.S && cutsceneRanLong) {
+				var channelBG = stageBuild.publicSprites["channelBG"];
+				var channelTopic = stageBuild.publicSprites["channelTopic"];
+				var dicsusButton = stageBuild.publicSprites["dicsusButton"];
+				var cutsceneFallbackTxt = stageBuild.publicSprites["cutsceneFallbackTxt"];
+				cast(dicsusButton, FlxSprite).animation.curAnim.curFrame = 2;
+				new FlxTimer().start(0.4, tmr -> {
+					channelBG.visible = false;
+					channelTopic.visible = false;
+					dicsusButton.visible = false;
+					cutsceneFallbackTxt.visible = false;
+					for (hud in allUIs) FlxTween.tween(hud, { alpha: 1 }, .75, { onComplete: t -> { 
+						FlxG.mouse.visible = false;
+						FlxG.mouse.useSystemCursor = false;
+						startCountdown(); 
+					}
+				});
+			    });
+		    }
 		}
 
 	}
@@ -1322,6 +1370,7 @@ class PlayState extends MusicBeatState
 				if ((PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection && mustHit)
 					|| (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection && !mustHit))
 				{
+					
 					camDisplaceX = 0;
 					if (cStrum.members[0].animation.curAnim.name == 'confirm')
 						camDisplaceX -= camDisplaceExtend;
@@ -1634,6 +1683,12 @@ class PlayState extends MusicBeatState
 		FlxG.sound.list.add(songMusic);
 		FlxG.sound.list.add(vocals);
 
+		if (useOtherDadChart) {
+			var extChart = Song.loadFromJson('ext-chart', CoolUtil.spaceToDash(SONG.song.toLowerCase()));
+			extChartUnspawnNotes = ChartLoader.generateChartType(extChart);
+			extChartUnspawnNotes.sort(sortByShit);
+		}
+
 		// generate the chart
 		unspawnNotes = ChartLoader.generateChartType(SONG, determinedChartType);
 		// sometime my brain farts dont ask me why these functions were separated before
@@ -1828,14 +1883,14 @@ class PlayState extends MusicBeatState
 					case 64:
 						FlxTween.tween(boyfriend, { alpha: 1 }, 1.4);
 					case 96:
-						FlxTween.tween(stageBuild.publicSprites["spotlight"], { alpha: 1 }, 1.4);
+						FlxTween.tween(stageBuild.publicSprites["BG"], { alpha: 1 }, 1.4);
 					case 111:
 						FlxTween.tween(strumHUD[0], { alpha: 1 }, 1.7);
 					case 509:
 						for (x in allUIs) FlxTween.tween(x, { alpha: 0 }, .7);
 						for (x in [dadOpponent, boyfriend]) FlxTween.tween(x, { alpha: 0 }, .7);
-						FlxTween.tween(stageBuild.publicSprites["spotlight"], { alpha: 0 }, .7, { onComplete: t -> {
-							dadStrums.tint = 0xCBAAAA;
+						FlxTween.tween(stageBuild.publicSprites["BG"], { alpha: 0 }, .7, { onComplete: t -> {
+							dadStrums.tint = 0xECC9C9;
 							dadStrums.changeTint();
 							uiHUD.switchOutIcons('dad', 'beeg-nater', '#CF0101');
 							uiHUD.doStuffWithIcons = false;
@@ -1862,7 +1917,20 @@ class PlayState extends MusicBeatState
 						shouldZoom = !Init.trueSettings.get('Reduced Movements');
 						uiHUD.doStuffWithIcons = true;
 						for (x in allUIs) FlxTween.tween(x, { alpha: 1 }, .7);
-						for (x in [boyfriend, stageBuild.publicSprites["spotlight"]]) FlxTween.tween(x, { alpha: 1 }, .7);
+						for (x in [boyfriend, stageBuild.publicSprites["BG"]]) FlxTween.tween(x, { alpha: 1 }, .7);
+				}
+			case 'Kadecat Hate Club':
+				switch (curStep) {
+					case 768:
+						followMustHits = false;
+						stageBuild.publicSprites["msgBlock"].visible = false;
+						var getCenterX = otherDad.getMidpoint().x;
+						var getCenterY = otherDad.getMidpoint().y;
+						camFollow.setPosition(getCenterX + camDisplaceX + otherDad.characterData.camOffsetX,
+							getCenterY + camDisplaceY + otherDad.characterData.camOffsetY);
+							
+						
+					
 				}
 		}
 
@@ -1899,10 +1967,15 @@ class PlayState extends MusicBeatState
 
 		// trace(curBeat); //for events
 		switch (SONG.song) {
+			case 'Kadecat Hate Club':
+				switch (curBeat) {
+					case 1: tweenSongIntroIn();
+					case 16: tweenSongIntroOut();
+				}
 			case 'SaveStated':
 				switch (curBeat) {
-					case 32: tweenSongIntroIn();
-					case 48: tweenSongIntroOut();
+					case 148: tweenSongIntroIn();
+					case 164: tweenSongIntroOut();
 				}
 			case 'Clownstace':
 				if (storyDifficulty != 3) switch (curBeat) {
@@ -2117,28 +2190,34 @@ class PlayState extends MusicBeatState
 	{
 		switch (curSong.toLowerCase())
 		{
-			case "test":
+			case "kadecat hate club":
 				var clicked = false;
 				inCutscene = true;
 				FlxG.mouse.visible = true;
 				FlxG.mouse.useSystemCursor = true;
+				var channelBG = stageBuild.publicSprites["channelBG"];
+				var channelTopic = stageBuild.publicSprites["channelTopic"];
+				var dicsusButton = stageBuild.publicSprites["dicsusButton"];
+				var cutsceneFallbackTxt = stageBuild.publicSprites["cutsceneFallbackTxt"];
 				for (hud in allUIs) {
 					if (hud != camHUD) hud.alpha = 0;
 				}
-				for (x in [stageBuild.publicSprites["channelBG"], stageBuild.publicSprites["channelTopic"], stageBuild.publicSprites["dicsusButton"]]) {
+				for (x in [channelBG, channelTopic, dicsusButton]) {
 					x.visible = true;
 					x.cameras = [camHUD];
 				}
-				FlxMouseEventManager.add(stageBuild.publicSprites["dicsusButton"], spr -> {
+				cutsceneFallbackTxt.cameras = [camHUD];
+			FlxMouseEventManager.add(cast(dicsusButton, FlxSprite), spr -> {
 					clicked = true;
 					spr.animation.curAnim.curFrame = 2;
 					new FlxTimer().start(0.4, tmr -> {
-						stageBuild.publicSprites["channelBG"].visible = false;
-						stageBuild.publicSprites["channelTopic"].visible = false;
-						stageBuild.publicSprites["dicsusButton"].visible = false;
+						channelBG.visible = false;
+						channelTopic.visible = false;
+						dicsusButton.visible = false;
+						cutsceneFallbackTxt.visible = false;
 						for (hud in allUIs) FlxTween.tween(hud, { alpha: 1 }, .75, { onComplete: t ->  { 
-								FlxG.mouse.visible = false;
-								FlxG.mouse.useSystemCursor = false;
+							FlxG.mouse.visible = false;
+							FlxG.mouse.useSystemCursor = false;
 							startCountdown(); 
 						} });
 					});
@@ -2146,17 +2225,24 @@ class PlayState extends MusicBeatState
 					if (clicked) return; // because tap clicking
 					spr.animation.curAnim.curFrame = 2;
 					new FlxTimer().start(0.4, tmr -> {
-						stageBuild.publicSprites["channelBG"].visible = false;
-						stageBuild.publicSprites["channelTopic"].visible = false;
-						stageBuild.publicSprites["dicsusButton"].visible = false;
+						channelBG.visible = false;
+						channelTopic.visible = false;
+						dicsusButton.visible = false;
+						cutsceneFallbackTxt.visible = false;
 						for (hud in allUIs) FlxTween.tween(hud, { alpha: 1 }, .75, { onComplete: t ->  { 
-								FlxG.mouse.visible = false;
-								FlxG.mouse.useSystemCursor = false;
+							FlxG.mouse.visible = false;
+							FlxG.mouse.useSystemCursor = false;
 							startCountdown(); 
 						} });
 					});
 				}, 
 				spr -> spr.animation.curAnim.curFrame = 1, spr -> spr.animation.curAnim.curFrame = 0);
+			    new FlxTimer().start(15, t -> { 
+					if (!clicked) { 
+						cutsceneRanLong = true; 
+						cutsceneFallbackTxt.visible = true;
+					}
+				});
 			case "winter-horrorland":
 				inCutscene = true;
 				var blackScreen:FlxSprite = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
@@ -2260,8 +2346,10 @@ class PlayState extends MusicBeatState
 
 	public static function skipCutscenes():Bool {
 		// pretty messy but an if statement is messier
+		if (isExtraSong) return false;
 		if (Init.trueSettings.get('Skip Text') != null
 		&& Std.isOfType(Init.trueSettings.get('Skip Text'), String)) {
+			
 			switch (cast(Init.trueSettings.get('Skip Text'), String))
 			{
 				case 'never':
@@ -2275,6 +2363,7 @@ class PlayState extends MusicBeatState
 					return true;
 			}
 		}
+		
 		return false;
 	}
 
@@ -2287,7 +2376,7 @@ class PlayState extends MusicBeatState
 		swagCounter = 0;
 
 		camHUD.visible = true;
-		if ((SONG.song == "Clownstace" && storyDifficulty != 3) || SONG.song == "Test" || SONG.song == "SaveStated") {
+		if ((SONG.song == "Clownstace" && storyDifficulty != 3) || ["SaveStated", "Kadecat Hate Club"].contains(SONG.song)) {
 			Conductor.songPosition = -(Conductor.crochet * 1);
 			countdownComplete = true;
 			charactersDance(curBeat);

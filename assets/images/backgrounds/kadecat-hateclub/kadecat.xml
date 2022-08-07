@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="kadecat.png">
+	<!-- Created with Adobe Animate version 21.0.6.41649 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Kade0000" x="0" y="0" width="200" height="200"/>
+	<SubTexture name="Kade0001" x="200" y="0" width="200" height="200"/>
+	<SubTexture name="Kade0002" x="400" y="0" width="200" height="200"/>
+	<SubTexture name="Kade0003" x="600" y="0" width="200" height="200"/>
+	<SubTexture name="Kade0004" x="800" y="0" width="200" height="200"/>
+	<SubTexture name="Kade0005" x="1000" y="0" width="200" height="200"/>
+	<SubTexture name="Kade0006" x="1200" y="0" width="200" height="200"/>
+	<SubTexture name="Kade0007" x="1400" y="0" width="200" height="200"/>
+	<SubTexture name="Kade0008" x="1600" y="0" width="200" height="200"/>
+	<SubTexture name="Kade0009" x="1800" y="0" width="200" height="200"/>
+	<SubTexture name="Kade0010" x="0" y="200" width="200" height="200"/>
+	<SubTexture name="Kade0011" x="200" y="200" width="200" height="200"/>
+	<SubTexture name="Kade0012" x="400" y="200" width="200" height="200"/>
+	<SubTexture name="Kade0013" x="600" y="200" width="200" height="200"/>
+	<SubTexture name="Kade0014" x="800" y="200" width="200" height="200"/>
+	<SubTexture name="Kade0015" x="1000" y="200" width="200" height="200"/>
+	<SubTexture name="Kade0016" x="1200" y="200" width="200" height="200"/>
+	<SubTexture name="Kade0017" x="1400" y="200" width="200" height="200"/>
+	<SubTexture name="Kade0018" x="1600" y="200" width="200" height="200"/>
+	<SubTexture name="Kade0019" x="1800" y="200" width="200" height="200"/>
+	<SubTexture name="Kade0020" x="0" y="400" width="200" height="200"/>
+	<SubTexture name="Kade0021" x="200" y="400" width="200" height="200"/>
+	<SubTexture name="Kade0022" x="400" y="400" width="200" height="200"/>
+	<SubTexture name="Kade0023" x="600" y="400" width="200" height="200"/>
+	<SubTexture name="Kade0024" x="800" y="400" width="200" height="200"/>
+	<SubTexture name="Kade0025" x="1000" y="400" width="200" height="200"/>
+	<SubTexture name="Kade0026" x="1200" y="400" width="200" height="200"/>
+	<SubTexture name="Kade0027" x="1400" y="400" width="200" height="200"/>
+	<SubTexture name="Kade0028" x="1600" y="400" width="200" height="200"/>
+	<SubTexture name="Kade0029" x="1800" y="400" width="200" height="200"/>
+	<SubTexture name="Kade0030" x="0" y="600" width="200" height="200"/>
+	<SubTexture name="Kade0031" x="200" y="600" width="200" height="200"/>
+	<SubTexture name="Kade0032" x="400" y="600" width="200" height="200"/>
+	<SubTexture name="Kade0033" x="600" y="600" width="200" height="200"/>
+	<SubTexture name="Kade0034" x="800" y="600" width="200" height="200"/>
+	<SubTexture name="Kade0035" x="1000" y="600" width="200" height="200"/>
+	<SubTexture name="Kade0036" x="1200" y="600" width="200" height="200"/>
+	<SubTexture name="Kade0037" x="1400" y="600" width="200" height="200"/>
+	<SubTexture name="Kade0038" x="1600" y="600" width="200" height="200"/>
+	<SubTexture name="Kade0039" x="1800" y="600" width="200" height="200"/>
+	<SubTexture name="Kade0040" x="0" y="800" width="200" height="200"/>
+	<SubTexture name="Kade0041" x="200" y="800" width="200" height="200"/>
+	<SubTexture name="Kade0042" x="400" y="800" width="200" height="200"/>
+	<SubTexture name="Kade0043" x="600" y="800" width="200" height="200"/>
+	<SubTexture name="Kade0044" x="800" y="800" width="200" height="200"/>
+	<SubTexture name="Kade0045" x="1000" y="800" width="200" height="200"/>
+	<SubTexture name="Kade0046" x="1200" y="800" width="200" height="200"/>
+	<SubTexture name="Kade0047" x="1400" y="800" width="200" height="200"/>
+	<SubTexture name="Kade0048" x="1600" y="800" width="200" height="200"/>
+	<SubTexture name="Kade0049" x="1800" y="800" width="200" height="200"/>
+	<SubTexture name="Kade0050" x="0" y="1000" width="200" height="200"/>
+	<SubTexture name="Kade0051" x="200" y="1000" width="200" height="200"/>
+	<SubTexture name="Kade0052" x="400" y="1000" width="200" height="200"/>
+</TextureAtlas>
