@@ -68,11 +68,11 @@ class Character extends FNFSprite
 				frames = Paths.getSparrowAtlas('characters/beeg-nater');
 
 				animation.addByPrefix('idle', 'BIDLE', 24, false);
-				animation.addByPrefix('laugh', 'BLAUGH', 24, false);
-				animation.addByPrefix('singLEFT', 'BLEFT', 24, false);
-				animation.addByPrefix('singRIGHT', 'BRIGHT', 24, false);
-				animation.addByPrefix('singUP', 'BUP', 24, false);
-				animation.addByPrefix('singDOWN', 'BDOWN', 24, false);
+				animation.addByPrefix('laugh', 'BLAUGH', 30, false);
+				animation.addByPrefix('singLEFT', 'BLEFT', 30, true);
+				animation.addByPrefix('singRIGHT', 'BRIGHT', 30, true);
+				animation.addByPrefix('singUP', 'BUP', 30, true); //"BUP" "YAHOO" "IM THE BEST" "AAAAAAAAAA"
+				animation.addByPrefix('singDOWN', 'BDOWN', 30, true);
 
 				scale.set(2.3, 2.3);
 				characterData.camOffsetY -= 50;
