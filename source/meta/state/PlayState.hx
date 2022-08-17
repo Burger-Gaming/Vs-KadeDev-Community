@@ -1719,6 +1719,7 @@ class PlayState extends MusicBeatState
 	// variables to keep track of the original Y value so yoda and bf can return
 	public var bfYBeforeTween:Float = 0;
 	public var yoderYBeforeTween:Float = 0;
+	public var coolSprite:FNFSprite;
 	override function stepHit()
 	{
 		super.stepHit();
@@ -1918,6 +1919,29 @@ class PlayState extends MusicBeatState
 						uiHUD.doStuffWithIcons = true;
 						for (x in allUIs) FlxTween.tween(x, { alpha: 1 }, .7);
 						for (x in [boyfriend, stageBuild.publicSprites["BG"]]) FlxTween.tween(x, { alpha: 1 }, .7);
+					case 2384: //2384
+						//new FlxTimer().start(0, t -> { 
+						coolSprite = new FNFSprite().loadGraphic(Paths.image("Robo-Voice-1"));
+						coolSprite.scale.set(0.5, 0.5);
+						add(coolSprite);
+						//});
+					case 2400:
+						coolSprite.destroy();
+						coolSprite = new FNFSprite().loadGraphic(Paths.image("Robo-Voice-2"));
+						coolSprite.scale.set(0.5, 0.5);
+						add(coolSprite);
+					case 2416:
+						coolSprite.destroy();
+						coolSprite = new FNFSprite().loadGraphic(Paths.image("Robo-Voice-3"));
+						coolSprite.scale.set(0.5, 0.5);
+					add(coolSprite);
+					case 2427:
+						coolSprite.destroy();
+						coolSprite = new FNFSprite();
+						coolSprite.frames = Paths.getSparrowAtlas("cutscene/Robo-Anim"); // works the same as Paths.image(), it just needs an XML as well
+						coolSprite.animation.addByPrefix('Robo-Anim idle', 'Robo-Anim', 24, false); // name of anim, name of that anim in the XML file, framerate, whether or not it's looped
+						coolSprite.animation.play('Robo-Anim idle'); // self explanatory
+						add(coolSprite);
 				}
 			case 'Kadecat Hate Club':
 				switch (curStep) {
