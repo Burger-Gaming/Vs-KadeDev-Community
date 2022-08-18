@@ -368,6 +368,19 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				add(raise);
 				publicSprites["raise"] = raise;
 
+				var BGA:FNFSprite = new FNFSprite(0, -100);
+				BGA.frames = Paths.getSparrowAtlas('backgrounds/naterplat/Platform-Stage');
+				BGA.animation.addByPrefix('bump', 'ANIM', 24, false);
+				BGA.scrollFactor.set(1, 1);
+				BGA.screenCenter(X);
+				BGA.visible = false;
+
+				// BG.playAnim('bump');
+				BGA.setGraphicSize(Std.int(BGA.width * 2.5));
+				bump.push(BGA);
+				add(BGA);
+				publicSprites["BGA"] = BGA;
+
 			default:
 				PlayState.defaultCamZoom = 0.9;
 				curStage = 'stage';

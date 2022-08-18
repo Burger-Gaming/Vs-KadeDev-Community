@@ -4,11 +4,11 @@ package gameObjects;
 	The character class initialises any and all characters that exist within gameplay. For now, the character class will
 	stay the same as it was in the original source of the game. I'll most likely make some changes afterwards though!
 **/
-import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.addons.util.FlxSimplex;
 import flixel.animation.FlxBaseAnimation;
 import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.util.FlxColor;
 import gameObjects.userInterface.HealthIcon;
 import meta.*;
 import meta.data.*;
@@ -69,6 +69,7 @@ class Character extends FNFSprite
 
 				animation.addByPrefix('idle', 'BIDLE', 24, false);
 				animation.addByPrefix('laugh', 'BLAUGH', 30, false);
+				animation.addByPrefix('laughis', 'ALAUGH', 30, false);
 				animation.addByPrefix('singLEFT', 'BLEFT', 30, true);
 				animation.addByPrefix('singRIGHT', 'BRIGHT', 30, true);
 				animation.addByPrefix('singUP', 'BUP', 30, true); //"BUP" "YAHOO" "IM THE BEST" "AAAAAAAAAA"
