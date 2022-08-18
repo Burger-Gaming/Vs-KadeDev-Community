@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Platform-Stage.png">
+	<!-- Created with Adobe Animate version 21.0.6.41649 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="ANIM0000" x="0" y="0" width="960" height="540"/>
+	<SubTexture name="ANIM0001" x="960" y="0" width="960" height="540"/>
+	<SubTexture name="ANIM0002" x="0" y="540" width="960" height="540"/>
+	<SubTexture name="ANIM0003" x="960" y="540" width="960" height="540"/>
+	<SubTexture name="ANIM0004" x="0" y="540" width="960" height="540"/>
+	<SubTexture name="ANIM0005" x="960" y="0" width="960" height="540"/>
+	<SubTexture name="ANIM0006" x="0" y="0" width="960" height="540"/>
+</TextureAtlas>

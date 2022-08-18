@@ -319,8 +319,54 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				rain.frames = Paths.getSparrowAtlas('backgrounds/naterrain/rain');
 				rain.animation.addByPrefix('rain', 'ANIM', 24);
 				rain.playAnim('rain');
+				publicSprites["rain"] = rain;
 				foreground.add(rain); // todo: reduced motion
 				
+				var dark = new FNFSprite(0, 50);
+				dark.frames = Paths.getSparrowAtlas('backgrounds/naterdark/dark');
+				dark.animation.addByPrefix('flash', 'ANIM', 24, true);
+				dark.playAnim('flash');
+				dark.scrollFactor.set(1, 1);
+				dark.screenCenter(X);
+				dark.y = 195;
+				dark.setGraphicSize(Std.int(dark.width * 1.7));
+				publicSprites["dark"] = dark;
+				add(dark);
+
+				var superdark = new FNFSprite(0, 50);
+				superdark.frames = Paths.getSparrowAtlas('backgrounds/naterdark/superdark');
+				superdark.animation.addByPrefix('flash', 'ANIM', 24, true);
+				superdark.playAnim('flash');
+				superdark.scrollFactor.set(1, 1);
+				superdark.screenCenter(X);
+				superdark.y = 195;
+				superdark.setGraphicSize(Std.int(dark.width * 1.7));
+				superdark.visible = false;
+				publicSprites["superdark"] = superdark;
+				add(superdark);
+
+				var spotlight = new FNFSprite(0, 50);
+				spotlight.frames = Paths.getSparrowAtlas('backgrounds/naterdark/spotlight');
+				spotlight.animation.addByPrefix('flash', 'ANIM', 24, true);
+				spotlight.playAnim('flash');
+				spotlight.scrollFactor.set(1, 1);
+				spotlight.screenCenter(X);
+				spotlight.y = 195;
+				spotlight.setGraphicSize(Std.int(dark.width * 1.7));
+				spotlight.visible = false;
+				publicSprites["spotlight"] = spotlight;
+				add(spotlight);
+
+				var raise = new FNFSprite();
+				raise.frames = Paths.getSparrowAtlas("backgrounds/naterplat/Platform-Raise");
+				raise.animation.addByPrefix('up', 'ANIM', 24, true);
+				raise.playAnim('up');
+				raise.scrollFactor.set(1, 1);
+				raise.screenCenter();
+				raise.y -= 195;
+				raise.setGraphicSize(Std.int(raise.width * 5));
+				add(raise);
+				publicSprites["raise"] = raise;
 
 			default:
 				PlayState.defaultCamZoom = 0.9;

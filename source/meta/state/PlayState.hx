@@ -1876,6 +1876,10 @@ class PlayState extends MusicBeatState
 				switch (curStep) {
 					// song starts completely black
 					case 1:
+						stageBuild.publicSprites["BG"].visible = true;
+						stageBuild.publicSprites["raise"].visible = false;
+						stageBuild.publicSprites["dark"].visible = false;
+						stageBuild.publicSprites["spotlight"].visible = false;
 						otherDad.shouldSing = false;
 						boyfriendStrums.tint = 0xffffff;
 						boyfriendStrums.changeTint();
@@ -1885,6 +1889,9 @@ class PlayState extends MusicBeatState
 						FlxTween.tween(boyfriend, { alpha: 1 }, 1.4);
 					case 96:
 						FlxTween.tween(stageBuild.publicSprites["BG"], { alpha: 1 }, 1.4);
+						FlxTween.tween(stageBuild.publicSprites["raise"], {alpha: 1}, 1.4);
+						FlxTween.tween(stageBuild.publicSprites["dark"], {alpha: 1}, 1.4);
+						FlxTween.tween(stageBuild.publicSprites["spotlight"], {alpha: 1}, 1.4);
 					case 111:
 						FlxTween.tween(strumHUD[0], { alpha: 1 }, 1.7);
 					case 509:
@@ -1910,6 +1917,7 @@ class PlayState extends MusicBeatState
 						// dadOpponent.destroy();
 						FlxG.camera.stopFX();
 						FlxG.camera.fade(FlxColor.BLACK, .5, true);
+						stageBuild.publicSprites["rain"].visible = false;
 
 					case 511:
 						otherDad.playAnim('laugh');
@@ -1919,6 +1927,21 @@ class PlayState extends MusicBeatState
 						uiHUD.doStuffWithIcons = true;
 						for (x in allUIs) FlxTween.tween(x, { alpha: 1 }, .7);
 						for (x in [boyfriend, stageBuild.publicSprites["BG"]]) FlxTween.tween(x, { alpha: 1 }, .7);
+					case 591:
+						FlxG.camera.flash(FlxColor.WHITE, .5);
+						stageBuild.publicSprites["BG"].visible = false;
+						stageBuild.publicSprites["spotlight"].visible = true; //L
+					case 831:
+						otherDad.playAnim('laugh');
+					case 847:
+						FlxG.camera.flash(FlxColor.WHITE, .5);
+						stageBuild.publicSprites["spotlight"].visible = false;
+						stageBuild.publicSprites["dark"].visible = true;
+					case 1103:
+						FlxG.camera.flash(FlxColor.WHITE, .5);
+						stageBuild.publicSprites["dark"].visible = false;
+						stageBuild.publicSprites["BG"].visible = true;
+						stageBuild.publicSprites["rain"].visible = true;
 					case 2384: //2384
 						//new FlxTimer().start(0, t -> { 
 						coolSprite = new FNFSprite().loadGraphic(Paths.image("Robo-Voice-1"));
