@@ -363,16 +363,17 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				raise.playAnim('up');
 				raise.scrollFactor.set(1, 1);
 				raise.screenCenter();
-				raise.y -= 195;
+				raise.y -= 110;
 				raise.setGraphicSize(Std.int(raise.width * 5));
 				add(raise);
 				publicSprites["raise"] = raise;
 
-				var BGA:FNFSprite = new FNFSprite(0, -100);
+				var BGA:FNFSprite = new FNFSprite(0, 0);
 				BGA.frames = Paths.getSparrowAtlas('backgrounds/naterplat/Platform-Stage');
 				BGA.animation.addByPrefix('bump', 'ANIM', 24, false);
 				BGA.scrollFactor.set(1, 1);
 				BGA.screenCenter(X);
+				BGA.y = 170;
 				BGA.visible = false;
 
 				// BG.playAnim('bump');

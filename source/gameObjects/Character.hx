@@ -63,6 +63,19 @@ class Character extends FNFSprite
 
 		switch (curCharacter)
 		{
+			case 'NaterMarson':
+				charColor = "#CF0101";
+				frames = Paths.getSparrowAtlas('characters/NaterMarson');
+
+				animation.addByPrefix('idle', 'AnIdle', 24, false);
+				animation.addByPrefix('singLEFT', 'AnLeft', 30, true);
+				animation.addByPrefix('singRIGHT', 'AnRight', 30, true);
+				animation.addByPrefix('singUP', 'AnUp', 30, true);
+				animation.addByPrefix('singDOWN', 'AnDown', 30, true);
+
+				scale.set(0.9, 0.9);
+				//characterData.camOffsetY -= 50;
+			
 			case 'beeg-nater':
 				charColor = "#CF0101";
 				frames = Paths.getSparrowAtlas('characters/beeg-nater');
