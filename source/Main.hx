@@ -87,9 +87,9 @@ class Main extends Sprite
 		[ [songs to use], [characters in songs], [color of week], name of week ]
 	**/
 	public static var extraSongs:Array<Dynamic> = [
-		['Battle of the Century', 'Roasted', 'Kadecat Hate Club'],
-		['Whoppa', 'burger', 'bf'],
-		[FlxColor.fromRGB(255, 153, 0), FlxColor.fromRGB(255, 255, 0), FlxColor.fromRGB(49, 176, 209)]
+		['Battle of the Century', 'Roasted'],
+		['Whoppa', 'burger'],
+		[FlxColor.fromRGB(255, 153, 0), FlxColor.fromRGB(255, 255, 0)]
 	];
 
 	public static var gameWeeks:Array<Dynamic> = [

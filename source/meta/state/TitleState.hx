@@ -49,6 +49,7 @@ class TitleState extends MusicBeatState
 	var curWacky:Array<String> = [];
 
 	var wackyImage:FlxSprite;
+	var introIcons:Map<String, FlxSprite> = new Map();
 
 	override public function create():Void
 	{
@@ -57,6 +58,17 @@ class TitleState extends MusicBeatState
 		super.create();
 
 		startIntro();
+		
+		// because you can't read a directory in flixel?? wtf
+		for (x in ["beekies", "burger", "fabi", "indefin8", "lem", "multihand", "nater", "red", "skullbite", "soulslimm", "tomi", "tostper", "vander", "waddle", "xg"]) {
+			var spr = new FlxSprite(50, 50).loadGraphic(Paths.image('intro-icons/$x'));
+			spr.visible = false;
+			spr.scale.set(.4, .4);
+			introIcons[x] = spr;
+			add(spr);
+
+		}
+
 	}
 
 	var logoBl:FlxSprite;
@@ -251,6 +263,25 @@ class TitleState extends MusicBeatState
 			credGroup.add(money);
 			textGroup.add(money);
 		}
+		return textGroup.members[0];
+	}
+	inline function hideIcons(targets: Array<String>) for (x in targets) introIcons[x].visible = false;
+	function adjustAndShowIcon(target: String, targetTxt, ?onLeft=true) {
+		var targetSpr = introIcons[target];
+		var _targetTxt = cast(targetTxt, Alphabet);
+
+		targetSpr.x = onLeft ? _targetTxt.x - 300 : _targetTxt.width + 220;
+		targetSpr.y = _targetTxt.y - 105;
+		switch (_targetTxt.text) {
+			case "fabi": targetSpr.x += 110;
+			case "xg": targetSpr.x += 210;
+			case "red": targetSpr.x += 160;
+			case "tostper": targetSpr.x += 80;
+			case "nater marson": targetSpr.x -= 40;
+			case "skullbite": targetSpr.x += 40;
+		}
+
+		targetSpr.visible = !skippedIntro;
 	}
 
 	function addMoreText(text:String)
@@ -260,6 +291,7 @@ class TitleState extends MusicBeatState
 		coolText.y += (textGroup.length * 60) + 200;
 		credGroup.add(coolText);
 		textGroup.add(coolText);
+		return coolText;
 	}
 
 	function deleteCoolText()
@@ -289,43 +321,56 @@ class TitleState extends MusicBeatState
 
 		switch (curBeat)
 		{
-			case 1: createCoolText(['music by']);
-			case 2:
-				var coolMusicPeople = ['waddle', 'lemlom', 'fabi'];
-				for (x in coolMusicPeople) addMoreText(x);
-			case 3:
+			case 1: adjustAndShowIcon('waddle', createCoolText(['waddle']));
+			case 2: adjustAndShowIcon('fabi', addMoreText('fabi'), false);
+			case 3: adjustAndShowIcon('tomi', addMoreText('tomi'));
+			case 4:
 				deleteCoolText();
-				createCoolText(['music by', 'tomi', 'xg', 'indefin8']);
-			case 4: deleteCoolText();
-			case 5: createCoolText(['art by']);
-			case 6:
-				var coolArtPeople = ['beekies', 'multi-hand', 'lemlom', 'tostper'];
-				for (x in coolArtPeople) addMoreText(x);
-			case 7:
+				hideIcons(["waddle", "fabi", "tomi"]);
+
+			case 5: adjustAndShowIcon('xg', createCoolText(['xg']), false);	
+			case 7: adjustAndShowIcon('indefin8', addMoreText('indefin-eight'));
+			case 8:
+				hideIcons(["xg", "indefin8"]);
 				deleteCoolText();
-				createCoolText(['art by', 'red', 'soulslimm', 'k4zimir', 'dareiphobia']);
-			case 8: deleteCoolText();
-			case 9: createCoolText(['three dimensional stuff by']);
-			case 10: addMoreText('vander');
-			case 11: addMoreText('nater marson');
-			case 12: deleteCoolText();
-			case 13: createCoolText(['charting by']);
-			case 15: addMoreText('techsec');
-			case 16: deleteCoolText();
-			case 17: createCoolText(['coding by']);
-			case 18: addMoreText('burger');
-			case 19: addMoreText('skullbite');
-			case 20: deleteCoolText();
-			case 21: createCoolText([curWacky[0]]);
-			case 23: addMoreText(curWacky[1]);
-			case 24: deleteCoolText();
-			case 25: createCoolText(['too much work', 'went into this']);
-			case 27: addMoreText('enjoy the mod');
-			case 28: deleteCoolText();
-			case 29: createCoolText(['vs']);
+
+			case 9: adjustAndShowIcon('beekies', createCoolText(['beekies']));
+			case 10: adjustAndShowIcon('multihand', addMoreText('multi-hand'), false);
+			case 11: adjustAndShowIcon('lem', addMoreText('lemlom'));
+			case 12:
+				hideIcons(["beekies", "multihand", "lem"]);
+				deleteCoolText();
+
+			case 13: adjustAndShowIcon('red', createCoolText(['red']), false);
+			case 14: adjustAndShowIcon('soulslimm', addMoreText('soulslimm'));
+			case 15: adjustAndShowIcon('tostper', addMoreText('tostper'), false);
+			case 16:
+				hideIcons(["soulslimm", "red", "tostper"]);
+				deleteCoolText();
+
+			case 17: adjustAndShowIcon('vander', createCoolText(['vander']));
+			case 18: adjustAndShowIcon('nater', addMoreText('nater marson'), false);
+			case 19: adjustAndShowIcon('burger', addMoreText('burger'));
+			case 20: adjustAndShowIcon('skullbite', addMoreText('skullbite'), false);
+
+			case 21:
+				hideIcons(["vander", "nater", "burger", "skullbite"]);
+				deleteCoolText();
+				createCoolText(['we need more']);
+			case 23: addMoreText('text here');
+
+			case 25:
+				deleteCoolText();
+				createCoolText([curWacky[0]]);
+			case 27: addMoreText(curWacky[1]);
+
+			case 29:
+				deleteCoolText();
+				createCoolText(['vs']);
 			case 30: addMoreText('kadedev');
 			case 31: addMoreText('community');
 			case 32: skipIntro();
+
 		}
 	}
 
