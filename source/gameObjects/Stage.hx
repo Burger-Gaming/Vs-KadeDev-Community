@@ -331,6 +331,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				dark.y = 195;
 				dark.setGraphicSize(Std.int(dark.width * 1.7));
 				publicSprites["dark"] = dark;
+				dark.visible = false;
 				add(dark);
 
 				var superdark = new FNFSprite(0, 50);
@@ -365,6 +366,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				raise.screenCenter();
 				raise.y -= 200;
 				raise.setGraphicSize(Std.int(raise.width * 5));
+				raise.visible = false;
 				add(raise);
 				publicSprites["raise"] = raise;
 
