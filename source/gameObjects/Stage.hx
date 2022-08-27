@@ -430,6 +430,8 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				gfVersion = 'gf-pixel';
 			case 'schoolEvil':
 				gfVersion = 'gf-pixel';
+			case 'naterdark' | 'naterrain' | 'nater':
+				gfVersion = 'natergf';
 		}
 
 		return gfVersion;
@@ -482,13 +484,11 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				boyfriend.y = dad.y + 300;
 			
 			case 'naterrain':
-				gf.visible = false;
 				dad.y += 110;
 				dad.alpha = 0;
 				boyfriend.alpha = 0;
 
 			case 'naterdark':
-				gf.visible = false;
 				// boyfriend.scale.set(0.75, 0.75);
 				boyfriend.y -= 130;
 				boyfriend.x -= 100;
@@ -502,7 +502,6 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				// boyfriend.scale.set(0.75, 0.75);
 				/*gf.scale.set(0.55, 0.55);
 				gf.adjustPos = false;*/
-				gf.visible = false;
 				dad.x -= 120;
 				dad.y -= 120;
 				boyfriend.y -= 225;

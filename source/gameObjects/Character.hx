@@ -63,6 +63,15 @@ class Character extends FNFSprite
 
 		switch (curCharacter)
 		{
+			case 'natergf':
+				tex = Paths.getSparrowAtlas('characters/GF_Nater');
+				frames = tex;
+				//animation.addByIndices('sad', 'gf sad', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "", 24, false);
+				animation.addByIndices('danceLeft', 'GF Dance', [20, 0, 1, 2, 3, 4, 5, 6, 7, 8], "", 24, false);
+				animation.addByIndices('danceRight', 'GF Dance', [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19], "", 24, false);
+				scale.set(1.5, 1.5);
+
+				playAnim('danceRight');
 			case 'NaterMarson':
 				charColor = "#CF0101";
 				frames = Paths.getSparrowAtlas('characters/NaterMarson');
