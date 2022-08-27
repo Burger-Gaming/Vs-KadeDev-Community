@@ -1998,6 +1998,7 @@ class PlayState extends MusicBeatState
 						add(coolSprite);
 					case 2448:
 						coolSprite.destroy();
+						FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom * 0.5}, .4);
 						dadOpponent.shouldSing = true;
 						dadOpponent.visible = true;
 						otherDad.shouldSing = false;
