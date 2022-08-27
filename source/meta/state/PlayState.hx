@@ -1863,8 +1863,14 @@ class PlayState extends MusicBeatState
 						stageBuild.publicSprites["spotlight"].visible = false;
 						uiTint = 0xffffff;
 						boyfriendStrums.changeTint();
-
 						dadStrums.changeTint();
+					case 1919:
+						for (x in [strumHUD[0], dadOpponent, stageBuild.publicSprites["dark"], boyfriendStrums.receptors.members[0], boyfriendStrums.receptors.members[1], boyfriendStrums.receptors.members[3]]) FlxTween.tween(x, { alpha: 0 }, 1.2, { ease: FlxEase.quadInOut });
+					case 1929:
+						FlxTween.tween(camHUD, { alpha: 0 }, 1.2, { ease: FlxEase.quadInOut });
+					case 1930:
+						FlxTween.tween(boyfriend, { alpha: 0 }, .5, { ease: FlxEase.quadInOut });
+						
 				}
 			case 'Rom Hack':
 				switch (curStep) {
