@@ -484,6 +484,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				boyfriend.y = dad.y + 300;
 			
 			case 'naterrain':
+				gf.y += 230;
 				dad.y += 110;
 				dad.alpha = 0;
 				boyfriend.alpha = 0;
@@ -492,6 +493,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				// boyfriend.scale.set(0.75, 0.75);
 				boyfriend.y -= 130;
 				boyfriend.x -= 100;
+				gf.y += 95;
 				dad.x -= 40;
 				dad.y -= 25;
 				publicSprites["dark"].visible = false;
