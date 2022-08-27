@@ -510,6 +510,10 @@ class PlayState extends MusicBeatState
 				preCacheCharacter('bf', 'naterbf-flash', [boyfriend.x, boyfriend.y]);
 				preCacheCharacter('bf', 'naterbf', [boyfriend.x, boyfriend.y]);
 			case "SaveStated":
+				preCacheCharacter('dad', 'beeg-nater', [dadOpponent.x, dadOpponent.y]);
+				preCacheCharacter('dad', 'NaterMarson', [dadOpponent.x, dadOpponent.y]);
+				preCacheCharacter('bf', 'bf', [boyfriend.x, boyfriend.y]);
+				//preCache()
 				for (x in allUIs) x.alpha = 0;
 		}
 
@@ -1878,6 +1882,7 @@ class PlayState extends MusicBeatState
 					case 1:
 						stageBuild.publicSprites["BG"].visible = true;
 						stageBuild.publicSprites["raise"].visible = false;
+						stageBuild.publicSprites["BGA"].visible = false;
 						stageBuild.publicSprites["dark"].visible = false;
 						stageBuild.publicSprites["spotlight"].visible = false;
 						otherDad.shouldSing = false;
@@ -1942,11 +1947,31 @@ class PlayState extends MusicBeatState
 						stageBuild.publicSprites["dark"].visible = false;
 						stageBuild.publicSprites["BG"].visible = true;
 						stageBuild.publicSprites["rain"].visible = true;
+					case 1343:
+						otherDad.playAnim('laugh');
+					case 1359:
+						stageBuild.publicSprites["BG"].visible = false;
+						stageBuild.publicSprites["rain"].visible = false;
+						stageBuild.publicSprites["raise"].visible = true;
+					case 1599:
+						otherDad.playAnim('laughis');
+					case 1615:
+						FlxG.camera.flash(FlxColor.WHITE, .5);
+						stageBuild.publicSprites["raise"].visible = false;
+						stageBuild.publicSprites["BGA"].visible = true;
+					case 1856:
+						otherDad.playAnim('laugh');
+					case 1871:
+						FlxG.camera.flash(FlxColor.WHITE, .5);
+						stageBuild.publicSprites["superdark"].visible = true;
+						stageBuild.publicSprites["BGA"].visible = false;
+						stageBuild.publicSprites["rain"].visible = true;
 					case 2384: //2384
-						//new FlxTimer().start(0, t -> { 
+						//new FlxTimer().start(0, t -> {  
 						coolSprite = new FNFSprite().loadGraphic(Paths.image("Robo-Voice-1"));
 						coolSprite.scale.set(0.5, 0.5);
 						add(coolSprite);
+						stageBuild.publicSprites["superdark"].visible = false;
 						//});
 					case 2400:
 						coolSprite.destroy();
@@ -1957,14 +1982,23 @@ class PlayState extends MusicBeatState
 						coolSprite.destroy();
 						coolSprite = new FNFSprite().loadGraphic(Paths.image("Robo-Voice-3"));
 						coolSprite.scale.set(0.5, 0.5);
-					add(coolSprite);
+						add(coolSprite);
 					case 2427:
 						coolSprite.destroy();
 						coolSprite = new FNFSprite();
-						coolSprite.frames = Paths.getSparrowAtlas("cutscene/Robo-Anim"); // works the same as Paths.image(), it just needs an XML as well
-						coolSprite.animation.addByPrefix('Robo-Anim idle', 'Robo-Anim', 24, false); // name of anim, name of that anim in the XML file, framerate, whether or not it's looped
-						coolSprite.animation.play('Robo-Anim idle'); // self explanatory
+						coolSprite.frames = Paths.getSparrowAtlas("cutscene/Robo-Anim"); // burger gaming is a fucking godsend :D
+						coolSprite.animation.addByPrefix('Robo-Anim idle', 'Robo-Anim', 24, false); 
+						coolSprite.animation.play('Robo-Anim idle'); 
 						add(coolSprite);
+					case 2448:
+						coolSprite.destroy();
+						dadOpponent.shouldSing = true;
+						dadOpponent.visible = true;
+						otherDad.shouldSing = false;
+						otherDad.x += -120;
+						otherDad.y += -1350;
+						switchCharacter('dad', 'NaterMarson', false);
+						switchCharacter('bf', 'bf', false);
 				}
 			case 'Kadecat Hate Club':
 				switch (curStep) {
