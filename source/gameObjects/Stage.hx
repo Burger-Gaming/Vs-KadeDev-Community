@@ -363,7 +363,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				raise.playAnim('up');
 				raise.scrollFactor.set(1, 1);
 				raise.screenCenter();
-				raise.y -= 110;
+				raise.y -= 200;
 				raise.setGraphicSize(Std.int(raise.width * 5));
 				add(raise);
 				publicSprites["raise"] = raise;
