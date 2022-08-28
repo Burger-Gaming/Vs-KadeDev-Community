@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="NateTextBox.png">
+<SubTexture name="NateTextBox Open0000" x="2303" y="510" width="28" height="12" frameX="-331" frameY="-112" frameWidth="690" frameHeight="236" />
+<SubTexture name="NateTextBox Open0001" x="1825" y="529" width="226" height="12" frameX="-232" frameY="-112" frameWidth="690" frameHeight="236" />
+<SubTexture name="NateTextBox Open0002" x="1825" y="510" width="478" height="19" frameX="-106" frameY="-108" frameWidth="690" frameHeight="236" />
+<SubTexture name="NateTextBox Open0003" x="1825" y="348" width="555" height="162" frameX="-68" frameY="-37" frameWidth="690" frameHeight="236" />
+<SubTexture name="NateTextBox Open0004" x="0" y="0" width="591" height="232" frameX="-49" frameY="-2" frameWidth="690" frameHeight="236" />
+<SubTexture name="NateTextBox Open0005" x="591" y="0" width="656" height="220" frameX="-17" frameY="-8" frameWidth="690" frameHeight="236" />
+<SubTexture name="NateTextBox Open0006" x="0" y="232" width="680" height="190" frameX="-5" frameY="-23" frameWidth="690" frameHeight="236" />
+<SubTexture name="NateTextBox Open0007" x="1160" y="1165" width="648" height="178" frameX="-21" frameY="-29" frameWidth="690" frameHeight="236" />
+<SubTexture name="NateTextBox Open0008" x="1160" y="1345" width="584" height="176" frameX="-53" frameY="-30" frameWidth="690" frameHeight="236" />
+<SubTexture name="NateTextBox Open0009" x="1825" y="176" width="580" height="172" frameX="-55" frameY="-32" frameWidth="690" frameHeight="236" />
+<SubTexture name="NateTextBox Idle0000" x="0" y="1523" width="580" height="176" frameX="-55" frameY="-30" frameWidth="690" frameHeight="236" />
+<SubTexture name="NateTextBox Idle0001" x="578" y="981" width="578" height="182" frameX="-56" frameY="-27" frameWidth="690" frameHeight="236" />
+<SubTexture name="NateTextBox Idle0002" x="578" y="796" width="578" height="184" frameX="-56" frameY="-26" frameWidth="690" frameHeight="236" />
+<SubTexture name="NateTextBox Idle0003" x="0" y="422" width="578" height="188" frameX="-56" frameY="-24" frameWidth="690" frameHeight="236" />
+<SubTexture name="NateTextBox Idle0004" x="578" y="422" width="578" height="187" frameX="-56" frameY="-25" frameWidth="690" frameHeight="236" />
+<SubTexture name="NateTextBox Idle0005" x="0" y="610" width="578" height="186" frameX="-56" frameY="-25" frameWidth="690" frameHeight="236" />
+<SubTexture name="NateTextBox Idle0006" x="578" y="610" width="578" height="186" frameX="-56" frameY="-25" frameWidth="690" frameHeight="236" />
+<SubTexture name="NateTextBox Idle0007" x="0" y="796" width="578" height="185" frameX="-56" frameY="-26" frameWidth="690" frameHeight="236" />
+<SubTexture name="NateTextBox Idle0008" x="0" y="981" width="578" height="184" frameX="-56" frameY="-26" frameWidth="690" frameHeight="236" />
+<SubTexture name="NateTextBox Idle0009" x="1247" y="0" width="578" height="182" frameX="-56" frameY="-27" frameWidth="690" frameHeight="236" />
+<SubTexture name="NateTextBox Idle0010" x="1247" y="182" width="578" height="182" frameX="-56" frameY="-27" frameWidth="690" frameHeight="236" />
+<SubTexture name="NateTextBox Idle0011" x="0" y="1165" width="580" height="180" frameX="-55" frameY="-28" frameWidth="690" frameHeight="236" />
+<SubTexture name="NateTextBox Idle0012" x="580" y="1165" width="580" height="180" frameX="-55" frameY="-28" frameWidth="690" frameHeight="236" />
+<SubTexture name="NateTextBox Idle0013" x="0" y="1345" width="580" height="178" frameX="-55" frameY="-29" frameWidth="690" frameHeight="236" />
+<SubTexture name="NateTextBox Idle0014" x="580" y="1345" width="580" height="178" frameX="-55" frameY="-29" frameWidth="690" frameHeight="236" />
+<SubTexture name="NateTextBox Idle0015" x="580" y="1523" width="580" height="176" frameX="-55" frameY="-30" frameWidth="690" frameHeight="236" />
+<SubTexture name="NateTextBox Idle0016" x="1160" y="1523" width="580" height="176" frameX="-55" frameY="-30" frameWidth="690" frameHeight="236" />
+<SubTexture name="NateTextBox Idle0017" x="1825" y="0" width="580" height="176" frameX="-55" frameY="-30" frameWidth="690" frameHeight="236" />
+</TextureAtlas>

@@ -1,0 +1,10 @@
+{
+    "position": [267, 456],
+    "scale": 2.4,
+    "states": {
+        "normal": {
+            "open": ["NateTextBox Open"],
+            "default": ["NateTextBox Idle", [-33, 0]]
+        }
+    }
+}
