@@ -66,6 +66,13 @@ class StoryMenuState extends MusicBeatState
 		// freeaaaky
 		ForeverTools.resetMenuMusic();
 
+		var Bull = new FlxSprite().loadGraphic(Paths.image('menus/base/menuSelect'));
+		Bull.screenCenter(X);
+		Bull.screenCenter(Y);
+		Bull.scale.set(0.69, 0.69);
+		Bull.alpha = 1;
+		add(Bull);
+
 		persistentUpdate = persistentDraw = true;
 
 		scoreText = new FlxText(10, 10, 0, "SCORE: 49324858", 36);
