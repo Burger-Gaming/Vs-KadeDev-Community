@@ -35,7 +35,7 @@ class HealthIcon extends FlxSprite
 			trace('$char icon trying $iconPath instead you fuck');
 		}
 
-		antialiasing = true;
+		antialiasing = !iconPath.contains('pixel');
 		var iconGraphic:FlxGraphic = Paths.image('icons/icon-' + iconPath);
 		loadGraphic(iconGraphic, true, Std.int(iconGraphic.width / 2), iconGraphic.height);
 

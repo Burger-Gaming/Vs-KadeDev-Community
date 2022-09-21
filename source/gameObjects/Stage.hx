@@ -308,12 +308,21 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				add(spotlight);
             
 		    case 'naterrain':
-				PlayState.defaultCamZoom = 1.3;
+				PlayState.defaultCamZoom = 1.2;
 				var BG = new FNFSprite().loadGraphic(Paths.image('backgrounds/naterrain/bg'));
 				BG.scrollFactor.set(1, 1);
 				BG.alpha = 0;
 				publicSprites["BG"] = BG;
 				add(BG);
+
+				var tvStatic = new FNFSprite();
+				tvStatic.frames = Paths.getSparrowAtlas('clownstace/noiseTexture');
+				tvStatic.animation.addByPrefix('static', 'tv static', 24, true);
+				tvStatic.alpha = 0;
+				tvStatic.color = 0xfc6a6a;
+				tvStatic.playAnim('static');
+				publicSprites["static"] = tvStatic;
+				add(tvStatic);
 
 				var rain = new FNFSprite();
 				rain.frames = Paths.getSparrowAtlas('backgrounds/naterrain/rain');
@@ -323,8 +332,8 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				foreground.add(rain); // todo: reduced motion
 				
 				var dark = new FNFSprite(0, 50);
-				dark.frames = Paths.getSparrowAtlas('backgrounds/naterdark/dark');
-				dark.animation.addByPrefix('flash', 'ANIM', 24, true);
+				dark.frames = Paths.getSparrowAtlas('backgrounds/naterrain/dark');
+				dark.animation.addByPrefix('flash', 'dark idle', 24, true);
 				dark.playAnim('flash');
 				dark.scrollFactor.set(1, 1);
 				dark.screenCenter(X);
@@ -347,9 +356,9 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				add(superdark);
 
 				var spotlight = new FNFSprite(0, 50);
-				spotlight.frames = Paths.getSparrowAtlas('backgrounds/naterdark/spotlight');
-				spotlight.animation.addByPrefix('flash', 'ANIM', 24, true);
-				spotlight.playAnim('flash');
+				spotlight.frames = Paths.getSparrowAtlas('backgrounds/naterrain/fire');
+				spotlight.animation.addByPrefix('flames', 'fire idle', 24, true);
+				spotlight.playAnim('flames');
 				spotlight.scrollFactor.set(1, 1);
 				spotlight.screenCenter(X);
 				spotlight.y = 195;
@@ -359,20 +368,20 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				add(spotlight);
 
 				var raise = new FNFSprite();
-				raise.frames = Paths.getSparrowAtlas("backgrounds/naterplat/Platform-Raise");
-				raise.animation.addByPrefix('up', 'ANIM', 24, true);
+				raise.frames = Paths.getSparrowAtlas("backgrounds/naterrain/RedRaise");
+				raise.animation.addByPrefix('up', 'RedRaise idle', 24, true);
 				raise.playAnim('up');
 				raise.scrollFactor.set(1, 1);
 				raise.screenCenter();
 				raise.y -= 200;
-				raise.setGraphicSize(Std.int(raise.width * 5));
+				raise.setGraphicSize(Std.int(raise.width * 2.4));
 				raise.visible = false;
 				add(raise);
 				publicSprites["raise"] = raise;
 
 				var BGA:FNFSprite = new FNFSprite(0, 0);
-				BGA.frames = Paths.getSparrowAtlas('backgrounds/naterplat/Platform-Stage');
-				BGA.animation.addByPrefix('bump', 'ANIM', 24, false);
+				BGA.frames = Paths.getSparrowAtlas('backgrounds/naterrain/Burning-stage');
+				BGA.animation.addByPrefix('bump', 'Burning-stage idle', 24, false);
 				BGA.scrollFactor.set(1, 1);
 				BGA.screenCenter(X);
 				BGA.y = 170;
@@ -383,6 +392,51 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				bump.push(BGA);
 				add(BGA);
 				publicSprites["BGA"] = BGA;
+
+				var letTheBloodFlow = new FNFSprite().loadGraphic(Paths.image('backgrounds/naterrain/Robo-Voice-1'));
+				letTheBloodFlow.screenCenter();
+				letTheBloodFlow.scale.set(0.5, 0.5);
+				letTheBloodFlow.visible = false;
+				add(letTheBloodFlow);
+				publicSprites["letTheBloodFlow"] = letTheBloodFlow;
+
+				var machinesRise = new FNFSprite().loadGraphic(Paths.image('backgrounds/naterrain/Robo-Voice-2'));
+				machinesRise.screenCenter();
+				machinesRise.y -= 60;
+				machinesRise.scale.set(0.5, 0.5);
+				machinesRise.color = 0xFBECB3;
+				machinesRise.visible = false;
+				add(machinesRise);
+				publicSprites["machinesRise"] = machinesRise;
+
+				var perfectAndAll = new FNFSprite().loadGraphic(Paths.image('backgrounds/naterrain/Robo-Voice-3'));
+				perfectAndAll.screenCenter();
+				perfectAndAll.y -= 20;
+				perfectAndAll.scale.set(0.5, 0.5);
+				perfectAndAll.color = 0xFA8253;
+				perfectAndAll.visible = false;
+				add(perfectAndAll);
+				publicSprites["perfectAndAll"] = perfectAndAll;
+
+				var ohHowDivine = new FNFSprite();
+				ohHowDivine.frames = Paths.getSparrowAtlas('cutscene/Robo-Anim');
+				ohHowDivine.animation.addByPrefix('OHHOWDIVINE', 'Robo-Anim', 24, false);
+				ohHowDivine.screenCenter();
+				ohHowDivine.visible = false;
+				add(ohHowDivine);
+				publicSprites["ohHowDivine"] = ohHowDivine;
+
+				var garbageModdedReference = new FNFSprite(0, 50).loadGraphic(Paths.image('backgrounds/naterrain/garbagemodded'));
+				garbageModdedReference.visible = false;
+				garbageModdedReference.scrollFactor.set(1, 1);
+				garbageModdedReference.setGraphicSize(Std.int(garbageModdedReference.width * .75));
+				garbageModdedReference.antialiasing = false;
+				add(garbageModdedReference);
+				publicSprites["gmr"] = garbageModdedReference;
+
+				var daCrash = new FNFSprite().loadGraphic(Paths.image("backgrounds/naterrain/daCrash"));
+				daCrash.screenCenter();
+				publicSprites["daCrash"] = daCrash;
 
 			default:
 				PlayState.defaultCamZoom = 0.9;
@@ -486,10 +540,15 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				boyfriend.y = dad.y + 300;
 			
 			case 'naterrain':
-				gf.y += 230;
 				dad.y += 110;
+				boyfriend.x += 420;
+				boyfriend.y -= 70;
+				boyfriend.angle = -7;
 				dad.alpha = 0;
 				boyfriend.alpha = 0;
+				gf.alpha = 0;
+				gf.x += 280;
+				gf.y += 200;
 
 			case 'naterdark':
 				// boyfriend.scale.set(0.75, 0.75);
@@ -501,6 +560,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				publicSprites["dark"].visible = false;
 				publicSprites["superdark"].visible = true;
 				boyfriend.setColorTransform(0.07, 0.07, 0.07);
+				gf.setColorTransform(0.07, 0.07, 0.07);
 				PlayState.uiTint = 0x747171;
 			case 'nater':
 				// boyfriend.scale.set(0.75, 0.75);

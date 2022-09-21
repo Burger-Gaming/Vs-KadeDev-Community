@@ -30,10 +30,10 @@
 <SubTexture name="Robo-Anim idle0028" x="5120" y="0" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720" />
 <SubTexture name="Robo-Anim idle0029" x="5120" y="720" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720" />
 <SubTexture name="Robo-Anim idle0030" x="5120" y="1440" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720" />
-<SubTexture name="Robo-Anim idle0031" x="5120" y="2160" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720" />
+<!--<SubTexture name="Robo-Anim idle0031" x="5120" y="2160" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720" />
 <SubTexture name="Robo-Anim idle0032" x="5120" y="2880" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720" />
 <SubTexture name="Robo-Anim idle0033" x="5120" y="3600" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720" />
 <SubTexture name="Robo-Anim idle0034" x="5120" y="4320" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720" />
 <SubTexture name="Robo-Anim idle0035" x="0" y="5040" width="1280" height="720" frameX="0" frameY="0" frameWidth="1280" frameHeight="720" />
-<SubTexture name="Robo-Anim idle0036" x="1280" y="5040" width="1280" height="595" frameX="0" frameY="-43" frameWidth="1280" frameHeight="720" />
+<SubTexture name="Robo-Anim idle0036" x="1280" y="5040" width="1280" height="595" frameX="0" frameY="-43" frameWidth="1280" frameHeight="720" /> unfortunately can't get the transition to work. -->
 </TextureAtlas>

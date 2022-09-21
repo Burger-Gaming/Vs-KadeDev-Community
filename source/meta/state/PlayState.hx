@@ -19,6 +19,7 @@ import flixel.math.FlxRect;
 import flixel.system.FlxAssets.FlxSoundAsset;
 import flixel.system.FlxSound;
 import flixel.text.FlxText;
+import flixel.addons.text.FlxTypeText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
@@ -143,6 +144,7 @@ class PlayState extends MusicBeatState
 	public static var camHUD:FlxCamera;
 	public static var camGame:FlxCamera;
 	public static var dialogueHUD:FlxCamera;
+	var ssCam:FlxCamera;
 
 	public var camDisplaceX:Float = 0;
 	public var camDisplaceY:Float = 0; // might not use depending on result
@@ -194,6 +196,10 @@ class PlayState extends MusicBeatState
 	var extColorBar:FlxSprite;
 	var songPos:Float;
 	var timeTxt:FlxText;
+
+	// savestated positions
+	// 0 = dad, 1 = gf, 2 = bf
+	var ogPos = [[], [], []];
 
 	// at the beginning of the playstate
 	override public function create()
@@ -511,8 +517,10 @@ class PlayState extends MusicBeatState
 				preCacheCharacter('bf', 'naterbf', [boyfriend.x, boyfriend.y]);
 			case "SaveStated":
 				preCacheCharacter('dad', 'beeg-nater', [dadOpponent.x, dadOpponent.y]);
-				preCacheCharacter('dad', 'NaterMarson', [dadOpponent.x, dadOpponent.y]);
+				preCacheCharacter('dad', 'NaterMarson', [dadOpponent.x + 100, dadOpponent.y + 50]);
 				preCacheCharacter('bf', 'bf', [boyfriend.x, boyfriend.y]);
+				preCacheCharacter('bf', 'bf-pixel', [boyfriend.x, boyfriend.y]);
+				preCacheCharacter('gf', 'gf-pixel', [gf.x, gf.y]);
 				//preCache()
 				for (x in allUIs) x.alpha = 0;
 		}
@@ -526,7 +534,6 @@ class PlayState extends MusicBeatState
 			screen1.visible = true;
 		} 
 		else {
-			
 			screen1.visible = false;
 		}
 		add(screen1);
@@ -909,7 +916,7 @@ class PlayState extends MusicBeatState
 			}
 
 			var lerpVal = (elapsed * 2.4) * cameraSpeed;
-			camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
+			if (followMustHits) camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 
 			var easeLerp = 0.95;
 			// camera stuffs
@@ -1482,6 +1489,9 @@ class PlayState extends MusicBeatState
 				negative, createdColor, scoreInt);
 			add(numScore);
 			numScore.color = uiTint;
+			numScore.cameras = [camHUD];
+			numScore.x = FlxG.width - (350 - (40 * scoreInt)) - (stringArray.length == 3 ? 40 : 0);
+			numScore.y = FlxG.height - 100;
 			// hardcoded lmao
 			if (!Init.trueSettings.get('Simply Judgements'))
 			{
@@ -1499,20 +1509,14 @@ class PlayState extends MusicBeatState
 			{
 				add(numScore);
 				// centers combo
-				numScore.y += 10;
-				numScore.x -= 95;
 				numScore.x -= ((comboString.length - 1) * 22);
+				
 				lastCombo.push(numScore);
-				FlxTween.tween(numScore, {y: numScore.y + 20}, 0.1, {type: FlxTweenType.BACKWARD, ease: FlxEase.circOut});
+				FlxTween.tween(numScore, {y: numScore.y + 20, "scale.y": 0, "scale.x": 0}, 0.1, {type: FlxTweenType.BACKWARD, ease: FlxEase.circOut});
 			}
 			// hardcoded lmao
-			if (Init.trueSettings.get('Fixed Judgements'))
-			{
-				if (!cache)
-					numScore.cameras = [camHUD];
-				numScore.y += 50;
-			}
-				numScore.x += 100;
+			// indeed
+			numScore.x += 100;
 		}
 	}
 
@@ -1602,12 +1606,10 @@ class PlayState extends MusicBeatState
 		// */
 
 		if (!cache) {
-			if (Init.trueSettings.get('Fixed Judgements')) {
-				// bound to camera
-				rating.cameras = [camHUD];
-				rating.screenCenter();
-			}
-			
+			rating.cameras = [camHUD];
+			rating.x = FlxG.width - 450;
+			rating.y = FlxG.height - 225;
+
 			// return the actual rating to the array of judgements
 			Timings.gottenJudgements.set(daRating, Timings.gottenJudgements.get(daRating) + 1);
 
@@ -1723,7 +1725,6 @@ class PlayState extends MusicBeatState
 	// variables to keep track of the original Y value so yoda and bf can return
 	public var bfYBeforeTween:Float = 0;
 	public var yoderYBeforeTween:Float = 0;
-	public var coolSprite:FNFSprite;
 	override function stepHit()
 	{
 		super.stepHit();
@@ -1806,8 +1807,10 @@ class PlayState extends MusicBeatState
 			case 'Poor Emulation':
 				switch (curStep) {
 					case 128:
+						uiHUD.doTheSaveStated("2");
 						switchCharacter('dad', 'nater', false);
 						boyfriend.setColorTransform(1, 1, 1);
+						gf.setColorTransform(1, 1, 1);
 						stageBuild.publicSprites["dark"].visible = true;
 						stageBuild.publicSprites["superdark"].visible = false;
 						uiTint = 0xffffff;
@@ -1821,6 +1824,8 @@ class PlayState extends MusicBeatState
 					case 639:
 						switchCharacter('dad', 'nater-dark', false);
 						boyfriend.setColorTransform(0.07, 0.07, 0.07);
+						gf.setColorTransform(0.07, 0.07, 0.07);
+
 						stageBuild.publicSprites["superdark"].visible = true;
 						stageBuild.publicSprites["dark"].visible = false;
 						uiTint = 0x747171;
@@ -1835,6 +1840,7 @@ class PlayState extends MusicBeatState
 					case 710:
 						switchCharacter('bf', 'naterbf-flash', false);
 						boyfriend.setColorTransform(0.07, 0.07, 0.07);
+						gf.setColorTransform(0.07, 0.07, 0.07);
 						boyfriend.playAnim('look');
 						boyfriend.animation.finishCallback = t ->  { 
 							boyfriend.dance();
@@ -1844,12 +1850,14 @@ class PlayState extends MusicBeatState
 					case 745:
 						boyfriend.playAnim('on');
 						boyfriend.setColorTransform(1, 1, 1);
+						gf.setColorTransform(0.3, 0.3, 0.3);
 						stageBuild.publicSprites["superdark"].visible = false;
 						stageBuild.publicSprites["spotlight"].visible = true;
 						boyfriendStrums.tint = 0xffffff;
 						boyfriendStrums.changeTint();
 
 					case 760:
+						uiHUD.doTheSaveStated("3");
 						FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom }, 1.5, {ease: FlxEase.quadInOut});
 						for (x in allUIs) FlxTween.tween(x, { alpha: 1 }, 0.8);
 						boyfriend.dance();
@@ -1859,26 +1867,31 @@ class PlayState extends MusicBeatState
 						switchCharacter('dad', 'nater', false);
 						switchCharacter('bf', 'naterbf', false);
 						boyfriend.setColorTransform(1, 1, 1);
+						gf.setColorTransform(1, 1, 1);
+
 						stageBuild.publicSprites["dark"].visible = true;
 						stageBuild.publicSprites["spotlight"].visible = false;
 						uiTint = 0xffffff;
 						boyfriendStrums.changeTint();
 						dadStrums.changeTint();
 					case 1919:
-						for (x in [strumHUD[0], dadOpponent, stageBuild.publicSprites["dark"], boyfriendStrums.receptors.members[0], boyfriendStrums.receptors.members[1], boyfriendStrums.receptors.members[3]]) FlxTween.tween(x, { alpha: 0 }, 1.2, { ease: FlxEase.quadInOut });
+						for (x in [strumHUD[0], dadOpponent, stageBuild.publicSprites["dark"], boyfriendStrums.receptors.members[0], boyfriendStrums.receptors.members[1], boyfriendStrums.receptors.members[3], gf]) FlxTween.tween(x, { alpha: 0 }, 1.2, { ease: FlxEase.quadInOut });
 					case 1929:
-						FlxTween.tween(camHUD, { alpha: 0 }, 1.2, { ease: FlxEase.quadInOut });
+						for (x in [camHUD, boyfriendStrums.receptors.members[2]]) FlxTween.tween(camHUD, { alpha: 0 }, .4, { ease: FlxEase.quadInOut });
 					case 1930:
 						FlxTween.tween(boyfriend, { alpha: 0 }, .5, { ease: FlxEase.quadInOut });
 						
 				}
 			case 'Rom Hack':
 				switch (curStep) {
+					case 1:
+						uiHUD.doTheSaveStated("0");
 					case 224:
 						FlxG.camera.fade(FlxColor.WHITE, 3);
 					case 256:
 						FlxG.camera.stopFX();
 						FlxG.camera.flash(FlxColor.WHITE, .5);
+						uiHUD.doTheSaveStated("1");
 					    stageBuild.publicSprites["BG"].visible = true;
 						stageBuild.publicSprites["raise"].visible = false;
 				}
@@ -1886,6 +1899,9 @@ class PlayState extends MusicBeatState
 				switch (curStep) {
 					// song starts completely black
 					case 1:
+						gfSpeed = 2;
+						ogPos[1] = [gf.x, gf.y];
+						ogPos[2] = [boyfriend.x, boyfriend.y];
 						stageBuild.publicSprites["BG"].visible = true;
 						stageBuild.publicSprites["raise"].visible = false;
 						stageBuild.publicSprites["BGA"].visible = false;
@@ -1897,7 +1913,7 @@ class PlayState extends MusicBeatState
 					case 32:
 						FlxTween.tween(dadOpponent, { alpha: 1 }, 1.4);
 					case 64:
-						FlxTween.tween(boyfriend, { alpha: 1 }, 1.4);
+						for (x in [gf, boyfriend]) FlxTween.tween(x, { alpha: 1 }, 1.4);
 					case 96:
 						FlxTween.tween(stageBuild.publicSprites["BG"], { alpha: 1 }, 1.4);
 						FlxTween.tween(stageBuild.publicSprites["raise"], {alpha: 1}, 1.4);
@@ -1907,12 +1923,11 @@ class PlayState extends MusicBeatState
 						FlxTween.tween(strumHUD[0], { alpha: 1 }, 1.7);
 					case 509:
 						for (x in allUIs) FlxTween.tween(x, { alpha: 0 }, .7);
-						for (x in [dadOpponent, boyfriend]) FlxTween.tween(x, { alpha: 0 }, .7);
+						for (x in [dadOpponent, boyfriend, gf]) FlxTween.tween(x, { alpha: 0 }, .7);
 						FlxTween.tween(stageBuild.publicSprites["BG"], { alpha: 0 }, .7, { onComplete: t -> {
 							dadStrums.tint = 0xECC9C9;
 							dadStrums.changeTint();
 							uiHUD.switchOutIcons('dad', 'beeg-nater', '#CF0101');
-							uiHUD.doStuffWithIcons = false;
 						}});
 						
 					case 510:
@@ -1924,88 +1939,227 @@ class PlayState extends MusicBeatState
 						otherDad.shouldSing = true;
 						otherDad.x += 120;
 						otherDad.y += 1350;
+						ogPos[0] = [otherDad.x, otherDad.y];
+						var tvStatic = stageBuild.publicSprites["static"];
+
+						FlxTween.tween(tvStatic, { alpha: 1 }, .5);
+						// if (!Init.trueSettings.get('Reduced Movements')) FlxG.camera.shake(0.05, 5)
+
 						// FlxTween.tween(otherDad, { alpha: 1 }, .5);
 						// dadOpponent.destroy();
 						FlxG.camera.stopFX();
 						FlxG.camera.fade(FlxColor.BLACK, .5, true);
 						stageBuild.publicSprites["rain"].visible = false;
-
 					case 511:
 						otherDad.playAnim('laugh');
+						if (!Init.trueSettings.get('Reduced Movements')) FlxG.camera.shake(.005, 5);
 					case 588:
+						gfSpeed = 1;
 						FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom }, .4);
 						shouldZoom = !Init.trueSettings.get('Reduced Movements');
 						uiHUD.doStuffWithIcons = true;
+						FlxTween.tween(stageBuild.publicSprites["static"], { alpha: 0 }, .5);
 						for (x in allUIs) FlxTween.tween(x, { alpha: 1 }, .7);
-						for (x in [boyfriend, stageBuild.publicSprites["BG"]]) FlxTween.tween(x, { alpha: 1 }, .7);
+						for (x in [boyfriend, gf, stageBuild.publicSprites["BG"]]) FlxTween.tween(x, { alpha: 1 }, .7);
 					case 591:
 						FlxG.camera.flash(FlxColor.WHITE, .5);
 						stageBuild.publicSprites["BG"].visible = false;
-						stageBuild.publicSprites["spotlight"].visible = true; //L
+						stageBuild.publicSprites["dark"].visible = true;
+						uiHUD.doTheSaveStated("2", true);
+						for (x in [boyfriend, gf, otherDad]) { 
+							x.y += 200;
+							x.color = 0xfc6a6a; 
+						}
+						uiTint = 0xfc6a6a;
+						for (x in [boyfriendStrums, dadStrums]) {
+							x.tint = null;
+							x.changeTint();
+						}
+						otherDad.x -= 150;
+						otherDad.y += 30;
+						gf.x -= 240;
+						gf.y += 35;
+						boyfriend.x -= 525;
+						boyfriend.y += 95;
+						boyfriend.angle = 0;
+						FlxTween.tween(PlayState, { defaultCamZoom: 1.05 }, .4);
 					case 831:
 						otherDad.playAnim('laugh');
 					case 847:
-						FlxG.camera.flash(FlxColor.WHITE, .5);
-						stageBuild.publicSprites["spotlight"].visible = false;
-						stageBuild.publicSprites["dark"].visible = true;
+						FlxG.camera.flash(0xfc6a6a, .5);
+						uiHUD.doTheSaveStated("3", true);
+						stageBuild.publicSprites["spotlight"].visible = true;
 					case 1103:
 						FlxG.camera.flash(FlxColor.WHITE, .5);
+						FlxTween.tween(PlayState, { defaultCamZoom: 1.35 }, .4);
+						uiHUD.doTheSaveStated("-1", true);
+						for (x in [boyfriend, gf, otherDad]) x.color = 0xffffff;
+						uiTint = 0xffffff;
+						for (x in [boyfriendStrums, dadStrums]) {
+							x.tint = null;
+							x.changeTint();
+						}
+						stageBuild.publicSprites["spotlight"].visible = false;
+						boyfriend.x = ogPos[2][0];
+						boyfriend.y = ogPos[2][1];
+						boyfriend.angle = -7;
+						gf.x = ogPos[1][0];
+						gf.y = ogPos[1][1];
+						otherDad.x = ogPos[0][0];
+						otherDad.y = ogPos[0][1];
 						stageBuild.publicSprites["dark"].visible = false;
 						stageBuild.publicSprites["BG"].visible = true;
 						stageBuild.publicSprites["rain"].visible = true;
 					case 1343:
 						otherDad.playAnim('laugh');
 					case 1359:
+						uiHUD.doTheSaveStated("0", true);
+						for (x in [boyfriend, gf, otherDad])
+						FlxG.camera.flash(FlxColor.WHITE, .5);
+						FlxTween.tween(PlayState, { defaultCamZoom: 0.9 }, .4);
+						boyfriend.x -= 480;
+						boyfriend.y -= 20;
+						boyfriend.angle = 0;
+						gf.x -= 300;
+						gf.y -= 60;
+						otherDad.x -= 200;
+						otherDad.y -= 100;
+						FlxG.camera.flash(FlxColor.WHITE, .5);
+						for (x in [boyfriend, gf, otherDad]) x.color = 0xfc6a6a; 
+						uiTint = 0xfc6a6a;
+						for (x in [boyfriendStrums, dadStrums]) {
+							x.tint = null;
+							x.changeTint();
+						}
+
 						stageBuild.publicSprites["BG"].visible = false;
 						stageBuild.publicSprites["rain"].visible = false;
+						cast(stageBuild.publicSprites["raise"], FlxSprite).y += 210;
 						stageBuild.publicSprites["raise"].visible = true;
 					case 1599:
 						otherDad.playAnim('laughis');
 					case 1615:
+						uiHUD.doTheSaveStated("1", true);
 						FlxG.camera.flash(FlxColor.WHITE, .5);
+						for (x in [boyfriend, gf, otherDad]) x.y += 160;
+						gf.y -= 15;
 						stageBuild.publicSprites["raise"].visible = false;
 						stageBuild.publicSprites["BGA"].visible = true;
 					case 1856:
 						otherDad.playAnim('laugh');
 					case 1871:
-						FlxG.camera.flash(FlxColor.WHITE, .5);
-						stageBuild.publicSprites["superdark"].visible = true;
+						gfSpeed = 2;
+						uiHUD.doTheSaveStated("2", true);
+						FlxG.camera.flash(0xfc6a6a, .5);
+						stageBuild.publicSprites["dark"].visible = true;
+						
+						boyfriend.x = ogPos[2][0] - 525;
+						boyfriend.y = ogPos[2][1] + 95;
+						gf.x = ogPos[1][0] - 240;
+						gf.y = ogPos[1][1] + 35;
+						otherDad.x = ogPos[0][0] - 150;
+						otherDad.y = ogPos[0][1] + 30;
+						// stageBuild.publicSprites["superdark"].visible = true;
 						stageBuild.publicSprites["BGA"].visible = false;
-						stageBuild.publicSprites["rain"].visible = true;
+						// stageBuild.publicSprites["rain"].visible = true;
+						for (x in [boyfriend, gf, otherDad]) x.y += 200;
+
 					case 2384: //2384
+						var tvStatic: FlxSprite = cast stageBuild.publicSprites["static"];
+						tvStatic.alpha = 1;
+						ssCam = new FlxCamera();
+						FlxG.cameras.add(ssCam);
+						stageBuild.publicSprites["dark"].visible = false;
+						dadOpponent.x += 150;
+						dadOpponent.y += 50;
+
+						
 						//new FlxTimer().start(0, t -> {  
-						coolSprite = new FNFSprite().loadGraphic(Paths.image("Robo-Voice-1"));
-						coolSprite.scale.set(0.5, 0.5);
-						add(coolSprite);
-						stageBuild.publicSprites["superdark"].visible = false;
+						var letTheBloodFlow: FNFSprite = cast stageBuild.publicSprites["letTheBloodFlow"];
+						letTheBloodFlow.cameras = [ssCam];
+						letTheBloodFlow.visible = true;
+						uiTint = 0xffffff;
+						for (x in [boyfriendStrums, dadStrums]) {
+							x.tint = null;
+							x.changeTint();
+						}
+						// stageBuild.publicSprites["superdark"].visible = false;
 						//});
 					case 2400:
-						coolSprite.destroy();
-						coolSprite = new FNFSprite().loadGraphic(Paths.image("Robo-Voice-2"));
-						coolSprite.scale.set(0.5, 0.5);
-						add(coolSprite);
+						stageBuild.publicSprites["letTheBloodFlow"].visible = false;
+						var machinesRise: FNFSprite = cast stageBuild.publicSprites["machinesRise"];
+						machinesRise.cameras = [ssCam];
+						machinesRise.visible = true;
 					case 2416:
-						coolSprite.destroy();
-						coolSprite = new FNFSprite().loadGraphic(Paths.image("Robo-Voice-3"));
-						coolSprite.scale.set(0.5, 0.5);
-						add(coolSprite);
+						stageBuild.publicSprites["machinesRise"].visible = false;
+						var perfectAndAll: FNFSprite = cast stageBuild.publicSprites["perfectAndAll"];
+						perfectAndAll.cameras = [ssCam];
+						perfectAndAll.visible = true;
+						FlxTween.tween(PlayState, { defaultCamZoom: 1.2 }, .4);
 					case 2427:
-						coolSprite.destroy();
-						coolSprite = new FNFSprite();
-						coolSprite.frames = Paths.getSparrowAtlas("cutscene/Robo-Anim"); // burger gaming is a fucking godsend :D
-						coolSprite.animation.addByPrefix('Robo-Anim idle', 'Robo-Anim', 24, false); 
-						coolSprite.animation.play('Robo-Anim idle'); 
-						add(coolSprite);
+						for (x in allUIs) x.alpha = 0;
+						stageBuild.publicSprites["perfectAndAll"].visible = false;
+						var ohHowDivine: FNFSprite = cast stageBuild.publicSprites["ohHowDivine"];
+						otherDad.visible = false;
+						otherDad.shouldSing = false;
+						dadOpponent.x += 100;
+
+						ohHowDivine.visible = true;
+						ohHowDivine.cameras = [ssCam];
+						ohHowDivine.playAnim("OHHOWDIVINE");
 					case 2448:
-						coolSprite.destroy();
-						FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom * 0.5}, .4);
+						for (x in allUIs) FlxTween.tween(x, { alpha: 1 }, 1.3);
+						FlxG.cameras.remove(ssCam);
+						FlxG.camera.flash(FlxColor.WHITE, .5);
+						assetModifier = "pixel";
+						gfSpeed = 1;
+						var tvStatic: FlxSprite = cast stageBuild.publicSprites["static"];
+						tvStatic.alpha = 0;
+						uiHUD.infoBar.text = "ERR: 0x736b696c6c206973737565206c6f6c";
+						uiHUD.infoBar.color = FlxColor.RED;
+						uiHUD.switchOutIcons('bf', 'bf-pixel', '#7bd6f5');
+						stageBuild.publicSprites["ohHowDivine"].visible = false;
+						stageBuild.publicSprites["gmr"].visible = true;
+
 						dadOpponent.shouldSing = true;
 						dadOpponent.visible = true;
-						otherDad.shouldSing = false;
-						otherDad.x += -120;
-						otherDad.y += -1350;
+						
 						switchCharacter('dad', 'NaterMarson', false);
-						switchCharacter('bf', 'bf', false);
+						switchCharacter('bf', 'bf-pixel', false);
+						switchCharacter('gf', 'gf-pixel', false);
+						for (x in [boyfriend, gf, dadOpponent]) {
+							x.x += 375;
+							x.y += 160;
+						}
+
+						boyfriend.x -= 40;
+						boyfriend.y += 240;
+						gf.y += 140;
+						gf.x += 200;
+					case 3792:
+						ssCam = new FlxCamera();
+						FlxG.cameras.add(ssCam);
+						
+						var skillIssueLol = new FlxTypeText(0, 500, 0, "SKILL ISSUE DETECTED", 50, false);
+
+						skillIssueLol.font = Paths.font("vcr.ttf");
+						skillIssueLol.cameras = [ssCam];
+						// skillIssueLol.applyMarkup("SKILL ISSUE DETECTED\nDELETEING NATER_MARSON...", [new FlxTextFormatMarkerPair(new FlxTextFormat(FlxColor.RED), "!")]);
+						
+						add(skillIssueLol);
+						skillIssueLol.start();
+					case 3820:
+						var byeByeNater = new FlxTypeText(0, 550, 0, "DELETING NATER_MARSON...", 50, false);
+						byeByeNater.delay = 0.06;
+						byeByeNater.font = Paths.font("vcr.ttf");
+						byeByeNater.color = FlxColor.RED;
+						byeByeNater.cameras = [ssCam];
+						add(byeByeNater);
+						byeByeNater.start();
+					case 3847:
+						var daCrash = stageBuild.publicSprites["daCrash"];
+						daCrash.cameras = [ssCam];
+						add(daCrash);
 				}
 			case 'Kadecat Hate Club':
 				switch (curStep) {
@@ -2016,9 +2170,6 @@ class PlayState extends MusicBeatState
 						var getCenterY = otherDad.getMidpoint().y;
 						camFollow.setPosition(getCenterX + camDisplaceX + otherDad.characterData.camOffsetX,
 							getCenterY + camDisplaceY + otherDad.characterData.camOffsetY);
-							
-						
-					
 				}
 		}
 

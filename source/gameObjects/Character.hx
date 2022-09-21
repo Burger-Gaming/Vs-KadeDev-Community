@@ -82,8 +82,8 @@ class Character extends FNFSprite
 				animation.addByPrefix('singUP', 'AnUp', 30, true);
 				animation.addByPrefix('singDOWN', 'AnDown', 30, true);
 
-				scale.set(0.9, 0.9);
-				//characterData.camOffsetY -= 50;
+				scale.set(0.75, 0.75);
+				characterData.camOffsetY = 250;
 			
 			case 'beeg-nater':
 				charColor = "#CF0101";
@@ -98,7 +98,7 @@ class Character extends FNFSprite
 				animation.addByPrefix('singDOWN', 'BDOWN', 30, true);
 
 				scale.set(2.3, 2.3);
-				characterData.camOffsetY -= 50;
+				characterData.camOffsetY -= 25;
 				 
 			case 'burger':
 				charColor = "#FFFF33";
@@ -319,6 +319,16 @@ class Character extends FNFSprite
 				characterData.offsetX = 100;
 
 				playAnim('idle');
+			
+			case 'gf-pixel':
+				frames = Paths.getSparrowAtlas("characters/gfPixel");
+				animation.addByIndices('danceLeft', 'GF IDLE', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
+				animation.addByIndices('danceRight', 'GF IDLE', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
+				playAnim('danceRight');
+				antialiasing = false;
+
+				setGraphicSize(Std.int(width * 6));
+
 			case 'gf':
 				// GIRLFRIEND CODE
 				tex = Paths.getSparrowAtlas('characters/GF_assets');
@@ -349,6 +359,27 @@ class Character extends FNFSprite
 				animation.addByPrefix('singLEFT', 'Dad Sing Note LEFT', 24);
 
 				playAnim('idle');
+
+			case 'bf-pixel':
+			    charColor = "#FF31b0d1";
+			    frames = Paths.getSparrowAtlas('characters/bfPixel');
+			    animation.addByPrefix('idle', 'BF IDLE', 24, false);
+			    animation.addByPrefix('singUP', 'BF UP NOTE', 24, false);
+			    animation.addByPrefix('singLEFT', 'BF LEFT NOTE', 24, false);
+			    animation.addByPrefix('singRIGHT', 'BF RIGHT NOTE', 24, false);
+			    animation.addByPrefix('singDOWN', 'BF DOWN NOTE', 24, false);
+			    animation.addByPrefix('singUPmiss', 'BF UP MISS', 24, false);
+			    animation.addByPrefix('singLEFTmiss', 'BF LEFT MISS', 24, false);
+			    animation.addByPrefix('singRIGHTmiss', 'BF RIGHT MISS', 24, false);
+			    animation.addByPrefix('singDOWNmiss', 'BF DOWN MISS', 24, false);
+
+				antialiasing = false;
+				flipX = true;
+
+				characterData.camOffsetY -= 70;
+				characterData.camOffsetX += 70;
+			    setGraphicSize(Std.int(width * 6));
+			    updateHitbox();
 			case 'bf':
 				frames = Paths.getSparrowAtlas('characters/BOYFRIEND');
 

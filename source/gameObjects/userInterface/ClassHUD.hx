@@ -31,7 +31,7 @@ using StringTools;
 class ClassHUD extends FlxTypedGroup<FlxBasic>
 {
 	// set up variables and stuff here
-	var infoBar:FlxText; // small side bar like kade engine that tells you engine info
+	public var infoBar:FlxText; // small side bar like kade engine that tells you engine info
 	var scoreBar:FlxText;
 
 	var scoreLast:Float = -1;
@@ -285,18 +285,27 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 		PlayState.comboShown = true;
 	}
 
+	public function doTheSaveStated(stateNumber: String, loaded=false) {
+		// because
+		var og = CoolUtil.dashToSpace(PlayState.SONG.song) + (!PlayState.isExtraSong ? ' - ' + CoolUtil.difficultyFromNumber(PlayState.storyDifficulty) : '');
+		infoBar.text = 'State $stateNumber ${loaded ? "Loaded" : "Saved"}.';
+		infoBar.color = loaded ? FlxColor.YELLOW : FlxColor.LIME;
+		new FlxTimer().start(3, t -> {
+			infoBar.text = og;
+			infoBar.color = FlxColor.WHITE;	
+		}, 1);
+
+	}
+
 	public function switchOutIcons(target: String, newIcon: String, color: String) {
 		switch (target) {
 			case "dad": { 
-				iconP2.destroy();
-				iconP2 = new HealthIcon(newIcon, false);
-				iconP2.y = healthBar.y - (iconP2.height / 2);
-				add(iconP2);
+				iconP2.updateIcon(newIcon);
 				p2Color = color;
 				
 			}
 			case "bf": {
-				iconP1 = new HealthIcon(newIcon);
+				iconP1.updateIcon(newIcon, true);
 				p1Color = color;
 			}
 		}
