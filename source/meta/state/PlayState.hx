@@ -8,6 +8,7 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.FlxSubState;
 import flixel.addons.effects.FlxTrail;
+import flixel.addons.text.FlxTypeText;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.input.keyboard.FlxKey;
@@ -19,7 +20,6 @@ import flixel.math.FlxRect;
 import flixel.system.FlxAssets.FlxSoundAsset;
 import flixel.system.FlxSound;
 import flixel.text.FlxText;
-import flixel.addons.text.FlxTypeText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
@@ -353,6 +353,9 @@ class PlayState extends MusicBeatState
 				barColor = "#C38742";
 			case 'kadecat hate club':
 				songArtist = 'Skullbite (SONG ISN\'T DONE, NOTHING IS FINAL)';
+			case 'synergy' | 'tempo' | 'energetic':
+				songArtist = 'XG';
+				barColor = "#2596BE";
 			default:
 				songArtist = '???';
 		}

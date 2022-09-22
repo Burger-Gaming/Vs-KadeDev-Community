@@ -132,8 +132,8 @@ class Main extends Sprite
 		[
 			['Synergy', 'Tempo', 'Energetic'],
 			['yoder'], //placeholder
-			[FlxColor.fromRGB(0, 200, 0)], // placeholder
-			'Spookly placeholder text' // placeholder
+			[FlxColor.fromRGB(0, 100, 200)], 
+			'Spookley placeholder text' // placeholder
 		]
 		
 	];
