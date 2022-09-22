@@ -121,13 +121,19 @@ class Main extends Sprite
 			['Rom-Hack', 'Poor-Emulation', 'SaveStated'],
 			['nater', 'nater', 'beeg-nater'],
 			[FlxColor.fromRGB(65, 65, 65), FlxColor.fromRGB(65, 65, 65), FlxColor.fromRGB(206, 0, 0)],
-			'3Deez nuts in your mouth'
+			'3Deez nuts in your mouth' //best insult since you're mom
 		],
 		[
 			['Lemfunker', 'Minging'],
 			['lemlom'],
 			[FlxColor.fromRGB(255, 204, 102)],
 			'She uses he/him pronouns' // guh
+		],
+		[
+			['Synergy', 'Tempo', 'Energetic'],
+			['yoder'], //placeholder
+			[FlxColor.fromRGB(0, 200, 0)], // placeholder
+			'Spookly placeholder text' // placeholder
 		]
 		
 	];
