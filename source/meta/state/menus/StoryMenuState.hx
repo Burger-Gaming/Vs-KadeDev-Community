@@ -26,13 +26,14 @@ class StoryMenuState extends MusicBeatState
 	
 
 	var weekCharacters:Array<Dynamic> = [
+		['', 'bf', ''],
 		['yoder', 'bf', 'gf'],
 		['onion', 'bf', 'gf'],
 		['acfh', 'bf', 'gf'],
 		['fabi', 'bf', 'gf'],
-		['nater', 'bf', 'gf'],
 		['lem', 'bf', 'gf'],
-		['yoder', 'bf', 'gf']
+		['yoder', 'bf', 'gf'],
+		['nater', 'bf', 'gf']
 	];
 
 	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, true];

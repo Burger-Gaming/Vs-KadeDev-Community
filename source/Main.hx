@@ -94,6 +94,12 @@ class Main extends Sprite
 
 	public static var gameWeeks:Array<Dynamic> = [
 		[
+			['Verification'],
+			['onion'],
+			[FlxColor.fromRGB(0, 0, 0)],
+			'THE pogbot'
+		],
+		[
 			['Yoder', 'Baby-Yoda-Real', 'Swagswag'],
 			['yoder'],
 			[FlxColor.fromRGB(0, 200, 0)],
@@ -118,12 +124,6 @@ class Main extends Sprite
 			'literally nothing but drum breaks ong'
 		],
 		[
-			['Rom-Hack', 'Poor-Emulation', 'SaveStated'],
-			['nater', 'nater', 'beeg-nater'],
-			[FlxColor.fromRGB(65, 65, 65), FlxColor.fromRGB(65, 65, 65), FlxColor.fromRGB(206, 0, 0)],
-			'3Deez nuts in your mouth' //best insult since you're mom
-		],
-		[
 			['Lemfunker', 'Minging'],
 			['lemlom'],
 			[FlxColor.fromRGB(255, 204, 102)],
@@ -134,6 +134,16 @@ class Main extends Sprite
 			['yoder'], //placeholder
 			[FlxColor.fromRGB(0, 100, 200)], 
 			'Spookley placeholder text' // placeholder
+		],
+		[
+			['Rom-Hack', 'Poor-Emulation', 'SaveStated'],
+			['nater', 'nater', 'beeg-nater'],
+			[
+				FlxColor.fromRGB(65, 65, 65),
+				FlxColor.fromRGB(65, 65, 65),
+				FlxColor.fromRGB(206, 0, 0)
+			],
+			'3Deez nuts in your mouth' // best insult since you're mom
 		]
 		
 	];
