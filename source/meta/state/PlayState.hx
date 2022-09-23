@@ -341,7 +341,7 @@ class PlayState extends MusicBeatState
 				barColor = "#7251DD";
 			case 'fabilicious': 
 				songArtist = 'KadeDev';
-			case 'poor emulation' | 'savestated': 
+			case 'poor emulation' | 'savestated' | 'verification': 
 				songArtist = 'Nater_Marson';
 				barColor = "#878787";
 			case 'roasted': 
