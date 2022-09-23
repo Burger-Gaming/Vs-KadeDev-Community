@@ -36,7 +36,7 @@ class StoryMenuState extends MusicBeatState
 		['nater', 'bf', 'gf']
 	];
 
-	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, true];
+	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, true, true, true];
 
 	var txtWeekTitle:FlxText;
 
