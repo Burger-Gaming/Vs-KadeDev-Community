@@ -1,0 +1,22 @@
+{
+    "box": "speech_bubble_talking",
+    "boxState": "normal",
+    "dialogue": [
+        {
+            "portrait": "yoda",
+            "expression": "normal",
+            "text": "you know what? fuck you ima beat the 
+everliving shit out of you!!!!"
+        },
+        {
+            "portrait": "bf",
+            "expression": "normal",
+            "text": "shut up 12 year old"
+        },
+        {
+            "portrait": "yoda",
+            "expression": "normal",
+            "text": "zamn ;-;"
+        }
+    ]
+}

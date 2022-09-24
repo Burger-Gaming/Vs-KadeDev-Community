@@ -1,0 +1,21 @@
+{
+    "box": "speech_bubble_talking",
+    "boxState": "normal",
+    "dialogue": [
+        {
+            "portrait": "yoda",
+            "expression": "normal",
+            "text": "hey bf you know who deez is?"
+        },
+        {
+            "portrait": "bf",
+            "expression": "normal",
+            "text": "yeah deez nuts"
+        },
+        {
+            "portrait": "yoda",
+            "expression": "normal",
+            "text": "fuck"
+        }
+    ]
+}

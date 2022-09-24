@@ -1,0 +1,13 @@
+{
+    "name": "yoda",
+    "expressions": {
+        "normal": "right"
+    },
+    "position": [1000, 500],
+    "position": "left",
+    "sounds": ["pixelText"],
+    "soundChance": 100,
+    "flipX": false,
+
+    "soundPath": "sounds/"
+}

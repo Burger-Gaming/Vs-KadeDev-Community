@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="yoda.png">
+	<!-- Created with Adobe Animate version 21.0.7.42652 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Right0000" x="0" y="0" width="799" height="751" frameX="-14" frameY="0" frameWidth="844" frameHeight="751"/>
+	<SubTexture name="Right0001" x="809" y="0" width="826" height="749" frameX="-6" frameY="-1" frameWidth="844" frameHeight="751"/>
+	<SubTexture name="Right0002" x="1645" y="0" width="838" height="749" frameX="-2" frameY="-1" frameWidth="844" frameHeight="751"/>
+	<SubTexture name="Right0003" x="2493" y="0" width="844" height="749" frameX="0" frameY="-1" frameWidth="844" frameHeight="751"/>
+	<SubTexture name="dialogue0000" x="0" y="761" width="801" height="749"/>
+</TextureAtlas>

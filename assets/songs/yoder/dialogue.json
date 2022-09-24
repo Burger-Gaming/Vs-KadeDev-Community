@@ -1,0 +1,21 @@
+{
+    "box": "speech_bubble_talking",
+    "boxState": "normal",
+    "dialogue": [
+        {
+            "portrait": "yoda",
+            "expression": "normal",
+            "text": "have you watched the new mandalorian?"
+        },
+        {
+            "portrait": "bf",
+            "expression": "normal",
+            "text": "no i dont like star wars."
+        },
+        {
+            "portrait": "yoda",
+            "expression": "normal",
+            "text": "d  i  e"
+        }
+    ]
+}
