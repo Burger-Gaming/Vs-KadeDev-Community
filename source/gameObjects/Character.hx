@@ -63,6 +63,22 @@ class Character extends FNFSprite
 
 		switch (curCharacter)
 		{
+			case 'PogBot':
+				charColor = "#CF0101";
+				frames = Paths.getSparrowAtlas('characters/pogbot');
+
+				animation.addByPrefix('idle', 'pogbot idle', 24, false);
+				animation.addByPrefix('intro', 'pogbot Intro', 24, false);
+				animation.addByPrefix('singLEFT', 'pogbot Left', 15, true);
+				animation.addByPrefix('singRIGHT', 'pogbot Right', 15, true);
+				animation.addByPrefix('singUP', 'pogbot up', 15, true);
+				animation.addByPrefix('singDOWN', 'pogbot Down', 15, true);
+				scale.set(0.5, 0.5);
+				characterData.offsetX = -680;
+				characterData.offsetY = -230;
+
+				playAnim('intro');
+
 			case 'natergf':
 				tex = Paths.getSparrowAtlas('characters/GF_Nater');
 				frames = tex;
@@ -72,6 +88,7 @@ class Character extends FNFSprite
 				scale.set(1.5, 1.5);
 
 				playAnim('danceRight');
+				
 			case 'NaterMarson':
 				charColor = "#CF0101";
 				frames = Paths.getSparrowAtlas('characters/NaterMarson');
