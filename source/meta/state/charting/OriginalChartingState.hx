@@ -376,7 +376,7 @@ class OriginalChartingState extends MusicBeatState
 
 		var yeah:Bool = false;
 
-		if(PlayState.storyDifficulty == 3){
+		if(PlayState.storyDifficulty == 1){
 			yeah = true;
 		} else{
 			yeah = false;

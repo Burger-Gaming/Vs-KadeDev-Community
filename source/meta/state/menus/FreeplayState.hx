@@ -37,7 +37,7 @@ class FreeplayState extends MusicBeatState
 	var selector:FlxText;
 	var curSelected:Int = 0;
 	var curSongPlaying:Int = -1;
-	var curDifficulty:Int = 1;
+	var curDifficulty:Int = 0;
 	var lastDiff:Int = 1;
 
 	var scoreText:FlxText;
@@ -242,7 +242,7 @@ class FreeplayState extends MusicBeatState
 			isExtra = !isExtra;
 			extrasTxt.text = isExtra ? "Press E to go back to freeplay songs." : "Press E to access the extra songs.";
 			curSelected = 0;
-			if (isExtra) curDifficulty = 1;
+			if (isExtra) curDifficulty = 0;
 			diffText.text = "< NORMAL >";
 			renderSongs();
 			changeSelection();
@@ -268,7 +268,7 @@ class FreeplayState extends MusicBeatState
 			var toUse = isExtra ? extraSongs : songs;
 			var poop:String = Highscore.formatSong(toUse[curSelected].songName.toLowerCase(),
 				CoolUtil.difficultyArray.indexOf(existingDifficulties[curSelected][curDifficulty]));
-
+				
 			PlayState.SONG = Song.loadFromJson(poop, toUse[curSelected].songName.toLowerCase());
 			PlayState.isStoryMode = false;
 			PlayState.storyDifficulty = curDifficulty;
@@ -317,7 +317,7 @@ class FreeplayState extends MusicBeatState
 	{
 		lastDiff = curDifficulty;
 		if (isExtra) { 
-			curDifficulty = 1;
+			curDifficulty = 0;
 			return;
 		}
 		curDifficulty += change;
@@ -333,10 +333,10 @@ class FreeplayState extends MusicBeatState
 
 
 		intendedScore = Highscore.getScore(songs[curSelected].songName, curDifficulty);
-		if (curDifficulty == 3 || (lastDiff + change) == 4 || curDifficulty == 2 && lastDiff == 3) changeSongPlaying();
+		if (curDifficulty == 1 || (lastDiff + change) == 2 || curDifficulty == 0 && lastDiff == 1) changeSongPlaying();
 		
-
-		diffText.text = '< ' + existingDifficulties[curSelected][curDifficulty] + ' >';
+		if (existingDifficulties[curSelected].length == 1) diffText.text = '  ' + existingDifficulties[curSelected][curDifficulty] + '  ';
+		else diffText.text = '< ' + existingDifficulties[curSelected][curDifficulty] + ' >';
 		lastDifficulty = existingDifficulties[curSelected][curDifficulty];
 	}
 
@@ -414,7 +414,7 @@ class FreeplayState extends MusicBeatState
 							trace("Loading index " + index);
 							var toUse = isExtra ? extraSongs : songs;
 							
-							var inst:Sound = Paths.inst(toUse[curSelected].songName, curDifficulty == 3);
+							var inst:Sound = Paths.inst(toUse[curSelected].songName, curDifficulty == 1);
 
 							if (index == curSelected && threadActive)
 							{

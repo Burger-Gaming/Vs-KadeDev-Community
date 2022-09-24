@@ -303,7 +303,7 @@ class PlayState extends MusicBeatState
 				otherDad = new Character().setCharacter(50 - 80, 850 - 10, 'ACFH');
 				otherDad.shouldSing = false;
 			case "Baby Yoder Real":
-				if (storyDifficulty == 3) beatZoomSpeed = 1;
+				if (storyDifficulty == 1) beatZoomSpeed = 1;
 			case "SaveStated":
 				otherDad = new Character().setCharacter(dadOpponent.x, dadOpponent.y - 200, 'beeg-nater');
 				// otherDad.alpha = 0;
@@ -316,7 +316,7 @@ class PlayState extends MusicBeatState
 		}
 
 		// if you want to change characters later use setCharacter() instead of new or it will break
-		songBoxTopText = new FlxText(0, 0, 0, SONG.song + (storyDifficulty == 3 ? " (ERECT)" : ""));
+		songBoxTopText = new FlxText(0, 0, 0, SONG.song + (storyDifficulty == 1 ? " (ERECT)" : ""));
 		songBoxTopText.setFormat(Paths.font("vcr.ttf"), 25, 0xffffff, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		songBoxTopText.borderSize = 2;
 		var target = songBoxTopText.text.length >= 15 ? 1.12 : 1.32;
@@ -467,7 +467,7 @@ class PlayState extends MusicBeatState
 
 		switch (SONG.song) { // more song set up that isn't stage or characters
 			case "Ancient Clown":
-				if (storyDifficulty == 3) { 
+				if (storyDifficulty == 1) { 
 					preCacheCharacter('dad', 'TankACFH', [dadOpponent.x, dadOpponent.y]); 
 					preCacheCharacter('dad', 'ACFH', [dadOpponent.x, dadOpponent.y]);
 				}
@@ -508,7 +508,7 @@ class PlayState extends MusicBeatState
 		switch (SONG.song)
 		{ // more song set up that isn't stage or characters
 			case "Ancient Clown":
-				if (storyDifficulty == 3)
+				if (storyDifficulty == 1)
 				{
 					preCacheCharacter('dad', 'TankACFH', [dadOpponent.x, dadOpponent.y]);
 					preCacheCharacter('dad', 'ACFH', [dadOpponent.x, dadOpponent.y]);
@@ -794,7 +794,7 @@ class PlayState extends MusicBeatState
 					uiHUD.autoplayCurUsed = boyfriendStrums.autoplay;
 				}
 
-				if (FlxG.keys.justPressed.E && storyDifficulty == 3) {
+				if (FlxG.keys.justPressed.E && storyDifficulty == 1) {
 					switch (erectCounter) {
 						case 0:
 							erectCounter++;
@@ -1677,15 +1677,11 @@ class PlayState extends MusicBeatState
 		// Updating Discord Rich Presence.
 		updateRPC(false);
 
-		curSong = songData.song;
-		var yes:Bool = false;
-		if(storyDifficulty == 3){
-			yes = true;
-		}
-		songMusic = new FlxSound().loadEmbedded(Paths.inst(SONG.song, yes), false, true);
+		curSong = songData.song;	
+		songMusic = new FlxSound().loadEmbedded(Paths.inst(SONG.song, storyDifficulty == 1), false, true);
 
 		if (SONG.needsVoices)
-			vocals = new FlxSound().loadEmbedded(Paths.voices(SONG.song, yes), false, true);
+			vocals = new FlxSound().loadEmbedded(Paths.voices(SONG.song, storyDifficulty == 1), false, true);
 		else
 			vocals = new FlxSound();
 
@@ -1745,7 +1741,7 @@ class PlayState extends MusicBeatState
         
 		switch (SONG.song) {
 			case 'Yoder': 
-				if (storyDifficulty == 3) {
+				if (storyDifficulty == 1) {
 					switch (curStep) {
 						case 271: // setting up the return before they ascend
 							bfYBeforeTween = boyfriend.y;
@@ -1766,7 +1762,7 @@ class PlayState extends MusicBeatState
 					}
 				}
 			case 'Ancient Clown':
-				if (storyDifficulty == 3) {
+				if (storyDifficulty == 1) {
 					switch (curStep) {
 						case 399: 
 							switchCharacter("dad", "TankACFH");
@@ -2771,7 +2767,7 @@ class PlayState extends MusicBeatState
 	public static function getPrecachedCharacters() {
 		switch (SONG.song) {
 			case "Ancient Clown":
-				if (storyDifficulty == 3) { 
+				if (storyDifficulty == 1) { 
 					// preCacheCharacter('dad', 'TankACFH', [dadOpponent.x, dadOpponent.y]); 
 					// preCacheCharacter('dad', 'ACFH', [dadOpponent.x, dadOpponent.y]);
 					forPreCacheState['dad'].push('TankACFH');

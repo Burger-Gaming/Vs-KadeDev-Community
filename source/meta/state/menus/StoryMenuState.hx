@@ -21,7 +21,7 @@ using StringTools;
 class StoryMenuState extends MusicBeatState
 {
 	var scoreText:FlxText;
-	var curDifficulty:Int = 1;
+	var curDifficulty:Int = 0;
 
 	
 
@@ -32,11 +32,12 @@ class StoryMenuState extends MusicBeatState
 		['acfh', 'bf', 'gf'],
 		['fabi', 'bf', 'gf'],
 		['lem', 'bf', 'gf'],
-		['yoder', 'bf', 'gf'],
-		['nater', 'bf', 'gf']
+		['yoder', 'bf', 'gf'], // spookley
+		['nater', 'bf', 'gf'],
+		['fabi', 'bf', 'gf'] // skullbite (thas me!)
 	];
 
-	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, true, true, true];
+	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, true, true, true, true];
 
 	var txtWeekTitle:FlxText;
 
@@ -160,12 +161,14 @@ class StoryMenuState extends MusicBeatState
 		add(difficultySelectors);
 
 		trace("Line 124");
+		var firstWeek = Main.gameWeeks[0];
 
 		leftArrow = new FlxSprite(grpWeekText.members[0].x + grpWeekText.members[0].width + 10, grpWeekText.members[0].y + 10);
 		leftArrow.frames = ui_tex;
 		leftArrow.animation.addByPrefix('idle', "arrow left");
 		leftArrow.animation.addByPrefix('press', "arrow push left");
 		leftArrow.animation.play('idle');
+		if (firstWeek[4] != null) leftArrow.visible = cast firstWeek[4];
 		difficultySelectors.add(leftArrow);
 
 		sprDifficulty = new FlxSprite(leftArrow.x + 130, leftArrow.y);
@@ -182,6 +185,7 @@ class StoryMenuState extends MusicBeatState
 		rightArrow.animation.addByPrefix('idle', 'arrow right');
 		rightArrow.animation.addByPrefix('press', "arrow push right", 24, false);
 		rightArrow.animation.play('idle');
+		if (firstWeek[4] != null) rightArrow.visible = cast firstWeek[4];
 		difficultySelectors.add(rightArrow);
 
 		trace("Line 150");
@@ -305,6 +309,10 @@ class StoryMenuState extends MusicBeatState
 	function changeDifficulty(change:Int = 0):Void
 	{
 		curDifficulty += change;
+		if (Main.gameWeeks[curWeek][4] != null && !Main.gameWeeks[curWeek][4]) { 
+			curDifficulty = 0;
+		    if (sprDifficulty.animation.curAnim != null && sprDifficulty.animation.curAnim.name == "normal") return;
+		}
 
 		if (curDifficulty < 0)
 			curDifficulty = CoolUtil.difficultyLength - 1;
@@ -318,12 +326,8 @@ class StoryMenuState extends MusicBeatState
 		switch (curDifficulty)
 		{
 			case 0:
-				sprDifficulty.offset.x = 20;
-			case 1:
 				sprDifficulty.offset.x = 70;
-			case 2:
-				sprDifficulty.offset.x = 20;
-			case 3:
+			case 1:
 				sprDifficulty.offset.x = 50;
 		}
 
@@ -347,6 +351,16 @@ class StoryMenuState extends MusicBeatState
 			curWeek = 0;
 		if (curWeek < 0)
 			curWeek = Main.gameWeeks.length - 1;
+
+		if (Main.gameWeeks[curWeek][4] != null) {
+			changeDifficulty(); 
+			leftArrow.visible = Main.gameWeeks[curWeek][4]; 
+			rightArrow.visible = Main.gameWeeks[curWeek][4];
+		}
+		else {
+			leftArrow.visible = true;
+			rightArrow.visible = true;
+		}
 
 		var bullShit:Int = 0;
 

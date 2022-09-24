@@ -12,7 +12,7 @@ import sys.FileSystem;
 class CoolUtil
 {
 	// tymgus45
-	public static var difficultyArray:Array<String> = ['EASY', "NORMAL", "HARD", "ERECT"];
+	public static var difficultyArray:Array<String> = ["NORMAL", "ERECT"];
 	public static var difficultyLength = difficultyArray.length;
 
 	public static function msToTimestamp(ms:Float) {

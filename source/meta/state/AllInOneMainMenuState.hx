@@ -268,7 +268,7 @@ class AllInOneMainMenuState extends MusicBeatState
 					}
 					else
 					{ */
-				Main.switchState(this, new MainMenuState());
+				Main.switchState(this, new TEST_MainMenuState());
 				// }
 			});
 			// FlxG.sound.play(Paths.music('titleShoot'), 0.7);

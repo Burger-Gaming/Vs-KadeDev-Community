@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="shop.png">
+<SubTexture name="shop idle0000" x="0" y="0" width="811" height="116" frameX="0" frameY="0" frameWidth="811" frameHeight="116" />
+<SubTexture name="shop idle0001" x="0" y="116" width="811" height="116" frameX="0" frameY="0" frameWidth="811" frameHeight="116" />
+<SubTexture name="shop idle0002" x="0" y="232" width="811" height="116" frameX="0" frameY="0" frameWidth="811" frameHeight="116" />
+</TextureAtlas>

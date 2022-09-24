@@ -276,7 +276,8 @@ class Paths
 		if (isErect){
 			erectYeah = '-erect';
 		}
-		var songKey:String = '${CoolUtil.swapSpaceDash(song.toLowerCase())}/Inst' + erectYeah;
+		
+		var songKey:String = '${CoolUtil.spaceToDash(song.toLowerCase())}/Inst' + erectYeah;
 		var inst = returnSound('songs', songKey);
 		return inst;
 	}

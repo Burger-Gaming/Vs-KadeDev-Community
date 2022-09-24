@@ -130,7 +130,7 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 
 		// small info bar, kinda like the KE watermark
 		// based on scoretxt which I will set up as well
-		var infoDisplay:String = CoolUtil.dashToSpace(PlayState.SONG.song) + (!PlayState.isExtraSong ? ' - ' + CoolUtil.difficultyFromNumber(PlayState.storyDifficulty) : '');
+		var infoDisplay:String = CoolUtil.dashToSpace(PlayState.SONG.song) + (PlayState.storyDifficulty == 1 ? ' - ' + CoolUtil.difficultyFromNumber(PlayState.storyDifficulty) : '');
 		if (PlayState.SONG.song == "Erect") infoDisplay = "HAHAHAHAhAHAHAHAHA";
 		var engineDisplay:String = "Forever Engine v" + Main.gameVersion;
 		var engineBar:FlxText = new FlxText(0, FlxG.height - 30, 0, engineDisplay, 16);
@@ -287,7 +287,7 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 
 	public function doTheSaveStated(stateNumber: String, loaded=false) {
 		// because
-		var og = CoolUtil.dashToSpace(PlayState.SONG.song) + (!PlayState.isExtraSong ? ' - ' + CoolUtil.difficultyFromNumber(PlayState.storyDifficulty) : '');
+		var og = CoolUtil.dashToSpace(PlayState.SONG.song) + (PlayState.storyDifficulty == 1 ? ' - ' + CoolUtil.difficultyFromNumber(PlayState.storyDifficulty) : '');
 		infoBar.text = 'State $stateNumber ${loaded ? "Loaded" : "Saved"}.';
 		infoBar.color = loaded ? FlxColor.YELLOW : FlxColor.LIME;
 		new FlxTimer().start(3, t -> {
@@ -302,7 +302,6 @@ class ClassHUD extends FlxTypedGroup<FlxBasic>
 			case "dad": { 
 				iconP2.updateIcon(newIcon);
 				p2Color = color;
-				
 			}
 			case "bf": {
 				iconP1.updateIcon(newIcon, true);

@@ -208,7 +208,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 						skyTime = 's';
 				}
 				var skyName:String = skyTime + 'ky';
-				if (PlayState.storyDifficulty == 3){ //erect shit
+				if (PlayState.storyDifficulty == 1){ //erect shit
 					timeOfDay = '-night';
 					skyName = 'sky-night';
 				}
@@ -577,7 +577,7 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				gf.y += 300;
 				gf.scrollFactor.set(1, 1);
 			case 'yoda':
-				if (PlayState.storyDifficulty == 3) { 
+				if (PlayState.storyDifficulty == 1) { 
 					for (x in [dad, boyfriend, gf]) x.color = 0xFFD3D8FF; 
 					PlayState.uiTint = 0xFFD3D8FF;
 				}

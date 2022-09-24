@@ -84,7 +84,7 @@ class Main extends Sprite
 		this system will eventually be overhauled in favor of using actual week folders within the 
 		assets.
 		Enough of that, here's how it works
-		[ [songs to use], [characters in songs], [color of week], name of week ]
+		[ [songs to use], [characters in songs], [color of week], name of week, if the week has all erects ]
 	**/
 	public static var extraSongs:Array<Dynamic> = [
 		['Battle of the Century', 'Roasted'],
@@ -97,7 +97,8 @@ class Main extends Sprite
 			['Verification'],
 			['onion'],
 			[FlxColor.fromRGB(0, 0, 0)],
-			'THE pogbot'
+			'THE pogbot',
+			false
 		],
 		[
 			['Yoder', 'Baby-Yoda-Real', 'Swagswag'],
@@ -121,19 +122,22 @@ class Main extends Sprite
 			['Dasher', 'Fabicoolest', 'Fabilicious'],
 			['fabi'],
 			[FlxColor.fromRGB(88, 44, 0)],
-			'literally nothing but drum breaks ong'
+			'literally nothing but drum breaks ong',
+			false
 		],
 		[
 			['Lemfunker', 'Minging'],
 			['lemlom'],
 			[FlxColor.fromRGB(255, 204, 102)],
-			'She uses he/him pronouns' // guh
+			'She uses he/him pronouns', // guh
+			false
 		],
 		[
 			['Synergy', 'Tempo', 'Energetic'],
 			['yoder'], //placeholder
 			[FlxColor.fromRGB(0, 100, 200)], 
-			'Spookley placeholder text' // placeholder
+			'Spookley placeholder text', // placeholder
+			false 
 		],
 		[
 			['Rom-Hack', 'Poor-Emulation', 'SaveStated'],
@@ -143,7 +147,14 @@ class Main extends Sprite
 				FlxColor.fromRGB(65, 65, 65),
 				FlxColor.fromRGB(206, 0, 0)
 			],
-			'3Deez nuts in your mouth' // best insult since you're mom
+			'3Deez nuts in your mouth', // best insult since you're mom
+			false
+		],
+		[
+			['Fresh', 'Bro', 'Bone-To-Pick'],
+			['fabi'],
+			[FlxColor.fromRGB(195, 135, 66)],
+			'I am now going to bark at you'
 		]
 		
 	];

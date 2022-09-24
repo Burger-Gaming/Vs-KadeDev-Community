@@ -130,6 +130,7 @@ class Character extends FNFSprite
 				frames = Paths.getSparrowAtlas('characters/lemlom');
 				
 				for (x in ['idle', 'singUP', 'singDOWN', 'singLEFT', 'singRIGHT']) animation.addByPrefix(x, x, 24, false); // actual ascension
+				characterData.offsetY -= 30;
 
 			case 'naterbf-dead':
 				frames = Paths.getSparrowAtlas('characters/naterBfDead');

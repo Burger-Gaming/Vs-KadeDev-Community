@@ -435,7 +435,7 @@ class ChartingState extends MusicBeatState
 			vocals.stop();
 
 		var yeah:Bool = false;
-		if (PlayState.storyDifficulty == 3){
+		if (PlayState.storyDifficulty == 1){
 			yeah = true;
 		}
 		trace("is it erect? " + yeah);
