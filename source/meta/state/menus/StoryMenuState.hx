@@ -26,7 +26,7 @@ class StoryMenuState extends MusicBeatState
 	
 
 	var weekCharacters:Array<Dynamic> = [
-		['', 'bf', ''],
+		['', 'bf', 'gf'],
 		['yoder', 'bf', 'gf'],
 		['onion', 'bf', 'gf'],
 		['acfh', 'bf', 'gf'],

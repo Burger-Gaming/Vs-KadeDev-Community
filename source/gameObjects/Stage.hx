@@ -81,6 +81,8 @@ class Stage extends FlxTypedGroup<FlxBasic>
 					curStage = 'naterdark';
 				case 'savestated':
 					curStage = 'naterrain';
+				case 'verification':
+					curStage = 'pogbot';
 				case 'battle-of-the-century':
 					curStage = 'botc';
 				case 'kadecat-hate-club':
@@ -245,6 +247,20 @@ class Stage extends FlxTypedGroup<FlxBasic>
 						offSpring.x = 1920 - 300;
 					}
 				}
+			case 'pogbot':
+				curStage = 'light';
+				PlayState.defaultCamZoom = 0.8;
+
+				var light = new FNFSprite();
+				light.frames = Paths.getSparrowAtlas("backgrounds/pogbot/light");
+				// light.animation.addByPrefix('up', 'ANIM', 10, true);
+				// light.playAnim(up);
+				light.scrollFactor.set(1, 1);
+				light.screenCenter();
+				light.y -= 195;
+				add(light);
+				publicSprites["light"] = light;
+				
 			case 'nater':
 				curStage = 'nater';
 				PlayState.defaultCamZoom = 0.9;

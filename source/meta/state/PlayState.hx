@@ -2481,6 +2481,29 @@ class PlayState extends MusicBeatState
 						cutsceneFallbackTxt.visible = true;
 					}
 				});
+			// case "verification":
+			// 	inCutscene = true;
+			// 	var pogBot:FlxSprite = new FlxSprite();
+			// 	pogBot.frames = Paths.getSparrowAtlas('characters/pogbot');
+			// 	pogBot.animation.addByPrefix('intro', 'pogbot Intro', 24, false);
+			// 	pogBot.scrollFactor.set();
+			// 	pogBot.updateHitbox();
+			// 	pogBot.screenCenter();
+
+			// 	add(pogBot);
+
+			// 	new FlxTimer().start(0.3, function(tmr:FlxTimer)
+			// 	{
+			// 		pogBot.animation.play('intro');
+			// 		new FlxTimer().start(0.3, function(tmr:FlxTimer)
+			// 		{
+			// 			onComplete: function(tmr:FlxTimer)
+			// 			{
+			// 			startCountdown();
+			// 			trace("fuck");
+			// 			}
+			// 		});
+			// 	}); // fuck this shit 
 			case "winter-horrorland":
 				inCutscene = true;
 				var blackScreen:FlxSprite = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
@@ -2507,9 +2530,7 @@ class PlayState extends MusicBeatState
 							{
 								startCountdown();
 							}
-
 						});
-
 					});
 				});
 			case 'roses':
