@@ -63,6 +63,30 @@ class Character extends FNFSprite
 
 		switch (curCharacter)
 		{
+			case 'test_character':
+				charColor = "#49cb65";
+
+				makeGraphic(280, 140, FlxColor.WHITE);
+				characterData.offsetY = -280;
+				
+				animation.add("singLEFT", [0], 0);
+				animation.add("singRIGHT", [0], 0);
+				animation.add("singUP", [0], 0);
+				animation.add("singDOWN", [0], 0);
+				animation.add("idle", [0], 0);
+
+				animation.callback = (n, i, d) -> {
+					switch (n) {
+						case "singLEFT": color = 0x8f3571;
+						case "singRIGHT": color = 0xcb2e33;
+						case "singUP": color = 0x1fc106;
+						case "singDOWN": color = 0x24bdbd;
+						case "idle": color = FlxColor.WHITE;
+					}
+				};
+
+				playAnim('idle');
+				
 			case 'PogBot':
 				charColor = "#CF0101";
 				frames = Paths.getSparrowAtlas('characters/pogbot');
@@ -576,7 +600,7 @@ class Character extends FNFSprite
 		}
 
 		// Post idle animation (think Week 4 and how the player and mom's hair continues to sway after their idle animations are done!)
-		if (animation.curAnim.finished && animation.curAnim.name == 'idle')
+		if (animation.curAnim != null && animation.curAnim.finished && animation.curAnim.name == 'idle')
 		{
 			// We look for an animation called 'idlePost' to switch to
 			if (animation.getByName('idlePost') != null)

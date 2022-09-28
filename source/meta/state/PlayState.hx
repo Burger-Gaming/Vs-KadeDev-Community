@@ -75,6 +75,7 @@ class PlayState extends MusicBeatState
 	var useOtherDadChart = false;
 	public static var gf:Character;
 	public static var boyfriend:Boyfriend;
+	public var otherBF:Null<Boyfriend> = null; // these bitches polyamourous
 	public var missTimer:FlxTimer;
 	var preCachedCharacters:Map<String, Map<String, Character>> = [
 		"bf" => [],
@@ -303,7 +304,12 @@ class PlayState extends MusicBeatState
 				otherDad = new Character().setCharacter(50 - 80, 850 - 10, 'ACFH');
 				otherDad.shouldSing = false;
 			case "Baby Yoder Real":
-				if (storyDifficulty == 1) beatZoomSpeed = 1;
+				if (storyDifficulty != 1) return;
+				otherDad = new Character().setCharacter(90, -50, 'test_character');
+				otherDad.shouldSing = false;
+				otherBF = cast new Boyfriend().setCharacter(180, -50, 'test_character');
+				otherBF.shouldSing = false;
+
 			case "SaveStated":
 				otherDad = new Character().setCharacter(dadOpponent.x, dadOpponent.y - 200, 'beeg-nater');
 				// otherDad.alpha = 0;
@@ -312,7 +318,6 @@ class PlayState extends MusicBeatState
 				otherDad = new Character().setCharacter(dadOpponent.x, dadOpponent.y + 260, 'dad');
 				otherDad.setGraphicSize(Std.int(otherDad.width * 0.3));
 				useOtherDadChart = true;
-
 		}
 
 		// if you want to change characters later use setCharacter() instead of new or it will break
@@ -348,7 +353,7 @@ class PlayState extends MusicBeatState
 				songArtist = 'Skullbite';
 				ogArtist = 'RaymondVito';
 				barColor = "#C38742";
-			case 'erect':
+			case 'erect' | 'fresh' | 'bro' | 'bone to pick':
 			    songArtist = 'Skullbite';
 				barColor = "#C38742";
 			case 'kadecat hate club':
@@ -384,6 +389,7 @@ class PlayState extends MusicBeatState
 		if (otherDad != null) add(otherDad);
 		add(dadOpponent);
 		
+		if (otherBF != null) add(otherBF);
 		add(boyfriend);
 
 		add(stageBuild.foreground);
@@ -392,6 +398,7 @@ class PlayState extends MusicBeatState
 		if (otherDad != null) otherDad.dance();
 		dadOpponent.dance();
 		gf.dance();
+		if (otherBF != null) otherBF.dance();
 		boyfriend.dance();
 
 		// set song position before beginning
@@ -449,7 +456,9 @@ class PlayState extends MusicBeatState
 			otherDadStrums.visible = false;
 			
 		}
-		boyfriendStrums = new Strumline(placement + (!Init.trueSettings.get('Centered Notefield') ? (FlxG.width / 4) : 0), this, [boyfriend], true, false, true,
+
+		var boyfriends:Array<Boyfriend>/* like the web comic lol */ = otherBF != null ? [otherBF, boyfriend] : [boyfriend];
+		boyfriendStrums = new Strumline(placement + (!Init.trueSettings.get('Centered Notefield') ? (FlxG.width / 4) : 0), this, cast boyfriends, true, false, true,
 			4, Init.trueSettings.get('Downscroll'));
 
 		strumLines.add(dadStrums);
@@ -913,8 +922,12 @@ class PlayState extends MusicBeatState
 							getCenterY = char.getMidpoint().y - 200;*/
 					}
 
-					if (followMustHits) camFollow.setPosition(getCenterX + camDisplaceX - char.characterData.camOffsetX,
-						getCenterY + camDisplaceY + char.characterData.camOffsetY);
+					if (followMustHits) { 
+						camFollow.setPosition(getCenterX + camDisplaceX - char.characterData.camOffsetX,
+						    getCenterY + camDisplaceY + char.characterData.camOffsetY);
+						/*if (char.curCharacter == "PogBot") FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom * 1.3 });
+						else FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom * 1.3 });*/
+					}
 				}
 			}
 
@@ -1382,7 +1395,7 @@ class PlayState extends MusicBeatState
 			if (PlayState.SONG.notes[Std.int(curStep / 16)] != null)
 			{
 				if ((PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection && mustHit)
-					|| (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection && !mustHit))
+					|| (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection && !mustHit && dadOpponent.curCharacter != 'PogBot'))
 				{
 					
 					camDisplaceX = 0;
@@ -1761,6 +1774,17 @@ class PlayState extends MusicBeatState
 							FlxTween.tween(dadOpponent, {y: yoderYBeforeTween}, 5);
 					}
 				}
+			/*case 'Baby Yoda Real':
+				if (storyDifficulty == 1) {
+					switch (curStep) {
+						case 565:
+							shouldZoom = false;
+							FlxTween.tween(FlxG.camera, { zoom: defaultCamZoom * 0.96 });
+							followMustHits = false;
+							camFollow.y -= 600;
+							camFollowPos.y -= 600;
+					}
+				}*/
 			case 'Ancient Clown':
 				if (storyDifficulty == 1) {
 					switch (curStep) {
@@ -1774,7 +1798,7 @@ class PlayState extends MusicBeatState
 					}
 				}
 			case 'Clownstace': 
-				if (storyDifficulty != 3) {
+				if (storyDifficulty != 1) {
 					switch (curStep) {
 						case 132:
 							screen1.loadGraphic(Paths.image('clownstace/GRAAAHHHHHH'));
@@ -2185,6 +2209,11 @@ class PlayState extends MusicBeatState
 		|| boyfriend.animation.curAnim.name.startsWith("dance")) 
 			&& (curBeat % 2 == 0 || boyfriend.characterData.quickDancer))
 			boyfriend.dance();
+
+		if (otherBF != null && (otherBF.animation.curAnim.name.startsWith("idle") 
+		|| otherBF.animation.curAnim.name.startsWith("dance")) 
+			&& (curBeat % 2 == 0 || otherBF.characterData.quickDancer))
+			otherBF.dance();
 
 		// added this for opponent cus it wasn't here before and skater would just freeze
 		if (dadOpponent != null && (dadOpponent.animation.curAnim.name.startsWith("idle")
