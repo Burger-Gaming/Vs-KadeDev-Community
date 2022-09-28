@@ -95,7 +95,7 @@ class Main extends Sprite
 	public static var gameWeeks:Array<Dynamic> = [
 		[
 			['Verification'],
-			['onion'],
+			['pogbot'],
 			[FlxColor.fromRGB(0, 0, 0)],
 			'THE pogbot',
 			false

@@ -253,10 +253,11 @@ class Stage extends FlxTypedGroup<FlxBasic>
 
 				var light = new FNFSprite();
 				light.frames = Paths.getSparrowAtlas("backgrounds/pogbot/light");
-				// light.animation.addByPrefix('up', 'ANIM', 10, true);
-				// light.playAnim(up);
+				light.animation.addByPrefix('up', 'ANIM', 10, true);
+				light.playAnim('up');
 				light.scrollFactor.set(1, 1);
-				light.screenCenter();
+				light.screenCenter(X);
+				light.setGraphicSize(Std.int(light.width * 2));
 				light.y -= 195;
 				add(light);
 				publicSprites["light"] = light;
