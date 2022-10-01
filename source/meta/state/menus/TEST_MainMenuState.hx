@@ -1,5 +1,6 @@
 package meta.state.menus;
 
+import flixel.util.FlxTimer;
 import flixel.input.mouse.FlxMouseEventManager;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxColor;
@@ -7,33 +8,38 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import meta.MusicBeat.MusicBeatState;
 
+
 // 0 = active, 1 = hovered, 2 = normal
 class ChannelButton extends FlxSprite {
     public var isActive = false;
     public override function new(optionKey: String, index: Int, callback: () -> Void) {
         super();
         ID = index;
-        scale.set(.4, .4);
+        scale.set(.6, .6);
         x = 20;
-        y = 50;
-        y += index * 50;
+        /*screenCenter(X);
+        x -= 270;*/
+        y = 180;
+        y += index * 80;
         antialiasing = true;
 		frames = Paths.getSparrowAtlas('menus/base/buttons/$optionKey');
 		animation.addByPrefix("idle", '$optionKey idle', 0, true);
 		animation.play("idle");
 		animation.curAnim.curFrame = 2;
 		FlxMouseEventManager.add(this, t -> {
-			if (!isActive) {
-				t.animation.curAnim.curFrame = 0;
-				isActive = true;
-			}
-			callback();
+			t.animation.curAnim.curFrame = 0;
+			FlxG.mouse.useSystemCursor = false;
+			FlxG.mouse.visible = false;
+			FlxG.sound.play(Paths.sound('confirmMenu'));
+            new FlxTimer().start(2, timer -> callback());
+
 		}, null,
-			t -> if (!isActive) t.animation.curAnim.curFrame = 1, 
-            t -> if (!isActive) t.animation.curAnim.curFrame = 2
+			t -> t.animation.curAnim.curFrame = 1, 
+            t -> t.animation.curAnim.curFrame = 2
         );
         updateHitbox();
     }
+    
 }
 
 class TEST_MainMenuState extends MusicBeatState {
@@ -46,31 +52,26 @@ class TEST_MainMenuState extends MusicBeatState {
     var curSelected = 0;
     var menuItems = new FlxTypedGroup<ChannelButton>();
     override function create() {
+        super.create();
 		FlxG.mouse.useSystemCursor = true;
 		FlxG.mouse.visible = true;
-		channelBG = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.fromString("#373a3f"));
+		channelBG = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.fromString("#2f3136"));
         add(channelBG);
-		channelSide = new FlxSprite().makeGraphic(350, FlxG.height, FlxColor.fromString("#2f3136"));
-        add(channelSide);
-        funniDiscordTV = new FlxSprite(700).loadGraphic(Paths.image("menus/base/funnidiscordtv"));
-        funniDiscordTV.scale.set(2.5, 2.5);
-        funniDiscordTV.antialiasing = true;
-        funniDiscordTV.screenCenter(Y);
-        add(funniDiscordTV);
         for (x in 0...selectables.length) { 
-			var button = new ChannelButton(selectables[x], x, () -> { 
-                showContent();
-				// menuItems.forEach(t -> t.isActive = t.ID != x);
-            });
+			var button = new ChannelButton(selectables[x], x, () -> switchStates(selectables[x]));
             menuItems.add(button); 
         }
         add(menuItems);
     } 
 
-    function showContent() {
-        funniDiscordTV.visible = false;
-        var testMenu = new StoryMenu();
-        testMenu.positionSprites();
-        add(testMenu);
+    function switchStates(optionKey:String) {
+        switch (optionKey) {
+            case "story-mode": Main.switchState(this, new StoryMenuState());
+            case "freeplay": Main.switchState(this, new FreeplayState());
+            case "credits": Main.switchState(this, new CreditsState());
+            case "shop": Main.switchState(this, new CreditsState()); // todo
+            case "options": Main.switchState(this, new OptionsMenuState());
+        }
     }
+
 }

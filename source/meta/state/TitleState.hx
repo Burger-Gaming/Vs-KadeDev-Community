@@ -238,7 +238,7 @@ class TitleState extends MusicBeatState
 					}
 					else
 					{ */
-				Main.switchState(this, new MainMenuState());
+				Main.switchState(this, #if debug new TEST_MainMenuState() #else new MainMenuState()enuState());
 				// }
 			});
 			// FlxG.sound.play(Paths.music('titleShoot'), 0.7);

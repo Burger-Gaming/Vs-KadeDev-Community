@@ -207,7 +207,7 @@ class CustomTitlescreen extends MusicBeatState
 				// Check if version is outdated
 
 				//var version:String = "v" + Application.current.meta.get('version');
-				Main.switchState(this, new MainMenuState());
+				Main.switchState(this, #if debug new TEST_MainMenuState() #else new MainMenuState()enuState());
 				// }
 			});
 		}

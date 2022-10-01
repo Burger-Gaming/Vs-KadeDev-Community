@@ -63,16 +63,15 @@ class CreditsName extends FlxTypedGroup<FlxSprite> {
             nameSpr.y += nextY;
         }
     }
-    
 }
 
 class CreditsState extends MusicBeatState {
     var credits:Array<Array<Dynamic>> = [
         // name, icon name, cool quote, what they did ("1, 2, 3"), link, color (int)
         ['Red', 'red', 'THE OWO', 'Artist of yoda sprites', 'https://example.com/', 0xEB002D],
-        ['Soulslimm', 'soulslimm', 'pending quote', 'pending actions...', 'https://example.com', 0xC0762A],
+        ['Soulslimm', 'soulslimm', 'pending quote', 'designed menu buttons', 'https://example.com', 0xC0762A],
         ['Burger', 'burger', 'pending quote', 'Primarily programmed this, Charted a bunch of songs', 'https://example.com/', 0xFFFF00],
-        ['Lemlom', 'lemlem', 'pending quote', 'Made fabi and own sprites', 'https://example.com/', 0xFFCC66],
+        ['Lemlom', 'lemlem', 'pending quote', 'Made fabi, burger and own sprites', 'https://example.com/', 0xFFCC66],
         ['Multi-hand', 'multihand', 'pending quote', 'Made ACFH sprites', 'https://example.com/', 0x4391E6],
         ['KadeDev', 'kadedev', 'no quote :(', 'Composed fabilicious, Made the community', 'https://github.com/kadedev', 0x4b6448]
     ];
@@ -188,7 +187,7 @@ class CreditsState extends MusicBeatState {
 		super.update(elapsed);
         if (FlxG.keys.justPressed.ESCAPE) { 
             if (colorTween != null) colorTween.cancel();
-            Main.switchState(this, new MainMenuState()); 
+            Main.switchState(this, #if debug new TEST_MainMenuState() #else new MainMenuState() #end); 
         }
 		if (controls.UI_LEFT_P) changeCred(-1);
 		if (controls.UI_RIGHT_P) changeCred(1);
