@@ -72,6 +72,7 @@ class Main extends Sprite
 	public static var framerate:Int = 120; // How many frames per second the game should run at.
 
 	public static var gameVersion:String = '0.3';
+	public static var modVersion = '1.2.0';
 
 	var zoom:Float = -1; // If -1, zoom is automatically calculated to fit the window dimensions.
 	var skipSplash:Bool = true; // Whether to skip the flixel splash screen that appears in release mode.

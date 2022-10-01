@@ -414,6 +414,7 @@ class AllInOneMainMenuState extends MusicBeatState
 
 			FlxG.camera.flash(FlxColor.WHITE, 4);
 			remove(credGroup);
+			for (_ => value in introIcons) remove(value);
 			skippedIntro = true;
 		}
 		//

@@ -479,6 +479,20 @@ class Character extends FNFSprite
 
 					flipX = true;
 			 */
+			
+			case 'bf-pixel-dead':
+				frames = Paths.getSparrowAtlas('characters/bfPixelsDEAD');
+
+				animation.addByPrefix('firstDeath', "BF Dies pixel", 24, false);
+				animation.addByPrefix('deathLoop', "Retry Loop", 24);
+				animation.addByPrefix('deathConfirm', "RETRY CONFIRM", 24);
+
+				playAnim('firstDeath');
+
+				flipX = true;
+				antialiasing = false;
+				setGraphicSize(Std.int(width * 6));
+
 
 			case 'bf-dead':
 				frames = Paths.getSparrowAtlas('characters/BF_DEATH');
