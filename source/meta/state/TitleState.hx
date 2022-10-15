@@ -219,7 +219,7 @@ class TitleState extends MusicBeatState
 			FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
 
 			transitioning = true;
-			// FlxG.sound.music.stop();
+			FlxG.sound.music.stop();
 
 			new FlxTimer().start(2, function(tmr:FlxTimer)
 			{
@@ -241,7 +241,7 @@ class TitleState extends MusicBeatState
 				Main.switchState(this, #if debug new TEST_MainMenuState() #else new MainMenuState()enuState());
 				// }
 			});
-			// FlxG.sound.play(Paths.music('titleShoot'), 0.7);
+			FlxG.sound.play(Paths.music('titleShoot'), 0.7);
 		}
 
 		// hi game, please stop crashing its kinda annoyin, thanks!
