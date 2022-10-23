@@ -1899,9 +1899,9 @@ class PlayState extends MusicBeatState
 						dadStrums.changeTint();
 					case 1919:
 						for (x in [strumHUD[0], dadOpponent, stageBuild.publicSprites["dark"], boyfriendStrums.receptors.members[0], boyfriendStrums.receptors.members[1], boyfriendStrums.receptors.members[3], gf]) FlxTween.tween(x, { alpha: 0 }, 1.2, { ease: FlxEase.quadInOut });
-					case 1929:
-						for (x in [camHUD, boyfriendStrums.receptors.members[2]]) FlxTween.tween(camHUD, { alpha: 0 }, .4, { ease: FlxEase.quadInOut });
-					case 1930:
+					case 1926:
+						for (x in [camHUD, boyfriendStrums.receptors.members[2]]) FlxTween.tween(x, { alpha: 0 }, .4, { ease: FlxEase.quadInOut });
+					case 1925:
 						FlxTween.tween(boyfriend, { alpha: 0 }, .5, { ease: FlxEase.quadInOut });
 						
 				}
@@ -2138,7 +2138,7 @@ class PlayState extends MusicBeatState
 						gfSpeed = 1;
 						var tvStatic: FlxSprite = cast stageBuild.publicSprites["static"];
 						tvStatic.alpha = 0;
-						uiHUD.infoBar.text = "ERR: 0x736b696c6c206973737565206c6f6c";
+						uiHUD.infoBar.text = "ERR: 0x736b696c6c206973737565206c6f6c"; // skill issue lol
 						uiHUD.infoBar.color = FlxColor.RED;
 						uiHUD.switchOutIcons('bf', 'bf-pixel', '#7bd6f5');
 						stageBuild.publicSprites["ohHowDivine"].visible = false;
@@ -2194,6 +2194,8 @@ class PlayState extends MusicBeatState
 						camFollow.setPosition(getCenterX + camDisplaceX + otherDad.characterData.camOffsetX,
 							getCenterY + camDisplaceY + otherDad.characterData.camOffsetY);
 				}
+			case 'Verification':
+				switch (curStep) {}
 		}
 
 	}
@@ -2804,10 +2806,7 @@ class PlayState extends MusicBeatState
 		}
 		character.x = toUse[0];
 		character.y = toUse[1];
-		character.visible = false;
-		add(character);
-		remove(character);
-		character.visible = true;
+
 		
 
 		// character.visible = false;

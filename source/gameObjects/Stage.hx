@@ -162,10 +162,16 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				foreground.add(kadeCat);
 
 			case 'fabiworld':
-				PlayState.defaultCamZoom = 0.8;
+				PlayState.defaultCamZoom = 0.85;
 
-				var bg:FNFSprite = new FNFSprite(-320, -120).loadGraphic(Paths.image('backgrounds/$curStage/fabiworld')); // $ means money therefore i will use $ instead :Dave:
-				bg.scale.set(1.2, 1.2);
+				/*var bg:FNFSprite = new FNFSprite(-320, -120).loadGraphic(Paths.image('backgrounds/$curStage/fabiworld')); // $ means money therefore i will use $ instead :Dave:
+
+				bg.scale.set(1.2, 1.2);*/
+				var bg = new FNFSprite();
+				bg.frames = Paths.getSparrowAtlas('backgrounds/fabiworld/fabiworld');
+				bg.animation.addByPrefix("sparkles", "fabiworld idle", 24);
+				bg.playAnim("sparkles");
+				bg.scale.set(1.8, 1.8);
 				add(bg);
 			case 'botc':
 				PlayState.defaultCamZoom = 0.7;
@@ -541,6 +547,8 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		// REPOSITIONING PER STAGE
 		switch (curStage)
 		{
+			case 'fabiworld':
+				for (x in [boyfriend, dad, gf]) x.y += 50;
 			case 'kadecat-hateclub':
 				gf.visible = false;
 				dad.setGraphicSize(Std.int(dad.width * 0.3));
