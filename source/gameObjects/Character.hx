@@ -325,7 +325,7 @@ class Character extends FNFSprite
 				flipLeftRight();
 
 				characterData.offsetY = -40;
-				characterData.camOffsetY = -100;
+				characterData.camOffsetY = -80;
 
 				playAnim('idle');
 			case 'whoppa':

@@ -15,6 +15,7 @@ import meta.data.dependency.Discord;
 import meta.data.dependency.FNFSprite;
 import meta.data.font.Alphabet;
 import meta.subState.OptionsSubstate;
+import meta.state.menus.MainMenuState;
 
 /**
 	Options menu rewrite because I'm unhappy with how it was done previously
@@ -301,7 +302,7 @@ class OptionsMenuState extends MusicBeatState
 			if (curCategory != 'main')
 				loadSubgroup('main');
 			else
-				Main.switchState(this, #if debug new TEST_MainMenuState() #else new MainMenuState() #end);
+				Main.switchState(this, new MainMenuState());
 		}
 	}
 
@@ -577,7 +578,7 @@ class OptionsMenuState extends MusicBeatState
 			lockedMovement = true;
 			FlxFlicker.flicker(activeSubgroup.members[curSelection], 0.5, 0.06 * 2, true, false, function(flick:FlxFlicker)
 			{
-				Main.switchState(this,  #if debug new TEST_MainMenuState() #else new MainMenuState() #end);
+				Main.switchState(this, new MainMenuState());
 				lockedMovement = false;
 			});
 		}

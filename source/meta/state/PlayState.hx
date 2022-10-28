@@ -41,6 +41,7 @@ import openfl.display.GraphicsShader;
 import openfl.events.KeyboardEvent;
 import openfl.filters.ShaderFilter;
 import openfl.media.Sound;
+import openfl.utils.Assets as OpenFlAssets;
 import openfl.utils.Assets;
 import sys.io.File;
 
@@ -53,6 +54,8 @@ import meta.data.dependency.Discord;
 class PlayState extends MusicBeatState
 {
 	public static var startTimer:FlxTimer;
+	/*public var HscriptManager:FunniHScript;*/
+	public static var instance:PlayState;
 
 	public static var curStage:String = '';
 	public static var SONG:SwagSong;
@@ -116,7 +119,7 @@ class PlayState extends MusicBeatState
 	private static var prevCamFollow:FlxObject;
 
 	private var curSong:String = "";
-	private var gfSpeed:Int = 1;
+	public var gfSpeed:Int = 1;
 
 	public static var health:Float = 1; // mario
 	public static var combo:Int = 0;
@@ -163,7 +166,7 @@ class PlayState extends MusicBeatState
 
 	public static var songLength:Float = 0;
 
-	private var stageBuild:Stage;
+	public var stageBuild:Stage;
 
 	public static var uiHUD:ClassHUD;
 
@@ -211,8 +214,10 @@ class PlayState extends MusicBeatState
 		Assets.getSound('assets/sounds/missnote2.ogg', true);
 		Assets.getSound('assets/sounds/missnote3.ogg', true);
 
+		// HscriptManager = new FunniHScript();
 
 		// reset any values and variables that are static
+		instance = this;
 		songScore = 0;
 		combo = 0;
 		health = 1;
@@ -254,6 +259,15 @@ class PlayState extends MusicBeatState
 
 		Conductor.mapBPMChanges(SONG);
 		Conductor.changeBPM(SONG.bpm);
+
+		/*trace("looking for script...");
+		var coolScript = Paths.hscript(SONG.song);
+		trace(coolScript);
+		if (OpenFlAssets.exists(coolScript)) {
+			HscriptManager.storeCode(CoolUtil.swagScript(coolScript));
+			trace("Hscript successfully loaded!");
+		}
+		else trace("no script found :(");*/
 
 		/// here we determine the chart type!
 		// determine the chart type here
@@ -357,7 +371,7 @@ class PlayState extends MusicBeatState
 			    songArtist = 'Skullbite';
 				barColor = "#C38742";
 			case 'kadecat hate club':
-				songArtist = 'Skullbite (SONG ISN\'T DONE, NOTHING IS FINAL)';
+				songArtist = 'Skullbite (SONG ISN\'T DONE, NOTHING IS FINAL)'; // and it stayed that way 😔
 			case 'synergy' | 'tempo' | 'energetic':
 				songArtist = 'XG';
 				barColor = "#2596BE";
@@ -372,8 +386,6 @@ class PlayState extends MusicBeatState
 			songBox.makeGraphic(Std.int(songBoxBottomText.width * target), 80, FlxColor.BLACK); 
 		}
 		extColorBar = new FlxSprite(songBox.width - 5, songBox.y).makeGraphic(5, Std.int(songBox.height), FlxColor.fromString(barColor));
-
-		
 
 		var camPos:FlxPoint = new FlxPoint(gf.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
 
@@ -617,6 +629,7 @@ class PlayState extends MusicBeatState
 		var shader:GraphicsShader = new GraphicsShader("", File.getContent("./assets/shaders/vhs.frag"));
 		FlxG.camera.setFilters([new ShaderFilter(shader)]);
 		*/
+		// HscriptManager.runDaCode("createPost", []);
 	}
 
 	public static function copyKey(arrayToCopy:Array<FlxKey>):Array<FlxKey>
@@ -813,7 +826,7 @@ class PlayState extends MusicBeatState
 							});
 						case 10:
 							if (SONG.song == "Erect") return;
-			                SONG = Song.loadFromJson(Highscore.formatSong("erect", 3), "erect");
+			                SONG = Song.loadFromJson(Highscore.formatSong("erect", 1), "erect");
 			                isStoryMode = false;
 							erectCounter = 0;
 							erectTimer.cancel();
@@ -1740,6 +1753,7 @@ class PlayState extends MusicBeatState
 	override function stepHit()
 	{
 		super.stepHit();
+		// HscriptManager.runDaCode("stepHit", [curStep]);
 		///*
 		if (songMusic.time >= Conductor.songPosition + 20 || songMusic.time <= Conductor.songPosition - 20)
 			resyncVocals();
@@ -2233,9 +2247,54 @@ class PlayState extends MusicBeatState
 	override function beatHit()
 	{
 		super.beatHit();
+		// HscriptManager.runDaCode("beatHit", [curBeat]);
 
 		// trace(curBeat); //for events
 		switch (SONG.song) {
+			case 'Dasher':
+				if (storyDifficulty == 1) switch (curBeat) {
+					case 16: tweenSongIntroOut();
+					case 224:
+						FlxG.camera.flash(0xffffff, .5);
+						stageBuild.publicSprites["bgRed"].visible = true;
+					case 287:
+						FlxG.camera.flash(0xffffff, .5);
+						stageBuild.publicSprites["bgRed"].visible = false;
+				}
+				else switch (curBeat) {
+					case 16: tweenSongIntroOut();
+					case 240:
+						FlxG.camera.flash(0xffffff, .5);
+						stageBuild.publicSprites["bgRed"].visible = true;
+					case 304:
+						FlxG.camera.flash(0xffffff, .5);
+						stageBuild.publicSprites["bgRed"].visible = false;
+				}
+			case 'Fabicoolest':
+				switch (curBeat) {
+					case 16: tweenSongIntroOut();
+					case 208:
+						FlxG.camera.flash(0xffffff, .5);
+						stageBuild.publicSprites["bgRed"].visible = true;
+					case 272:
+						FlxG.camera.flash(0xffffff, .5);
+						stageBuild.publicSprites["bgRed"].visible = false;
+				}
+			case 'Fabilicious':
+				switch (curBeat) {
+					case 1:
+						gfSpeed = 2;
+					case 32:
+						gfSpeed = 1;
+					case 16: tweenSongIntroOut();
+					case 128:
+						gfSpeed = 2;
+						for (x in allUIs) FlxTween.tween(x, { alpha: 0 }, .3);
+					case 152: 
+						for (x in allUIs) FlxTween.tween(x, { alpha: 1 }, 4);
+					case 160:
+						gfSpeed = 1;
+				}
 			case 'Kadecat Hate Club':
 				switch (curBeat) {
 					case 1: tweenSongIntroIn();
@@ -2800,6 +2859,7 @@ class PlayState extends MusicBeatState
 		}
 		if (target == 'bf') character = new Boyfriend().setCharacter(toUse[0], toUse[1], char);
 		else character = new Character().setCharacter(toUse[0], toUse[1], char);
+		FlxG.bitmap.add(character.graphic);
 		switch (target) {
 			case 'dad': dadStrums.characters.push(character);
 			case 'bf': boyfriendStrums.characters.push(character);

@@ -287,6 +287,10 @@ class Paths
 		return returnAsset;
 	}
 
+	inline static public function hscript(targetSong:String) {
+		return getPath('songs/${CoolUtil.spaceToDash(targetSong.toLowerCase())}/script.hx', TEXT);
+	}
+
 	inline static public function font(key:String) {
 		return 'assets/fonts/$key';
 	}

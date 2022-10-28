@@ -173,6 +173,16 @@ class Stage extends FlxTypedGroup<FlxBasic>
 				bg.playAnim("sparkles");
 				bg.scale.set(1.8, 1.8);
 				add(bg);
+
+				var bgRed = new FNFSprite();
+				bgRed.frames = Paths.getSparrowAtlas('backgrounds/fabiworld/fabiworld-red-alt');
+				bgRed.animation.addByPrefix("sparkles", "fabiworld idle", 24);
+				bgRed.playAnim("sparkles");
+				bgRed.scale.set(1.8, 1.8);
+				bgRed.visible = false;
+				publicSprites["bgRed"] = bgRed;
+				add(bgRed);
+
 			case 'botc':
 				PlayState.defaultCamZoom = 0.7;
 

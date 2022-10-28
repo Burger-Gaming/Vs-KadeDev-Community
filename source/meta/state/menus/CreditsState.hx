@@ -12,6 +12,7 @@ import meta.data.Conductor;
 import meta.data.font.Alphabet;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
+import meta.state.menus.MainMenuState;
 
 // i didn't steal this from psych i swear
 // grrr skull youre FIRED from stealing CODE.
@@ -187,7 +188,7 @@ class CreditsState extends MusicBeatState {
 		super.update(elapsed);
         if (FlxG.keys.justPressed.ESCAPE) { 
             if (colorTween != null) colorTween.cancel();
-            Main.switchState(this, #if debug new TEST_MainMenuState() #else new MainMenuState() #end); 
+            Main.switchState(this, new MainMenuState()); 
         }
 		if (controls.UI_LEFT_P) changeCred(-1);
 		if (controls.UI_RIGHT_P) changeCred(1);

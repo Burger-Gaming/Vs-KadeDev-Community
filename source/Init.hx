@@ -234,15 +234,10 @@ class Init extends FlxState
 
 	private function gotoTitleScreen()
 	{	
-		#if !debug
 		if (trueSettings.get("Custom Titlescreen"))
 			Main.switchState(this, new CustomTitlescreen());
 		else
 			Main.switchState(this, new TitleState());
-		#else
-		Main.switchState(this, new AllInOneMainMenuState());
-		#end
-
 	}
 
 	public static function loadSettings():Void

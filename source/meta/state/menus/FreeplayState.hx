@@ -260,7 +260,7 @@ class FreeplayState extends MusicBeatState
 		if (controls.BACK)
 		{
 			threadActive = false;
-			Main.switchState(this,  #if debug new TEST_MainMenuState() #else new MainMenuState() #end);
+			Main.switchState(this, new MainMenuState());
 		}
 
 		if (accepted)

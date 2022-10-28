@@ -42,6 +42,10 @@ class CoolUtil
 		return StringTools.contains(string, '-') ? dashToSpace(string) : spaceToDash(string);
 	}
 
+	public static function swagScript(path:String):String {
+		return Assets.getText(path).trim();
+	}
+
 	public static function coolTextFile(path:String):Array<String>
 	{
 		var daList:Array<String> = Assets.getText(path).trim().split('\n');

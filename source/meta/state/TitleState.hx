@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.addons.display.FlxGridOverlay;
+import flixel.addons.display.FlxBackdrop;
 import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileDiamond;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.addons.transition.TransitionData;
@@ -27,24 +28,23 @@ import meta.data.dependency.Discord;
 import meta.data.font.Alphabet;
 import meta.state.menus.*;
 import openfl.Assets;
+import meta.state.menus.MainMenuState;
 
 using StringTools;
 
-/**
-	I hate this state so much that I gave up after trying to rewrite it 3 times and just copy pasted the original code
-	with like minor edits so it actually runs in forever engine. I'll redo this later, I've said that like 12 times now
 
-	I genuinely fucking hate this code no offense ninjamuffin I just dont like it and I don't know why or how I should rewrite it
-**/
 class TitleState extends MusicBeatState
 {
 	static var initialized:Bool = false;
 
 	var blackScreen:FlxSprite;
+    var serverSideSprite:FlxSprite;
 	var credGroup:FlxGroup;
 	var credTextShit:Alphabet;
 	var textGroup:FlxGroup;
 	var ngSpr:FlxSprite;
+	var spinner:FlxSprite;
+	var disStartText:FlxText;
 
 	var curWacky:Array<String> = [];
 
@@ -66,7 +66,6 @@ class TitleState extends MusicBeatState
 			spr.scale.set(.4, .4);
 			introIcons[x] = spr;
 			add(spr);
-
 		}
 
 	}
@@ -90,46 +89,47 @@ class TitleState extends MusicBeatState
 
 		persistentUpdate = true;
 
-		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+        var debugText = new FlxText();
+        debugText.text = "DEBUG";
+        debugText.size = 20;
+        debugText.screenCenter();
+        add(debugText);
+
+		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.fromString("#373a3f"));
 		// bg.antialiasing = true;
 		// bg.setGraphicSize(Std.int(bg.width * 0.6));
 		// bg.updateHitbox();
 		add(bg);
+		
+		/*var checkers = new FlxBackdrop(FlxGraphic.fromRectangle(50, 50, FlxColor.WHITE));
+        add(checkers);*/
 
-		logoBl = new FlxSprite(-150, -100);
-		logoBl.frames = Paths.getSparrowAtlas('menus/base/title/logoBumpin');
-		logoBl.antialiasing = true;
-		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
-		logoBl.animation.play('bump');
-		logoBl.updateHitbox();
+		serverSideSprite = new FlxSprite(380, FlxG.height - 90).makeGraphic(FlxG.width + 80, 260, FlxColor.fromString("#2f3237"));
+		serverSideSprite.angle = -20;
+        add(serverSideSprite);
+
+		var kdcLogo = new FlxSprite(0, 0).loadGraphic(Paths.image("menus/base/title/KDCLogo"));
+		kdcLogo.setGraphicSize(Std.int(kdcLogo.width * .6));
+		kdcLogo.antialiasing = true;
+		add(kdcLogo);
+
+	    disStartText = new FlxText(905, 610);
+		disStartText.antialiasing = true;
+		disStartText.angle = -20;
+		disStartText.text = "Press Enter To Start!";
+		disStartText.font = Paths.font("whitneybold.otf");
+		disStartText.size = 42;
+		FlxTween.tween(disStartText, { alpha: 0 }, { type: PINGPONG });
+		add(disStartText);
 		// logoBl.screenCenter();
 		// logoBl.color = FlxColor.BLACK;
 
-		gfDance = new FlxSprite(FlxG.width * 0.4, FlxG.height * 0.07);
-		gfDance.frames = Paths.getSparrowAtlas('menus/base/title/gfDanceTitle');
-		gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
-		gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
-		gfDance.antialiasing = true;
-		add(gfDance);
-		add(logoBl);
-
-		titleText = new FlxSprite(100, FlxG.height * 0.8);
-		titleText.frames = Paths.getSparrowAtlas('menus/base/title/titleEnter');
-		titleText.animation.addByPrefix('idle', "Press Enter to Begin", 24);
-		titleText.animation.addByPrefix('press', "ENTER PRESSED", 24);
-		titleText.antialiasing = true;
-		titleText.animation.play('idle');
-		titleText.updateHitbox();
-		// titleText.screenCenter(X);
-		add(titleText);
-
-		// var logo:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menus/base/title/logo'));
-		// logo.screenCenter();
-		// logo.antialiasing = true;
-		// add(logo);
-
-		// FlxTween.tween(logoBl, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG});
-		// FlxTween.tween(logo, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG, startDelay: 0.1});
+		spinner = new FlxSprite(disStartText.getMidpoint().x, disStartText.getMidpoint().y);
+		spinner.frames = Paths.getSparrowAtlas("menus/base/title/spinner");
+		spinner.animation.addByPrefix("spin", "spinner idle", 30, true);
+		spinner.animation.play("spin");
+		spinner.visible = false;
+		add(spinner);
 
 		credGroup = new FlxGroup();
 		add(credGroup);
@@ -144,14 +144,6 @@ class TitleState extends MusicBeatState
 		// credTextShit.alignment = CENTER;
 
 		credTextShit.visible = false;
-
-		ngSpr = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('menus/base/title/newgrounds_logo'));
-		add(ngSpr);
-		ngSpr.visible = false;
-		ngSpr.setGraphicSize(Std.int(ngSpr.width * 0.8));
-		ngSpr.updateHitbox();
-		ngSpr.screenCenter(X);
-		ngSpr.antialiasing = true;
 
 		FlxTween.tween(credTextShit, {y: credTextShit.y + 20}, 2.9, {ease: FlxEase.quadInOut, type: PINGPONG});
 
@@ -213,13 +205,14 @@ class TitleState extends MusicBeatState
 
 		if (pressedEnter && !transitioning && skippedIntro)
 		{
-			titleText.animation.play('press');
+			disStartText.visible = false;
+			spinner.visible = true;
 
 			FlxG.camera.flash(FlxColor.WHITE, 1);
 			FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
 
 			transitioning = true;
-			FlxG.sound.music.stop();
+			// FlxG.sound.music.stop();
 
 			new FlxTimer().start(2, function(tmr:FlxTimer)
 			{
@@ -238,10 +231,10 @@ class TitleState extends MusicBeatState
 					}
 					else
 					{ */
-				Main.switchState(this, #if debug new TEST_MainMenuState() #else new MainMenuState()enuState());
+				Main.switchState(this, new MainMenuState());
 				// }
 			});
-			FlxG.sound.play(Paths.music('titleShoot'), 0.7);
+			// FlxG.sound.play(Paths.music('titleShoot'), 0.7);
 		}
 
 		// hi game, please stop crashing its kinda annoyin, thanks!
@@ -306,18 +299,6 @@ class TitleState extends MusicBeatState
 	override function beatHit()
 	{
 		super.beatHit();
-
-		logoBl.animation.play('bump');
-		danceLeft = !danceLeft;
-
-		if (danceLeft)
-			gfDance.animation.play('danceRight');
-		else
-			gfDance.animation.play('danceLeft');
-
-		FlxG.log.add(curBeat);
-		trace(curBeat);
-
 
 		switch (curBeat)
 		{
@@ -384,6 +365,7 @@ class TitleState extends MusicBeatState
 
 			FlxG.camera.flash(FlxColor.WHITE, 4);
 			remove(credGroup);
+			for (_ => value in introIcons) remove(value);
 			skippedIntro = true;
 		}
 		//
