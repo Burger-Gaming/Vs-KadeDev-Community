@@ -52,7 +52,7 @@ class CreditsName extends FlxTypedGroup<FlxSprite> {
         if (isActive) {
 			nameSpr.alpha = 1;
 			icon.alpha = 1;
-            if (FlxG.keys.justPressed.ENTER) MusicBeatState.fancyOpenURL(link);
+            if (FlxG.keys.justPressed.ENTER && link != "no_link") MusicBeatState.fancyOpenURL(link);
         }
 
         else {
@@ -68,13 +68,18 @@ class CreditsName extends FlxTypedGroup<FlxSprite> {
 
 class CreditsState extends MusicBeatState {
     var credits:Array<Array<Dynamic>> = [
-        // name, icon name, cool quote, what they did ("1, 2, 3"), link, color (int)
-        ['Red', 'red', 'THE OWO', 'Artist of yoda sprites', 'https://example.com/', 0xEB002D],
-        ['Soulslimm', 'soulslimm', 'pending quote', 'designed menu buttons', 'https://example.com', 0xC0762A],
-        ['Burger', 'burger', 'pending quote', 'Primarily programmed this, Charted a bunch of songs', 'https://example.com/', 0xFFFF00],
-        ['Lemlom', 'lemlem', 'pending quote', 'Made fabi, burger and own sprites', 'https://example.com/', 0xFFCC66],
-        ['Multi-hand', 'multihand', 'pending quote', 'Made ACFH sprites', 'https://example.com/', 0x4391E6],
-        ['KadeDev', 'kadedev', 'no quote :(', 'Composed fabilicious, Made the community', 'https://github.com/kadedev', 0x4b6448]
+        // name, icon name, cool quote, what they did ("1 | 2 | 3"), link, color (int)
+        ['Red', 'red', 'THE OWO', 'Made yoda sprites', 'no_link', 0xEB002D],
+        ['Soulslimm', 'soulslimm', 'no_quote', 'designed menu buttons | recreated mod logo', 'no_link', 0xC0762A],
+        ['Waddle', 'none', 'no_quote', 'Primary composer', 'no_link', 0xffffff],
+        ['Tostper', 'none', 'no_quote', 'Made the kadecat sprites in BOTC', 'no_link', 0xffffff],
+        ['Burger', 'burger', 'no_quote', 'Programmer | Charted a bunch of songs', 'https://github.com/Burger-Gaming/', 0xFFFF00],
+        ['Lemlom', 'lemlem', 'no_quote', 'Made fabi, burger  and own sprites', 'no_link', 0xFFCC66],
+        ['Multi-hand', 'multihand', 'no_quote', 'Made ACFH sprites', 'no_link', 0x4391E6],
+        ['KadeDev', 'kadedev', 'no_quote', 'Composed fabilicious | Made the community', 'https://github.com/kadedev', 0x4b6448],
+        ['Nater_Marson', 'none', 'no_quote', 'Composer + Artist | Composed Verification | Made fabiworld background | Helped with programming', 'no_link', 0x838383],
+        ['Fabi', 'none', 'no_quote', 'Composed the title theme', 'no_link', 0xffffff],
+        ['Skullbite', 'none', 'no_quote', 'The Other Programmer | Programmed new menus', 'https://github.com/skullbite', 0xffffff],
     ];
     var bg:FlxSprite; 
     var coolCredits:FlxTypedGroup<CreditsName>;
@@ -242,9 +247,10 @@ class CreditsState extends MusicBeatState {
         coolCredits.members[prev].isActive = false;
         coolCredits.members[activeCred].isActive = true;
 		quoteTxt.text = '"${credits[activeCred][2]}"';
+        quoteTxt.visible = quoteTxt.text != "\"no_quote\"";
 		curCredName.text = credits[activeCred][0];
 
-        var coolNumeral = 0;
+
         for (x in 0...coolCredits.members.length) {
             
             if (change == 1) {
@@ -264,10 +270,20 @@ class CreditsState extends MusicBeatState {
             // coolNumeral++;
         }
 
-		curCredIcon.loadGraphic(Paths.image('credits/${credits[activeCred][1]}'));
+       
 
-		var aaaa:Array<String> = credits[activeCred][3].split(", ");
-		var uwu = quoteBox.y + 70;
+		if (credits[activeCred][1] != "none") { 
+			curCredName.x = quoteBox.x + 90;
+            curCredIcon.loadGraphic(Paths.image('credits/${credits[activeCred][1]}'));
+            curCredIcon.visible = true;
+        }
+        else {
+			curCredName.screenCenter(X);
+            curCredIcon.visible = false; 
+        }
+
+		var aaaa:Array<String> = credits[activeCred][3].split(" | ");
+		var uwu = quoteBox.y + (quoteTxt.visible ? 70 : 0);
 		
 
         for (x in 0...aaaa.length) {
@@ -283,7 +299,7 @@ class CreditsState extends MusicBeatState {
             if (colorTween != null) colorTween.cancel();
 			lastColor = credits[activeCred][5];
 			bg.color = credits[activeCred][5];
-            // FlxTween.color()
+            // FlxTween.color();
 
 			/* colorTween = FlxTween.color(bg, .5, bg.color, color, { // turns the bg black for some reason?? TODO
 				onComplete: t -> colorTween = null
