@@ -552,7 +552,7 @@ class PlayState extends MusicBeatState
 		screen1 = new FlxSprite().loadGraphic(Paths.image('clownstace/normal'));
 		screen1.scrollFactor.set();
 		screen1.cameras = [camHUD];
-		if (SONG.song == 'Clownstace' && storyDifficulty != 3) {
+		if (SONG.song == 'Clownstace' && storyDifficulty != 1) {
 			shouldZoom = false;
 			for (hud in allUIs) hud.visible = false;
 			screen1.visible = true;
@@ -2306,7 +2306,7 @@ class PlayState extends MusicBeatState
 					case 164: tweenSongIntroOut();
 				}
 			case 'Clownstace':
-				if (storyDifficulty != 3) switch (curBeat) {
+				if (storyDifficulty != 1) switch (curBeat) {
 					case 44: tweenSongIntroIn();
 					case 60: tweenSongIntroOut();
 				}
@@ -2725,7 +2725,7 @@ class PlayState extends MusicBeatState
 		swagCounter = 0;
 
 		camHUD.visible = true;
-		if ((SONG.song == "Clownstace" && storyDifficulty != 3) || ["SaveStated", "Kadecat Hate Club"].contains(SONG.song)) {
+		if ((SONG.song == "Clownstace" && storyDifficulty != 1) || ["SaveStated", "Kadecat Hate Club"].contains(SONG.song)) {
 			Conductor.songPosition = -(Conductor.crochet * 1);
 			countdownComplete = true;
 			charactersDance(curBeat);
