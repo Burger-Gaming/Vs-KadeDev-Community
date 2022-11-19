@@ -87,6 +87,8 @@ class Stage extends FlxTypedGroup<FlxBasic>
 					curStage = 'botc';
 				case 'kadecat-hate-club':
 					curStage = 'kadecat-hateclub';
+				case 'computer':
+					curStage = 'windows';
 				default:
 					curStage = 'stage';
 			}
@@ -100,6 +102,28 @@ class Stage extends FlxTypedGroup<FlxBasic>
 		//
 		switch (curStage)
 		{
+			case 'windows':
+				PlayState.defaultCamZoom = 0.8;
+
+				var winBack = new FNFSprite(0, 10).loadGraphic(Paths.image('backgrounds/windows/Capture'));
+				//winBack.screenCenter(X);
+				winBack.setGraphicSize(Std.int(winBack.width * 2));
+				winBack.antialiasing = true;
+				winBack.scrollFactor.set(0.9, 0.9);
+				winBack.active = false;
+
+				add(winBack);
+
+				var winFront = new FNFSprite(-130, 730).loadGraphic(Paths.image('backgrounds/windows/KadeNakedLink'));
+				///winFront.screenCenter(X);
+				winFront.setGraphicSize(Std.int(winFront.width * 2));
+				winFront.updateHitbox();
+				winFront.antialiasing = true;
+				winFront.scrollFactor.set(0.9, 0.9);
+				winFront.active = false;
+
+				add(winFront);
+
 			case 'kadecat-hateclub':
 				PlayState.defaultCamZoom = 1.7;
 

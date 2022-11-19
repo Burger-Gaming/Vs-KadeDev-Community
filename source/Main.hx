@@ -88,9 +88,9 @@ class Main extends Sprite
 		[ [songs to use], [characters in songs], [color of week], name of week, if the week has all erects ]
 	**/
 	public static var extraSongs:Array<Dynamic> = [
-		['Battle of the Century', 'Roasted'],
-		['Whoppa', 'burger'],
-		[FlxColor.fromRGB(255, 153, 0), FlxColor.fromRGB(255, 255, 0)]
+		['Battle of the Century', 'Roasted','Computer'],
+		['Whoppa', 'burger','nater'],
+		[FlxColor.fromRGB(255, 153, 0), FlxColor.fromRGB(255, 255, 0),FlxColor.fromRGB(0, 100, 200)]
 	];
 
 	public static var gameWeeks:Array<Dynamic> = [
@@ -150,12 +150,12 @@ class Main extends Sprite
 			],
 			'3Deez nuts in your mouth', // best insult since you're mom
 			false
-		],
-		[
-			['Fresh', 'Bro', 'Bone-To-Pick'],
-			['fabi'],
-			[FlxColor.fromRGB(195, 135, 66)],
-			'I am now going to bark at you'
+		// ],
+		// [
+		// 	['Fresh', 'Bro', 'Bone-To-Pick'],
+		// 	['fabi'],
+		// 	[FlxColor.fromRGB(195, 135, 66)],
+		// 	'I am now going to bark at you'
 		]
 		
 	];

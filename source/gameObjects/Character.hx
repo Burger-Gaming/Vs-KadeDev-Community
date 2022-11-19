@@ -86,9 +86,22 @@ class Character extends FNFSprite
 				};
 
 				playAnim('idle');
-				
+
+			case 'BillGates':
+				charColor = "#FF884D";
+				frames = Paths.getSparrowAtlas('characters/Bill');
+
+				animation.addByPrefix('idle', 'Bill BillIdle', 24, false);
+				animation.addByPrefix('singLEFT', 'Bill Bill Left', 15, true);
+				animation.addByPrefix('singRIGHT', 'Bill BillRight', 15, true);
+				animation.addByPrefix('singUP', 'Bill BillUp', 15, true);
+				animation.addByPrefix('singDOWN', 'Bill BillDown', 15, true);
+				scale.set(2, 2);
+				characterData.offsetX = 10;
+				characterData.offsetY = 100;
+
 			case 'PogBot':
-				charColor = "#CF0101";
+				charColor = "#33963D";
 				frames = Paths.getSparrowAtlas('characters/pogbot');
 
 				animation.addByPrefix('idle', 'pogbot idle', 24, false);
